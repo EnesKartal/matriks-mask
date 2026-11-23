@@ -1,0 +1,18 @@
+matriks-pii
+Copyright 2026 Matriks Finansal Teknolojiler A.Ş.
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+The Apache License does not grant permission to use the name "Matriks" or the
+Matriks logos (section 6). Modified versions must be distributed under a
+different name.
+
+This product bundles data files derived from third-party sources, each under
+its own license (full texts and attributions: THIRD_PARTY_NOTICES.md):
+
+- mkozturk/trnames (MIT), Copyright (c) 2021 Kaan Öztürk:
+  Turkish first-name and surname lists in matriks_pii/data/.
+- ubeydeozdmr/turkiye-api (MIT), Copyright (c) 2022-2026 Ubeyde Emir Özdemir:
+  matriks_pii/data/il_ilce_tr.json.
+- FrequencyWords by Hermit Dave (OpenSubtitles 2018 Turkish word list),
+  Creative Commons Attribution-ShareAlike 4.0 International:
+  matriks_pii/data/tr_words.txt. This file is not covered by the Apache License.

@@ -1,0 +1,27 @@
+# elle yazıldı — build_fixtures.py bu dosyayı üretmez/silmez; tüm değerler sentetiktir.
+# Akrabalık sözcüğü yapışması, kurum eki sanılan sıradan sözcük, yer adı/kısaltma, patronim, sekme, ASCII etnonim.
+- {id: KISIX-001, text: "Eşim Mehmet Demir'in kaydı", expect: [{entity: KISI, value: "Mehmet Demir"}], masked: "Eşim <KISI_1>'in kaydı"}
+- {id: KISIX-002, text: "Eşim Mehmet Demir'in kaydı. Mehmet Demir için işlem yapıldı.", expect: [{entity: KISI, value: "Mehmet Demir"}, {entity: KISI, value: "Mehmet Demir"}], masked: "Eşim <KISI_1>'in kaydı. <KISI_1> için işlem yapıldı."}
+- {id: KISIX-003, text: "Müşterimiz Ayşe Demir aradı.", expect: [{entity: KISI, value: "Ayşe Demir"}], masked: "Müşterimiz <KISI_1> aradı."}
+- {id: KISIX-004, text: "Ayşe Demir ilaç aldı.", expect: [{entity: KISI, value: "Ayşe Demir"}]}
+- {id: KISIX-005, text: "Ahmet Yılmaz portföy raporu istedi.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}]}
+- {id: KISIX-006, text: "Mehmet Kaya sigorta yaptırdı.", expect: [{entity: KISI, value: "Mehmet Kaya"}]}
+- {id: KISIX-007, text: "Hemşire Ayşe Demir ilaç verdi.", expect: [{entity: KISI, value: "Ayşe Demir"}]}
+- {id: KISIX-008, text: "Ahmet Yılmaz emeklilik başvurusu yaptı.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}]}
+- {id: KISIX-009, text: "Ayşe Demir yatırım yapmak istiyor.", expect: [{entity: KISI, value: "Ayşe Demir"}]}
+- {id: KISIX-010, text: "Mehmet Kaya tv izliyor.", expect: [{entity: KISI, value: "Mehmet Kaya"}]}
+- {id: KISIX-011, text: "Ahmet oğlu Mehmet Yılmaz başvurdu.", expect: [{entity: KISI, value: "Ahmet"}, {entity: KISI, value: "Mehmet Yılmaz"}]}
+- {id: KISIX-012, text: "Ali kızı Ayşe Demir'in dosyası", expect: [{entity: KISI, value: "Ali"}, {entity: KISI, value: "Ayşe Demir"}]}
+- {id: KISIX-013, text: "YILMAZ Ahmet", expect: [{entity: KISI, value: "YILMAZ Ahmet"}]}
+- {id: KISIX-014, text: "Ahmet\tYılmaz\t17291716060", expect: [{entity: KISI, value: "Ahmet\tYılmaz"}, {entity: TCKN, value: "17291716060"}]}
+- {id: KISIX-015, text: "Sayın A. Yılmaz,", expect: [{entity: KISI, value: "A. Yılmaz"}]}
+- {id: KISIX-016, text: "imza: A. Yılmaz", expect: [{entity: KISI, value: "A. Yılmaz"}]}
+- {id: KISIX-017, text: "Ayşecim nasılsın?", expect: [{entity: KISI, value: "Ayşe"}], tags: [borderline]}
+- {id: KISIX-018, text: "Ahmetciğim gel.", expect: [{entity: KISI, value: "Ahmet"}], tags: [borderline]}
+- {id: KISIX-019, text: "Çan Çanakkale", expect: [], not_expect: [KISI]}
+- {id: KISIX-020, text: "İnönü Cad. trafiğe kapalı.", expect: [], not_expect: [KISI]}
+- {id: KISIX-021, text: "Ahmet Yılmaz Kurt kokenli.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_ETNIK, value: "Kurt kokenli"}], config: {entities: {OZEL_ETNIK: MASK}}}
+- {id: KISIX-022, text: "Ahmet Yılmaz Cerkes kokenli.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_ETNIK, value: "Cerkes kokenli"}], config: {entities: {OZEL_ETNIK: MASK}}}
+- {id: KISIX-023, text: "Ahmet Yılmaz Kürt kökenli.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_ETNIK, value: "Kürt kökenli"}]}
+- {id: KISIX-024, text: "Musteri Ayse Demir aradi.", expect: [{entity: KISI, value: "Ayse Demir"}]}
+- {id: KISIX-025, text: "Mehmet Kaya Kuyumculuk", expect: [{entity: KISI, value: "Mehmet Kaya"}]}

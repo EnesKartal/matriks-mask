@@ -1,0 +1,17 @@
+# Docker derleme bağlamına girmemesi gerekenler (examples/Dockerfile `COPY . ...` kullanır).
+.git
+.github
+.venv
+**/__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.hypothesis
+build
+dist
+*.egg-info
+scripts/_raw
+.env
+*.env
+audit*.jsonl
+*.log

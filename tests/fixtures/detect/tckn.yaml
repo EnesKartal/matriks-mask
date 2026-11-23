@@ -1,0 +1,195 @@
+# detect/tckn — 34 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: TCKN-001
+  text: TC kimlik numaram 17291716060, lütfen kaydedin.
+  expect:
+  - entity: TCKN
+    value: '17291716060'
+  masked: TC kimlik numaram <TCKN_1>, lütfen kaydedin.
+- id: TCKN-002
+  text: 10000000146 numaralı kimlik sahibi başvurdu.
+  expect:
+  - entity: TCKN
+    value: '10000000146'
+- id: TCKN-003
+  text: 'Başvuru sahibinin kimlik numarası: 44771278268'
+  expect:
+  - entity: TCKN
+    value: '44771278268'
+- id: TCKN-004
+  text: 'TC: 26197306992'
+  expect:
+  - entity: TCKN
+    value: '26197306992'
+- id: TCKN-005
+  text: 'T.C. Kimlik No: 52393849902'
+  expect:
+  - entity: TCKN
+    value: '52393849902'
+- id: TCKN-006
+  text: Kimlik no "79893557250" olarak girildi.
+  expect:
+  - entity: TCKN
+    value: '79893557250'
+- id: TCKN-007
+  text: Kimlik (15184715664) doğrulandı.
+  expect:
+  - entity: TCKN
+    value: '15184715664'
+- id: TCKN-008
+  text: '| Alan | Değer |
+
+    | TCKN | 17777786808 |'
+  expect:
+  - entity: TCKN
+    value: '17777786808'
+- id: TCKN-009
+  text: '{"tckn": "98183655308", "durum": "aktif"}'
+  expect:
+  - entity: TCKN
+    value: '98183655308'
+- id: TCKN-010
+  text: Kimlik 67539892278 ve tekrar 67539892278 yazıldı.
+  expect:
+  - entity: TCKN
+    value: '67539892278'
+  - entity: TCKN
+    value: '67539892278'
+  masked: Kimlik <TCKN_1> ve tekrar <TCKN_1> yazıldı.
+- id: TCKN-011
+  text: 'İki kişi: 20107136426 ve 49265548698.'
+  expect:
+  - entity: TCKN
+    value: '20107136426'
+  - entity: TCKN
+    value: '49265548698'
+  masked: 'İki kişi: <TCKN_1> ve <TCKN_2>.'
+- id: TCKN-012
+  text: tckn=17291716060&islem=sorgu
+  expect:
+  - entity: TCKN
+    value: '17291716060'
+- id: TCKN-013
+  text: Kimlik numarası10000000146bitişik yazılmış.
+  expect:
+  - entity: TCKN
+    value: '10000000146'
+  tags:
+  - borderline
+- id: TCKN-014
+  text: Vatandaşın numarası 44771278268.
+  expect:
+  - entity: TCKN
+    value: '44771278268'
+- id: TCKN-015
+  text: '26197306992'
+  expect:
+  - entity: TCKN
+    value: '26197306992'
+- id: TCKN-016
+  text: Numara:52393849902;
+  expect:
+  - entity: TCKN
+    value: '52393849902'
+- id: TCKN-017
+  text: 'Kimlik numarası
+
+    79893557250
+
+    olarak kayıtlı.'
+  expect:
+  - entity: TCKN
+    value: '79893557250'
+- id: TCKN-018
+  text: VKN yerine TCKN 15184715664 verildi (şahıs şirketi).
+  expect:
+  - entity: TCKN
+    value: '15184715664'
+- id: TCKN-019
+  text: 'Hasta TCKN: 17777786808, protokol 2026-114.'
+  expect:
+  - entity: TCKN
+    value: '17777786808'
+- id: TCKN-020
+  text: 'Kimlik: 98183655308.'
+  expect:
+  - entity: TCKN
+    value: '98183655308'
+- id: TCKN-021
+  text: TC kimlik numarası 17291716050 doğrulanamadı.
+  expect: []
+  tags:
+  - invalid_checksum
+- id: TCKN-022
+  text: TC kimlik numarası 10000000178 doğrulanamadı.
+  expect: []
+  tags:
+  - invalid_checksum
+- id: TCKN-023
+  text: TC kimlik numarası 12345678901 doğrulanamadı.
+  expect: []
+  tags:
+  - invalid_checksum
+- id: TCKN-024
+  text: TC kimlik numarası 44771278269 doğrulanamadı.
+  expect: []
+  tags:
+  - invalid_checksum
+- id: TCKN-025
+  text: TC kimlik numarası 26197306991 doğrulanamadı.
+  expect: []
+  tags:
+  - invalid_checksum
+- id: TCKN-026
+  text: Kimlik numarası 07291716092 sıfırla başlıyor.
+  expect: []
+  tags:
+  - invalid_checksum
+- id: TCKN-027
+  text: On haneli 1729171606 numara TCKN değildir.
+  expect: []
+- id: TCKN-028
+  text: On iki haneli 172917160601 numara TCKN değildir.
+  expect: []
+- id: TCKN-029
+  text: Boşluklu yazım 172 917 160 60 tanınmaz.
+  expect: []
+- id: TCKN-030
+  text: Numara 53212345678 kontrol basamağı tutmuyor.
+  expect: []
+  tags:
+  - invalid_checksum
+- id: TCKN-031
+  text: IBAN TR330006100519786457841326 içinde TCKN aranmaz.
+  expect:
+  - entity: IBAN
+    value: TR330006100519786457841326
+  not_expect:
+  - TCKN
+- id: TCKN-032
+  text: Kart 4111111111111111 ile ödendi.
+  expect:
+  - entity: KART
+    value: '4111111111111111'
+  not_expect:
+  - TCKN
+- id: TCKN-033
+  text: TC kimlik numarası 12345678901 (geçersiz) bağlamla yakalanır.
+  expect:
+  - entity: TCKN
+    value: '12345678901'
+  config:
+    tckn_require_checksum: false
+  tags:
+  - invalid_checksum
+- id: TCKN-034
+  text: Sipariş 12345678901 bağlamsız; checksum kapalıyken de yakalanmaz.
+  expect: []
+  config:
+    tckn_require_checksum: false
+- id: TCKN-035
+  text: "Annemin kimlik no: 10000000146, kayıtlara işlendi."
+  expect:
+  - entity: TCKN
+    value: '10000000146'
+  masked: "Annemin kimlik no: <TCKN_1>, kayıtlara işlendi."

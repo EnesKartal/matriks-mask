@@ -1,0 +1,52 @@
+# Politika / yapılandırma senaryoları: BLOCK, should_run, özel kategoriler, profiller. Tüm değerler sentetiktir.
+- id: HOOK-026
+  config: {entities: {SIFRE: BLOCK}}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Şifre: Gizli123! ve TCKN 17291716060"}]}
+  expect_error: {status: 400, entity: SIFRE}
+  forbid: ["Gizli123", "17291716060"]
+- id: HOOK-027
+  config: {entities: {TCKN: BLOCK}}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "TCKN 17291716060"}]}
+  expect_error: {status: 400, entity: TCKN}
+  forbid: ["17291716060"]
+- id: HOOK-028
+  call_type: aimage_generation
+  config: {unsupported_call_types: block}
+  request: {model: x, prompt: "TCKN 17291716060"}
+  expect_error: {status: 400}
+  forbid: ["17291716060"]
+- id: HOOK-029
+  config: {default_on: false}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "TCKN 17291716060"}]}
+  expect_none: true
+- id: HOOK-030
+  config: {default_on: false}
+  request: {model: m, guardrails: [matriks-pii], metadata: {guardrails: [matriks-pii]}, messages: [{role: user, content: "TCKN 17291716060"}]}
+  expect_request: {messages.0.content: "TCKN <TCKN_1>"}
+- id: HOOK-031
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Müşterimiz Ahmet Yılmaz CHP üyesi."}]}
+  expect_request:
+    messages.0.content: "Müşterimiz <KISI_1> CHP üyesi."
+    metadata.standard_logging_guardrail_information.0.guardrail_response.logged: {OZEL_SIYASI: 1}
+- id: HOOK-032
+  config: {profile: strict}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Müşterimiz Ahmet Yılmaz CHP üyesi."}]}
+  expect_request: {messages.1.content: "Müşterimiz <KISI_1> <OZEL_SIYASI_1>."}
+- id: HOOK-033
+  config: {entities: {KISI: IGNORE}}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ben Ayşe Demir, TCKN 17291716060."}]}
+  expect_request: {messages.0.content: "Ben Ayşe Demir, TCKN <TCKN_1>."}
+- id: HOOK-034
+  config: {placeholder_format: "[{label}_{n}]"}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ben Ayşe Demir, TCKN 17291716060."}]}
+  expect_request: {messages.0.content: "Ben [KISI_1], TCKN [TCKN_1]."}
+- id: HOOK-035
+  config: {placeholder_format: "__{label}_{n}__"}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "IBAN TR330006100519786457841326"}]}
+  expect_request: {messages.0.content: "IBAN __IBAN_1__"}
+- id: HOOK-036
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ben Ayşe Demir, TCKN 17291716060, tel 0532 234 56 78, ayse@ornek.com, IBAN TR330006100519786457841326"}]}
+  expect_request:
+    metadata.standard_logging_guardrail_information.0.masked_entity_count.TCKN: 1
+    metadata.standard_logging_guardrail_information.0.masked_entity_count.IBAN: 1
+  forbid: ["17291716060", "Ayşe Demir", "0532 234 56 78", "ayse@ornek.com", "TR330006100519786457841326"]

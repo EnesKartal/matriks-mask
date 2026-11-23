@@ -1,0 +1,56 @@
+# elle yazıldı — build_fixtures.py bu dosyayı üretmez/silmez; tüm değerler sentetiktir (gerçek anahtar değildir).
+# GIZLI_ANAHTAR, KONUM, POLICE_NO, TICARET_SICIL, MKK_SICIL, ADRES_KODU, gizlenmiş e-posta.
+- {id: GIZLI-001, text: "api_key=sk-abc123def456ghi789jkl012mno345pqr", expect: [{entity: GIZLI_ANAHTAR, value: "sk-abc123def456ghi789jkl012mno345pqr"}], masked: "api_key=<GIZLI_ANAHTAR_1>", tags: [surface_variants]}
+- {id: GIZLI-002, text: "anahtar sk-proj-AbCdEfGhIjKlMnOpQrStUvWxYz0123456789", expect: [{entity: GIZLI_ANAHTAR, value: "sk-proj-AbCdEfGhIjKlMnOpQrStUvWxYz0123456789"}], tags: [surface_variants]}
+- {id: GIZLI-003, text: "Anthropic: sk-ant-api03-AbCdEfGhIjKlMnOpQrStUvWxYz0123456789AbCd", expect: [{entity: GIZLI_ANAHTAR, value: "sk-ant-api03-AbCdEfGhIjKlMnOpQrStUvWxYz0123456789AbCd"}], tags: [surface_variants]}
+- {id: GIZLI-004, text: "AWS AKIAIOSFODNN7EXAMPLE kullan", expect: [{entity: GIZLI_ANAHTAR, value: "AKIAIOSFODNN7EXAMPLE"}], tags: [surface_variants]}
+- {id: GIZLI-005, text: "token ghp_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789", expect: [{entity: GIZLI_ANAHTAR, value: "ghp_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789"}], tags: [surface_variants]}
+- {id: GIZLI-006, text: "github_pat_11AAAAAAA0abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456 süresi doldu", expect: [{entity: GIZLI_ANAHTAR, value: "github_pat_11AAAAAAA0abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456"}], tags: [surface_variants]}
+- {id: GIZLI-007, text: "Slack: xoxb-1234567890-ABCDEFGHIJKLMNOP", expect: [{entity: GIZLI_ANAHTAR, value: "xoxb-1234567890-ABCDEFGHIJKLMNOP"}], tags: [surface_variants]}
+- {id: GIZLI-008, text: "Maps AIzaSyA1234567890abcdefghijklmnopqrstuv", expect: [{entity: GIZLI_ANAHTAR, value: "AIzaSyA1234567890abcdefghijklmnopqrstuv"}], tags: [surface_variants]}
+- {id: GIZLI-009, text: "jwt: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.abcdefghijklmnop", expect: [{entity: GIZLI_ANAHTAR, value: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.abcdefghijklmnop"}], tags: [surface_variants]}
+- {id: GIZLI-010, text: "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEA\n-----END RSA PRIVATE KEY-----", expect: [{entity: GIZLI_ANAHTAR, value: "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEA\n-----END RSA PRIVATE KEY-----"}], tags: [surface_variants]}
+- {id: GIZLI-011, text: "postgres://user:pass123@db:5432/x", expect: [{entity: GIZLI_ANAHTAR, value: "user:pass123@db"}], tags: [surface_variants]}
+- {id: GIZLI-012, text: "Authorization: Bearer AbCdEfGhIjKlMnOpQrStUvWxYz012345", expect: [{entity: GIZLI_ANAHTAR, value: "AbCdEfGhIjKlMnOpQrStUvWxYz012345"}], tags: [surface_variants]}
+- {id: GIZLI-013, text: 'client_secret: "Zz9Zz9Zz9Zz9Zz9Zz9Zz"', expect: [{entity: GIZLI_ANAHTAR, value: "Zz9Zz9Zz9Zz9Zz9Zz9Zz"}], tags: [surface_variants]}
+- {id: GIZLI-014, text: "x-api-key = 1234567890abcdef1234", expect: [{entity: GIZLI_ANAHTAR, value: "1234567890abcdef1234"}], tags: [surface_variants]}
+- {id: GIZLI-015, text: "postgres://user:pass@db.example.com/x", expect: [{entity: GIZLI_ANAHTAR, value: "user:pass@db.example.com"}], not_expect: [EPOSTA], tags: [surface_variants]}
+- {id: GIZLI-016, text: "sk-test anahtarı", expect: []}
+- {id: GIZLI-017, text: "token: evet", expect: []}
+- {id: GIZLI-018, text: "Bearer token gerekiyor", expect: []}
+- {id: GIZLI-019, text: "AKIA ile başlayan anahtarlar", expect: []}
+- {id: GIZLI-020, text: "api_key= (boş)", expect: []}
+- {id: KONUM-001, text: "Müşterinin konumu 41.0082, 28.9784", expect: [{entity: KONUM, value: "41.0082, 28.9784"}], masked: "Müşterinin konumu <KONUM_1>"}
+- {id: KONUM-002, text: "Evimin koordinatı: 39.92077, 32.85411", expect: [{entity: KONUM, value: "39.92077, 32.85411"}]}
+- {id: KONUM-003, text: "Ahmet Yılmaz GPS 36.8841; 30.7056", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: KONUM, value: "36.8841; 30.7056"}]}
+- {id: KONUM-011, text: "koordinat: 39.92077, 32.85411", expect: []}
+- {id: KONUM-012, text: "GPS 36.8841; 30.7056", expect: []}
+- {id: KONUM-004, text: "lat=41.0082&lng=28.9784", expect: [{entity: KONUM, value: "41.0082&lng=28.9784"}], masked: "lat=<KONUM_1>"}
+- {id: KONUM-005, text: "Bulunduğum yerin harita pini 40.7128, -74.0060", expect: [{entity: KONUM, value: "40.7128, -74.0060"}], not_expect: [SIFRE]}
+- {id: KONUM-006, text: "USD/TRY 41.0082, EUR/TRY 28.9784", expect: []}
+- {id: KONUM-007, text: "sürüm 1.0082, 2.9784", expect: []}
+- {id: KONUM-008, text: "fiyat 41.0082, 28.9784 TL", expect: []}
+- {id: KONUM-009, text: "harita pini 1234 ile paylaş", expect: [], not_expect: [SIFRE]}
+- {id: KONUM-010, text: '{"latitude": 41.0082, "longitude": 28.9784}', expect: [{entity: KONUM, value: '41.0082, "longitude": 28.9784'}]}
+- {id: FINANSEK-001, text: "Poliçe no 1234567890", expect: [{entity: POLICE_NO, value: "1234567890"}]}
+- {id: FINANSEK-002, text: "poliçe numarası: TR-1234567", expect: [{entity: POLICE_NO, value: "TR-1234567"}]}
+- {id: FINANSEK-003, text: "Poliçe 123456789 için hasar", expect: [{entity: POLICE_NO, value: "123456789"}]}
+- {id: FINANSEK-004, text: "Ticaret sicil no: 123456-5", expect: [{entity: TICARET_SICIL, value: "123456-5"}], config: {entities: {TICARET_SICIL: MASK}}}
+- {id: FINANSEK-005, text: "İstanbul Ticaret Sicil Müdürlüğü 123456", expect: [{entity: TICARET_SICIL, value: "123456"}], config: {entities: {TICARET_SICIL: MASK}}}
+- {id: FINANSEK-013, text: "Ticaret sicil no: 123456-5", expect: []}
+- {id: FINANSEK-006, text: "MKK sicil no 12345678901", expect: [{entity: MKK_SICIL, value: "12345678901"}], not_expect: [SGK]}
+- {id: FINANSEK-007, text: "yatırımcı sicil numarası 1234567", expect: [{entity: MKK_SICIL, value: "1234567"}]}
+- {id: FINANSEK-008, text: "MKK 12345678", expect: [{entity: MKK_SICIL, value: "12345678"}]}
+- {id: FINANSEK-009, text: "adres kodu 1234567890", expect: [{entity: ADRES_KODU, value: "1234567890"}]}
+- {id: FINANSEK-010, text: "UAVT kodu: 1234567890", expect: [{entity: ADRES_KODU, value: "1234567890"}]}
+- {id: FINANSEK-011, text: "hasar dosya no 12345", expect: []}
+- {id: FINANSEK-012, text: "sipariş no 1234567890", expect: []}
+- {id: EPOSTAEK-001, text: "ahmet [at] gmail.com", expect: [{entity: EPOSTA, value: "ahmet [at] gmail.com"}]}
+- {id: EPOSTAEK-002, text: "ahmet(at)gmail(dot)com", expect: [{entity: EPOSTA, value: "ahmet(at)gmail(dot)com"}]}
+- {id: EPOSTAEK-003, text: "kullanici (at) alanadi (nokta) com", expect: [{entity: EPOSTA, value: "kullanici (at) alanadi (nokta) com"}]}
+- {id: EPOSTAEK-004, text: "ayse.demir [at] firma.com.tr", expect: [{entity: EPOSTA, value: "ayse.demir [at] firma.com.tr"}]}
+- {id: EPOSTAEK-005, text: "ahmet at gmail dot com", expect: []}
+- {id: EPOSTAEK-006, text: "(at) işaretini kullanın", expect: []}
+- {id: KONUM-014, text: "Konumum 39.6936, 41.1198. Lütfen kaydedin.", expect: [{entity: KONUM, value: "39.6936, 41.1198"}], why: "cümle sonu noktası koordinatın parçası değil"}
+- {id: KONUM-015, text: "Müşteri konumu 36.0649, 32.7968, maaşı aylık 142.000 TL.", expect: [{entity: KONUM, value: "36.0649, 32.7968"}], why: "uzaktaki para tutarı koordinatı geçersiz kılmaz"}
+- {id: KONUM-016, text: "konumum 41.0082, 28.9784 TL", expect: [], why: "hemen arkada para birimi: kur/fiyat çifti"}

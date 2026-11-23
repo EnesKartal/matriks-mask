@@ -1,0 +1,39 @@
+# elle yazıldı — build_fixtures.py bu dosyayı üretmez/silmez; tüm değerler sentetiktir.
+# Damak l'si istisnaları, BÜYÜK harf ek, geçmiş/rivayet kopulası, 3. tekil iyelik, -ki+belirtme, rakamla biten değer,
+# apostrofsuz ek (bayrakla), sıfır dolgu, LLM'in çevirdiği etiket, etiket içi boşluk, sayısal varlıklarda ek onarımı.
+- {id: REVERT-041, map: {<KISI_1>: Ayşe Demir}, llm_output: "<KISI_01>'e iletildi.", expect: "Ayşe Demir'e iletildi."}
+- {id: REVERT-042, map: {<KISI_1>: Kemal}, llm_output: "<KISI_1>'a söyle.", expect: "Kemal'e söyle."}
+- {id: REVERT-043, map: {<KISI_1>: Kemal}, llm_output: "<KISI_1>'ın evi", expect: "Kemal'in evi"}
+- {id: REVERT-044, map: {<KISI_1>: Celal}, llm_output: "<KISI_1>'ı aradım", expect: "Celal'i aradım"}
+- {id: REVERT-045, map: {<KISI_1>: Hilal}, llm_output: "<KISI_1>'a", expect: "Hilal'e"}
+- {id: REVERT-046, map: {<KISI_1>: Kemâl}, llm_output: "<KISI_1>'a", expect: "Kemâl'e"}
+- {id: REVERT-047, map: {<KISI_1>: Mustafa Kemal}, llm_output: "<KISI_1>'a", expect: "Mustafa Kemal'e"}
+- {id: REVERT-048, map: {<KISI_1>: AHMET}, llm_output: "<KISI_1>'in", expect: "AHMET'İN"}
+- {id: REVERT-049, map: {<KISI_1>: AYŞE}, llm_output: "<KISI_1>'e", expect: "AYŞE'YE"}
+- {id: REVERT-050, map: {<KISI_1>: Ahmet}, llm_output: "<KISI_1>'ydi.", expect: "Ahmet'ti."}
+- {id: REVERT-051, map: {<KISI_1>: Ali}, llm_output: "<KISI_1>'ymış.", expect: "Ali'ymiş."}
+- {id: REVERT-052, map: {<KISI_1>: Ayşe}, llm_output: "<KISI_1>'sı", expect: "Ayşe'si"}
+- {id: REVERT-053, map: {<KISI_1>: Ahmet}, llm_output: "<KISI_1>'dekini", expect: "Ahmet'tekini"}
+- {id: REVERT-054, map: {<ADRES_1>: "Gül Sok. No: 6"}, entities: {<ADRES_1>: ADRES}, llm_output: "<ADRES_1>'de", expect: "Gül Sok. No: 6'da"}
+- {id: REVERT-055, map: {<ADRES_1>: "No: 5"}, entities: {<ADRES_1>: ADRES}, llm_output: "<ADRES_1>'de", expect: "No: 5'te"}
+- {id: REVERT-056, map: {<ADRES_1>: "Kat: 100"}, entities: {<ADRES_1>: ADRES}, llm_output: "<ADRES_1>'da", expect: "Kat: 100'de"}
+- {id: REVERT-057, map: {<KISI_1>: Ayşe Demir}, llm_output: "<KISI_1>lar geldi.", expect: "Ayşe Demirler geldi.", config: {suffix_repair_attached: true}}
+- {id: REVERT-058, map: {<KISI_1>: Ayşe Demir}, llm_output: "<KISI_1>lar geldi.", expect: "Ayşe Demirlar geldi."}
+- {id: REVERT-059, map: {<KISI_1>: Ayşe Demir}, llm_output: "<KISI_1>demek istedi", expect: "Ayşe Demirdemek istedi", config: {suffix_repair_attached: true}}
+- {id: REVERT-061, map: {<TCKN_1>: '17291716060'}, entities: {<TCKN_1>: TCKN}, llm_output: "<TCKN_1>'i doğruladım", expect: "17291716060'ı doğruladım"}
+- {id: REVERT-062, map: {<TCKN_1>: '17291716060'}, entities: {<TCKN_1>: TCKN}, llm_output: "<TCKN_1>'nin", expect: "17291716060'ın"}
+- {id: REVERT-063, map: {<TELEFON_1>: '0532 123 45 67'}, entities: {<TELEFON_1>: TELEFON}, llm_output: "<TELEFON_1>'ı aradım", expect: "0532 123 45 67'yi aradım"}
+- {id: REVERT-064, map: {<IBAN_1>: 'TR33 0006 1005 1978 6457 8413 26'}, entities: {<IBAN_1>: IBAN}, llm_output: "<IBAN_1>'den", expect: "TR33 0006 1005 1978 6457 8413 26'dan"}
+- {id: REVERT-065, map: {<KART_1>: '**** **** **** 1111'}, entities: {<KART_1>: KART}, llm_output: "<KART_1>'a", expect: "**** **** **** 1111'e"}
+- {id: REVERT-066, map: {<KISI_1>: Ayşe Demir}, llm_output: "<PERSON_1>'e iletildi", expect: "Ayşe Demir'e iletildi"}
+- {id: REVERT-067, map: {<KISI_1>: Ayşe Demir}, llm_output: "<PERSON_1>'e", expect: "<PERSON_1>'e", config: {label_aliases: {}}}
+- {id: REVERT-068, map: {<KISI_1>: Ayşe Demir}, llm_output: "<KISI _1>", expect: "Ayşe Demir"}
+- {id: REVERT-069, map: {<KISI_1>: Ayşe Demir}, llm_output: "<KISI_1>'İN evi", expect: "Ayşe Demir'in evi"}
+- {id: REVERT-070, map: {<KISI_1>: Ayşe Demir}, llm_output: "**<KISI_1>**'in", expect: "**Ayşe Demir**'in"}
+- {id: REVERT-071, map: {<KISI_1>: Ayşe Demir}, llm_output: "```\n<KISI_1>\n```", expect: "```\nAyşe Demir\n```"}
+- {id: REVERT-072, map: {<KISI_1>: Ayşe Demir}, llm_output: "\\u003cKISI_1\\u003e", expect: "Ayşe Demir"}
+- {id: REVERT-073, map: {<KISI_1>: Ayşe Demir}, llm_output: "PERSON_1 geldi", expect: "PERSON_1 geldi"}
+- {id: REVERT-074, map: {<KISI_1>: Ayşe Demir}, llm_output: "<KISI_1>e-posta adresi", expect: "Ayşe Demire-posta adresi", config: {suffix_repair_attached: true}}
+- {id: REVERT-075, map: {<KISI_1>: Celâl}, llm_output: "<KISI_1>'dan", expect: "Celâl'den"}
+- {id: REVERT-076, map: {<KISI_1>: Ayşe Demir}, llm_output: "<KİŞİ_1>'e", expect: "Ayşe Demir'e"}
+- {id: REVERT-060, map: {<GIZLI_ANAHTAR_1>: "****"}, entities: {<GIZLI_ANAHTAR_1>: GIZLI_ANAHTAR}, llm_output: "anahtar <GIZLI_ANAHTAR_1> geçersiz", expect: "anahtar **** geçersiz"}

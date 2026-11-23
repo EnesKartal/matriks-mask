@@ -1,0 +1,31 @@
+# En katı profil: tüm KVKK m.6 özel nitelikli veriler maskelenir, 444 hatları maskelenir,
+# LLM'e yer tutucu talimatı eklenir, yanıtta yeni PII sayımı yapılır.
+model_list:
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY
+
+guardrails:
+  - guardrail_name: matriks-pii
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: true
+      profile: strict
+      placeholder_id: hmac                  # turlar/replikalar arası aynı değer → aynı yer tutucu
+      hash_secret: os.environ/MATRIKS_PII_HASH_SECRET
+      entities:
+        OZEL_SAGLIK: BLOCK                  # sağlık verisi hiç gönderilmesin
+        TCKN: MASK
+        GIZLI_ANAHTAR: BLOCK                # API anahtarı/token içeren istek reddedilir (strict varsayılanı)
+      audit_log: {enabled: true, path: /var/log/litellm/matriks_pii_audit.jsonl}
+      fail_mode: closed
+      revert_fail_mode: closed
+      allow_list: []                        # asla maskelenmeyecek ifadeler (kimlik/anahtar için uygulanmaz)
+      # dry_run: true                       # ilk yayında gölge mod: yalnız "maskelenecekti" sayımları
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+litellm_settings:
+  turn_off_message_logging: true

@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "matriks-pii"
+version = "0.3.3"
+description = "KVKK uyum süreçlerini destekleyen, Türkçe ve geri çevrilebilir PII maskeleme guardrail'i (LiteLLM) / Turkish reversible PII masking guardrail for LiteLLM"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0 AND MIT AND CC-BY-SA-4.0"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md"]
+authors = [{ name = "Matriks Finansal Teknolojiler A.Ş." }]
+keywords = ["pii", "kvkk", "gdpr", "litellm", "guardrail", "turkish", "anonymization", "pseudonymization", "llm", "redaction"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Natural Language :: Turkish",
+    "Topic :: Security",
+    "Topic :: Text Processing :: Linguistic",
+    "Typing :: Typed",
+]
+dependencies = ["pydantic>=2", "pyyaml>=6"]
+
+[project.optional-dependencies]
+dev = [
+    "litellm[proxy]>=1.106.1,<2",
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "httpx",
+    "hypothesis",
+    "ruff",
+    "mypy",
+    "uvicorn",
+]
+# LiteLLM proxy (fastapi dâhil); guardrail modülü fastapi.HTTPException kullanır
+proxy = ["litellm[proxy]>=1.106.1,<2"]
+metrics = ["prometheus_client>=0.17"]
+ner = ["transformers", "torch"]
+redis = ["redis>=5", "cryptography"]
+fast = ["pyahocorasick"]
+
+[project.urls]
+Homepage = "https://github.com/MatriksData/matriks-pii"
+Repository = "https://github.com/MatriksData/matriks-pii"
+Issues = "https://github.com/MatriksData/matriks-pii/issues"
+Changelog = "https://github.com/MatriksData/matriks-pii/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+include = ["matriks_pii*"]
+
+[tool.setuptools.package-data]
+matriks_pii = ["py.typed", "data/*.txt", "data/*.json", "data/*.md", "data/special_category/*.txt"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = ["ignore:Item .* is using the `ReadOnly` qualifier:UserWarning"]
+testpaths = ["tests"]
+addopts = "-m 'not benchmark and not e2e and not external and not redis_live'"
+markers = [
+    "benchmark: performans testleri",
+    "e2e: gerçek litellm proxy ile uçtan uca testler",
+    "ner: HF NER modeli gerektirir",
+    "external: üçüncü taraf Türkçe PII veri setleri (scripts/_raw/external; yoksa atlanır)",
+    "redis_live: gerçek Redis sunucusu (MATRIKS_PII_REDIS_URL)",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]

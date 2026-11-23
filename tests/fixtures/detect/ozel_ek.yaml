@@ -1,0 +1,36 @@
+# elle yazıldı — build_fixtures.py bu dosyayı üretmez/silmez; tüm değerler sentetiktir.
+# KVKK m.6 terim eksikleri (Özel Nitelikli Veri Rehberi 2025 örnekleri dâhil); hepsi kişiye bağlı cümle.
+- {id: OZELEK-001, text: "Ahmet Yılmaz Türk-İş üyesi.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_UYELIK, value: "Türk-İş üyesi"}]}
+- {id: OZELEK-002, text: "Ahmet Yılmaz hepatit B taşıyıcısı.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "hepatit B taşıyıcısı"}], not_expect: [OZEL_GENETIK]}
+- {id: OZELEK-003, text: "Ahmet Yılmaz'ın ehliyetine el konuldu.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_CEZA, value: "ehliyetine el konuldu"}]}
+- {id: OZELEK-004, text: "Müşterimiz Ayşe Demir gebe.", expect: [{entity: KISI, value: "Ayşe Demir"}, {entity: OZEL_SAGLIK, value: "gebe"}]}
+- {id: OZELEK-005, text: "Ahmet Yılmaz sigara içiyor.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "sigara içiyor"}]}
+- {id: OZELEK-006, text: "Ahmet Yılmaz alkol bağımlısı.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "alkol bağımlısı"}]}
+- {id: OZELEK-007, text: "Ahmet Yılmaz madde bağımlısı.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "madde bağımlısı"}]}
+- {id: OZELEK-008, text: "Ahmet Yılmaz uyuşturucu kullanıyor.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "uyuşturucu kullanıyor"}]}
+- {id: OZELEK-009, text: "Ahmet Yılmaz Down sendromlu.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "Down sendromlu"}]}
+- {id: OZELEK-010, text: "Ahmet Yılmaz otistik.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "otistik"}]}
+- {id: OZELEK-011, text: "Ahmet Yılmaz psikolojik destek alıyor.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "psikolojik destek"}]}
+- {id: OZELEK-012, text: "Ahmet Yılmaz intihar girişiminde bulundu.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "intihar girişiminde"}]}
+- {id: OZELEK-013, text: "Ayşe Demir kürtaj oldu.", expect: [{entity: KISI, value: "Ayşe Demir"}, {entity: OZEL_SAGLIK, value: "kürtaj"}]}
+- {id: OZELEK-014, text: "Ayşe Demir tüp bebek tedavisi görüyor.", expect: [{entity: KISI, value: "Ayşe Demir"}, {entity: OZEL_SAGLIK, value: "tüp bebek tedavisi"}]}
+- {id: OZELEK-015, text: "Ahmet Yılmaz obez.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "obez"}]}
+- {id: OZELEK-016, text: "Ahmet Yılmaz protez kullanıyor.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "protez"}]}
+- {id: OZELEK-017, text: "Ahmet Yılmaz tekerlekli sandalye kullanıyor.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "tekerlekli sandalye"}]}
+- {id: OZELEK-018, text: "Ahmet Yılmaz işitme cihazı kullanıyor.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "işitme cihazı"}]}
+- {id: OZELEK-019, text: "Ahmet Yılmaz malulen emekli.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_SAGLIK, value: "malulen emekli"}]}
+- {id: OZELEK-020, text: "Ahmet Yılmaz Hanefi.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_DIN, value: "Hanefi"}], config: {entities: {OZEL_DIN: MASK}}}
+- {id: OZELEK-021, text: "Ahmet Yılmaz Şafii mezhebinden.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_DIN, value: "Şafii"}], config: {entities: {OZEL_DIN: MASK}}}
+- {id: OZELEK-022, text: "Ahmet Yılmaz Nakşibendi.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_DIN, value: "Nakşibendi"}], config: {entities: {OZEL_DIN: MASK}}}
+- {id: OZELEK-023, text: "Ahmet Yılmaz Yehova Şahidi.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_DIN, value: "Yehova Şahidi"}], config: {entities: {OZEL_DIN: MASK}}}
+- {id: OZELEK-024, text: "Ahmet Yılmaz Mason.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_DIN, value: "Mason"}], config: {entities: {OZEL_DIN: MASK}}}
+- {id: OZELEK-025, text: "Ahmet Yılmaz siyahi.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_ETNIK, value: "siyahi"}], config: {entities: {OZEL_ETNIK: MASK}}}
+- {id: OZELEK-026, text: "Ahmet Yılmaz Rotary üyesi.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_UYELIK, value: "Rotary üyesi"}], config: {entities: {OZEL_UYELIK: MASK}}}
+- {id: OZELEK-027, text: "Ahmet Yılmaz Ülkü Ocakları üyesi.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_UYELIK, value: "Ülkü Ocakları üyesi"}], config: {entities: {OZEL_UYELIK: MASK}}}
+- {id: OZELEK-028, text: "Ayşe Demir tesettürlü.", expect: [{entity: KISI, value: "Ayşe Demir"}, {entity: OZEL_KIYAFET, value: "tesettürlü"}], config: {entities: {OZEL_KIYAFET: MASK}}}
+- {id: OZELEK-029, text: "Ahmet Yılmaz dövmeli.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_KIYAFET, value: "dövmeli"}], config: {entities: {OZEL_KIYAFET: MASK}}}
+- {id: OZELEK-030, text: "Ahmet Yılmaz cezaevinde.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}, {entity: OZEL_CEZA, value: "cezaevinde"}]}
+- {id: OZELEK-031, text: "Psikolog Ayşe Demir randevu verdi.", expect: [{entity: KISI, value: "Ayşe Demir"}], not_expect: [OZEL_SAGLIK]}
+- {id: OZELEK-032, text: "Ayşe Demir kısır yaptı.", expect: [{entity: KISI, value: "Ayşe Demir"}], not_expect: [OZEL_SAGLIK]}
+- {id: OZELEK-033, text: "Ahmet Yılmaz sakat iş yaptı.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}], not_expect: [OZEL_SAGLIK]}
+- {id: OZELEK-034, text: "Ahmet Yılmaz alevi.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}], not_expect: [OZEL_DIN]}

@@ -1,0 +1,201 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-341
+  text: "İstanbul'da hava bugün yağmurlu."
+  expect: []
+  why: "tek il adı"
+  tags: [adres, il_adi]
+- id: NEG-342
+  text: "Kadıköy çarşısı hafta sonu kalabalıktı."
+  expect: []
+  why: "tek ilçe adı"
+  tags: [adres, il_adi]
+- id: NEG-343
+  text: "Ankara ve İzmir arasında hızlı tren seferleri arttı."
+  expect: []
+  why: "iki il adı, çapa yok"
+  tags: [adres, il_adi]
+- id: NEG-344
+  text: "34000 beş haneli bir sayıdır, tek başına adres değildir."
+  expect: []
+  why: "posta kodu çapasız"
+  tags: [adres]
+- id: NEG-345
+  text: "No: 5 madde uyarınca sözleşme feshedilebilir."
+  expect: []
+  why: "tek No çapası, span içinde il/ilçe yok"
+  tags: [adres, anchor, borderline]
+- id: NEG-346
+  text: "Kat: 3 yazan etiket yanlış basılmıştı."
+  expect: []
+  why: "tek Kat çapası"
+  tags: [adres, anchor, borderline]
+- id: NEG-347
+  text: "Katılım bankacılığı aktifleri %25 büyüdü."
+  expect: []
+  why: "Kat ön eki, \\b sınırı"
+  tags: [adres, anchor]
+- id: NEG-348
+  text: "Mahalle baskısı deyimi sosyolojide tartışılır."
+  expect: []
+  why: "deyim, tek çapa"
+  tags: [adres, anchor]
+- id: NEG-349
+  text: "Sokak hayvanları için besleme noktaları kuruldu."
+  expect: []
+  why: "sokak genel anlam, tek çapa"
+  tags: [adres, anchor]
+- id: NEG-350
+  text: "Cadde üzerinde trafik yoğunluğu sürüyor."
+  expect: []
+  why: "cadde genel anlam"
+  tags: [adres, anchor]
+- id: NEG-351
+  text: "Blok zinciri teknolojisi takas süreçlerini hızlandırabilir."
+  expect: []
+  why: "Blok teknik terim"
+  tags: [adres, anchor]
+- id: NEG-352
+  text: "Plaza çalışanları öğle yemeğinde dışarı çıktı."
+  expect: []
+  why: "Plaza genel, tek çapa"
+  tags: [adres, anchor]
+- id: NEG-353
+  text: "Daire başkanlığı yeni genelge yayımladı."
+  expect: []
+  why: "Daire kurum anlamı"
+  tags: [adres, anchor]
+- id: NEG-354
+  text: "Bulvar boyunca ağaçlandırma çalışması başladı."
+  expect: []
+  why: "Bulvar genel, tek çapa"
+  tags: [adres, anchor]
+- id: NEG-355
+  text: "Apartman yönetimi aidatı 1.500 TL'ye çıkardı."
+  expect: []
+  why: "Apartman genel, tek çapa"
+  tags: [adres, anchor]
+- id: NEG-356
+  text: "Site yönetimi havuz bakımını tamamladı."
+  expect: []
+  why: "Site çapa değil"
+  tags: [adres]
+- id: NEG-357
+  text: "Residence projeleri lüks konut talebini artırdı."
+  expect: []
+  why: "Residence genel, tek çapa"
+  tags: [adres, anchor]
+- id: NEG-358
+  text: "1600 Pennsylvania Avenue, Washington DC 20500 adresi Beyaz Saray'dır."
+  expect: []
+  why: "yurt dışı adres, çapa yok"
+  tags: [adres, yurt_disi]
+- id: NEG-359
+  text: "10 Downing Street, London SW1A 2AA posta adresi yurt dışıdır."
+  expect: []
+  why: "yurt dışı adres"
+  tags: [adres, yurt_disi]
+- id: NEG-360
+  text: "Alexanderplatz 1, 10178 Berlin adresi Almanya'da."
+  expect: []
+  why: "yurt dışı adres, 5 hane + il/ilçe yok"
+  tags: [adres, yurt_disi]
+- id: NEG-361
+  text: "Mahallenin en eski fırını kapandı."
+  expect: []
+  why: "Mah ön eki, \\b sınırı"
+  tags: [adres, anchor]
+- id: NEG-362
+  text: "Sokağa çıkma kısıtlaması 2020'de uygulandı."
+  expect: []
+  why: "Sok ön eki, \\b sınırı"
+  tags: [adres, anchor]
+- id: NEG-363
+  text: "Caddebostan sahilinde yürüyüş yapıldı."
+  expect: []
+  why: "Cad ön eki, semt adı"
+  tags: [adres, anchor]
+- id: NEG-364
+  text: "Beşiktaş maçı 2-1 bitti."
+  expect: []
+  why: "ilçe adı spor bağlamı"
+  tags: [adres, il_adi]
+- id: NEG-365
+  text: "Posta kutusu anahtarı kayboldu."
+  expect: []
+  why: "Posta Kodu çapası yok"
+  tags: [adres]
+- id: NEG-366
+  text: "Kapı numarası sorulunca 5 dedi, ama adres vermedi."
+  expect: []
+  why: "No çapası yok"
+  tags: [adres]
+- id: NEG-367
+  text: "Daire 3 kişilik ekip tarafından tamamlandı."
+  expect: []
+  why: "Daire tek çapa, No yok"
+  tags: [adres, anchor]
+- id: NEG-368
+  text: "Bulvar genişletme çalışması trafiği etkiledi."
+  expect: []
+  why: "tek çapa"
+  tags: [adres, anchor]
+- id: NEG-369
+  text: "Sitesi olmayan şirketler dijital pazarlamada geride kalıyor."
+  expect: []
+  why: "Sitesi web anlamı, tek çapa"
+  tags: [adres, anchor]
+- id: NEG-370
+  text: "Apt. kısaltması belgede açıklanmamış."
+  expect: []
+  why: "tek çapa"
+  tags: [adres, anchor]
+- id: NEG-371
+  text: "PK 123 kısaltması posta kutusu anlamındadır."
+  expect: []
+  why: "tek PK çapası; No sayılmaz"
+  tags: [adres, anchor, borderline]
+- id: NEG-372
+  text: "D: sürücüsü doluydu, dosyalar E: sürücüsüne taşındı."
+  expect: []
+  why: "D: disk sürücüsü, tek çapa"
+  tags: [adres, anchor]
+- id: NEG-373
+  text: "K: tuşu klavyede harf girişi için kullanılır."
+  expect: []
+  why: "K: tek çapa"
+  tags: [adres, anchor]
+- id: NEG-374
+  text: "Mah. kısaltması tabelada silinmişti."
+  expect: []
+  why: "tek çapa"
+  tags: [adres, anchor]
+- id: NEG-375
+  text: "Kadıköy, Üsküdar ve Beşiktaş ilçelerinde kira fiyatları arttı."
+  expect: []
+  why: "ilçe adları çapasız"
+  tags: [adres, il_adi]
+- id: NEG-376
+  text: "Nişantaşı'ndaki mağaza kapandı."
+  expect: []
+  why: "semt adı ekli"
+  tags: [adres, il_adi]
+- id: NEG-377
+  text: "İzmir Alsancak'ta yeni ofis açıldı."
+  expect: []
+  why: "il + semt, çapa yok"
+  tags: [adres, il_adi]
+- id: NEG-378
+  text: "Beyoğlu Belediyesi bütçeyi onayladı."
+  expect: []
+  why: "ilçe + kurum"
+  tags: [adres, il_adi]
+- id: NEG-379
+  text: "Türkiye'nin 81 ilinde eş zamanlı tatbikat yapıldı."
+  expect: []
+  why: "il sayısı"
+  tags: [adres]
+- id: NEG-380
+  text: "Levent'teki ofis kiraları yükseldi."
+  expect: []
+  why: "semt adı (ad da olabilir) + yer eki −0.4, cümle başı"
+  tags: [adres, il_adi, kisi]

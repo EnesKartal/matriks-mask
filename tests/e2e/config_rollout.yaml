@@ -1,0 +1,27 @@
+# Kademeli yayın provası (test_rollout_rehearsal.py): gölge mod → canary, gerçek proxy üzerinden.
+model_list:
+  - model_name: echo
+    litellm_params:
+      model: openai/echo
+      api_base: http://127.0.0.1:9914/v1
+      api_key: sk-echo
+
+guardrails:
+  # aşama 1: gölge mod (üretimde default_on: true; provada istek bazında seçilir ki aşamalar karışmasın)
+  - guardrail_name: matriks-pii-shadow
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: false
+      dry_run: true
+      audit_log: {enabled: true, path: os.environ/ROLLOUT_AUDIT_SHADOW}
+  # aşama 2: canary (anahtarların %5'i; üretimde anahtarın guardrails listesiyle)
+  - guardrail_name: matriks-pii-canary
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: false
+      audit_log: {enabled: true, path: os.environ/ROLLOUT_AUDIT_CANARY}
+
+general_settings:
+  master_key: sk-test

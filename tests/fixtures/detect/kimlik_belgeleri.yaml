@@ -1,0 +1,119 @@
+# detect/kimlik_belgeleri — 25 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: KIMLIK-001
+  text: Pasaport numaram U12345678.
+  expect:
+  - entity: PASAPORT
+    value: U12345678
+- id: KIMLIK-002
+  text: 'Passport no: A98765432'
+  expect:
+  - entity: PASAPORT
+    value: A98765432
+- id: KIMLIK-003
+  text: pasaport no u23456789
+  expect:
+  - entity: PASAPORT
+    value: u23456789
+- id: KIMLIK-004
+  text: U12345678 depo kodu.
+  expect: []
+- id: KIMLIK-005
+  text: Kimlik kartı seri no A12B34567
+  expect:
+  - entity: KIMLIK_SERI
+    value: A12B34567
+- id: KIMLIK-006
+  text: Nüfus cüzdanı seri numarası ABC123456
+  expect:
+  - entity: KIMLIK_SERI
+    value: ABC123456
+- id: KIMLIK-007
+  text: Ehliyet numarası 123456.
+  expect:
+  - entity: EHLIYET
+    value: '123456'
+- id: KIMLIK-008
+  text: 'Sürücü belgesi no: 654321'
+  expect:
+  - entity: EHLIYET
+    value: '654321'
+- id: KIMLIK-009
+  text: SGK sicil no 1234567890
+  expect:
+  - entity: SGK
+    value: '1234567890'
+- id: KIMLIK-010
+  text: Sigorta sicil numarası 9876543
+  expect:
+  - entity: SGK
+    value: '9876543'
+- id: KIMLIK-011
+  text: İşyeri sicil numarası 12345678901234567890123456
+  expect:
+  - entity: SGK
+    value: '12345678901234567890123456'
+- id: KIMLIK-012
+  text: 'Nüfusa kayıtlı olduğu cilt no: 12, aile sıra no: 345, sıra no: 6'
+  expect:
+  - entity: NUFUS_KAYIT
+    value: '12'
+  - entity: NUFUS_KAYIT
+    value: '345'
+  - entity: NUFUS_KAYIT
+    value: '6'
+- id: KIMLIK-013
+  text: Sıra no 1, 2, 3 satırlar.
+  expect: []
+- id: KIMLIK-014
+  text: SGK prim oranı %20,5.
+  expect: []
+- id: KIMLIK-015
+  text: Sigorta sicil kayıtları arşivde tutulur; arşiv raf kodu, ilgili yönetmelik hükümlerine göre, ayrı bir listede 9876543 olarak saklanır.
+  expect: []
+- id: KIMLIK-016
+  text: Ehliyet sınavı 50 soru.
+  expect: []
+- id: KIMLIK-017
+  text: '{"pasaport_no": "Pasaport U87654321"}'
+  expect:
+  - entity: PASAPORT
+    value: U87654321
+- id: KIMLIK-018
+  text: Kod 123456 SMS ile gönderildi.
+  expect: []
+- id: KIMLIK-019
+  text: 'Pasaport: P12345678, ehliyet: 112233'
+  expect:
+  - entity: PASAPORT
+    value: P12345678
+  - entity: EHLIYET
+    value: '112233'
+- id: KIMLIK-020
+  text: SSK no 12345678
+  expect:
+  - entity: SGK
+    value: '12345678'
+- id: KIMLIK-021
+  text: Emekli sicil numarası 7654321
+  expect:
+  - entity: SGK
+    value: '7654321'
+- id: KIMLIK-022
+  text: 'Kimlik kartı belge no: XYZ987654'
+  expect:
+  - entity: KIMLIK_SERI
+    value: XYZ987654
+- id: KIMLIK-023
+  text: Pasaport başvurusu için randevu alındı.
+  expect: []
+- id: KIMLIK-024
+  text: Bağ-Kur no 22334455
+  expect:
+  - entity: SGK
+    value: '22334455'
+- id: KIMLIK-025
+  text: Ehliyetimin numarası 998877
+  expect:
+  - entity: EHLIYET
+    value: '998877'

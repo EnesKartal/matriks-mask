@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+build/
+dist/
+# ham indirme dosyaları (scripts/fetch_raw.py ile yeniden indirilir)
+scripts/_raw/
+*.jsonl.tmp
+# yerel ortam / çalışma çıktıları (sır ve değersiz de olsa denetim kayıtları depoya girmez)
+.env
+*.env
+audit*.jsonl
+*.log

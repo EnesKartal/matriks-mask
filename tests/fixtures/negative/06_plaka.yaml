@@ -1,0 +1,151 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-231
+  text: "Fiyat 34 TL'ye yükseldi, hedef 100 TL."
+  expect: []
+  why: "34 TL apostroflu, rakam grubu yok"
+  tags: [plaka, fiyat]
+- id: NEG-232
+  text: "Hisse 24 bin 500 lot işlem gördü."
+  expect: []
+  why: "küçük harf bin, harf grubu değil"
+  tags: [plaka]
+- id: NEG-233
+  text: "06 ADET 12 numaralı kalem stokta."
+  expect: []
+  why: "4 harf, en fazla 3"
+  tags: [plaka]
+- id: NEG-234
+  text: "34 THYAO 12 lot alım emri girildi."
+  expect: []
+  why: "5 harfli hisse kodu"
+  tags: [plaka, hisse]
+- id: NEG-235
+  text: "12 05 2024 tarihli rapor yayımlandı."
+  expect: []
+  why: "harf grubu yok"
+  tags: [plaka, tarih]
+- id: NEG-236
+  text: "34 QWX 123 harf grubu plaka alfabesinde yok."
+  expect: []
+  why: "Q W X yasak"
+  tags: [plaka]
+- id: NEG-237
+  text: "00 AB 123 il kodu geçersizdir."
+  expect: []
+  why: "il kodu 00"
+  tags: [plaka]
+- id: NEG-238
+  text: "82 AB 123 ve 99 CD 456 il kodları Türkiye'de kullanılmaz."
+  expect: []
+  why: "il kodu 82 ve 99"
+  tags: [plaka]
+- id: NEG-239
+  text: "34 ABC 1234 yedi karakterli olduğundan plaka formatına uymaz."
+  expect: []
+  why: "3 harf + 4 rakam"
+  tags: [plaka]
+- id: NEG-240
+  text: "34 A 123 bir harfli plakada en az dört rakam gerekir."
+  expect: []
+  why: "1 harf + 3 rakam"
+  tags: [plaka]
+- id: NEG-241
+  text: "34 AB 12345 iki harfli plaka en fazla dört rakam alır."
+  expect: []
+  why: "2 harf + 5 rakam"
+  tags: [plaka]
+- id: NEG-242
+  text: "TR 34 123 ülke kodu ile başlayan bu dizi plaka değildir."
+  expect: []
+  why: "harf grubu il kodundan önce"
+  tags: [plaka]
+- id: NEG-243
+  text: "34 ŞK 123 Türkçe karakterli harf grubu plakada bulunmaz."
+  expect: []
+  why: "Ş yasak"
+  tags: [plaka]
+- id: NEG-244
+  text: "06 CÖ 1234 harf grubunda Ö kullanılmaz."
+  expect: []
+  why: "Ö yasak"
+  tags: [plaka]
+- id: NEG-245
+  text: "16 BURSA 12 plaka değil şehir adıdır."
+  expect: []
+  why: "5 harf"
+  tags: [plaka, il_adi]
+- id: NEG-246
+  text: "35 İZMİR 2024 metinde plaka olarak yorumlanmamalı."
+  expect: []
+  why: "İ yasak, 5 harf"
+  tags: [plaka, il_adi]
+- id: NEG-247
+  text: "41 KOCAELİ 15 ifadesi il adı içerir."
+  expect: []
+  why: "7 harf"
+  tags: [plaka, il_adi]
+- id: NEG-248
+  text: "Lot dağılımı: ABC 34, DEF 06 şeklinde."
+  expect: []
+  why: "harf grubu rakamdan önce"
+  tags: [plaka]
+- id: NEG-249
+  text: "Madde 34 TL cinsinden ödemeyi, madde 35 USD cinsinden ödemeyi düzenler."
+  expect: []
+  why: "harf sonrası rakam yok"
+  tags: [plaka]
+- id: NEG-250
+  text: "Sayfa 12 ABD doları kuru tablosunu içerir."
+  expect: []
+  why: "harf sonrası rakam yok"
+  tags: [plaka]
+- id: NEG-251
+  text: "Depo rafı 34 B 123 numarasıyla etiketlendi."
+  expect: []
+  why: "1 harf + 3 rakam"
+  tags: [plaka]
+- id: NEG-252
+  text: "Uçuş TK 34 1234 kodu plaka değildir."
+  expect: []
+  why: "harfler il kodundan önce"
+  tags: [plaka]
+- id: NEG-253
+  text: "34ABC123 kodu depo etiketinde boşluksuz basılmış."
+  expect: []
+  why: "boşluksuz, plaka/araç bağlamı yok"
+  tags: [plaka]
+- id: NEG-254
+  text: "Araç sayısı 34, sürücü sayısı 12, güzergah ABC."
+  expect: []
+  why: "araç bağlamı, plaka deseni yok"
+  tags: [plaka]
+- id: NEG-255
+  text: "Model yılı 2024, motor 1.6 TDI, 115 HP."
+  expect: []
+  why: "harf sonrası rakam yok"
+  tags: [plaka]
+- id: NEG-256
+  text: "Kod 81 AA 1 ve 01 B 12 eksik rakamlı dizilerdir."
+  expect: []
+  why: "rakam grubu kısa"
+  tags: [plaka]
+- id: NEG-257
+  text: "Konteyner numarası MSCU 1234567 ve mühür 34 M 12 kaydedildi."
+  expect: []
+  why: "1 harf + 2 rakam"
+  tags: [plaka]
+- id: NEG-258
+  text: "Ders kodu MAT 101, sınıf 34, sıra 12."
+  expect: []
+  why: "harf il kodundan önce"
+  tags: [plaka]
+- id: NEG-259
+  text: "Gemi IMO 9321483 ve çağrı işareti TCA 34 kaydı."
+  expect: []
+  why: "harf grubu önce"
+  tags: [plaka]
+- id: NEG-260
+  text: "Bölge 34 AVR 2 kodu dağıtım planında."
+  expect: []
+  why: "3 harf + 1 rakam"
+  tags: [plaka]

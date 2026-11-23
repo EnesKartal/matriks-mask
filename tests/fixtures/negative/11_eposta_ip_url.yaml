@@ -1,0 +1,101 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-461
+  text: "@ahmet etiketi yorumda kullanıldı."
+  expect: []
+  why: "mention, @ öncesi boş; 'ahmet' küçük harf"
+  tags: [eposta, kisi]
+- id: NEG-462
+  text: "Hesap @borsagunlugu piyasa özetini paylaştı."
+  expect: []
+  why: "sosyal medya mention"
+  tags: [eposta]
+- id: NEG-463
+  text: "a@b geçerli bir e-posta adresi değildir."
+  expect: []
+  why: "TLD yok"
+  tags: [eposta]
+- id: NEG-464
+  text: "destek@ ile başlayan adres eksik girilmiş."
+  expect: []
+  why: "alan adı yok"
+  tags: [eposta]
+- id: NEG-465
+  text: "Sürüm 1.2.3.4 yayımlandı, hata düzeltmeleri içeriyor."
+  expect: []
+  why: "sürüm bağlamı, IP değil"
+  tags: [ip]
+- id: NEG-466
+  text: "v2.0.1.3 güncellemesi performans iyileştirmesi getiriyor."
+  expect: []
+  why: "v öneki sürüm bağlamı"
+  tags: [ip]
+- id: NEG-467
+  text: "256.1.1.1 geçerli bir IPv4 adresi değildir."
+  expect: []
+  why: "oktet 255 üstü"
+  tags: [ip]
+- id: NEG-468
+  text: "999.999.999.999 adres aralığı dışındadır."
+  expect: []
+  why: "geçersiz oktetler"
+  tags: [ip]
+- id: NEG-469
+  text: "Ondalık sayılar 3.14 ve 2.718 hesaplamada kullanıldı."
+  expect: []
+  why: "iki parçalı ondalıklar"
+  tags: [ip, sayisal]
+- id: NEG-470
+  text: "www.ornek.com.tr adresinden belgeye ulaşılabilir."
+  expect: []
+  why: "URL maskelenmez"
+  tags: [url]
+- id: NEG-471
+  text: "https://www.borsaistanbul.com/tr/sayfa/123 bağlantısı paylaşıldı."
+  expect: []
+  why: "URL"
+  tags: [url]
+- id: NEG-472
+  text: "Fiyat @ 12,50 TL seviyesinden 100 lot alındı."
+  expect: []
+  why: "@ fiyat ayracı"
+  tags: [eposta, fiyat]
+- id: NEG-473
+  text: "Hisse @312 seviyesinde destek buldu."
+  expect: []
+  why: "@ ile seviye"
+  tags: [eposta, fiyat]
+- id: NEG-474
+  text: "Sunucu 10.0.0.x bloğunda, tam adres paylaşılmadı."
+  expect: []
+  why: "eksik oktet"
+  tags: [ip]
+- id: NEG-475
+  text: "Port 8080 üzerinden erişim engellendi."
+  expect: []
+  why: "port numarası"
+  tags: [ip]
+- id: NEG-476
+  text: "Alan adı ornek.com.tr için SSL sertifikası yenilendi."
+  expect: []
+  why: "alan adı, @ yok"
+  tags: [url]
+- id: NEG-477
+  text: "E-posta adresinizi (at) işaretiyle yazmayın, @ kullanın."
+  expect: []
+  why: "(at) tek başına, yerel kısım yok"
+  tags: [eposta]
+- id: NEG-478
+  text: "Sürüm numarası 10.15.7 macOS Catalina'ya ait."
+  expect: []
+  why: "3 parçalı sürüm"
+  tags: [ip]
+- id: NEG-479
+  text: "Subnet maskesi /24 olarak ayarlandı."
+  expect: []
+  why: "CIDR öneki"
+  tags: [ip]
+- id: NEG-480
+  text: "ornek@ornek yazımında üst düzey alan adı eksik."
+  expect: []
+  why: "TLD yok"
+  tags: [eposta]

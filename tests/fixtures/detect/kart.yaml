@@ -1,0 +1,178 @@
+# detect/kart — 36 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: KART-001
+  text: Kart numaram 4111111111111111 (visa).
+  expect:
+  - entity: KART
+    value: '4111111111111111'
+- id: KART-002
+  text: 'Kart: 4111 1111 1111 1111'
+  expect:
+  - entity: KART
+    value: 4111 1111 1111 1111
+- id: KART-003
+  text: Kart 4111-1111-1111-1111 ile ödeme.
+  expect:
+  - entity: KART
+    value: 4111-1111-1111-1111
+- id: KART-004
+  text: Kart numaram 5555555555554444 (mc).
+  expect:
+  - entity: KART
+    value: '5555555555554444'
+- id: KART-005
+  text: 'Kart: 5555 5555 5555 4444'
+  expect:
+  - entity: KART
+    value: 5555 5555 5555 4444
+- id: KART-006
+  text: Kart 5555-5555-5555-4444 ile ödeme.
+  expect:
+  - entity: KART
+    value: 5555-5555-5555-4444
+- id: KART-007
+  text: Kart numaram 9792000000000003 (troy).
+  expect:
+  - entity: KART
+    value: '9792000000000003'
+- id: KART-008
+  text: 'Kart: 9792 0000 0000 0003'
+  expect:
+  - entity: KART
+    value: 9792 0000 0000 0003
+- id: KART-009
+  text: Kart 9792-0000-0000-0003 ile ödeme.
+  expect:
+  - entity: KART
+    value: 9792-0000-0000-0003
+- id: KART-010
+  text: Kart numaram 4543000000000006 (visa2).
+  expect:
+  - entity: KART
+    value: '4543000000000006'
+- id: KART-011
+  text: 'Kart: 4543 0000 0000 0006'
+  expect:
+  - entity: KART
+    value: 4543 0000 0000 0006
+- id: KART-012
+  text: Kart 4543-0000-0000-0006 ile ödeme.
+  expect:
+  - entity: KART
+    value: 4543-0000-0000-0006
+- id: KART-013
+  text: Kart numaram 5406000000000009 (mc2).
+  expect:
+  - entity: KART
+    value: '5406000000000009'
+- id: KART-014
+  text: 'Kart: 5406 0000 0000 0009'
+  expect:
+  - entity: KART
+    value: 5406 0000 0000 0009
+- id: KART-015
+  text: Kart 5406-0000-0000-0009 ile ödeme.
+  expect:
+  - entity: KART
+    value: 5406-0000-0000-0009
+- id: KART-016
+  text: Amex 378282246310005 kullanıldı.
+  expect:
+  - entity: KART
+    value: '378282246310005'
+- id: KART-017
+  text: Amex 3782 822463 10005 kullanıldı.
+  expect:
+  - entity: KART
+    value: 3782 822463 10005
+- id: KART-018
+  text: Kart 4111 1111 1111 1112 Luhn'dan geçmez.
+  expect: []
+- id: KART-019
+  text: Kart 1234 5678 9012 3456 geçersiz.
+  expect: []
+- id: KART-020
+  text: Kart **** **** **** 1234 ile ödendi.
+  expect: []
+- id: KART-021
+  text: Kod 8888888888888888 BIN dışı.
+  expect: []
+- id: KART-022
+  text: 19 haneli 4000000000000000006 kart.
+  expect:
+  - entity: KART
+    value: '4000000000000000006'
+- id: KART-023
+  text: İki kart 4111111111111111 ve 5555555555554444.
+  expect:
+  - entity: KART
+    value: '4111111111111111'
+  - entity: KART
+    value: '5555555555554444'
+- id: KART-024
+  text: Kart 9792000000000003, CVV 123, son kullanma 12/27.
+  expect:
+  - entity: KART
+    value: '9792000000000003'
+  - entity: KART_CVV
+    value: '123'
+  - entity: KART_SKT
+    value: 12/27
+- id: KART-025
+  text: 'CVV: 456 bilgisini kimseyle paylaşmayın.'
+  expect:
+  - entity: KART_CVV
+    value: '456'
+- id: KART-026
+  text: Güvenlik kodu 7890 girildi.
+  expect:
+  - entity: KART_CVV
+    value: '7890'
+- id: KART-027
+  text: 'CVC2 kodu: 321'
+  expect:
+  - entity: KART_CVV
+    value: '321'
+- id: KART-028
+  text: SKT 03/2028 olan kart.
+  expect:
+  - entity: KART_SKT
+    value: 03/2028
+- id: KART-029
+  text: 'Son kullanma tarihi: 11/26'
+  expect:
+  - entity: KART_SKT
+    value: 11/26
+- id: KART-030
+  text: Expiry 09/29, kart aktif.
+  expect:
+  - entity: KART_SKT
+    value: 09/29
+- id: KART-031
+  text: Fatura dönemi 12/27 sayfasında.
+  expect: []
+- id: KART-032
+  text: CVV kodunu asla paylaşmayın.
+  expect: []
+- id: KART-033
+  text: Kart numarası:4543000000000006
+  expect:
+  - entity: KART
+    value: '4543000000000006'
+- id: KART-034
+  text: Kart 5406000000000009'ten çekim yapıldı.
+  expect:
+  - entity: KART
+    value: '5406000000000009'
+- id: KART-035
+  text: Visa 4111111111111111 CVV 999
+  expect:
+  - entity: KART
+    value: '4111111111111111'
+  - entity: KART_CVV
+    value: '999'
+- id: KART-036
+  text: 'Ödeme bilgisi {"card": "5555555555554444"}'
+  expect:
+  - entity: KART
+    value: '5555555555554444'

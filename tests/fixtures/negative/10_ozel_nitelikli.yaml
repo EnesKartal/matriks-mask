@@ -1,0 +1,251 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-411
+  text: "CHP kurultayı hafta sonu Ankara'da toplandı."
+  expect: []
+  why: "parti adı haber bağlamı, kişiye bağlılık yok"
+  tags: [ozel, siyasi]
+- id: NEG-412
+  text: "AK Parti grup toplantısında ekonomi gündemi konuşuldu."
+  expect: []
+  why: "parti adı, kişi yok"
+  tags: [ozel, siyasi]
+- id: NEG-413
+  text: "MHP ve İYİ Parti bütçe görüşmelerinde söz aldı."
+  expect: []
+  why: "parti adları haber"
+  tags: [ozel, siyasi]
+- id: NEG-414
+  text: "Sağlık Bakanlığı grip aşısı kampanyasını başlattı."
+  expect: []
+  why: "sağlık kurumu haberi"
+  tags: [ozel, saglik]
+- id: NEG-415
+  text: "Kanser araştırmaları için 50 milyon TL bütçe ayrıldı."
+  expect: []
+  why: "sağlık terimi, kişi yok"
+  tags: [ozel, saglik]
+- id: NEG-416
+  text: "Diyabet nedir, belirtileri nelerdir?"
+  expect: []
+  why: "genel tıbbi soru"
+  tags: [ozel, saglik]
+- id: NEG-417
+  text: "İnsülin fiyatları eczanelerde güncellendi."
+  expect: []
+  why: "ilaç adı genel"
+  tags: [ozel, saglik]
+- id: NEG-418
+  text: "Sendika grevi üçüncü gününde devam ediyor."
+  expect: []
+  why: "sendika haberi, üye yok"
+  tags: [ozel, sendika]
+- id: NEG-419
+  text: "Türk-İş asgari ücret önerisini duyurdu."
+  expect: []
+  why: "sendika adı kurum olarak"
+  tags: [ozel, sendika]
+- id: NEG-420
+  text: "LGBT yürüyüşü için valilik açıklama yaptı."
+  expect: []
+  why: "haber bağlamı, kişi yok"
+  tags: [ozel, cinsel]
+- id: NEG-421
+  text: "Alevi dernekleri ortak basın açıklaması düzenledi."
+  expect: []
+  why: "mezhep terimi kurum bağlamı"
+  tags: [ozel, din]
+- id: NEG-422
+  text: "Kürt sorunu tartışmaları Meclis gündemine geldi."
+  expect: []
+  why: "etnik terim siyasi tartışma"
+  tags: [ozel, etnik]
+- id: NEG-423
+  text: "Sabıka kaydı nasıl alınır? E-devlet üzerinden sorgulanabilir."
+  expect: []
+  why: "genel bilgi sorusu"
+  tags: [ozel, ceza]
+- id: NEG-424
+  text: "Parmak izi teknolojisi akıllı telefonlarda yaygınlaştı."
+  expect: []
+  why: "biyometrik terim teknoloji haberi"
+  tags: [ozel, biyometrik]
+- id: NEG-425
+  text: "Kan grubu uyumu hakkında genel bilgi: 0 negatif genel vericidir."
+  expect: []
+  why: "genel bilgi, kişi yok; '0 negatif' Rh regex'ine uymaz"
+  tags: [ozel, saglik]
+- id: NEG-426
+  text: "DNA dizileme maliyeti son on yılda hızla düştü."
+  expect: []
+  why: "genetik terim haber"
+  tags: [ozel, genetik]
+- id: NEG-427
+  text: "Hepatit B aşısı doğumda uygulanır."
+  expect: []
+  why: "genel sağlık bilgisi; 'doğumda' DOB için tarih yok"
+  tags: [ozel, saglik]
+- id: NEG-428
+  text: "Depresyon belirtileri hakkında farkındalık kampanyası başladı."
+  expect: []
+  why: "kampanya haberi"
+  tags: [ozel, saglik]
+- id: NEG-429
+  text: "Engelli bireyler için erişilebilirlik yönetmeliği yayımlandı."
+  expect: []
+  why: "mevzuat haberi"
+  tags: [ozel, saglik]
+- id: NEG-430
+  text: "Hamilelik döneminde beslenme önerileri yayımlandı."
+  expect: []
+  why: "genel sağlık bilgisi"
+  tags: [ozel, saglik]
+- id: NEG-431
+  text: "Müslüman ülkelerde bayram tatili ekonomiyi etkiliyor."
+  expect: []
+  why: "din terimi coğrafi bağlam"
+  tags: [ozel, din]
+- id: NEG-432
+  text: "Hristiyan dünyası Noel tatiline girdi, piyasalar kapalı."
+  expect: []
+  why: "din terimi piyasa haberi"
+  tags: [ozel, din]
+- id: NEG-433
+  text: "Yahudi takvimine göre Roş Aşana tatili nedeniyle Tel Aviv borsası kapalı."
+  expect: []
+  why: "din terimi takvim bağlamı"
+  tags: [ozel, din]
+- id: NEG-434
+  text: "Ateist derneği basın toplantısı düzenledi."
+  expect: []
+  why: "kurum adı, üye yok"
+  tags: [ozel, din]
+- id: NEG-435
+  text: "Cemaat yurtları hakkında rapor yayımlandı."
+  expect: []
+  why: "rapor haberi"
+  tags: [ozel, din]
+- id: NEG-436
+  text: "Ermeni mimarisi İstanbul'un tarihi dokusunda önemli yer tutar."
+  expect: []
+  why: "etnik terim kültürel bağlam"
+  tags: [ozel, etnik]
+- id: NEG-437
+  text: "Rum Ortodoks Patrikhanesi Fener'de bulunur."
+  expect: []
+  why: "kurum adı"
+  tags: [ozel, din]
+- id: NEG-438
+  text: "Roman vatandaşlar için sosyal destek programı açıklandı."
+  expect: []
+  why: "politika haberi, kişi yok"
+  tags: [ozel, etnik]
+- id: NEG-439
+  text: "Arap yatırımcılar gayrimenkul alımlarını artırdı."
+  expect: []
+  why: "Arap: 'kökenli|asıllı' bağlamı yok"
+  tags: [ozel, etnik]
+- id: NEG-440
+  text: "Suriyeli girişimciler 10 bin şirket kurdu."
+  expect: []
+  why: "uyruk m.6 kapsamı dışı"
+  tags: [ozel, etnik]
+- id: NEG-441
+  text: "Afgan göçmen sayısı resmi verilerle açıklandı."
+  expect: []
+  why: "uyruk, istatistik haberi"
+  tags: [ozel, etnik]
+- id: NEG-442
+  text: "Çerkes kültür derneği festival düzenledi."
+  expect: []
+  why: "kurum adı"
+  tags: [ozel, etnik]
+- id: NEG-443
+  text: "Hapis cezası yerine denetimli serbestlik uygulaması genişletildi."
+  expect: []
+  why: "mevzuat haberi"
+  tags: [ozel, ceza]
+- id: NEG-444
+  text: "Adli sicil belgesi e-devletten alınabilir."
+  expect: []
+  why: "genel bilgi"
+  tags: [ozel, ceza]
+- id: NEG-445
+  text: "Tutuklu sayısı istatistiklerde yer aldı."
+  expect: []
+  why: "istatistik"
+  tags: [ozel, ceza]
+- id: NEG-446
+  text: "Gözaltı süreleri yeni yargı paketiyle düzenlendi."
+  expect: []
+  why: "mevzuat haberi"
+  tags: [ozel, ceza]
+- id: NEG-447
+  text: "Başörtüsü serbestliği üniversitelerde 2013'te genişletildi."
+  expect: []
+  why: "kıyafet terimi tarihsel haber; 'başörtüsü' ≠ 'başörtülü'"
+  tags: [ozel, kiyafet]
+- id: NEG-448
+  text: "Dernek üyeliği aidatları yılda bir kez ödenir."
+  expect: []
+  why: "genel kural, kişi yok"
+  tags: [ozel, uyelik]
+- id: NEG-449
+  text: "Vakıf üniversiteleri burs oranlarını açıkladı."
+  expect: []
+  why: "vakıf kurum anlamı"
+  tags: [ozel, uyelik]
+- id: NEG-450
+  text: "Retina taraması bankacılık uygulamalarında kullanılabilir."
+  expect: []
+  why: "biyometrik teknoloji genel"
+  tags: [ozel, biyometrik]
+- id: NEG-451
+  text: "Yüz tanıma sistemi havalimanlarında devreye alındı."
+  expect: []
+  why: "teknoloji haberi"
+  tags: [ozel, biyometrik]
+- id: NEG-452
+  text: "Genetik testler nadir rahatsızlıkların teşhisinde kullanılır."
+  expect: []
+  why: "genel bilgi"
+  tags: [ozel, genetik]
+- id: NEG-453
+  text: "Lazım olan belgeler listede yer alıyor."
+  expect: []
+  why: "lazım, Laz ek biçimi değil (tam kelime)"
+  tags: [ozel, ek_bicim]
+- id: NEG-454
+  text: "Rumeli yakasında kira fiyatları yükseldi."
+  expect: []
+  why: "Rumeli, Rum ek biçimi değil"
+  tags: [ozel, ek_bicim]
+- id: NEG-455
+  text: "Roman okudum, çok beğendim."
+  expect: []
+  why: "roman kitap anlamı; 1. şahıs var ama kişiye bağlı etnik ifade değil (tam kelime, büyük harf etnonim + 'okudum' fiili)"
+  tags: [ozel, ek_bicim, borderline]
+- id: NEG-456
+  text: "Transfer işlemi 2 saat içinde tamamlanır."
+  expect: []
+  why: "transfer, trans ek biçimi değil"
+  tags: [ozel, ek_bicim]
+- id: NEG-457
+  text: "Geyik muhabbeti uzayınca toplantı gecikti."
+  expect: []
+  why: "geyik, gey ek biçimi değil"
+  tags: [ozel, ek_bicim]
+- id: NEG-458
+  text: "Romantik komedi filmi gişede ilk sırada."
+  expect: []
+  why: "romantik, Roman ek biçimi değil"
+  tags: [ozel, ek_bicim]
+- id: NEG-459
+  text: "Arapça öğreniyorum, kurs haftada iki gün."
+  expect: []
+  why: "dil adı; Arap için 'kökenli|asıllı' yok"
+  tags: [ozel, ek_bicim]
+- id: NEG-460
+  text: "Türkmenistan doğal gaz ihracatını artırdı."
+  expect: []
+  why: "ülke adı, Türkmen ek biçimi değil"
+  tags: [ozel, ek_bicim]

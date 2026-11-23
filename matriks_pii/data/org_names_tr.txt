@@ -1,0 +1,183 @@
+# Kişi adı içeren veya kişi adına benzeyen kurum/pazar/endeks/marka adları (ASCII katlanmış, tam ifade).
+# BIST pazarları ve endeksleri
+yıldız pazar
+ana pazar
+alt pazar
+yakın izleme pazarı
+gelişen işletmeler pazarı
+borsa istanbul
+# kamu kurumları
+merkez bankası
+türkiye cumhuriyet merkez bankası
+sermaye piyasası kurulu
+bankacılık düzenleme ve denetleme kurumu
+kişisel verileri koruma kurumu
+toprak mahsulleri ofisi
+gelir idaresi başkanlığı
+sosyal güvenlik kurumu
+türkiye istatistik kurumu
+merkezi kayıt kuruluşu
+kamuyu aydınlatma platformu
+takasbank
+# bankalar ve büyük şirketler (kişi adı/sözcük içerenler)
+türkiye iş bankası
+iş bankası
+yapı kredi
+yapı ve kredi bankası
+garanti bbva
+ziraat bankası
+halkbank
+vakıfbank
+akbank
+denizbank
+şekerbank
+odeabank
+türk hava yolları
+türk telekom
+turkcell
+koç holding
+sabancı holding
+sabancı üniversitesi
+koç üniversitesi
+doğuş otomotiv
+doğuş holding
+doğan holding
+anadolu efes
+anadolu grubu
+ülker bisküvi
+eczacıbaşı holding
+zorlu enerji
+zorlu holding
+pınar süt
+mavi jeans
+yıldız holding
+şahin holding
+kale grubu
+aydın doğan
+ford otosan
+tofaş
+arçelik
+vestel
+beko
+selva
+yudum
+efes pilsen
+türkiye petrol rafinerileri
+tüpraş
+ereğli demir ve çelik
+kardemir
+aselsan
+roketsan
+havelsan
+türk-iş
+hak-iş
+memur-sen
+türkiye büyük millet meclisi
+cumhuriyet halk partisi
+adalet ve kalkınma partisi
+milliyetçi hareket partisi
+iyi parti
+# kişi adına benzeyen diğer özel adlar (bayramlar, yapılar, kurumlar)
+istanbul menkul kıymetler borsası
+menkul kıymetler
+cumhuriyet bayramı
+zafer bayramı
+kurban bayramı
+ramazan bayramı
+şeker bayramı
+beyaz saray
+kızılay
+yeşilay
+hazine ve maliye bakanlığı
+ticaret bakanlığı
+sağlık bakanlığı
+milli eğitim bakanlığı
+türk lirası
+# ülkeler, dünya şehirleri, bölgeler (apostrof alan özel adlar; kişi değil)
+türkiye
+almanya
+fransa
+ingiltere
+birleşik krallık
+amerika
+abd
+amerika birleşik devletleri
+rusya
+çin
+japonya
+italya
+ispanya
+yunanistan
+iran
+irak
+suriye
+mısır
+suudi arabistan
+katar
+azerbaycan
+gürcistan
+ukrayna
+hollanda
+belçika
+isviçre
+avusturya
+kanada
+avustralya
+hindistan
+pakistan
+israil
+avrupa
+asya
+afrika
+londra
+paris
+berlin
+new york
+moskova
+brüksel
+dubai
+frankfurt
+viyana
+amsterdam
+tokyo
+pekin
+şanghay
+wall street
+kıbrıs
+kktc
+# tarihi kişiler (tarih anlatımında kişisel veri değildir)
+mustafa kemal atatürk
+mustafa kemal paşa
+gazi mustafa kemal
+atatürk
+fatih sultan mehmet
+kanuni sultan süleyman
+yavuz sultan selim
+ismet inönü
+mimar sinan
+mevlana
+nasreddin hoca
+hacı bektaş veli
+piri reis
+evliya çelebi
+sultan abdülhamid
+kazım karabekir
+fevzi çakmak
+kemal atatürk
+selanik
+üsküp
+atina
+bakü
+tiflis
+şam
+bağdat
+kahire
+kuveyt türk
+ziraat katılım
+vakıf katılım
+emlak katılım
+albaraka türk
+türkiye finans
+türkiye emlak katılım
+kuveyt türk katılım
+ülkü ocakları

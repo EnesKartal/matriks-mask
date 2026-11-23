@@ -1,0 +1,47 @@
+# detect/ip — 10 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: IP-001
+  text: İstemci IP 192.168.1.15 adresinden bağlandı.
+  expect:
+  - entity: IP
+    value: 192.168.1.15
+- id: IP-002
+  text: Sunucu 10.0.0.1:8080 portunda.
+  expect:
+  - entity: IP
+    value: 10.0.0.1
+- id: IP-003
+  text: IPv6 2001:db8::8a2e:370:7334 kaydedildi.
+  expect:
+  - entity: IP
+    value: 2001:db8::8a2e:370:7334
+- id: IP-004
+  text: Kaynak 203.0.113.34, hedef 8.8.8.8
+  expect:
+  - entity: IP
+    value: 203.0.113.34
+  - entity: IP
+    value: 8.8.8.8
+- id: IP-005
+  text: Sürüm 1.2.3.4 yayımlandı.
+  expect: []
+- id: IP-006
+  text: v2.0.1.3 güncellemesi.
+  expect: []
+- id: IP-007
+  text: 256.1.1.1 geçersiz.
+  expect: []
+- id: IP-008
+  text: MAC 00:1A:2B:3C:4D:5E görüldü.
+  expect: []
+- id: IP-009
+  text: MAC 00:1A:2B:3C:4D:5E görüldü.
+  expect:
+  - entity: MAC
+    value: 00:1A:2B:3C:4D:5E
+  config:
+    entities:
+      MAC: MASK
+- id: IP-010
+  text: Ondalık 3.14 sayı.
+  expect: []

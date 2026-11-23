@@ -1,0 +1,251 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-181
+  text: "Çağrı merkezi 444 0 123 numarasından 7/24 ulaşabilirsiniz."
+  expect: []
+  why: "444 çağrı merkezi, mask_444 false"
+  tags: [telefon]
+- id: NEG-182
+  text: "Müşteri hizmetleri 444 1 234 hattı hafta sonu kapalı."
+  expect: []
+  why: "444 X XXX formatı"
+  tags: [telefon]
+- id: NEG-183
+  text: "Ücretsiz hat 0800 211 00 00 üzerinden destek alabilirsiniz."
+  expect: []
+  why: "0800 ücretsiz, mask_800 false"
+  tags: [telefon]
+- id: NEG-184
+  text: "0800 314 10 20 numaralı danışma hattı mesai saatlerinde açık."
+  expect: []
+  why: "0800 hattı"
+  tags: [telefon]
+- id: NEG-185
+  text: "0900 234 45 67 katma değerli servis hattı ücretlidir."
+  expect: []
+  why: "abone 1 ile başlar; 900 hattı"
+  tags: [telefon]
+- id: NEG-186
+  text: "Toplantı 28.10.2026 14:30'da, süre 45 dakika."
+  expect: []
+  why: "tarih-saat"
+  tags: [telefon, tarih]
+- id: NEG-187
+  text: "Saat 10:32:45'te 212 adet emir iletildi."
+  expect: []
+  why: "saat + 212 adet"
+  tags: [telefon]
+- id: NEG-188
+  text: "Depoda 0532 adet ürün, 0212 koli ve 0216 palet sayıldı."
+  expect: []
+  why: "kesik alan kodları"
+  tags: [telefon]
+- id: NEG-189
+  text: "Kısa kod 1234567 yedi haneli olduğundan telefon değildir."
+  expect: []
+  why: "7 hane yalın"
+  tags: [telefon]
+- id: NEG-190
+  text: "Dahili numara 345 67 89 sadece şirket içinden aranabilir."
+  expect: []
+  why: "7 hane, alan kodu yok"
+  tags: [telefon]
+- id: NEG-191
+  text: "0 199 123 45 67 geçersiz alan koduna sahip."
+  expect: []
+  why: "alan kodu 199 yok"
+  tags: [telefon]
+- id: NEG-192
+  text: "0 101 234 56 78 şeklinde bir numara Türkiye planında yok."
+  expect: []
+  why: "alan kodu 101 yok"
+  tags: [telefon]
+- id: NEG-193
+  text: "0312 112 34 56 sabit hatta abone kısmı 1 ile başladığından geçersizdir."
+  expect: []
+  why: "abone 1 ile başlar"
+  tags: [telefon]
+- id: NEG-194
+  text: "0212 123 45 67 formatı sabit hat için geçersiz, abone 1 ile başlamaz."
+  expect: []
+  why: "abone 1 ile başlar"
+  tags: [telefon]
+- id: NEG-195
+  text: "+90 216 100 00 00 numarası ulusal numaralandırma planına aykırı."
+  expect: []
+  why: "abone 1 ile başlar"
+  tags: [telefon]
+- id: NEG-196
+  text: "5411 sayılı Bankacılık Kanunu'nun 73. maddesi sır saklama yükümlülüğü getirir."
+  expect: []
+  why: "kanun numarası"
+  tags: [telefon, sayisal]
+- id: NEG-197
+  text: "6698 sayılı Kişisel Verilerin Korunması Kanunu 2016'da yürürlüğe girdi."
+  expect: []
+  why: "kanun numarası + yıl"
+  tags: [telefon, sayisal]
+- id: NEG-198
+  text: "4857 sayılı İş Kanunu'nun 24. maddesi uygulanır."
+  expect: []
+  why: "kanun numarası"
+  tags: [telefon, sayisal]
+- id: NEG-199
+  text: "6362 sayılı Sermaye Piyasası Kanunu'na göre işlem yapılır."
+  expect: []
+  why: "kanun numarası"
+  tags: [telefon, sayisal]
+- id: NEG-200
+  text: "34394 kodlu dağıtım bölgesi İstanbul Avrupa yakasında."
+  expect: []
+  why: "5 haneli posta kodu, bitişik il adı yok (küçük harf 'kodlu' keser)"
+  tags: [telefon, adres]
+- id: NEG-201
+  text: "Koordinatlar 41.0082, 28.9784 noktasını gösteriyor."
+  expect: []
+  why: "koordinatlar"
+  tags: [telefon, sayisal]
+- id: NEG-202
+  text: "Fiyat 5.321.234,56 TL olarak faturalandı."
+  expect: []
+  why: "noktalı fiyat, 532 ile başlamaz"
+  tags: [telefon, fiyat]
+- id: NEG-203
+  text: "Hisse 532,12 TL'den 45,67 lot alındı."
+  expect: []
+  why: "532 ondalık fiyat"
+  tags: [telefon, fiyat]
+- id: NEG-204
+  text: "Toplam 532 123 45 678 rakam dizisi 11 haneli olduğundan numara değildir."
+  expect: []
+  why: "fazla hane, lookahead bozulur"
+  tags: [telefon]
+- id: NEG-205
+  text: "Sayı 12345321234567890 uzun dizi içinde yer alıyor."
+  expect: []
+  why: "17 hane, BIN dışı"
+  tags: [telefon, kart]
+- id: NEG-206
+  text: "Numara 05321234567890 fazla haneli olduğu için reddedildi."
+  expect: []
+  why: "14 hane, 0 ile başlar"
+  tags: [telefon, kart]
+- id: NEG-207
+  text: "532 lot THYAO ve 216 lot GARAN alındı."
+  expect: []
+  why: "kesik kodlar + hisse"
+  tags: [telefon, finans]
+- id: NEG-208
+  text: "Faks 0212 345 67 8 eksik haneli yazılmış."
+  expect: []
+  why: "eksik hane"
+  tags: [telefon]
+- id: NEG-209
+  text: "Sipariş 2024 05 32 kodu tarih formatında değildir."
+  expect: []
+  why: "sayı grupları telefon değil"
+  tags: [telefon]
+- id: NEG-210
+  text: "Bütçe 212.345,67 TL, harcama 216.789,00 TL."
+  expect: []
+  why: "alan kodu benzeri tutarlar"
+  tags: [telefon, fiyat]
+- id: NEG-211
+  text: "Oda numarası 312, kat 4, bina B."
+  expect: []
+  why: "kısa sayılar, tek çapa"
+  tags: [telefon, adres]
+- id: NEG-212
+  text: "Alan kodu 0312 Ankara, 0232 İzmir, 0224 Bursa içindir."
+  expect: []
+  why: "alan kodları abone numarasız"
+  tags: [telefon, il_adi]
+- id: NEG-213
+  text: "90 derece döndürülen görsel 532 piksel genişliğinde."
+  expect: []
+  why: "90 ve 532 ayrı bağlam"
+  tags: [telefon, sayisal]
+- id: NEG-214
+  text: "0090 ülke kodu Türkiye'yi gösterir; numara girilmemiş."
+  expect: []
+  why: "yalnızca ülke kodu"
+  tags: [telefon]
+- id: NEG-215
+  text: "Telefonla arayan müşteri numara bırakmadı."
+  expect: []
+  why: "bağlam var, numara yok"
+  tags: [telefon]
+- id: NEG-216
+  text: "GSM paketi 5 GB, 500 dakika, 1000 SMS içerir."
+  expect: []
+  why: "paket verileri"
+  tags: [telefon, sayisal]
+- id: NEG-217
+  text: "WhatsApp grubunda 212 kişi var, 45 kişi çevrim içi."
+  expect: []
+  why: "kişi sayıları"
+  tags: [telefon, sayisal]
+- id: NEG-218
+  text: "Faturalı hat ücreti 345,67 TL, 12 ay taahhütlü."
+  expect: []
+  why: "tutar"
+  tags: [telefon, fiyat]
+- id: NEG-219
+  text: "Numara taşıma süresi 3 iş günü, ücret 0 TL."
+  expect: []
+  why: "numara kelimesi, rakam yok"
+  tags: [telefon]
+- id: NEG-220
+  text: "Tel: (bilgi yok), e-posta: belirtilmedi."
+  expect: []
+  why: "etiketler boş"
+  tags: [telefon, eposta]
+- id: NEG-221
+  text: "Tel alanına 123 girilmiş, 3 hane yetersiz."
+  expect: []
+  why: "3 hane"
+  tags: [telefon]
+- id: NEG-222
+  text: "0850 hattı için ek ücret alınmaz; numara talep üzerine paylaşılır."
+  expect: []
+  why: "850 öneki, abone yok"
+  tags: [telefon]
+- id: NEG-223
+  text: "1 532 123 45 678 on iki haneli dizi geçersizdir."
+  expect: []
+  why: "sonda fazla rakam"
+  tags: [telefon]
+- id: NEG-224
+  text: "Bölüm 532, sayfa 123, satır 45, sütun 67 referansı."
+  expect: []
+  why: "virgülle ayrık sayılar"
+  tags: [telefon, sayisal]
+- id: NEG-225
+  text: "PIN kodu SIM kartın ambalajında yazar; 4 hanelidir, PUK 8 hanelidir."
+  expect: []
+  why: "PIN/PUK sözcükleri ve uzunluklar, değer yok (eski senaryo: PIN değeri artık SIFRE olarak maskelenir)"
+  tags: [telefon]
+- id: NEG-226
+  text: "IMEI 356938035643800 kontrol basamağı hatalı, kutuyla eşleşmiyor."
+  expect: []
+  why: "15 hane, imei bağlamı var ama Luhn geçmez"
+  tags: [telefon, kart, imei]
+- id: NEG-227
+  text: "Kargo SMS'inde 3 haneli onay kodu 532 iletildi."
+  expect: []
+  why: "3 hane"
+  tags: [telefon]
+- id: NEG-228
+  text: "Sıcaklık 21,5 derece, nem %45, rüzgar 12 km/sa."
+  expect: []
+  why: "ölçümler"
+  tags: [telefon, sayisal]
+- id: NEG-229
+  text: "Model numarası TX-532-123 raf etiketinde."
+  expect: []
+  why: "harfli model kodu"
+  tags: [telefon]
+- id: NEG-230
+  text: "Randevu saati 15:30, bekleme süresi 25 dakika, oda 212."
+  expect: []
+  why: "saat ve oda numarası"
+  tags: [telefon]

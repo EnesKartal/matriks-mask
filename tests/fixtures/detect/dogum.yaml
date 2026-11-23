@@ -1,0 +1,117 @@
+# detect/dogum — 25 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: DOGUM-001
+  text: 'Doğum tarihi: 12.03.1985'
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 12.03.1985
+- id: DOGUM-002
+  text: 'Doğum tarihi: 1/2/1990'
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 1/2/1990
+- id: DOGUM-003
+  text: 'Doğum tarihi: 05-11-1978'
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 05-11-1978
+- id: DOGUM-004
+  text: 'Doğum tarihi: 12 Mart 1985'
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 12 Mart 1985
+- id: DOGUM-005
+  text: 'Doğum tarihi: 3 Ağustos 2001'
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 3 Ağustos 2001
+- id: DOGUM-006
+  text: 'Doğum tarihi: 1985-03-12'
+  expect:
+  - entity: DOGUM_TARIHI
+    value: '1985-03-12'
+- id: DOGUM-007
+  text: D.T. 01.01.1970
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 01.01.1970
+- id: DOGUM-008
+  text: 15.06.1992 doğumluyum.
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 15.06.1992
+- id: DOGUM-009
+  text: Kendisi 23 Nisan 1999'da doğdu.
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 23 Nisan 1999
+- id: DOGUM-010
+  text: İşlem tarihi 28.10.2026.
+  expect: []
+- id: DOGUM-011
+  text: Kuruluş 1856.
+  expect: []
+- id: DOGUM-012
+  text: Tebliğ 12 Mart 1985 tarihli.
+  expect: []
+- id: DOGUM-013
+  text: Doğum günü partisi 12.05.2026'da yapılacak.
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 12.05.2026
+  tags:
+  - borderline
+- id: DOGUM-014
+  text: Yaşam boyu 01.01.2000 tarihinden beri.
+  expect: []
+- id: DOGUM-015
+  text: 'Doğum tarihleri: 01.02.1980 ve 03.04.1982'
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 01.02.1980
+  - entity: DOGUM_TARIHI
+    value: 03.04.1982
+- id: DOGUM-016
+  text: 'Doğum yeri: Kadıköy'
+  expect:
+  - entity: DOGUM_YERI
+    value: Kadıköy
+- id: DOGUM-017
+  text: 'Doğum yeri ve tarihi: İzmir / 05.05.1975'
+  expect:
+  - entity: DOGUM_YERI
+    value: İzmir
+  - entity: DOGUM_TARIHI
+    value: 05.05.1975
+- id: DOGUM-018
+  text: 1980 Trabzon doğumlu.
+  expect:
+  - entity: DOGUM_YERI
+    value: Trabzon
+- id: DOGUM-019
+  text: Erzurum'da doğdu.
+  expect:
+  - entity: DOGUM_YERI
+    value: Erzurum
+- id: DOGUM-020
+  text: İzmir'e taşındı.
+  expect: []
+- id: DOGUM-021
+  text: Ankara güzel bir şehir.
+  expect: []
+- id: DOGUM-022
+  text: '{"dogum_tarihi": "Doğum: 10.10.1990"}'
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 10.10.1990
+- id: DOGUM-023
+  text: Valör 30.10.2026, vade 12.03.2027.
+  expect: []
+- id: DOGUM-024
+  text: 'Doğum: 7 Temmuz 1965'
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 7 Temmuz 1965
+- id: DOGUM-025
+  text: Lozan 24 Temmuz 1923'te imzalandı.
+  expect: []

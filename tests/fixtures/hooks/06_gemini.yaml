@@ -1,0 +1,75 @@
+# Gemini native generateContent (call_type: agenerate_content). Elle yazıldı; tüm değerler sentetiktir.
+- id: HOOK-061
+  call_type: agenerate_content
+  request: {model: g, contents: [{role: user, parts: [{text: "Ben Ayşe Demir, TCKN 17291716060"}]}]}
+  expect_request: {contents.0.parts.0.text: "Ben <KISI_1>, TCKN <TCKN_1>"}
+  forbid: ["Ayşe Demir", "17291716060"]
+  llm_response:
+    raw: {candidates: [{content: {role: model, parts: [{text: "Merhaba <KISI_1>, <TCKN_1> doğrulandı"}]}, index: 0}]}
+  expect_client: {candidates.0.content.parts.0.text: "Merhaba Ayşe Demir, 17291716060 doğrulandı"}
+- id: HOOK-062
+  call_type: agenerate_content
+  request:
+    model: g
+    systemInstruction: {parts: [{text: "Asistanın adı Ahmet Yılmaz."}]}
+    contents: [{role: user, parts: [{text: "Ben Ayşe Demir."}]}]
+  expect_request:
+    systemInstruction.parts.0.text: "Asistanın adı <KISI_1>."
+    contents.0.parts.0.text: "Ben <KISI_2>."
+- id: HOOK-063
+  call_type: agenerate_content
+  request: {model: g, config: {system_instruction: "Danışan Ahmet Yılmaz"}, contents: [{role: user, parts: [{text: "merhaba"}]}]}
+  expect_request: {config.system_instruction: "Danışan <KISI_1>"}
+- id: HOOK-064
+  call_type: agenerate_content
+  request: {model: g, contents: {role: user, parts: [{text: "TCKN 17291716060"}]}}
+  expect_request: {contents.parts.0.text: "TCKN <TCKN_1>"}
+- id: HOOK-065
+  call_type: agenerate_content
+  config: {mask_assistant_messages: false}
+  request:
+    model: g
+    contents:
+    - {role: user, parts: [{text: "TCKN 17291716060"}]}
+    - {role: model, parts: [{text: "TCKN 44771278268 kayıtlı"}]}
+  expect_request:
+    contents.0.parts.0.text: "TCKN <TCKN_1>"
+    contents.1.parts.0.text: "TCKN 44771278268 kayıtlı"
+- id: HOOK-066
+  call_type: agenerate_content
+  request:
+    model: g
+    contents: [{role: model, parts: [{functionCall: {name: kaydet, args: {tc: "17291716060", not: "x"}}}]}]
+  expect_request: {contents.0.parts.0.functionCall.args.tc: "<TCKN_1>"}
+  llm_response:
+    raw: {candidates: [{content: {role: model, parts: [{functionCall: {name: f, args: {tc: "<TCKN_1>"}}}]}}]}
+  expect_client: {candidates.0.content.parts.0.functionCall.args.tc: "17291716060"}
+- id: HOOK-067
+  call_type: agenerate_content
+  request:
+    model: g
+    contents: [{role: user, parts: [{functionResponse: {name: f, response: {ad: "Ayşe Demir"}}}]}]
+  expect_request: {contents.0.parts.0.functionResponse.response.ad: "<KISI_1>"}
+- id: HOOK-068
+  call_type: agenerate_content
+  request:
+    model: g
+    contents: [{role: user, parts: [{inlineData: {mimeType: image/png, data: "QUJD"}}, {text: "TCKN 17291716060"}]}]
+  expect_request: {contents.0.parts.0.inlineData.data: "QUJD", contents.0.parts.1.text: "TCKN <TCKN_1>"}
+- id: HOOK-069
+  call_type: agenerate_content
+  config: {placeholder_instruction: system_suffix}
+  request: {model: g, systemInstruction: {parts: [{text: "Kısa yanıtla."}]}, contents: [{role: user, parts: [{text: "TCKN 17291716060"}]}]}
+  expect_request: {systemInstruction.parts.0.text: "Kısa yanıtla."}
+  expect_keys: [systemInstruction.parts.1.text]
+- id: HOOK-070
+  call_type: agenerate_content
+  request: {model: g, contents: [{role: user, parts: [{text: "TCKN 17291716060"}]}]}
+  expect_keys: [metadata.matriks_pii_session_id.matriks-pii]
+  absent_keys: [litellm_metadata]
+- id: HOOK-071
+  call_type: agenerate_content
+  config: {gemini_native: false}
+  request: {model: g, contents: [{role: user, parts: [{text: "TCKN 17291716060"}]}]}
+  expect_request: {contents.0.parts.0.text: "TCKN <TCKN_1>"}
+  absent_keys: [metadata.matriks_pii_session_id]

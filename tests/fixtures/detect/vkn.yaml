@@ -1,0 +1,111 @@
+# detect/vkn — 20 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: VKN-001
+  text: 'Vergi No: 4540536920'
+  expect:
+  - entity: VKN
+    value: '4540536920'
+  masked: 'Vergi No: <VKN_1>'
+- id: VKN-002
+  text: VKN 3973535717 olan firma.
+  expect:
+  - entity: VKN
+    value: '3973535717'
+- id: VKN-003
+  text: Vergi kimlik numarası 6448549736 kayıtlı.
+  expect:
+  - entity: VKN
+    value: '6448549736'
+- id: VKN-004
+  text: 'Vergi Dairesi: Kadıköy VKN: 3305304193'
+  expect:
+  - entity: VKN
+    value: '3305304193'
+- id: VKN-005
+  text: Mükellef 1402606623 beyannamesini verdi.
+  expect:
+  - entity: VKN
+    value: '1402606623'
+- id: VKN-006
+  text: v.k.n. 1922851420
+  expect:
+  - entity: VKN
+    value: '1922851420'
+- id: VKN-007
+  text: Firmanın vergi numarası 1750066914 ve 3584099295 şubeleri.
+  expect:
+  - entity: VKN
+    value: '1750066914'
+  - entity: VKN
+    value: '3584099295'
+- id: VKN-008
+  text: '{"vergi_no": "4540536920"}'
+  expect:
+  - entity: VKN
+    value: '4540536920'
+- id: VKN-009
+  text: 'Vergi levhası: 3973535717'
+  expect:
+  - entity: VKN
+    value: '3973535717'
+- id: VKN-010
+  text: 'Fatura bilgisi — vergi: 6448549736'
+  expect:
+  - entity: VKN
+    value: '6448549736'
+- id: VKN-011
+  text: Sipariş numarası 3305304193 hazırlanıyor.
+  expect: []
+  tags:
+  - no_context
+- id: VKN-012
+  text: Referans 1402606623 kayda alındı.
+  expect: []
+  tags:
+  - no_context
+- id: VKN-013
+  text: 'Vergi No: 4540536921 hatalı.'
+  expect: []
+  tags:
+  - invalid_checksum
+- id: VKN-014
+  text: 'Vergi No: 3973535711 hatalı.'
+  expect: []
+  tags:
+  - invalid_checksum
+- id: VKN-015
+  text: 'Vergi No: 6448549737 hatalı.'
+  expect: []
+  tags:
+  - invalid_checksum
+- id: VKN-016
+  text: Vergi numarası olarak TCKN 17291716060 kullanıldı.
+  expect:
+  - entity: TCKN
+    value: '17291716060'
+  not_expect:
+  - VKN
+- id: VKN-017
+  text: VKN 1922851420, 1750066914 ve 3584099295
+  expect:
+  - entity: VKN
+    value: '1922851420'
+  - entity: VKN
+    value: '1750066914'
+  - entity: VKN
+    value: '3584099295'
+- id: VKN-018
+  text: Vergi dairesi Beşiktaş, numara 4540536920.
+  expect:
+  - entity: VKN
+    value: '4540536920'
+- id: VKN-019
+  text: Tedarikçi VKN'si 3973535717'dir.
+  expect:
+  - entity: VKN
+    value: '3973535717'
+- id: VKN-020
+  text: Müşteri vergi no 6448549736
+  expect:
+  - entity: VKN
+    value: '6448549736'

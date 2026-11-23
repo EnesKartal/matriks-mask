@@ -1,0 +1,69 @@
+# streaming — 20 senaryo (her biri 5 bölme stratejisiyle)
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: STREAM-001
+  map: &id001
+    <KISI_1>: Ayşe Demir
+    <TCKN_1>: '17291716060'
+    <KISI_2>: Ahmet
+  full_output: Merhaba <KISI_1>, TCKN'niz <TCKN_1>.
+- id: STREAM-002
+  map: *id001
+  full_output: <KISI_1>'e iletildi.
+- id: STREAM-003
+  map: *id001
+  full_output: Placeholder yok, düz metin.
+- id: STREAM-004
+  map: *id001
+  full_output: a < b ve c > d karşılaştırması uzun bir metin içinde yer alıyor.
+- id: STREAM-005
+  map: *id001
+  full_output: <KISI_1><KISI_2>
+- id: STREAM-006
+  map: *id001
+  full_output: <KISI_2>'in ve <KISI_1>'in dosyaları
+- id: STREAM-007
+  map: *id001
+  full_output: Sonda <KISI_1>
+- id: STREAM-008
+  map: *id001
+  full_output: '**<KISI_1>** kalın'
+- id: STREAM-009
+  map: *id001
+  full_output: <<KISI_1>> çift
+- id: STREAM-010
+  map: *id001
+  full_output: Sayın KISI_1 hoş geldiniz
+- id: STREAM-011
+  map: *id001
+  full_output: <KISI_9> bilinmiyor
+- id: STREAM-012
+  map: *id001
+  full_output: Türkçe çok uzun metin Türkçe çok uzun metin Türkçe çok uzun metin Türkçe çok uzun metin Türkçe çok uzun metin <KISI_1>
+- id: STREAM-013
+  map: *id001
+  full_output: <
+- id: STREAM-014
+  map: *id001
+  full_output: Kimlik <TCKN_1>'dir.
+- id: STREAM-015
+  map: *id001
+  full_output: 'İki satır
+
+    <KISI_2>
+
+    son'
+- id: STREAM-016
+  map: *id001
+  full_output: '{"ad": "<KISI_1>"}'
+- id: STREAM-017
+  map: *id001
+  full_output: <KISI_1 > boşluklu
+- id: STREAM-018
+  map: *id001
+  full_output: '&lt;KISI_1&gt; html'
+- id: STREAM-019
+  map: *id001
+  full_output: <KİŞİ_1> türkçe
+- id: STREAM-020
+  map: *id001
+  full_output: Ki tap ki kisi kim

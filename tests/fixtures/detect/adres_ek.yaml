@@ -1,0 +1,17 @@
+# elle yazıldı — build_fixtures.py bu dosyayı üretmez/silmez; tüm değerler sentetiktir.
+# Kırsal çapalar (Köyü, Mevkii, Kyü., Mvk.), Bulv., P.K., "Cad. + numara + ilçe", MERNİS alanları.
+- {id: ADRESEK-001, text: "Zafer Köyü Mevkii Çan/Çanakkale", expect: [{entity: ADRES, value: "Zafer Köyü Mevkii Çan/Çanakkale"}], not_expect: [KISI]}
+- {id: ADRESEK-002, text: "Çiftlik Köyü Merkez Mah. No:3 Bolu", expect: [{entity: ADRES, value: "Çiftlik Köyü Merkez Mah. No:3 Bolu"}]}
+- {id: ADRESEK-003, text: "Atatürk Mahallesi 100. Yıl Sokak Dış Kapı No: 5 İç Kapı No: 3 Çankaya/Ankara", expect: [{entity: ADRES, value: "Atatürk Mahallesi 100. Yıl Sokak Dış Kapı No: 5 İç Kapı No: 3 Çankaya/Ankara"}]}
+- {id: ADRESEK-004, text: "Yeşilyurt Beldesi Kızılcahamam", expect: []}
+- {id: ADRESEK-005, text: "köyü ziyaret ettik", expect: []}
+- {id: ADRESEK-006, text: "Mevkii raporu hazırlandı", expect: []}
+- {id: ADRESEK-007, text: "Çamlık Mah. Mimar Sinan Bulv. No:12 Çankaya", expect: [{entity: ADRES, value: "Çamlık Mah. Mimar Sinan Bulv. No:12 Çankaya"}]}
+- {id: ADRESEK-008, text: "Bağdat Cad. 100 Kadıköy", expect: [{entity: ADRES, value: "Bağdat Cad. 100 Kadıköy"}]}
+- {id: ADRESEK-009, text: "Kuşçular Kyü. No:3 Yenice/Çanakkale", expect: [{entity: ADRES, value: "Kuşçular Kyü. No:3 Yenice/Çanakkale"}]}
+- {id: ADRESEK-010, text: "Merkez Mah. Zafer Mvk. No:1 Çan", expect: [{entity: ADRES, value: "Merkez Mah. Zafer Mvk. No:1 Çan"}], not_expect: [KISI]}
+- {id: ADRESEK-011, text: "P.K. 06690 Ankara", expect: [{entity: ADRES, value: "P.K. 06690 Ankara"}]}
+- {id: ADRESEK-012, text: "Yeni Mah Atatürk Cad No 5 Kat 2 Daire 4 Bornova", expect: [{entity: ADRES, value: "Yeni Mah Atatürk Cad No 5 Kat 2 Daire 4 Bornova"}]}
+- {id: ADRESEK-013, text: "Ulus Mahallesi Ankara", expect: []}
+- {id: ADRESEK-014, text: "Bağdat Caddesi trafiği yoğun.", expect: []}
+- {id: ADRESEK-015, text: "Posta kodu alanı boş bırakıldı.", expect: []}

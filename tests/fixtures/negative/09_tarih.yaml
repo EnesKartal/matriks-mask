@@ -1,0 +1,151 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-381
+  text: "İşlem tarihi 28.10.2026, valör 30.10.2026."
+  expect: []
+  why: "işlem tarihleri, doğum bağlamı yok"
+  tags: [tarih, dogum_tarihi]
+- id: NEG-382
+  text: "Vade 12.03.2027 olan mevduat hesabı açıldı."
+  expect: []
+  why: "vade tarihi"
+  tags: [tarih, dogum_tarihi]
+- id: NEG-383
+  text: "Sözleşme 01/01/2025 tarihinde yürürlüğe girdi."
+  expect: []
+  why: "eğik çizgili işlem tarihi; 01/2025 SKT bağlamı yok"
+  tags: [tarih, dogum_tarihi]
+- id: NEG-384
+  text: "Osmanlı Bankası 1856'da kuruldu."
+  expect: []
+  why: "1800'ler, regex dışı"
+  tags: [tarih]
+- id: NEG-385
+  text: "İstanbul Menkul Kıymetler Borsası 26.12.1985'te faaliyete başladı."
+  expect: []
+  why: "kuruluş tarihi, doğum bağlamı yok"
+  tags: [tarih, dogum_tarihi]
+- id: NEG-386
+  text: "Cumhuriyet 29 Ekim 1923'te ilan edildi."
+  expect: []
+  why: "tarihsel tarih, bağlam yok"
+  tags: [tarih, dogum_tarihi]
+- id: NEG-387
+  text: "Tahvil itfa tarihi 15 Haziran 2031."
+  expect: []
+  why: "gelecek tarih"
+  tags: [tarih, dogum_tarihi]
+- id: NEG-388
+  text: "Son başvuru tarihi 31.12.2026 saat 17:00."
+  expect: []
+  why: "son başvuru tarihi"
+  tags: [tarih]
+- id: NEG-389
+  text: "Rapor 12 Mart'ta yayımlanacak."
+  expect: []
+  why: "yılsız tarih"
+  tags: [tarih, ay_adi]
+- id: NEG-390
+  text: "2024/Q3 döneminde ciro %15 arttı."
+  expect: []
+  why: "dönem gösterimi"
+  tags: [tarih]
+- id: NEG-391
+  text: "2025 yılı 2. çeyrek sonuçları 15 Ağustos'ta açıklandı."
+  expect: []
+  why: "çeyrek + yılsız tarih"
+  tags: [tarih, ay_adi]
+- id: NEG-392
+  text: "Seans 09:30'da başlayıp 18:00'de bitti."
+  expect: []
+  why: "saatler"
+  tags: [tarih]
+- id: NEG-393
+  text: "Lozan Antlaşması 24 Temmuz 1923'te imzalandı."
+  expect: []
+  why: "tarihsel tarih"
+  tags: [tarih, dogum_tarihi]
+- id: NEG-394
+  text: "Halka arz 03-04 Kasım 2026 tarihlerinde gerçekleşecek."
+  expect: []
+  why: "Kasım tarih bağlamında"
+  tags: [tarih, ay_adi]
+- id: NEG-395
+  text: "Kuruluş tarihi 1850 olan şirket halen faal."
+  expect: []
+  why: "1800'ler"
+  tags: [tarih]
+- id: NEG-396
+  text: "01.02.1990 tarihli yönetmelik yürürlükten kaldırıldı."
+  expect: []
+  why: "DOB biçimi ama bağlam yok"
+  tags: [tarih, dogum_tarihi]
+- id: NEG-397
+  text: "12 Mart 1985 tarihli tebliğ güncellendi."
+  expect: []
+  why: "DOB biçimi ama bağlam yok"
+  tags: [tarih, dogum_tarihi]
+- id: NEG-398
+  text: "Genel kurul 25 Mart 2027 Perşembe günü saat 14:00'te."
+  expect: []
+  why: "gelecek tarih + saat"
+  tags: [tarih]
+- id: NEG-399
+  text: "Kupon ödeme günleri: 15.01, 15.04, 15.07, 15.10."
+  expect: []
+  why: "yılsız gün.ay"
+  tags: [tarih]
+- id: NEG-400
+  text: "Bugün 28 Ekim, yarın Cumhuriyet Bayramı."
+  expect: []
+  why: "yılsız tarih, Ekim ay"
+  tags: [tarih, ay_adi]
+- id: NEG-401
+  text: "Piyasa 1 Ocak ve 23 Nisan günleri kapalıdır."
+  expect: []
+  why: "Nisan tarih bağlamında"
+  tags: [tarih, ay_adi]
+- id: NEG-402
+  text: "Vergi beyannamesi Mart ayının 31'ine kadar verilir."
+  expect: []
+  why: "ay adı + 'ayının'"
+  tags: [tarih, ay_adi]
+- id: NEG-403
+  text: "Haftalık veri her Cuma 14:30'da açıklanır."
+  expect: []
+  why: "gün adı 'her' sonrası + saat bitişik → atla (Cuma erkek adı da)"
+  tags: [tarih, kisi, borderline]
+- id: NEG-404
+  text: "Saat 12:00 itibarıyla endeks 9.900 puanda."
+  expect: []
+  why: "saat"
+  tags: [tarih]
+- id: NEG-405
+  text: "Bilanço dönemi 01.01.2026-30.06.2026 arasını kapsar."
+  expect: []
+  why: "tarih aralığı"
+  tags: [tarih, dogum_tarihi]
+- id: NEG-406
+  text: "Kayıt tarihi 2026-10-28T14:30:00Z olarak loglandı."
+  expect: []
+  why: "ISO zaman damgası"
+  tags: [tarih, teknik]
+- id: NEG-407
+  text: "Teslimat 3-5 iş günü içinde, en geç 05.11.2026."
+  expect: []
+  why: "teslim tarihi"
+  tags: [tarih]
+- id: NEG-408
+  text: "Yıl sonu 31 Aralık 2026 Perşembe gününe denk geliyor."
+  expect: []
+  why: "gelecek tarih"
+  tags: [tarih]
+- id: NEG-409
+  text: "Şirketin kuruluşu 1923'e, ilk halka arzı 1990'a dayanır."
+  expect: []
+  why: "yalnız yıllar"
+  tags: [tarih]
+- id: NEG-410
+  text: "Emeklilik planı 2050 vadeli fonlara yatırım yapar."
+  expect: []
+  why: "gelecek yıl"
+  tags: [tarih]

@@ -1,0 +1,187 @@
+# detect/adres — 34 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: ADRES-001
+  text: 'Adresim: Atatürk Mah. Gül Sok. No:5 D:3 34710 Kadıköy/İstanbul'
+  expect:
+  - entity: ADRES
+    value: Atatürk Mah. Gül Sok. No:5 D:3 34710 Kadıköy/İstanbul
+  not_expect:
+  - KISI
+- id: ADRES-002
+  text: 'Adresim: Cumhuriyet Mahallesi Lale Sokak No: 12 Daire 4 Çankaya/Ankara'
+  expect:
+  - entity: ADRES
+    value: 'Cumhuriyet Mahallesi Lale Sokak No: 12 Daire 4 Çankaya/Ankara'
+  not_expect:
+  - KISI
+- id: ADRES-003
+  text: 'Adresim: Bağdat Caddesi No:250 Kat:3 Kadıköy İstanbul'
+  expect:
+  - entity: ADRES
+    value: Bağdat Caddesi No:250 Kat:3 Kadıköy İstanbul
+  not_expect:
+  - KISI
+- id: ADRES-004
+  text: 'Adresim: Kızılay Mah. Atatürk Bulvarı No:45 Çankaya Ankara'
+  expect:
+  - entity: ADRES
+    value: Kızılay Mah. Atatürk Bulvarı No:45 Çankaya Ankara
+  not_expect:
+  - KISI
+- id: ADRES-005
+  text: 'Adresim: Barbaros Bulvarı No:100 Beşiktaş/İstanbul'
+  expect:
+  - entity: ADRES
+    value: Barbaros Bulvarı No:100 Beşiktaş/İstanbul
+  not_expect:
+  - KISI
+- id: ADRES-006
+  text: 'Adresim: Alsancak Mah. 1453 Sok. No:7 Konak/İzmir'
+  expect:
+  - entity: ADRES
+    value: Alsancak Mah. 1453 Sok. No:7 Konak/İzmir
+  not_expect:
+  - KISI
+- id: ADRES-007
+  text: 'Adresim: Yeni Mah. Çınar Cad. No: 8/2 Nilüfer/Bursa'
+  expect:
+  - entity: ADRES
+    value: 'Yeni Mah. Çınar Cad. No: 8/2 Nilüfer/Bursa'
+  not_expect:
+  - KISI
+- id: ADRES-008
+  text: 'Adresim: Levent Mah. Büyükdere Cad. No:185 Kat:12 Şişli'
+  expect:
+  - entity: ADRES
+    value: Levent Mah. Büyükdere Cad. No:185 Kat:12 Şişli
+  not_expect:
+  - KISI
+- id: ADRES-009
+  text: 'Adresim: Kordon Apt. Daire 5 Kat:2 Karşıyaka'
+  expect:
+  - entity: ADRES
+    value: Kordon Apt. Daire 5 Kat:2 Karşıyaka
+  not_expect:
+  - KISI
+- id: ADRES-010
+  text: 'Adresim: Mavi Sitesi B Blok Daire 12 Ataşehir/İstanbul'
+  expect:
+  - entity: ADRES
+    value: Mavi Sitesi B Blok Daire 12 Ataşehir/İstanbul
+  not_expect:
+  - KISI
+- id: ADRES-011
+  text: 'Adresim: Gül Sok. No:3 Üsküdar'
+  expect:
+  - entity: ADRES
+    value: Gül Sok. No:3 Üsküdar
+  not_expect:
+  - KISI
+- id: ADRES-012
+  text: 'Adresim: Ahmet Yılmaz Sok. No:4 Maltepe'
+  expect:
+  - entity: ADRES
+    value: Ahmet Yılmaz Sok. No:4 Maltepe
+  not_expect:
+  - KISI
+- id: ADRES-013
+  text: No:5 Kadıköy
+  expect:
+  - entity: ADRES
+    value: No:5 Kadıköy
+- id: ADRES-014
+  text: 34710 Kadıköy/İstanbul
+  expect:
+  - entity: ADRES
+    value: 34710 Kadıköy/İstanbul
+- id: ADRES-015
+  text: Kadıköy çarşısı kalabalıktı.
+  expect: []
+- id: ADRES-016
+  text: Posta kodu 34000 tek başına.
+  expect: []
+- id: ADRES-017
+  text: Mahalle baskısı deyimi.
+  expect: []
+- id: ADRES-018
+  text: Katılım bankacılığı büyüdü.
+  expect: []
+- id: ADRES-019
+  text: 1600 Pennsylvania Avenue, Washington DC 20500
+  expect: []
+- id: ADRES-020
+  text: 'No: 5 madde uyarınca.'
+  expect: []
+- id: ADRES-021
+  text: 'Teslimat adresi:
+
+    Atatürk Mah. Gül Sok.
+
+    No:5 Kadıköy/İstanbul'
+  expect:
+  - entity: ADRES
+    value: 'Atatürk Mah. Gül Sok.
+
+      No:5 Kadıköy/İstanbul'
+  tags:
+  - borderline
+- id: ADRES-022
+  text: 'Şirket merkezi: Maslak Mah. Ahi Evran Cad. No:6 Sarıyer/İstanbul'
+  expect:
+  - entity: ADRES
+    value: Maslak Mah. Ahi Evran Cad. No:6 Sarıyer/İstanbul
+- id: ADRES-023
+  text: Adres Gül Sok. No:3 Kadıköy, telefon 0532 234 56 78
+  expect:
+  - entity: ADRES
+    value: Gül Sok. No:3 Kadıköy
+  - entity: TELEFON
+    value: 0532 234 56 78
+- id: ADRES-024
+  text: 'İki adres: Gül Sok. No:3 Kadıköy ve Lale Cad. No:9 Bornova.'
+  expect:
+  - entity: ADRES
+    value: Gül Sok. No:3 Kadıköy
+  - entity: ADRES
+    value: Lale Cad. No:9 Bornova
+- id: ADRES-025
+  text: '{"adres": "Atatürk Cad. No:1 Merkez/Sivas"}'
+  expect:
+  - entity: ADRES
+    value: Atatürk Cad. No:1 Merkez/Sivas
+- id: ADRES-026
+  text: Sokak hayvanları için mama.
+  expect: []
+- id: ADRES-027
+  text: Plaza çalışanları dışarı çıktı.
+  expect: []
+- id: ADRES-028
+  text: Blok zinciri teknolojisi.
+  expect: []
+- id: ADRES-029
+  text: İstanbul'da hava yağmurlu.
+  expect: []
+- id: ADRES-030
+  text: Cadde üzerinde trafik var.
+  expect: []
+- id: ADRES-031
+  text: 'Kat: 3 yazan etiket.'
+  expect: []
+- id: ADRES-032
+  text: 'D: sürücüsü doldu.'
+  expect: []
+- id: ADRES-033
+  text: Residence projeleri arttı.
+  expect: []
+- id: ADRES-034
+  text: Adresi Fatih Mah. Vatan Cad. No:12/3 Fatih İstanbul'dur.
+  expect:
+  - entity: ADRES
+    value: Fatih Mah. Vatan Cad. No:12/3 Fatih İstanbul'dur
+  tags:
+  - borderline
+- id: ADRES-035
+  text: "Teslimat adresi: Bağdat Cad. No:245 D:7 Suadiye Kadıköy/İstanbul"
+  expect:
+  - entity: ADRES
+    value: Bağdat Cad. No:245 D:7 Suadiye Kadıköy/İstanbul

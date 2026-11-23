@@ -1,0 +1,75 @@
+# detect/eposta — 15 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: EPOSTA-001
+  text: E-posta adresim ayse.demir@ornek.com.tr, yazabilirsiniz.
+  expect:
+  - entity: EPOSTA
+    value: ayse.demir@ornek.com.tr
+- id: EPOSTA-002
+  text: E-posta adresim ahmet_yilmaz+test@mail.example.com, yazabilirsiniz.
+  expect:
+  - entity: EPOSTA
+    value: ahmet_yilmaz+test@mail.example.com
+- id: EPOSTA-003
+  text: E-posta adresim info@ornek-sirket.com.tr, yazabilirsiniz.
+  expect:
+  - entity: EPOSTA
+    value: info@ornek-sirket.com.tr
+- id: EPOSTA-004
+  text: E-posta adresim AHMET@ORNEK.COM, yazabilirsiniz.
+  expect:
+  - entity: EPOSTA
+    value: AHMET@ORNEK.COM
+- id: EPOSTA-005
+  text: E-posta adresim çağrı.öztürk@örnek.com.tr, yazabilirsiniz.
+  expect:
+  - entity: EPOSTA
+    value: çağrı.öztürk@örnek.com.tr
+- id: EPOSTA-006
+  text: E-posta adresim a.b-c@sub.domain.co.uk, yazabilirsiniz.
+  expect:
+  - entity: EPOSTA
+    value: a.b-c@sub.domain.co.uk
+- id: EPOSTA-007
+  text: mailto:destek@ornek.com.tr bağlantısı
+  expect:
+  - entity: EPOSTA
+    value: destek@ornek.com.tr
+- id: EPOSTA-008
+  text: 'İki adres: a1@x.com ve b2@y.org'
+  expect:
+  - entity: EPOSTA
+    value: a1@x.com
+  - entity: EPOSTA
+    value: b2@y.org
+- id: EPOSTA-009
+  text: <ayse@ornek.com>
+  expect:
+  - entity: EPOSTA
+    value: ayse@ornek.com
+- id: EPOSTA-010
+  text: ahmet.yilmaz@firma.com.tr adresine yazın.
+  expect:
+  - entity: EPOSTA
+    value: ahmet.yilmaz@firma.com.tr
+  not_expect:
+  - KISI
+- id: EPOSTA-011
+  text: '@ahmet etiketi mention''dır.'
+  expect: []
+- id: EPOSTA-012
+  text: a@b geçerli değildir.
+  expect: []
+- id: EPOSTA-013
+  text: E-posta (kullanici at ornek nokta com) gizlenmiş.
+  expect: []
+- id: EPOSTA-014
+  text: '{"email":"x.y@z.io"}'
+  expect:
+  - entity: EPOSTA
+    value: x.y@z.io
+- id: EPOSTA-015
+  text: 'Adres: Ayse.Demir@Ornek.Com.Tr'
+  expect:
+  - entity: EPOSTA
+    value: Ayse.Demir@Ornek.Com.Tr

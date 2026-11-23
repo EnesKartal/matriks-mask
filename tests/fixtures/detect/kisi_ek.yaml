@@ -1,0 +1,42 @@
+# elle yazıldı — build_fixtures.py bu dosyayı üretmez/silmez; tüm değerler sentetiktir.
+# Ad SOYAD karma yazım, BÜYÜK+apostrof, bitişik ek, küçük harfli form alanı, unvan, tireli soyad, koordinasyon.
+- {id: KISIEK-001, text: "Saygılarımla, Ahmet YILMAZ", expect: [{entity: KISI, value: "Ahmet YILMAZ"}], masked: "Saygılarımla, <KISI_1>"}
+- {id: KISIEK-002, text: "Ahmet YILMAZ ile görüştüm.", expect: [{entity: KISI, value: "Ahmet YILMAZ"}]}
+- {id: KISIEK-003, text: "Ahmet YILMAZ'ın talebi işleme alındı.", expect: [{entity: KISI, value: "Ahmet YILMAZ"}], masked: "<KISI_1>'ın talebi işleme alındı."}
+- {id: KISIEK-004, text: "Sayın Ahmet YILMAZ,", expect: [{entity: KISI, value: "Ahmet YILMAZ"}]}
+- {id: KISIEK-005, text: "Mehmet Ali KAYA'ya ilet.", expect: [{entity: KISI, value: "Mehmet Ali KAYA"}]}
+- {id: KISIEK-006, text: "Başvuran: Ayşe Nur DEMİR", expect: [{entity: KISI, value: "Ayşe Nur DEMİR"}]}
+- {id: KISIEK-007, text: "Müşteri Ahmet YILMAZ'ın hesabı", expect: [{entity: KISI, value: "Ahmet YILMAZ"}]}
+- {id: KISIEK-008, text: "AHMET'in arabası", expect: [{entity: KISI, value: "AHMET"}], masked: "<KISI_1>'in arabası"}
+- {id: KISIEK-009, text: "Dün AYŞE'ye söyledim.", expect: [{entity: KISI, value: "AYŞE"}]}
+- {id: KISIEK-010, text: "Ahmetin arabası bozuldu.", expect: [{entity: KISI, value: "Ahmet"}], masked: "<KISI_1>in arabası bozuldu."}
+- {id: KISIEK-011, text: "Ayşeye söyledim.", expect: [{entity: KISI, value: "Ayşe"}], masked: "<KISI_1>ye söyledim."}
+- {id: KISIEK-012, text: "Mehmetle konuştum.", expect: [{entity: KISI, value: "Mehmet"}]}
+- {id: KISIEK-013, text: "Ad: ahmet", expect: [{entity: KISI, value: "ahmet"}]}
+- {id: KISIEK-014, text: "Soyad: yılmaz", expect: [{entity: KISI, value: "yılmaz"}]}
+- {id: KISIEK-015, text: '{"ad": "ahmet", "soyad": "yılmaz"}', expect: [{entity: KISI, value: "ahmet"}, {entity: KISI, value: "yılmaz"}]}
+- {id: KISIEK-016, text: "Öğr. Gör. Murat Demir ile görüştüm.", expect: [{entity: KISI, value: "Murat Demir"}]}
+- {id: KISIEK-017, text: "Dt. Elif Kaya randevu verdi.", expect: [{entity: KISI, value: "Elif Kaya"}]}
+- {id: KISIEK-018, text: "Psk. Zeynep Arslan ile görüşme", expect: [{entity: KISI, value: "Zeynep Arslan"}]}
+- {id: KISIEK-019, text: "Ayşe nine aradı.", expect: [{entity: KISI, value: "Ayşe"}]}
+- {id: KISIEK-020, text: "Mehmet Usta geldi.", expect: [{entity: KISI, value: "Mehmet Usta"}]}
+- {id: KISIEK-021, text: "Kaymakam Ahmet Yılmaz açıklama yaptı.", expect: [{entity: KISI, value: "Ahmet Yılmaz"}]}
+- {id: KISIEK-022, text: "Ayşe Demir-Yılmaz aradı.", expect: [{entity: KISI, value: "Ayşe Demir-Yılmaz"}], masked: "<KISI_1> aradı."}
+- {id: KISIEK-023, text: "Ahmet ve Ayşe geldi.", expect: [{entity: KISI, value: "Ahmet"}, {entity: KISI, value: "Ayşe"}]}
+- {id: KISIEK-024, text: "Ayşe, Ahmet ile konuştu.", expect: [{entity: KISI, value: "Ayşe"}, {entity: KISI, value: "Ahmet"}]}
+- {id: KISIEK-025, text: "Zafer Köyü Mevkii Çan/Çanakkale", expect: [{entity: ADRES, value: "Zafer Köyü Mevkii Çan/Çanakkale"}], not_expect: [KISI]}
+- {id: KISIEK-026, text: "Zafer Köyü'nde oturuyor.", expect: [], not_expect: [KISI]}
+- {id: KISIEK-027, text: "Deniz AŞ hisseleri yükseldi.", expect: [], not_expect: [KISI]}
+- {id: KISIEK-028, text: "Koç HOLDİNG bilanço açıkladı.", expect: [], not_expect: [KISI]}
+- {id: KISIEK-029, text: "Mehmet TCMB'ye gitti.", expect: [], not_expect: [KISI], tags: [borderline]}
+- {id: KISIEK-030, text: "EGE'de hava güzel.", expect: [], not_expect: [KISI]}
+- {id: KISIEK-031, text: "Umutla bekliyoruz.", expect: [], not_expect: [KISI]}
+- {id: KISIEK-032, text: "AD SOYAD: AHMET YILMAZ", expect: [{entity: KISI, value: "AHMET YILMAZ"}]}
+- {id: KISIEK-033, text: "Ahmet YILMAZ ve Ayşe DEMİR toplantıda.", expect: [{entity: KISI, value: "Ahmet YILMAZ"}, {entity: KISI, value: "Ayşe DEMİR"}]}
+- {id: KISIEK-034, text: "Kerem ÇELİK'e ulaşıldı.", expect: [{entity: KISI, value: "Kerem ÇELİK"}]}
+- {id: KISIEK-035, text: "Yetkili kişi: ayşe demir", expect: [{entity: KISI, value: "ayşe demir"}]}
+- {id: KISIEK-036, text: "Hacı Mehmet Kaya ile görüşüldü.", expect: [{entity: KISI, value: "Hacı Mehmet Kaya"}]}
+- {id: KISIEK-037, text: "- Ahmet YILMAZ\n- Ayşe DEMİR\n- Mehmet KAYA", expect: [{entity: KISI, value: "Ahmet YILMAZ"}, {entity: KISI, value: "Ayşe DEMİR"}, {entity: KISI, value: "Mehmet KAYA"}]}
+- {id: KISIEK-038, text: "Hem deniz hem kum vardı.", expect: [], not_expect: [KISI]}
+- {id: KISIEK-039, text: "Barış ve Huzur içinde yaşadık.", expect: [], not_expect: [KISI]}   # sözcük-ad cümle başında: koordinasyon bonusu almaz
+- {id: KISIEK-040, text: "Ahmetçiğim nasılsın?", expect: [{entity: KISI, value: "Ahmet"}], tags: [borderline]}

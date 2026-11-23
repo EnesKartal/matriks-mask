@@ -1,0 +1,41 @@
+model_list:
+  - model_name: echo
+    litellm_params:
+      model: openai/echo
+      api_base: http://127.0.0.1:9911/v1
+      api_key: sk-echo
+  - model_name: echo-gemini
+    litellm_params:
+      model: gemini/echo-gemini
+      api_base: http://127.0.0.1:9911
+      api_key: gm-echo
+
+guardrails:
+  - guardrail_name: matriks-pii
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: true
+      entities:
+        SIFRE: BLOCK
+      audit_log:
+        enabled: true
+        path: os.environ/MATRIKS_PII_AUDIT_PATH
+  - guardrail_name: matriks-pii-optin
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: false
+  # bilinçli olarak sınırlı (1024 karakterden uzun metin reddedilir) → fail-closed: istek sağlayıcıya hiç gitmemeli
+  - guardrail_name: matriks-pii-broken
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: false
+      max_text_chars: 1024
+
+litellm_settings:
+  callbacks: custom_callbacks.leak_logger
+
+general_settings:
+  master_key: sk-test

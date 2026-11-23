@@ -1,0 +1,82 @@
+# Çok turlu konuşma, numaralama kararlılığı, rezerve yer tutucu, gölge mod. Elle yazıldı; tüm değerler sentetiktir.
+- id: HOOK-072
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: system, content: "Sen bir müşteri temsilcisisin."}
+    - {role: user, content: "Ben Ayşe Demir, TCKN 17291716060."}
+    - {role: assistant, content: "Merhaba Ayşe Demir, 17291716060 kaydedildi."}
+    - {role: user, content: "Eşim Mehmet Demir'in telefonu 0532 234 56 78."}
+  expect_request:
+    messages.1.content: "Ben <KISI_1>, TCKN <TCKN_1>."
+    messages.2.content: "Merhaba <KISI_1>, <TCKN_1> kaydedildi."
+    messages.3.content: "Eşim <KISI_2>'in telefonu <TELEFON_1>."
+  forbid: ["Ayşe Demir", "Mehmet Demir", "17291716060", "0532 234 56 78"]
+  llm_response: {content: "<KISI_2> için <TELEFON_1> kaydedildi, <KISI_1>."}
+  expect_client: {choices.0.message.content: "Mehmet Demir için 0532 234 56 78 kaydedildi, Ayşe Demir."}
+- id: HOOK-073
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: user, content: "Eşim Mehmet Demir'in telefonu 0532 234 56 78."}
+    - {role: assistant, content: "Kaydettim."}
+    - {role: user, content: "Ayşe Demir'in de kaydını aç."}
+  expect_request:
+    messages.0.content: "Eşim <KISI_1>'in telefonu <TELEFON_1>."
+    messages.2.content: "<KISI_2>'in de kaydını aç."
+- id: HOOK-074
+  config: {placeholder_id: hmac, hash_secret: "0123456789abcdef0123456789abcdef"}
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: user, content: "Ben Ayşe Demir."}
+    - {role: user, content: "Ayşe Demir tekrar yazıyor."}
+  expect_request:
+    messages.0.content: "Ben <KISI_nwlclq>."
+    messages.1.content: "<KISI_nwlclq> tekrar yazıyor."
+- id: HOOK-075
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: assistant, content: "Önceki yanıt <KISI_1> içeriyordu."}
+    - {role: user, content: "Ben Ayşe Demir."}
+  expect_request:
+    messages.0.content: "Önceki yanıt <KISI_1> içeriyordu."
+    messages.1.content: "Ben <KISI_2>."
+  llm_response: {content: "<KISI_1> ve <KISI_2>"}
+  expect_client: {choices.0.message.content: "<KISI_1> ve Ayşe Demir"}
+- id: HOOK-076
+  config: {placeholder_instruction: system_suffix}
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: system, content: "Kısa yanıtla."}
+    - {role: user, content: "TCKN 17291716060"}
+  expect_request:
+    messages.0.content: "Kısa yanıtla.\n\nMetinde <ETİKET_n> biçiminde yer tutucular (ör. <KISI_1>, <TCKN_1>) bulunabilir. Bunlar kişisel verilerdir ve yanıtın kullanıcıya ulaşmadan önce otomatik olarak gerçek değerlerle değiştirilir. Yer tutucuyu gerçek değermiş gibi kullan: değere atıf yaparken veya kullanıcı değeri tekrar etmeni istediğinde yer tutucuyu aynen yaz (ör. <TCKN_1>). Yer tutucudan, maskelemeden ya da değeri göremediğinden söz etme; yer tutucuyu kısaltma, değiştirme ve gerçek değeri tahmin etmeye çalışma."
+- id: HOOK-077
+  config: {dry_run: true}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ben Ayşe Demir, TCKN 17291716060."}]}
+  passthrough: true
+  expect_request:
+    messages.0.content: "Ben Ayşe Demir, TCKN 17291716060."
+    metadata.standard_logging_guardrail_information.0.guardrail_response.would_mask: {KISI: 1, TCKN: 1}
+  absent_keys: [metadata.matriks_pii_session_id]
+- id: HOOK-078
+  config: {dry_run: true, entities: {SIFRE: BLOCK}}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Şifre: Gizli123! kaydet"}]}
+  passthrough: true
+  expect_request:
+    metadata.standard_logging_guardrail_information.0.guardrail_response.would_block: SIFRE
+  forbid: []
+- id: HOOK-079
+  config: {dry_run: true}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "TCKN 17291716060"}]}
+  passthrough: true
+  llm_response: {content: "Kayıt <TCKN_1>"}
+  expect_client: {choices.0.message.content: "Kayıt <TCKN_1>"}

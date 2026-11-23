@@ -1,0 +1,274 @@
+# detect/ozel_nitelikli — 50 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: OZEL-001
+  text: Müşterimiz Ahmet Yılmaz diyabet hastasıdır.
+  expect:
+  - &id001
+    entity: KISI
+    value: Ahmet Yılmaz
+  - entity: OZEL_SAGLIK
+    value: diyabet hastasıdır
+- id: OZEL-002
+  text: Müşterimiz Ahmet Yılmaz kanser tedavisi görüyor.
+  expect:
+  - *id001
+  - entity: OZEL_SAGLIK
+    value: kanser tedavisi
+- id: OZEL-003
+  text: Müşterimiz Ahmet Yılmaz kan grubu A Rh+.
+  expect:
+  - *id001
+  - entity: OZEL_SAGLIK
+    value: kan grubu A Rh+
+- id: OZEL-004
+  text: Müşterimiz Ahmet Yılmaz engelli raporu sundu.
+  expect:
+  - *id001
+  - entity: OZEL_SAGLIK
+    value: engelli raporu
+- id: OZEL-005
+  text: Müşterimiz Ahmet Yılmaz depresyon nedeniyle izinli.
+  expect:
+  - *id001
+  - entity: OZEL_SAGLIK
+    value: depresyon
+- id: OZEL-006
+  text: Müşterimiz Ahmet Yılmaz hamile olduğunu bildirdi.
+  expect:
+  - *id001
+  - entity: OZEL_SAGLIK
+    value: hamile
+- id: OZEL-007
+  text: Ben diyabetim.
+  expect:
+  - entity: OZEL_SAGLIK
+    value: diyabetim
+- id: OZEL-008
+  text: Şeker hastasıyım, insülin kullanıyorum.
+  expect:
+  - entity: OZEL_SAGLIK
+    value: Şeker hastasıyım
+  - entity: OZEL_SAGLIK
+    value: insülin
+- id: OZEL-009
+  text: Müşterimiz Ahmet Yılmaz DNA testi yaptırdı.
+  expect:
+  - *id001
+  - entity: OZEL_GENETIK
+    value: DNA testi
+- id: OZEL-010
+  text: Müşterimiz Ahmet Yılmaz BRCA1 taşıyıcısı.
+  expect:
+  - *id001
+  - entity: OZEL_GENETIK
+    value: BRCA1 taşıyıcısı
+- id: OZEL-011
+  text: Müşterimiz Ahmet Yılmaz parmak izi verisi alındı.
+  expect:
+  - *id001
+  - entity: OZEL_BIYOMETRIK
+    value: parmak izi verisi
+- id: OZEL-012
+  text: Müşterimiz Ahmet Yılmaz retina taraması yaptırdı.
+  expect:
+  - *id001
+  - entity: OZEL_BIYOMETRIK
+    value: retina taraması
+- id: OZEL-013
+  text: Müşterimiz Ahmet Yılmaz eşcinsel olduğunu açıkladı.
+  expect:
+  - *id001
+  - entity: OZEL_CINSEL
+    value: eşcinsel
+- id: OZEL-014
+  text: Müşterimiz Ahmet Yılmaz hapis cezası aldı.
+  expect:
+  - *id001
+  - entity: OZEL_CEZA
+    value: hapis cezası
+- id: OZEL-015
+  text: Müşterimiz Ahmet Yılmaz sabıkalı.
+  expect:
+  - *id001
+  - entity: OZEL_CEZA
+    value: sabıkalı
+- id: OZEL-016
+  text: Müşterimiz Ahmet Yılmaz denetimli serbestlikte.
+  expect:
+  - *id001
+  - entity: OZEL_CEZA
+    value: denetimli serbestlikte
+- id: OZEL-017
+  text: Müşterimiz Ahmet Yılmaz gözaltına alındı.
+  expect:
+  - *id001
+  - entity: OZEL_CEZA_GENIS
+    value: gözaltına alındı
+- id: OZEL-018
+  text: Müşterimiz Ahmet Yılmaz Alevi'dir.
+  expect:
+  - *id001
+  - entity: OZEL_DIN
+    value: Alevi'dir
+- id: OZEL-019
+  text: Müşterimiz Ahmet Yılmaz Müslüman.
+  expect:
+  - *id001
+  - entity: OZEL_DIN
+    value: Müslüman
+- id: OZEL-020
+  text: Müşterimiz Ahmet Yılmaz ateist.
+  expect:
+  - *id001
+  - entity: OZEL_DIN
+    value: ateist
+- id: OZEL-021
+  text: Müşterimiz Ahmet Yılmaz, Kürt kökenli.
+  expect:
+  - *id001
+  - entity: OZEL_ETNIK
+    value: Kürt kökenli
+- id: OZEL-022
+  text: Müşterimiz Ahmet Yılmaz Arap kökenli.
+  expect:
+  - *id001
+  - entity: OZEL_ETNIK
+    value: Arap kökenli
+- id: OZEL-023
+  text: Müşterimiz Ahmet Yılmaz CHP üyesi.
+  expect:
+  - *id001
+  - entity: OZEL_SIYASI
+    value: CHP üyesi
+- id: OZEL-024
+  text: Müşterimiz Ahmet Yılmaz parti üyesi.
+  expect:
+  - *id001
+  - entity: OZEL_SIYASI
+    value: parti üyesi
+- id: OZEL-025
+  text: Müşterimiz Ahmet Yılmaz başörtülü.
+  expect:
+  - *id001
+  - entity: OZEL_KIYAFET
+    value: başörtülü
+- id: OZEL-026
+  text: Müşterimiz Ahmet Yılmaz sendika üyesi.
+  expect:
+  - *id001
+  - entity: OZEL_UYELIK
+    value: sendika üyesi
+- id: OZEL-027
+  text: Müşterimiz Ahmet Yılmaz dernek üyesi.
+  expect:
+  - *id001
+  - entity: OZEL_UYELIK
+    value: dernek üyesi
+- id: OZEL-028
+  text: Müşterimiz Ahmet Yılmaz laik.
+  expect:
+  - *id001
+  - entity: OZEL_FELSEFI
+    value: laik
+- id: OZEL-029
+  text: CHP kurultayı toplandı.
+  expect: []
+- id: OZEL-030
+  text: Kanser araştırmalarına bütçe ayrıldı.
+  expect: []
+- id: OZEL-031
+  text: Diyabet nedir?
+  expect: []
+- id: OZEL-032
+  text: Lazım olan belgeler.
+  expect: []
+- id: OZEL-033
+  text: Rumeli yakasında kira arttı.
+  expect: []
+- id: OZEL-034
+  text: Transfer işlemi tamamlandı.
+  expect: []
+- id: OZEL-035
+  text: Geyik muhabbeti uzadı.
+  expect: []
+- id: OZEL-036
+  text: Roman okudum, beğendim.
+  expect: []
+- id: OZEL-037
+  text: Müşterimiz Ahmet Yılmaz Suriyeli.
+  expect:
+  - *id001
+  not_expect:
+  - OZEL_ETNIK
+- id: OZEL-038
+  text: Parmak izi teknolojisi yaygınlaştı.
+  expect: []
+- id: OZEL-039
+  text: Müşterimiz Ahmet Yılmaz diyabet hastasıdır.
+  expect:
+  - *id001
+  - entity: OZEL_SAGLIK
+    value: diyabet hastasıdır
+  masked: Müşterimiz <KISI_1> <OZEL_SAGLIK_1>.
+- id: OZEL-040
+  text: Müşterimiz Ahmet Yılmaz CHP üyesi.
+  expect:
+  - *id001
+  - entity: OZEL_SIYASI
+    value: CHP üyesi
+  masked: Müşterimiz <KISI_1> CHP üyesi.
+- id: OZEL-041
+  text: Müşterimiz Ahmet Yılmaz CHP üyesi.
+  expect:
+  - *id001
+  - entity: OZEL_SIYASI
+    value: CHP üyesi
+  masked: Müşterimiz <KISI_1> <OZEL_SIYASI_1>.
+  config:
+    profile: strict
+- id: OZEL-042
+  text: TCKN 17291716060 olan hasta HIV pozitif.
+  expect:
+  - entity: TCKN
+    value: '17291716060'
+  - entity: OZEL_SAGLIK
+    value: HIV pozitif
+- id: OZEL-043
+  text: Hasta kemoterapi alıyor.
+  expect:
+  - entity: OZEL_SAGLIK
+    value: kemoterapi
+- id: OZEL-044
+  text: Çalışanımız ameliyat oldu.
+  expect:
+  - entity: OZEL_SAGLIK
+    value: ameliyat oldu
+- id: OZEL-045
+  text: Tutuklu sayısı arttı.
+  expect: []
+- id: OZEL-046
+  text: Sağlık Bakanlığı kampanya başlattı.
+  expect: []
+- id: OZEL-047
+  text: Benim kan grubum 0 Rh-.
+  expect:
+  - entity: OZEL_SAGLIK
+    value: kan grubum 0 Rh-
+- id: OZEL-048
+  text: Kan grubu uyumu hakkında genel bilgi.
+  expect: []
+- id: OZEL-049
+  text: Müşterimiz Ahmet Yılmaz epilepsi hastası, ilaç kullanıyor.
+  expect:
+  - *id001
+  - entity: OZEL_SAGLIK
+    value: epilepsi hastası
+  - entity: OZEL_SAGLIK
+    value: ilaç kullanıyor
+- id: OZEL-050
+  text: Sen gey misin diye sordu.
+  expect:
+  - entity: OZEL_CINSEL
+    value: gey
+  tags:
+  - borderline

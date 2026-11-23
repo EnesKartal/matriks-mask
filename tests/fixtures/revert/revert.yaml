@@ -1,0 +1,249 @@
+# revert — 40 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: REVERT-001
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba <KISI_1>.
+  expect: Merhaba Ayşe.
+- id: REVERT-002
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba <KISI_1 >.
+  expect: Merhaba Ayşe.
+- id: REVERT-003
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba < KISI_1>.
+  expect: Merhaba Ayşe.
+- id: REVERT-004
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba [KISI_1].
+  expect: Merhaba Ayşe.
+- id: REVERT-005
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba {KISI_1}.
+  expect: Merhaba Ayşe.
+- id: REVERT-006
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba <<KISI_1>>.
+  expect: Merhaba Ayşe.
+- id: REVERT-007
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba <kisi_1>.
+  expect: Merhaba Ayşe.
+- id: REVERT-008
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba <KİŞİ_1>.
+  expect: Merhaba Ayşe.
+- id: REVERT-009
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba <KISI 1>.
+  expect: Merhaba Ayşe.
+- id: REVERT-010
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba <KISI-1>.
+  expect: Merhaba Ayşe.
+- id: REVERT-011
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba **<KISI_1>**.
+  expect: Merhaba **Ayşe**.
+- id: REVERT-012
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba &lt;KISI_1&gt;.
+  expect: Merhaba Ayşe.
+- id: REVERT-013
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba [[KISI_1]].
+  expect: Merhaba Ayşe.
+- id: REVERT-014
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Merhaba {{KISI_1}}.
+  expect: Merhaba Ayşe.
+- id: REVERT-015
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Sayın KISI_1, hoş geldiniz.
+  expect: Sayın Ayşe, hoş geldiniz.
+- id: REVERT-016
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: KISI 1 kişidir.
+  expect: KISI 1 kişidir.
+- id: REVERT-017
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: <KISI_1>'in dosyası
+  expect: Ayşe'nin dosyası
+- id: REVERT-018
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: <KISI_1>’e ilettim
+  expect: Ayşe’ye ilettim
+- id: REVERT-019
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: <KISI_1>'den aldım
+  expect: Ayşe'den aldım
+- id: REVERT-020
+  map:
+    <KISI_1>: Ahmet
+  llm_output: <KISI_1>'yla görüştüm
+  expect: Ahmet'le görüştüm
+- id: REVERT-021
+  map:
+    <KISI_1>: Mehmet
+  llm_output: <KISI_1>'a sor
+  expect: Mehmet'e sor
+- id: REVERT-022
+  map:
+    <KISI_1>: Kadıköy
+  llm_output: <KISI_1>'de kaldım
+  expect: Kadıköy'de kaldım
+- id: REVERT-023
+  map:
+    <KISI_1>: Zeynep
+  llm_output: <KISI_1>'da kaldı
+  expect: Zeynep'te kaldı
+- id: REVERT-024
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: <TCKN_1>'in sahibi
+  expect: 17291716060'ın sahibi
+  entities:
+    <TCKN_1>: TCKN
+- id: REVERT-025
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Bilinmeyen <KISI_9> var.
+  expect: Bilinmeyen <KISI_9> var.
+- id: REVERT-026
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Bilinmeyen <KISI_9> var.
+  expect: Bilinmeyen  var.
+  config:
+    unresolved_placeholder: strip
+- id: REVERT-027
+  map: {}
+  llm_output: Boş harita <KISI_1>.
+  expect: Boş harita <KISI_1>.
+- id: REVERT-028
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: <KISI_1> <KISI_1> <KISI_1>
+  expect: Ayşe Ayşe Ayşe
+- id: REVERT-029
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: '{"ad": "<KISI_1>"}'
+  expect: '{"ad": "Ayşe"}'
+- id: REVERT-030
+  map:
+    <KART_1>: '**** **** **** 1111'
+  llm_output: 'KART: <KART_1>'
+  expect: 'KART: **** **** **** 1111'
+  entities:
+    <KART_1>: KART
+- id: REVERT-031
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Yarım kalan <KIS
+  expect: 'Yarım kalan '
+  final: true
+- id: REVERT-032
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Yarım kalan <KIS
+  expect: Yarım kalan <KIS
+  final: true
+  config:
+    truncated_placeholder: keep
+- id: REVERT-033
+  map:
+    __KISI_1__: Ayşe
+  llm_output: Merhaba __KISI_1__.
+  expect: Merhaba Ayşe.
+  config:
+    placeholder_format: __{label}_{n}__
+- id: REVERT-034
+  map:
+    PII_KISI_1: Ayşe
+  llm_output: Merhaba PII_KISI_1.
+  expect: Merhaba Ayşe.
+  config:
+    placeholder_format: PII_{label}_{n}
+- id: REVERT-035
+  map:
+    '[KISI_1]': Ayşe
+  llm_output: Merhaba [KISI_1].
+  expect: Merhaba Ayşe.
+  config:
+    placeholder_format: '[{label}_{n}]'
+- id: REVERT-036
+  map:
+    <KISI_1>: Kisi_2
+    <KISI_2>: Mehmet
+  llm_output: <KISI_1> ve <KISI_2>
+  expect: Kisi_2 ve Mehmet
+- id: REVERT-037
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: AKISI_1 bitişik
+  expect: AKISI_1 bitişik
+- id: REVERT-038
+  map:
+    <KISI_1>: AYŞE
+  llm_output: <KISI_1>'İN
+  expect: AYŞE'NİN
+- id: REVERT-039
+  map:
+    <KISI_1>: Ayşe
+    <KISI_12>: Can
+  llm_output: <KISI_12> ve <KISI_1>
+  expect: Can ve Ayşe
+- id: REVERT-040
+  map:
+    <KISI_1>: Ayşe
+    <TCKN_1>: '17291716060'
+  llm_output: Ek yok <KISI_1>.
+  expect: Ek yok Ayşe.
+  config:
+    suffix_repair: false

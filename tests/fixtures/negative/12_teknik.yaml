@@ -1,0 +1,101 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-481
+  text: "<KISI_1> için randevu oluşturuldu."
+  expect: []
+  why: "mevcut yer tutucu, haritaya girmez (reserve_existing)"
+  tags: [yer_tutucu]
+- id: NEG-482
+  text: "<TCKN_1> numaralı kayıt güncellendi."
+  expect: []
+  why: "mevcut yer tutucu"
+  tags: [yer_tutucu]
+- id: NEG-483
+  text: "JSON: {'status': 'ok', 'count': 12}"
+  expect: []
+  why: "JSON anahtarları"
+  tags: [teknik]
+- id: NEG-484
+  text: "UUID 550e8400-e29b-41d4-a716-446655440000 kayda atandı."
+  expect: []
+  why: "UUID, ettn bağlamı yok; 12 hane kart değil"
+  tags: [teknik, kart]
+- id: NEG-485
+  text: "SHA-256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  expect: []
+  why: "hex hash"
+  tags: [teknik]
+- id: NEG-486
+  text: "MAC adresi 00:1A:2B:3C:4D:5E ağda görüldü."
+  expect: []
+  why: "MAC varsayılan IGNORE"
+  tags: [teknik]
+- id: NEG-487
+  text: "Zaman damgası 2026-10-28T14:30:05+03:00 formatında."
+  expect: []
+  why: "ISO zaman damgası"
+  tags: [teknik, tarih]
+- id: NEG-488
+  text: "Base64: SGVsbG8gV29ybGQh dizesi çözüldü."
+  expect: []
+  why: "base64 dizesi"
+  tags: [teknik]
+- id: NEG-489
+  text: "Regex: [0-9]{11} deseni on bir haneli sayıları yakalar."
+  expect: []
+  why: "regex metni"
+  tags: [teknik]
+- id: NEG-490
+  text: "Markdown tablosu: | Hisse | Fiyat | Hacim |"
+  expect: []
+  why: "tablo başlıkları"
+  tags: [teknik]
+- id: NEG-491
+  text: "Kod: for i in range(10): print(i)"
+  expect: []
+  why: "kod parçası"
+  tags: [teknik]
+- id: NEG-492
+  text: "SQL: SELECT * FROM islemler WHERE tarih > '2026-01-01'"
+  expect: []
+  why: "SQL + ISO tarih"
+  tags: [teknik, tarih]
+- id: NEG-493
+  text: "Git commit a1b2c3d4 ana dala birleştirildi."
+  expect: []
+  why: "kısa hash"
+  tags: [teknik]
+- id: NEG-494
+  text: "Docker imajı python:3.12-slim kullanıldı."
+  expect: []
+  why: "imaj etiketi"
+  tags: [teknik]
+- id: NEG-495
+  text: "Hata kodu E1234 loglara yazıldı."
+  expect: []
+  why: "harf + 4 hane, pasaport deseni değil"
+  tags: [teknik, pasaport]
+- id: NEG-496
+  text: "API anahtarı sk-test-xxxx olarak maskelenmiş."
+  expect: []
+  why: "maskeli anahtar"
+  tags: [teknik]
+- id: NEG-497
+  text: "<EPOSTA_1> adresine bildirim gönderildi."
+  expect: []
+  why: "mevcut yer tutucu"
+  tags: [yer_tutucu]
+- id: NEG-498
+  text: "{KISI_2} yer tutucusu şablonda bırakıldı."
+  expect: []
+  why: "süslü parantezli yer tutucu"
+  tags: [yer_tutucu]
+- id: NEG-499
+  text: "YAML anahtarı entities: {TCKN: MASK, VKN: IGNORE}"
+  expect: []
+  why: "config metni"
+  tags: [teknik]
+- id: NEG-500
+  text: "Log satırı: [INFO] 2026-10-28 14:30:05 engine.analyze 2 ms"
+  expect: []
+  why: "log satırı"
+  tags: [teknik, tarih]

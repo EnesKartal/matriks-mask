@@ -1,0 +1,276 @@
+# elle yazıldı — yeni kurallar/varlıklar için yanlış pozitif tuzakları. Tüm değerler sentetiktir.
+- id: NEG-531
+  text: Deniz AŞ hisseleri yükseldi.
+  expect: []
+  why: 'kurum: BÜYÜK AŞ eki'
+  tags:
+  - kisi
+  - kurum
+- id: NEG-532
+  text: Ege AŞ bilançosu açıklandı.
+  expect: []
+  why: 'kurum: BÜYÜK AŞ eki'
+  tags:
+  - kisi
+  - kurum
+- id: NEG-533
+  text: Koç HOLDİNG temettü dağıttı.
+  expect: []
+  why: 'kurum: BÜYÜK HOLDİNG'
+  tags:
+  - kisi
+  - kurum
+- id: NEG-534
+  text: Mehmet TCMB'ye gitti diye bir haber yok, kurum açıklaması bekleniyor.
+  expect: []
+  why: TCMB kısaltması soyad değil
+  tags:
+  - kisi
+- id: NEG-535
+  text: ABD'ye ihracat arttı.
+  expect: []
+  why: ülke kısaltması
+  tags:
+  - kisi
+- id: NEG-536
+  text: Umut OSB'de yeni fabrika açıldı.
+  expect: []
+  why: OSB kısaltması; Umut cümle başı sözcük
+  tags:
+  - kisi
+- id: NEG-537
+  text: EGE'de hava sıcak.
+  expect: []
+  why: BÜYÜK yer adı + ek
+  tags:
+  - kisi
+- id: NEG-538
+  text: Umutla bekliyoruz.
+  expect: []
+  why: sözcük (umut+la)
+  tags:
+  - kisi
+- id: NEG-539
+  text: Canla başla çalıştı.
+  expect: []
+  why: deyim
+  tags:
+  - kisi
+- id: NEG-540
+  text: Güle güle kullanın.
+  expect: []
+  why: deyim
+  tags:
+  - kisi
+- id: NEG-541
+  text: DENİZ KUVVETLERİ tatbikat yaptı.
+  expect: []
+  why: kurum adı BÜYÜK
+  tags:
+  - kisi
+  - kurum
+- id: NEG-542
+  text: Zafer Köyü'nde festival düzenlendi.
+  expect: []
+  why: köy adı
+  tags:
+  - kisi
+  - adres
+- id: NEG-543
+  text: sipariş numarası 5321234567 olarak kaydedildi
+  expect: []
+  why: sipariş no
+  tags:
+  - telefon
+- id: NEG-544
+  text: fiş numarası 5321234567 ile iade yapılır
+  expect: []
+  why: fiş no
+  tags:
+  - telefon
+- id: NEG-545
+  text: Depoda 812 adet ürün var.
+  expect: []
+  why: adet
+  tags:
+  - telefon
+- id: NEG-546
+  text: 0812 numaralı dosya kapatıldı.
+  expect: []
+  why: dosya no
+  tags:
+  - telefon
+- id: NEG-547
+  text: takip no 8121234567 kargoda
+  expect: []
+  why: kargo takip
+  tags:
+  - telefon
+- id: NEG-548
+  text: Cihaz seri 3000000000000004 kayıtlı.
+  expect: []
+  why: 16 hane Diners değil
+  tags:
+  - kart
+- id: NEG-549
+  text: Barkod 3530111333300001 okundu.
+  expect: []
+  why: Luhn geçmez
+  tags:
+  - kart
+- id: NEG-550
+  text: Referans 36148900647914 kapandı.
+  expect: []
+  why: Luhn geçmez
+  tags:
+  - kart
+- id: NEG-551
+  text: Sipariş 3566002020360506 hazır.
+  expect: []
+  why: Luhn geçmez
+  tags:
+  - kart
+- id: NEG-552
+  text: A07 123456 kodlu ürün stokta.
+  expect: []
+  why: ürün kodu, bağlam yok
+  tags:
+  - kimlik
+- id: NEG-553
+  text: U1234567 sürümü yayımlandı.
+  expect: []
+  why: sürüm, pasaport bağlamı yok
+  tags:
+  - kimlik
+- id: NEG-554
+  text: Poliçe şartları madde 12'de açıklanır.
+  expect: []
+  why: poliçe ama numara yok
+  tags:
+  - finans
+- id: NEG-555
+  text: Ticaret sicil gazetesinde ilan edildi.
+  expect: []
+  why: sicil gazetesi
+  tags:
+  - finans
+- id: NEG-556
+  text: MKK duyurusu 2024 yılında yayımlandı.
+  expect: []
+  why: yıl
+  tags:
+  - finans
+- id: NEG-557
+  text: Formda adres kodu alanını doldurun.
+  expect: []
+  why: değer yok
+  tags:
+  - finans
+- id: NEG-558
+  text: sipariş no 1234567890 hazırlanıyor
+  expect: []
+  why: sipariş no
+  tags:
+  - finans
+- id: NEG-559
+  text: hasar dosya no 12345 incelemede
+  expect: []
+  why: dosya no
+  tags:
+  - finans
+- id: NEG-560
+  text: ahmet at gmail dot com yazmayın
+  expect: []
+  why: parantezsiz at/dot
+  tags:
+  - eposta
+- id: NEG-561
+  text: (at) işareti yerine @ kullanın
+  expect: []
+  why: yerel kısım yok
+  tags:
+  - eposta
+- id: NEG-562
+  text: Destek için [at] yazmayın
+  expect: []
+  why: yerel kısım yok
+  tags:
+  - eposta
+- id: NEG-563
+  text: sk-test anahtarı geçersiz
+  expect: []
+  why: kısa sk-
+  tags:
+  - gizli
+- id: NEG-564
+  text: 'token: evet'
+  expect: []
+  why: değer kısa
+  tags:
+  - gizli
+- id: NEG-565
+  text: Bearer token gerekiyor
+  expect: []
+  why: değer yok
+  tags:
+  - gizli
+- id: NEG-566
+  text: AKIA ile başlayan anahtarlar AWS'ye aittir
+  expect: []
+  why: önek tek başına
+  tags:
+  - gizli
+- id: NEG-567
+  text: client_secret alanı boş bırakılmış
+  expect: []
+  why: değer yok
+  tags:
+  - gizli
+- id: NEG-568
+  text: USD/TRY 41.0082, EUR/TRY 28.9784 seviyesinde.
+  expect: []
+  why: kur çifti
+  tags:
+  - konum
+- id: NEG-569
+  text: fiyat 41.0082, 28.9784 TL aralığında
+  expect: []
+  why: fiyat
+  tags:
+  - konum
+- id: NEG-570
+  text: sürüm 1.0082, 2.9784 karşılaştırması
+  expect: []
+  why: sürüm
+  tags:
+  - konum
+- id: NEG-571
+  text: 41.0082, 28.9784 değerleri tabloda.
+  expect: []
+  why: bağlamsız sayı çifti
+  tags:
+  - konum
+- id: NEG-572
+  text: Kürtaj yasası mecliste tartışıldı.
+  expect: []
+  why: haber cümlesi
+  tags:
+  - ozel
+- id: NEG-573
+  text: Rotary kulübü bağış topladı.
+  expect: []
+  why: kurum haberi
+  tags:
+  - ozel
+- id: NEG-574
+  text: Sigara fiyatları arttı.
+  expect: []
+  why: fiyat haberi
+  tags:
+  - ozel
+- id: NEG-575
+  text: Hanefi mezhebinin tarihi anlatıldı.
+  expect: []
+  why: kişiye bağlı değil
+  tags:
+  - ozel

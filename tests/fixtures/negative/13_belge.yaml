@@ -1,0 +1,51 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-501
+  text: "U12345678 kodu depo rafında etiketli."
+  expect: []
+  why: "pasaport bağlamı yok"
+  tags: [pasaport]
+- id: NEG-502
+  text: "Belge numarası A98765432 kargo etiketinde."
+  expect: []
+  why: "pasaport bağlamı yok; 'belge numarası' ≠ 'belge no'"
+  tags: [pasaport]
+- id: NEG-503
+  text: "Kod 123456 doğrulama için SMS ile gönderildi."
+  expect: []
+  why: "6 hane, ehliyet bağlamı yok"
+  tags: [ehliyet]
+- id: NEG-504
+  text: "Sicil defteri yüz yıl önce tutulmaya başlanmıştı ve içinde hiçbir sayı yoktu; sonraki sayfada 1234567 ile başlayan kayıt bulunmaktadır."
+  expect: []
+  why: "'sicil' tek başına bağlam değil, uzak"
+  tags: [sgk]
+- id: NEG-505
+  text: "Sigorta sicil kayıtları arşivde tutulur; arşiv raf kodu, ilgili yönetmelik hükümlerine göre, ayrı bir listede 9876543 olarak saklanır."
+  expect: []
+  why: "bağlam 90+ karakter uzak; pencere 60"
+  tags: [sgk, borderline]
+- id: NEG-506
+  text: "Pasaport başvurusu için randevu alındı, numara henüz verilmedi."
+  expect: []
+  why: "bağlam var, numara yok"
+  tags: [pasaport]
+- id: NEG-507
+  text: "Ehliyet sınavı 50 soru, geçme notu 70."
+  expect: []
+  why: "bağlam var, 6 hane yok"
+  tags: [ehliyet]
+- id: NEG-508
+  text: "SGK prim oranı %20,5 olarak uygulanır."
+  expect: []
+  why: "SGK bağlamı, 7+ hane yok"
+  tags: [sgk]
+- id: NEG-509
+  text: "Pasaport ücreti 2026 yılında 4.567,50 TL oldu."
+  expect: []
+  why: "bağlam var, harf+8 hane yok"
+  tags: [pasaport]
+- id: NEG-510
+  text: "Sürücü belgesi yenileme süresi 10 yıldır."
+  expect: []
+  why: "bağlam var, 6 hane yok"
+  tags: [ehliyet]

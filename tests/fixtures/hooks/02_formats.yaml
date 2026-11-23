@@ -1,0 +1,80 @@
+# Responses / Anthropic / embeddings / text completion / desteklenmeyen çağrı türleri. Tüm değerler sentetiktir.
+- id: HOOK-015
+  call_type: aresponses
+  request: {model: m, metadata: {user: x}, input: "TCKN 17291716060", instructions: "Ahmet Yılmaz için yaz"}
+  expect_request: {input: "TCKN <TCKN_1>", instructions: "<KISI_1> için yaz"}
+  expect_keys: [litellm_metadata.matriks_pii_session_id]
+  absent_keys: [metadata.matriks_pii_session_id]
+- id: HOOK-016
+  call_type: aresponses
+  request:
+    model: m
+    litellm_metadata: {}
+    input:
+    - {role: user, content: [{type: input_text, text: "TCKN 17291716060"}]}
+    - {type: function_call, call_id: c, name: f, arguments: "{\"t\": \"44771278268\"}"}
+    - {type: function_call_output, call_id: c, output: "sonuç 44771278268"}
+  expect_request:
+    input.0.content.0.text: "TCKN <TCKN_1>"
+    input.1.arguments: {t: "<TCKN_2>"}
+    input.2.output: "sonuç <TCKN_2>"
+- id: HOOK-017
+  call_type: aembedding
+  request: {model: e, metadata: {}, input: ["TCKN 17291716060", "düz metin"]}
+  expect_request: {input: ["TCKN <TCKN_1>", "düz metin"]}
+- id: HOOK-018
+  call_type: aembedding
+  request: {model: e, metadata: {}, input: [[1, 2, 3], [4]]}
+  expect_request: {input: [[1, 2, 3], [4]]}
+- id: HOOK-019
+  call_type: atext_completion
+  request: {model: m, metadata: {}, prompt: "Ayşe Demir için mektup yaz, tel 0532 234 56 78."}
+  expect_request: {prompt: "<KISI_1> için mektup yaz, tel <TELEFON_1>."}
+- id: HOOK-020
+  call_type: atext_completion
+  request: {model: m, metadata: {}, prompt: ["TCKN 17291716060", "IBAN TR330006100519786457841326"]}
+  expect_request: {prompt: ["TCKN <TCKN_1>", "IBAN <IBAN_1>"]}
+- id: HOOK-021
+  call_type: anthropic_messages
+  request:
+    model: claude
+    system: [{type: text, text: "Müşteri Ahmet Yılmaz"}]
+    messages:
+    - role: user
+      content:
+      - {type: text, text: "TCKN 17291716060"}
+      - {type: tool_result, tool_use_id: t, content: [{type: text, text: "IBAN TR330006100519786457841326"}]}
+    - role: assistant
+      content: [{type: tool_use, id: t, name: f, input: {tckn: "17291716060"}}]
+  expect_request:
+    system.0.text: "Müşteri <KISI_1>"
+    messages.0.content.0.text: "TCKN <TCKN_1>"
+    messages.0.content.1.content.0.text: "IBAN <IBAN_1>"
+    messages.1.content.0.input: {tckn: "<TCKN_1>"}
+  expect_keys: [litellm_metadata.matriks_pii_session_id]
+- id: HOOK-022
+  call_type: anthropic_messages
+  request:
+    model: claude
+    messages:
+    - role: assistant
+      content:
+      - {type: thinking, thinking: "Ayşe Demir 17291716060", signature: "imza"}
+      - {type: text, text: "Tamam."}
+    - {role: user, content: "TCKN 17291716060"}
+  expect_request:
+    messages.0.content.0.thinking: "Ayşe Demir 17291716060"
+    messages.1.content: "TCKN <TCKN_1>"
+- id: HOOK-023
+  call_type: aimage_generation
+  request: {model: dall-e, metadata: {}, prompt: "TCKN 17291716060 için afiş"}
+  expect_request: {prompt: "TCKN <TCKN_1> için afiş"}
+- id: HOOK-024
+  call_type: aimage_generation
+  config: {unsupported_call_types: pass}
+  request: {model: dall-e, metadata: {}, prompt: "TCKN 17291716060"}
+  expect_none: true
+- id: HOOK-025
+  call_type: arerank
+  request: {model: r, metadata: {}, query: "TCKN 17291716060", documents: ["IBAN TR330006100519786457841326"]}
+  forbid: ["17291716060", "TR330006100519786457841326"]

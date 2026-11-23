@@ -1,0 +1,206 @@
+"""Analiz motoru: iki fazlı tanıma, çakışma çözümü, maskeleme."""
+
+from __future__ import annotations
+
+import bisect
+import dataclasses
+import hashlib
+import re
+import threading
+import time
+from collections import OrderedDict
+from typing import TYPE_CHECKING
+
+from .config import ALLOW_PROTECTED, PRIORITY, TurkishPIIConfig
+from .recognizers import build_recognizers
+from .recognizers.base import AnalysisContext, Span
+from .text_utils import ascii_width, fold_text, trie_pattern
+
+if TYPE_CHECKING:
+    from .session import MaskSession
+
+
+def _priority(entity: str) -> int:
+    return PRIORITY.get(entity, 65)
+
+
+def resolve_overlaps(spans: list[Span]) -> list[Span]:
+    """Öncelik > skor > uzunluk > başlangıç sırasıyla kabul et; kabul edilenlerle kesişeni at."""
+    ordered = sorted(spans, key=lambda s: (-_priority(s.entity), -s.score, -(s.end - s.start), s.start))
+    return _greedy_disjoint(ordered)
+
+
+def _dedupe_same_entity(spans: list[Span]) -> list[Span]:
+    """Aynı entity'de kısmi kesişen adaylar (NER + sözlük): uzun olanı tut."""
+    by_ent: dict[str, list[Span]] = {}
+    for s in spans:
+        by_ent.setdefault(s.entity, []).append(s)
+    out: list[Span] = []
+    for _ent, lst in by_ent.items():
+        lst.sort(key=lambda s: (-(s.end - s.start), -s.score))
+        out.extend(_greedy_disjoint(lst))
+    return out
+
+
+def _greedy_disjoint(ordered: list[Span]) -> list[Span]:
+    """Sıralı adaylardan kabul edilenlerle kesişmeyenleri seç (ayrık aralık listesi + bisect, O(n log n))."""
+    starts: list[int] = []
+    accepted: list[Span] = []
+    for s in ordered:
+        if s.end <= s.start:
+            continue
+        i = bisect.bisect_left(starts, s.start)
+        if i > 0 and accepted[i - 1].end > s.start:
+            continue
+        if i < len(accepted) and accepted[i].start < s.end:
+            continue
+        starts.insert(i, s.start)
+        accepted.insert(i, s)
+    return accepted
+
+
+MAX_CACHED_TEXT_CHARS = 65_536
+
+
+class AnalysisCache:
+    """Metin özeti → span listesi (LRU + TTL). Span'ler ORİJİNAL değerleri taşır: kısa TTL, giriş ve toplam span sınırı."""
+
+    def __init__(self, max_entries: int, ttl_seconds: int, max_total_spans: int = 200_000) -> None:
+        self.max = max_entries
+        self.ttl = ttl_seconds
+        self.max_spans = max_total_spans
+        self.total_spans = 0
+        self._d: OrderedDict[str, tuple[float, list[Span]]] = OrderedDict()
+        self._lock = threading.Lock()
+
+    def __len__(self) -> int:
+        return len(self._d)
+
+    def _drop(self, key: str) -> None:
+        v = self._d.pop(key, None)
+        if v is not None:
+            self.total_spans -= len(v[1])
+
+    def get(self, key: str) -> list[Span] | None:
+        if self.max <= 0:
+            return None
+        with self._lock:
+            v = self._d.get(key)
+            if v is None:
+                return None
+            ts, spans = v
+            if time.monotonic() - ts > self.ttl:
+                self._drop(key)
+                return None
+            self._d.move_to_end(key)
+            return spans
+
+    def put(self, key: str, spans: list[Span]) -> None:
+        if self.max <= 0 or len(spans) > self.max_spans:
+            return
+        with self._lock:
+            self._drop(key)
+            self._d[key] = (time.monotonic(), spans)
+            self.total_spans += len(spans)
+            while self._d and (len(self._d) > self.max or self.total_spans > self.max_spans):
+                old, (_, sp) = self._d.popitem(last=False)
+                self.total_spans -= len(sp)
+
+    def clear(self) -> None:
+        with self._lock:
+            self._d.clear()
+            self.total_spans = 0
+
+
+class PIIEngine:
+    def __init__(self, cfg: TurkishPIIConfig) -> None:
+        self.cfg = cfg
+        self.recognizers = build_recognizers(cfg)
+        self.cache = AnalysisCache(cfg.analysis_cache.max_entries, cfg.analysis_cache.ttl_seconds,
+                                   cfg.analysis_cache.max_total_spans)
+        self._cfg_hash = cfg.version_hash
+        allow = sorted({" ".join(fold_text(x).split()) for x in cfg.allow_list}, key=len, reverse=True)
+        self._allow_rx = re.compile(rf"(?<![0-9a-z])(?:{trie_pattern(allow)})(?![0-9a-z])") if allow else None
+
+    # ------------------------------------------------------------------ analiz
+    def analyze(self, text: str) -> list[Span]:
+        """Tüm (IGNORE dahil) eşik üstü span'ler; çakışmalar çözülmüş."""
+        if not text:
+            return []
+        if len(text) > self.cfg.max_text_chars:
+            raise ValueError("matriks_pii: metin max_text_chars sınırını aşıyor")
+        key = hashlib.sha256(text.encode("utf-8", "surrogatepass")).hexdigest() + self._cfg_hash
+        hit = self.cache.get(key)
+        if hit is not None:
+            return hit
+        orig = text
+        text = ascii_width(text)  # 1:1; tanıyıcılar ASCII kopyada eşleşir, span metni aşağıda orijinalden alınır
+        ctx = AnalysisContext.build(self.cfg, text)
+        phase1: list[Span] = []
+        for r in self.recognizers:
+            if r.phase == 1:
+                phase1.extend(r.find(text, ctx))
+        phase1 = [s for s in phase1 if s.score >= self.cfg.min_score(s.entity)]
+        ctx.prior_spans = resolve_overlaps(_dedupe_same_entity(phase1))
+        phase2: list[Span] = []
+        for r in self.recognizers:
+            if r.phase == 2:
+                phase2.extend(r.find(text, ctx))
+        phase2 = [s for s in phase2 if s.score >= self.cfg.min_score(s.entity)]
+        spans = resolve_overlaps(ctx.prior_spans + phase2)
+        if self._allow_rx is not None:
+            zones = [(m.start(), m.end()) for m in self._allow_rx.finditer(ctx.casefolded)]
+            if zones:  # izin listesindeki ifadenin bir geçişi span'i tamamen kapsıyorsa at (kesin kimlikler hariç)
+                spans = [s for s in spans if s.entity in ALLOW_PROTECTED or not any(a <= s.start and s.end <= b for a, b in zones)]
+        if text is not orig:
+            spans = [dataclasses.replace(s, text=orig[s.start : s.end]) for s in spans]
+        if len(text) <= MAX_CACHED_TEXT_CHARS:  # büyük metinler önbelleğe girmez (bellek + tekrar olasılığı düşük)
+            self.cache.put(key, spans)
+        return spans
+
+    def analyze_with_prefix(self, text: str, prefix: str = "") -> list[Span]:
+        """Bağlam önekiyle analiz (ör. JSON anahtarı "Adı soyadı: "); span'ler `text`'e göre döner."""
+        if not prefix:
+            return self.analyze(text)
+        n = len(prefix)
+        return [
+            dataclasses.replace(s, start=s.start - n, end=s.end - n) for s in self.analyze(prefix + text) if s.start >= n
+        ]
+
+    def actionable(self, spans: list[Span]) -> tuple[list[Span], list[Span], list[Span]]:
+        """(maskelenecek, engelleyecek, yalnız sayılacak)."""
+        mask, block, log = [], [], []
+        for s in spans:
+            a = self.cfg.action(s.entity)
+            if a == "MASK":
+                mask.append(s)
+            elif a == "BLOCK":
+                block.append(s)
+            elif a == "LOG":
+                log.append(s)
+        return mask, block, log
+
+    def detected(self, text: str) -> list[Span]:
+        """IGNORE aksiyonlu olanlar hariç tespitler (fixture sözleşmesi)."""
+        return [s for s in self.analyze(text) if self.cfg.action(s.entity) != "IGNORE"]
+
+    def mask(self, text: str, spans: list[Span], session: MaskSession, count: bool = True) -> str:
+        if not spans:
+            return text
+        # numaralama soldan sağa (deterministik), yerleştirme sağdan sola
+        ordered = sorted(spans, key=lambda s: s.start)
+        parts: list[str] = []
+        pos = 0
+        for s in ordered:
+            if s.start < pos:  # güvenlik: çakışan span (olmamalı) atlanır
+                continue
+            parts.append(text[pos : s.start])
+            parts.append(session.placeholder_for(s, count))
+            pos = s.end
+        parts.append(text[pos:])
+        return "".join(parts)
+
+    def mask_text(self, text: str, session: MaskSession) -> tuple[str, list[Span], list[Span], list[Span]]:
+        spans = self.analyze(text)
+        m, b, lg = self.actionable(spans)
+        return self.mask(text, m, session), m, b, lg

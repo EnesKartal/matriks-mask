@@ -1,0 +1,35 @@
+parti üyesi
+partili
+!AK Parti
+!AKP
+!CHP
+!MHP
+!İYİ Parti
+!DEM Parti
+!HDP
+!Saadet Partisi
+!Yeniden Refah
+!Zafer Partisi
+!TİP
+!Türkiye İşçi Partisi
+!Demokrat Parti
+!DEVA
+!Gelecek Partisi
+oy verdi
+oy veriyorum
+oy verdim
+oy vereceğim
+siyasi görüş
+siyasi görüşü
+siyasi düşünce
+siyasi düşüncesi
+apolitik
+solcu
+sağcı
+ülkücü
+milliyetçi
+sosyalist
+komünist
+liberal
+muhafazakar
+muhafazakâr

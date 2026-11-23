@@ -1,0 +1,151 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-151
+  text: "Kart numarası 4111 1111 1111 1112 Luhn kontrolünden geçmedi."
+  expect: []
+  why: "Visa BIN ama Luhn geçmez"
+  tags: [kart, luhn]
+- id: NEG-152
+  text: "5555 5555 5555 4445 numaralı kart tanımsız."
+  expect: []
+  why: "MC BIN, Luhn geçmez"
+  tags: [kart, luhn]
+- id: NEG-153
+  text: "Amex formatında 3782 822463 10006 girişi geçersiz."
+  expect: []
+  why: "15 hane, Luhn geçmez"
+  tags: [kart, luhn]
+- id: NEG-154
+  text: "Troy kartı 9792 0000 0000 0004 doğrulanamadı."
+  expect: []
+  why: "Troy BIN, Luhn geçmez"
+  tags: [kart, luhn]
+- id: NEG-155
+  text: "1234 5678 9012 3456 örnek kart numarası olarak kullanılamaz."
+  expect: []
+  why: "Luhn ve BIN geçmez"
+  tags: [kart, luhn]
+- id: NEG-156
+  text: "Kart **** **** **** 1234 ile ödeme alındı."
+  expect: []
+  why: "zaten maskeli kart"
+  tags: [kart]
+- id: NEG-157
+  text: "Son dört hanesi 4444 olan kartla 250,00 TL harcama yapıldı."
+  expect: []
+  why: "yalnızca son 4 hane"
+  tags: [kart]
+- id: NEG-158
+  text: "Sipariş numarası 2024102812345678 fatura ile eşleşti."
+  expect: []
+  why: "Luhn geçer, BIN 20 dışı"
+  tags: [kart, bin]
+- id: NEG-159
+  text: "Kargo takip numarası 1234567890123 ile sorgulama yapıldı."
+  expect: []
+  why: "13 hane, BIN dışı"
+  tags: [kart, bin]
+- id: NEG-160
+  text: "Kargo takip kodu 8888888888888888 teslimat aşamasında."
+  expect: []
+  why: "Luhn geçer, BIN 8 dışı"
+  tags: [kart, bin]
+- id: NEG-161
+  text: "Üyelik kartı numarası 7000000000000009 sadakat programına kayıtlı."
+  expect: []
+  why: "BIN 7 dışı, Luhn geçmez"
+  tags: [kart, bin]
+- id: NEG-162
+  text: "Hediye çeki kodu 0000000000000000 geçersiz sayılır."
+  expect: []
+  why: "Luhn geçer, BIN 0 dışı"
+  tags: [kart, bin]
+- id: NEG-163
+  text: "Kart numarasının ilk 6 hanesi (BIN) 979200 Troy şemasına aittir."
+  expect: []
+  why: "yalnızca 6 hane"
+  tags: [kart]
+- id: NEG-164
+  text: "2221 0000 0000 0008 numaralı kart Mastercard aralığında ama Luhn tutmuyor."
+  expect: []
+  why: "BIN 22 ama Luhn geçmez"
+  tags: [kart, luhn]
+- id: NEG-165
+  text: "5105 1051 0510 5101 test kartı doğrulanamıyor."
+  expect: []
+  why: "Luhn geçmez"
+  tags: [kart, luhn]
+- id: NEG-166
+  text: "6011 0000 0000 0005 Discover numarası kontrol basamağı hatalı."
+  expect: []
+  why: "Discover BIN, Luhn geçmez"
+  tags: [kart, luhn]
+- id: NEG-167
+  text: "19 haneli 4111 1111 1111 1111 111 girişi geçersiz."
+  expect: []
+  why: "19 hane, Luhn geçmez"
+  tags: [kart, luhn]
+- id: NEG-168
+  text: "15 haneli 1234 5678 9012 345 numarası kart formatında değil."
+  expect: []
+  why: "Luhn ve BIN geçmez"
+  tags: [kart, luhn]
+- id: NEG-169
+  text: "Sanal kart limiti 5.000,00 TL, günlük işlem sayısı 10."
+  expect: []
+  why: "kart bağlamı, numara yok"
+  tags: [kart]
+- id: NEG-170
+  text: "Kart son kullanma tarihi ve güvenlik kodu yazılı fiş imha edildi."
+  expect: []
+  why: "SKT/CVV bağlamı var, rakam yok"
+  tags: [kart]
+- id: NEG-171
+  text: "POS cihazı seri numarası 3000000000000004 teknik servise gönderildi."
+  expect: []
+  why: "Luhn geçer, BIN 30 dışı"
+  tags: [kart, bin]
+- id: NEG-172
+  text: "Müşteri temsilcisi kart numarasını asla 5000000000000009 gibi düz metin istemez."
+  expect: []
+  why: "Luhn geçer, BIN 50 dışı"
+  tags: [kart, bin]
+- id: NEG-173
+  text: "Ödeme referansı 9876543210987654 bankaya iletildi."
+  expect: []
+  why: "Luhn ve BIN geçmez"
+  tags: [kart, islem_no]
+- id: NEG-174
+  text: "Taksit planı: 12 taksit, aylık 1.234,56 TL, toplam 14.814,72 TL."
+  expect: []
+  why: "tutarlar"
+  tags: [kart, fiyat]
+- id: NEG-175
+  text: "Kartın ilk 4 hanesi 4111, son 4 hanesi 1111 olarak maskelenmiş kayıt."
+  expect: []
+  why: "ayrık 4 haneli parçalar"
+  tags: [kart]
+- id: NEG-176
+  text: "Ekstre kesim tarihi 28.10.2026, son ödeme 07.11.2026."
+  expect: []
+  why: "işlem tarihleri; 'son ödeme' SKT bağlamı değil"
+  tags: [kart, tarih]
+- id: NEG-177
+  text: "Kredi kartı limiti 150.000 TL, kullanılabilir bakiye 87.654,32 TL."
+  expect: []
+  why: "tutarlar"
+  tags: [kart, fiyat]
+- id: NEG-178
+  text: "Sadakat kodu 1111 1111 1111 1111 sistemde geçersiz."
+  expect: []
+  why: "Luhn ve BIN geçmez"
+  tags: [kart, luhn]
+- id: NEG-179
+  text: "Fatura numarası 1200000000000001 ve sipariş kodu 2800000000000000 eşleştirildi."
+  expect: []
+  why: "iki 16 hane, Luhn/BIN geçmez"
+  tags: [kart, islem_no]
+- id: NEG-180
+  text: "Terminal ID 6300000000000002 ve işyeri numarası 9000000000000003 kaydedildi."
+  expect: []
+  why: "BIN 63 ve 90 dışı, Luhn geçmez"
+  tags: [kart, bin]

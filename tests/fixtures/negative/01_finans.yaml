@@ -1,0 +1,401 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-001
+  text: "THYAO bugün 312,50 TL'den kapandı, hacim 12.345.678 lot."
+  expect: []
+  why: "hisse kodu + fiyat + hacim"
+  tags: [finans, hisse]
+- id: NEG-002
+  text: "GARAN ve AKBNK seansı yüzde 2,15 yükselişle tamamladı."
+  expect: []
+  why: "iki hisse kodu, yüzde"
+  tags: [finans, hisse]
+- id: NEG-003
+  text: "ASELS için hedef fiyat 95,40 TL olarak güncellendi."
+  expect: []
+  why: "hisse kodu + hedef fiyat"
+  tags: [finans, hisse]
+- id: NEG-004
+  text: "SASA hissesinde 1.250.000 lot alış emri girildi."
+  expect: []
+  why: "4 harfli hisse kodu + lot"
+  tags: [finans, hisse]
+- id: NEG-005
+  text: "ISIN kodu TRATHYAO91M5 olan hisse XU100 endeksine dahildir."
+  expect: []
+  why: "TR ile başlayan ISIN, IBAN değil"
+  tags: [finans, isin]
+- id: NEG-006
+  text: "TRAGARAN91N1 ISIN koduyla işlem gören kıymet takasa konu oldu."
+  expect: []
+  why: "ISIN, IBAN regex'ine uymaz"
+  tags: [finans, isin]
+- id: NEG-007
+  text: "XU100 endeksi 9.875,43 puandan kapandı; XBANK %1,8 geriledi."
+  expect: []
+  why: "endeks kodları ve puan"
+  tags: [finans, endeks]
+- id: NEG-008
+  text: "XU030 ve XUTUM endekslerinde hacim 125.456.789.000 TL oldu."
+  expect: []
+  why: "noktalı 12 rakam, bitişik değil"
+  tags: [finans, endeks]
+- id: NEG-009
+  text: "VIOP'ta F_XU0301225 sözleşmesi 11.250,00 seviyesinden işlem gördü."
+  expect: []
+  why: "VIOP vadeli sözleşme kodu"
+  tags: [finans, viop]
+- id: NEG-010
+  text: "F_USDTRY1225 sözleşmesinde açık pozisyon 45.678 adet."
+  expect: []
+  why: "döviz vadeli kodu + adet"
+  tags: [finans, viop]
+- id: NEG-011
+  text: "O_THYAOE1225C320 alım opsiyonu primi 4,15 TL."
+  expect: []
+  why: "opsiyon sözleşme kodu"
+  tags: [finans, viop]
+- id: NEG-012
+  text: "F_THYAO1225 vadeli sözleşmesinde teminat oranı %12,5."
+  expect: []
+  why: "tek hisse vadeli kodu"
+  tags: [finans, viop]
+- id: NEG-013
+  text: "AFT fon kodlu yatırım fonu günlük %0,12 getiri sağladı."
+  expect: []
+  why: "3 harfli fon kodu"
+  tags: [finans, fon]
+- id: NEG-014
+  text: "TTE ve YAY fonlarının birim pay değeri 3,4567 TL."
+  expect: []
+  why: "fon kodları + pay değeri"
+  tags: [finans, fon]
+- id: NEG-015
+  text: "Fon kodu IPB olan fonun toplam değeri 1.234.567.890,12 TL."
+  expect: []
+  why: "büyük tutar, noktalı"
+  tags: [finans, fon]
+- id: NEG-016
+  text: "Portföyde 1.234.567,89 TL nakit, 12.345.678 lot hisse var."
+  expect: []
+  why: "tutar ve lot biçimleri"
+  tags: [finans, fiyat]
+- id: NEG-017
+  text: "Günlük değişim %3,45; haftalık değişim %-1,20."
+  expect: []
+  why: "yüzde biçimleri"
+  tags: [finans, fiyat]
+- id: NEG-018
+  text: "KAP bildirimi: şirket 2026 yılı ilk çeyrek finansal tablolarını açıkladı."
+  expect: []
+  why: "KAP cümlesi, varlık yok"
+  tags: [finans, kap]
+- id: NEG-019
+  text: "KAP'a yapılan özel durum açıklamasında pay geri alım programı duyuruldu."
+  expect: []
+  why: "KAP özel durum açıklaması"
+  tags: [finans, kap]
+- id: NEG-020
+  text: "Bilanço: dönen varlıklar 4.567.890.123 TL, kısa vadeli yükümlülükler 2.345.678.901 TL."
+  expect: []
+  why: "bilanço satırı, noktalı 10 rakam"
+  tags: [finans, bilanco]
+- id: NEG-021
+  text: "Net dönem kârı 987.654.321 TL, FAVÖK marjı %18,7 olarak gerçekleşti."
+  expect: []
+  why: "kâr ve marj"
+  tags: [finans, bilanco]
+- id: NEG-022
+  text: "Takas tarihi T+2, valör 30.10.2026 olarak belirlendi."
+  expect: []
+  why: "valör tarihi, doğum bağlamı yok"
+  tags: [finans, tarih]
+- id: NEG-023
+  text: "Temettü ödeme tarihi 15.12.2026, hak kullanım tarihi 12.12.2026."
+  expect: []
+  why: "işlem tarihleri"
+  tags: [finans, tarih]
+- id: NEG-024
+  text: "TRT131224T19 ISIN kodlu tahvil 13.12.2024 vadeli, kupon oranı %9,50."
+  expect: []
+  why: "tahvil ISIN + vade"
+  tags: [finans, isin]
+- id: NEG-025
+  text: "Hazine 2 yıllık gösterge tahvil faizi %31,25 ile kapandı."
+  expect: []
+  why: "faiz oranı"
+  tags: [finans, fiyat]
+- id: NEG-026
+  text: "Eurobond TRT050325T14 vadesi 05.03.2025, nominal 100.000 USD."
+  expect: []
+  why: "eurobond ISIN + vade + nominal"
+  tags: [finans, isin]
+- id: NEG-027
+  text: "BTC adresi 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa üzerinden 0,0025 BTC gönderildi."
+  expect: []
+  why: "kripto adresi varsayılan IGNORE"
+  tags: [finans, kripto]
+- id: NEG-028
+  text: "ETH cüzdanı 0x742d35Cc6634C0532925a3b844Bc454e4438f44e bakiyesi 1,5 ETH."
+  expect: []
+  why: "hex adres, 0532 bitişik harfli; IGNORE"
+  tags: [finans, kripto]
+- id: NEG-029
+  text: "SWIFT kodu TGBATRISXXX ile gelen 50.000 EUR tutarındaki havale alacak kaydedildi."
+  expect: []
+  why: "SWIFT/BIC kodu"
+  tags: [finans, swift]
+- id: NEG-030
+  text: "BIC: ISBKTRISXXX, muhabir banka üzerinden 25.000 USD gönderimi yapıldı."
+  expect: []
+  why: "BIC kodu"
+  tags: [finans, swift]
+- id: NEG-031
+  text: "Takasbank nezdinde teminat tamamlama çağrısı yapıldı."
+  expect: []
+  why: "Takasbank genel ifade"
+  tags: [finans, kurum]
+- id: NEG-032
+  text: "MKK kaydi sistemde hak sahipliği güncellemesi tamamlandı."
+  expect: []
+  why: "MKK genel ifade"
+  tags: [finans, kurum]
+- id: NEG-033
+  text: "Bakiyeli hesap sayısı 1234567 olarak açıklandı."
+  expect: []
+  why: "hesap sayısı; hesap no bağlamı değil"
+  tags: [finans, hesap_no]
+- id: NEG-034
+  text: "Sipariş no 1029384756 ile girilen emir gerçekleşti."
+  expect: []
+  why: "10 hane, VKN checksum geçmez"
+  tags: [finans, islem_no]
+- id: NEG-035
+  text: "İşlem referans numarası 98765432109 olarak kaydedildi."
+  expect: []
+  why: "11 hane, TCKN checksum geçmez"
+  tags: [finans, islem_no]
+- id: NEG-036
+  text: "Emir numarası 123456789012 sistemde bekliyor."
+  expect: []
+  why: "12 hane, hiçbir regex'e uymaz"
+  tags: [finans, islem_no]
+- id: NEG-037
+  text: "Referans: 7123456789012340 numaralı EFT alacak kaydı."
+  expect: []
+  why: "16 hane, Luhn ve BIN geçmez"
+  tags: [finans, islem_no]
+- id: NEG-038
+  text: "USD/TRY 34,2150, EUR/TRY 37,1080, GBP/TRY 44,5520 seviyesinde."
+  expect: []
+  why: "döviz kurları"
+  tags: [finans, doviz]
+- id: NEG-039
+  text: "Gram altın 2.950,75 TL, ons altın 2.650,30 dolar."
+  expect: []
+  why: "emtia fiyatları"
+  tags: [finans, doviz]
+- id: NEG-040
+  text: "EUR/USD paritesi 1,0850'den 1,0912'ye yükseldi."
+  expect: []
+  why: "parite, apostroflu ek"
+  tags: [finans, doviz]
+- id: NEG-041
+  text: "Brent petrol 78,45 dolar/varil, doğal gaz 2,95 dolar/MMBtu."
+  expect: []
+  why: "emtia fiyatları"
+  tags: [finans, fiyat]
+- id: NEG-042
+  text: "TCMB politika faizini %47,50'de sabit tuttu."
+  expect: []
+  why: "faiz oranı"
+  tags: [finans, fiyat]
+- id: NEG-043
+  text: "Dolar/TL kuru gün içinde 34,18 ile 34,27 arasında dalgalandı."
+  expect: []
+  why: "kur aralığı"
+  tags: [finans, doviz]
+- id: NEG-044
+  text: "Stopaj oranı %10, BSMV %5, KDV %20 olarak uygulanır."
+  expect: []
+  why: "vergi oranları"
+  tags: [finans, fiyat]
+- id: NEG-045
+  text: "Yıllık bileşik getiri %42,35, faiz dışı fazla 12,5 milyar TL."
+  expect: []
+  why: "getiri ve tutar"
+  tags: [finans, fiyat]
+- id: NEG-046
+  text: "Aracı kurum komisyon oranı on binde 7,5 olarak belirlendi."
+  expect: []
+  why: "komisyon oranı"
+  tags: [finans, fiyat]
+- id: NEG-047
+  text: "Piyasa değeri 125,4 milyar TL, F/K oranı 6,8, PD/DD 1,2."
+  expect: []
+  why: "değerleme çarpanları"
+  tags: [finans, fiyat]
+- id: NEG-048
+  text: "Halka arz fiyatı 25,00 TL, dağıtılan pay adedi 150.000.000."
+  expect: []
+  why: "halka arz verileri"
+  tags: [finans, fiyat]
+- id: NEG-049
+  text: "Bedelsiz sermaye artırımı oranı %150, kayıtlı sermaye tavanı 5.000.000.000 TL."
+  expect: []
+  why: "noktalı 10 rakam, bitişik değil"
+  tags: [finans, bilanco]
+- id: NEG-050
+  text: "Sermaye 1.500.000.000 TL'den 2.250.000.000 TL'ye çıkarıldı."
+  expect: []
+  why: "sermaye tutarları"
+  tags: [finans, bilanco]
+- id: NEG-051
+  text: "Seans 09:55'te açılış, 18:10'da kapanış seansıyla sona erer."
+  expect: []
+  why: "saat biçimleri"
+  tags: [finans, tarih]
+- id: NEG-052
+  text: "Açılış 10:00, kapanış 18:00; Londra ile saat farkı 3 saat."
+  expect: []
+  why: "saatler"
+  tags: [finans, tarih]
+- id: NEG-053
+  text: "Son işlem 28.10.2026 14:30:05 zaman damgasıyla kaydedildi."
+  expect: []
+  why: "tarih-saat zaman damgası"
+  tags: [finans, tarih]
+- id: NEG-054
+  text: "Emir girişi 28/10/2026 09:31:12, gerçekleşme 09:31:13."
+  expect: []
+  why: "eğik çizgili tarih + saat; Emir cümle başı ad değil"
+  tags: [finans, tarih]
+- id: NEG-055
+  text: "KCHOL, SAHOL ve DOHOL holdingler sepetinde yer alıyor."
+  expect: []
+  why: "holding hisse kodları"
+  tags: [finans, hisse]
+- id: NEG-056
+  text: "EREGL 45,20 TL, TUPRS 155,80 TL, BIMAS 480,25 TL ile günü tamamladı."
+  expect: []
+  why: "kod + fiyat listesi, plaka değil"
+  tags: [finans, hisse]
+- id: NEG-057
+  text: "PGSUS ve TAVHL havacılık sektöründe öne çıktı."
+  expect: []
+  why: "hisse kodları"
+  tags: [finans, hisse]
+- id: NEG-058
+  text: "Yabancı takas oranı %38,45'ten %38,52'ye yükseldi."
+  expect: []
+  why: "takas oranı"
+  tags: [finans, fiyat]
+- id: NEG-059
+  text: "Açığa satış yasağı kaldırıldı; brüt takas listesi güncellendi."
+  expect: []
+  why: "piyasa haberi"
+  tags: [finans]
+- id: NEG-060
+  text: "Devre kesici %10 fiyat değişiminde tetiklenir."
+  expect: []
+  why: "yüzde"
+  tags: [finans, fiyat]
+- id: NEG-061
+  text: "Teminat oranı %50, başlangıç teminatı 15.000 TL."
+  expect: []
+  why: "teminat verileri"
+  tags: [finans, fiyat]
+- id: NEG-062
+  text: "Kredili işlem faizi günlük %0,15 olarak hesaplanır."
+  expect: []
+  why: "faiz oranı"
+  tags: [finans, fiyat]
+- id: NEG-063
+  text: "Lot büyüklüğü 1, fiyat adımı 0,01 TL, maksimum emir 1.000.000 lot."
+  expect: []
+  why: "lot ve fiyat adımı"
+  tags: [finans, fiyat]
+- id: NEG-064
+  text: "VIOP'ta günlük uzlaşma fiyatı 11.312,50 olarak ilan edildi."
+  expect: []
+  why: "uzlaşma fiyatı"
+  tags: [finans, viop]
+- id: NEG-065
+  text: "Pay piyasasında toplam işlem hacmi 98.765.432.100 TL oldu."
+  expect: []
+  why: "noktalı 11 rakam, bitişik değil"
+  tags: [finans, fiyat]
+- id: NEG-066
+  text: "Hisse başına kâr 4,56 TL, temettü verimi %3,2."
+  expect: []
+  why: "finansal oranlar"
+  tags: [finans, fiyat]
+- id: NEG-067
+  text: "Alt Pazar'da işlem gören 150 şirketin toplam hacmi arttı."
+  expect: []
+  why: "pazar adı (org_names), kişi değil"
+  tags: [finans]
+- id: NEG-068
+  text: "Endeks 10.000 puan direncini test etti, destek 9.750."
+  expect: []
+  why: "teknik seviyeler"
+  tags: [finans, endeks]
+- id: NEG-069
+  text: "RSI 68,4; MACD pozitif; 50 günlük ortalama 9.620 puan."
+  expect: []
+  why: "teknik göstergeler"
+  tags: [finans, endeks]
+- id: NEG-070
+  text: "Kurum raporunda AL tavsiyesi, hedef fiyat 42,00 TL, yukarı potansiyel %18."
+  expect: []
+  why: "analist raporu"
+  tags: [finans, fiyat]
+- id: NEG-071
+  text: "Eurobond kupon ödemesi 15 Ocak ve 15 Temmuz tarihlerinde yapılır."
+  expect: []
+  why: "yılsız tarihler"
+  tags: [finans, tarih]
+- id: NEG-072
+  text: "Sukuk ihracı 500 milyon USD, vade 5 yıl, kâr payı %6,25."
+  expect: []
+  why: "ihraç verileri"
+  tags: [finans, fiyat]
+- id: NEG-073
+  text: "Repo faizi %46,80, ters repo %45,90 olarak açıklandı."
+  expect: []
+  why: "faiz oranları"
+  tags: [finans, fiyat]
+- id: NEG-074
+  text: "Yatırımcı sayısı 7.654.321'e ulaştı, bakiyeli hesap sayısı 2.345.678."
+  expect: []
+  why: "noktalı sayılar"
+  tags: [finans, sayisal]
+- id: NEG-075
+  text: "Günlük bazda 3.456 adet, haftalık 21.098 adet işlem gerçekleşti."
+  expect: []
+  why: "adet sayıları"
+  tags: [finans, sayisal]
+- id: NEG-076
+  text: "212 adet kontrat, 0532 lot bakiye ve 444 TL komisyon hesaplandı."
+  expect: []
+  why: "kesik alan kodları, telefon değil"
+  tags: [finans, telefon]
+- id: NEG-077
+  text: "Toplam 1.532 adet emir iletildi, 123 adet iptal edildi."
+  expect: []
+  why: "adet sayıları"
+  tags: [finans, sayisal]
+- id: NEG-078
+  text: "Borçlanma aracı ihraç tavanı 10.000.000.000 TL olarak onaylandı."
+  expect: []
+  why: "noktalı 11 rakam"
+  tags: [finans, bilanco]
+- id: NEG-079
+  text: "VIOP teminat çağrısı: 23.456,78 TL ek teminat yatırılmalıdır."
+  expect: []
+  why: "teminat tutarı"
+  tags: [finans, viop]
+- id: NEG-080
+  text: "Matriks veri terminalinde derinlik ekranı 25 kademe gösterir."
+  expect: []
+  why: "ürün açıklaması"
+  tags: [finans]

@@ -1,0 +1,184 @@
+# detect/coklu_varlik — 20 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: COKLU-001
+  text: Ben Ayşe Demir, TCKN 44771278268, tel 0532 234 56 78, e-posta ayse@ornek.com, IBAN TR920006101532418854210086.
+  expect:
+  - entity: KISI
+    value: Ayşe Demir
+  - entity: TCKN
+    value: '44771278268'
+  - entity: TELEFON
+    value: 0532 234 56 78
+  - entity: EPOSTA
+    value: ayse@ornek.com
+  - entity: IBAN
+    value: TR920006101532418854210086
+  masked: Ben <KISI_1>, TCKN <TCKN_1>, tel <TELEFON_1>, e-posta <EPOSTA_1>, IBAN <IBAN_1>.
+- id: COKLU-002
+  text: TCKN:44771278268,Tel:05322345678
+  expect:
+  - entity: TCKN
+    value: '44771278268'
+  - entity: TELEFON
+    value: 05322345678
+- id: COKLU-003
+  text: 'Ad Soyad: Mehmet Öztürk
+
+    TCKN: 26197306992
+
+    Telefon: 0212 345 67 89
+
+    Adres: Gül Sok. No:3 Kadıköy'
+  expect:
+  - entity: KISI
+    value: Mehmet Öztürk
+  - entity: TCKN
+    value: '26197306992'
+  - entity: TELEFON
+    value: 0212 345 67 89
+  - entity: ADRES
+    value: Gül Sok. No:3 Kadıköy
+- id: COKLU-004
+  text: '{"ad":"Zeynep Arslan","tckn":"52393849902","iban":"TR960001006093156159526063"}'
+  expect:
+  - entity: KISI
+    value: Zeynep Arslan
+  - entity: TCKN
+    value: '52393849902'
+  - entity: IBAN
+    value: TR960001006093156159526063
+- id: COKLU-005
+  text: '| Ad | TCKN |
+
+    | Emre Koç | 79893557250 |'
+  expect:
+  - entity: KISI
+    value: Emre Koç
+  - entity: TCKN
+    value: '79893557250'
+- id: COKLU-006
+  text: Kullanıcı <KISI_1> yazdı; gerçek ad Ahmet Yılmaz.
+  expect:
+  - entity: KISI
+    value: Ahmet Yılmaz
+  masked: Kullanıcı <KISI_1> yazdı; gerçek ad <KISI_2>.
+- id: COKLU-007
+  text: Kart 4111111111111111 sahibi Ali Rıza Yıldız, CVV 123.
+  expect:
+  - entity: KART
+    value: '4111111111111111'
+  - entity: KISI
+    value: Ali Rıza Yıldız
+  - entity: KART_CVV
+    value: '123'
+- id: COKLU-008
+  text: VKN 4540536920 firması, yetkili Hasan Doğan, tel +90 216 444 55 66.
+  expect:
+  - entity: VKN
+    value: '4540536920'
+  - entity: KISI
+    value: Hasan Doğan
+  - entity: TELEFON
+    value: +90 216 444 55 66
+- id: COKLU-009
+  text: Pasaport U12345678 ve TCKN 15184715664
+  expect:
+  - entity: PASAPORT
+    value: U12345678
+  - entity: TCKN
+    value: '15184715664'
+- id: COKLU-010
+  text: Müşteri Elif Aydın (17777786808) IBAN TR09 0001 2095 3386 8620 6433 63
+  expect:
+  - entity: KISI
+    value: Elif Aydın
+  - entity: TCKN
+    value: '17777786808'
+  - entity: IBAN
+    value: TR09 0001 2095 3386 8620 6433 63
+- id: COKLU-011
+  text: Doğum tarihi 12.03.1985, doğum yeri İzmir, TCKN 98183655308
+  expect:
+  - entity: DOGUM_TARIHI
+    value: 12.03.1985
+  - entity: DOGUM_YERI
+    value: İzmir
+  - entity: TCKN
+    value: '98183655308'
+- id: COKLU-012
+  text: Plaka 34 ABC 123, sahibi Burak Kurt, e-posta burak@ornek.com
+  expect:
+  - entity: PLAKA
+    value: 34 ABC 123
+  - entity: KISI
+    value: Burak Kurt
+  - entity: EPOSTA
+    value: burak@ornek.com
+- id: COKLU-013
+  text: THYAO 312,50 TL; müşteri Merve Polat TCKN 67539892278
+  expect:
+  - entity: KISI
+    value: Merve Polat
+  - entity: TCKN
+    value: '67539892278'
+- id: COKLU-014
+  text: '1. Ahmet Yılmaz
+
+    2. Ayşe Demir
+
+    3. Mehmet Öztürk'
+  expect:
+  - entity: KISI
+    value: Ahmet Yılmaz
+  - entity: KISI
+    value: Ayşe Demir
+  - entity: KISI
+    value: Mehmet Öztürk
+  masked: '1. <KISI_1>
+
+    2. <KISI_2>
+
+    3. <KISI_3>'
+- id: COKLU-015
+  text: IBAN TR930001506680172517175385 ve kart 5555 5555 5555 4444
+  expect:
+  - entity: IBAN
+    value: TR930001506680172517175385
+  - entity: KART
+    value: 5555 5555 5555 4444
+- id: COKLU-016
+  text: 'E-posta: ayse@ornek.com, Tel: 0532 234 56 78'
+  expect:
+  - entity: EPOSTA
+    value: ayse@ornek.com
+  - entity: TELEFON
+    value: 0532 234 56 78
+- id: COKLU-017
+  text: 'Şifre: Gizli2026 ve TCKN 20107136426'
+  expect:
+  - entity: SIFRE
+    value: Gizli2026
+  - entity: TCKN
+    value: '20107136426'
+- id: COKLU-018
+  text: 'Hesap No: 1234567, IBAN TR020004606251171444815541'
+  expect:
+  - entity: HESAP_NO
+    value: '1234567'
+  - entity: IBAN
+    value: TR020004606251171444815541
+- id: COKLU-019
+  text: IP 192.168.1.15 kullanıcı Fatma Şahin
+  expect:
+  - entity: IP
+    value: 192.168.1.15
+  - entity: KISI
+    value: Fatma Şahin
+- id: COKLU-020
+  text: TCKN 49265548698 TCKN 49265548698
+  expect:
+  - entity: TCKN
+    value: '49265548698'
+  - entity: TCKN
+    value: '49265548698'
+  masked: TCKN <TCKN_1> TCKN <TCKN_1>

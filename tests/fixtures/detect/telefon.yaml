@@ -1,0 +1,218 @@
+# detect/telefon — 43 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: TELEFON-001
+  text: Cep telefonum 0532 234 56 78, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: 0532 234 56 78
+- id: TELEFON-002
+  text: Cep telefonum 05322345678, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: 05322345678
+- id: TELEFON-003
+  text: Cep telefonum +90 532 234 56 78, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: +90 532 234 56 78
+- id: TELEFON-004
+  text: Cep telefonum +905322345678, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: '+905322345678'
+- id: TELEFON-005
+  text: Cep telefonum 0 (532) 234 56 78, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: 0 (532) 234 56 78
+- id: TELEFON-006
+  text: Cep telefonum (0532) 234 56 78, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: (0532) 234 56 78
+- id: TELEFON-007
+  text: Cep telefonum 532 234 56 78, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: 532 234 56 78
+- id: TELEFON-008
+  text: Cep telefonum 0532-234-56-78, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: 0532-234-56-78
+- id: TELEFON-009
+  text: Cep telefonum 0532.234.56.78, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: 0532.234.56.78
+- id: TELEFON-010
+  text: Cep telefonum 90 532 234 5678, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: 90 532 234 5678
+- id: TELEFON-011
+  text: Cep telefonum 0090 532 234 56 78, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: 0090 532 234 56 78
+- id: TELEFON-012
+  text: Cep telefonum +90(532)2345678, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: +90(532)2345678
+- id: TELEFON-013
+  text: Cep telefonum 0532 234 5678, arayabilirsiniz.
+  expect:
+  - entity: TELEFON
+    value: 0532 234 5678
+- id: TELEFON-014
+  text: 'Ofis: 0212 345 67 89'
+  expect:
+  - entity: TELEFON
+    value: 0212 345 67 89
+- id: TELEFON-015
+  text: 'Ofis: 0216 444 55 66'
+  expect:
+  - entity: TELEFON
+    value: 0216 444 55 66
+- id: TELEFON-016
+  text: 'Ofis: (0312) 456 78 90'
+  expect:
+  - entity: TELEFON
+    value: (0312) 456 78 90
+- id: TELEFON-017
+  text: 'Ofis: +90 232 345 67 89'
+  expect:
+  - entity: TELEFON
+    value: +90 232 345 67 89
+- id: TELEFON-018
+  text: 'Ofis: 0224 567 89 01'
+  expect:
+  - entity: TELEFON
+    value: 0224 567 89 01
+- id: TELEFON-019
+  text: 'Ofis: 0 242 678 90 12'
+  expect:
+  - entity: TELEFON
+    value: 0 242 678 90 12
+- id: TELEFON-020
+  text: 'Ofis: 0850 222 33 44'
+  expect:
+  - entity: TELEFON
+    value: 0850 222 33 44
+- id: TELEFON-021
+  text: 'Cep: 0532 123 45 67'
+  expect:
+  - entity: TELEFON
+    value: 0532 123 45 67
+- id: TELEFON-022
+  text: Telefon 0505 987 65 43 ve 0555 876 54 32.
+  expect:
+  - entity: TELEFON
+    value: 0505 987 65 43
+  - entity: TELEFON
+    value: 0555 876 54 32
+- id: TELEFON-023
+  text: Numara 0532 234 56 78 ve tekrar +90 532 234 56 78.
+  expect:
+  - entity: TELEFON
+    value: 0532 234 56 78
+  - entity: TELEFON
+    value: +90 532 234 56 78
+  masked: Numara <TELEFON_1> ve tekrar <TELEFON_1>.
+  tags:
+  - surface_variants
+- id: TELEFON-024
+  text: Çağrı merkezi 444 0 123
+  expect: []
+- id: TELEFON-025
+  text: Çağrı merkezi 444 0 123
+  expect:
+  - entity: TELEFON
+    value: 444 0 123
+  config:
+    phone:
+      mask_444: true
+- id: TELEFON-026
+  text: Ücretsiz hat 0800 211 00 00
+  expect: []
+- id: TELEFON-027
+  text: Ücretsiz hat 0800 211 00 00
+  expect:
+  - entity: TELEFON
+    value: 0800 211 00 00
+  config:
+    phone:
+      mask_800: true
+- id: TELEFON-028
+  text: Geçersiz alan kodu 0 199 234 56 78
+  expect: []
+- id: TELEFON-029
+  text: Sabit hat 0212 123 45 67 abone 1 ile başlar.
+  expect: []
+- id: TELEFON-030
+  text: Kısa numara 234 56 78 yeterli değil.
+  expect: []
+- id: TELEFON-031
+  text: Uzun dizi 053223456789012 telefon değil.
+  expect: []
+- id: TELEFON-032
+  text: Toplantı 28.10.2026 14:30'da.
+  expect: []
+- id: TELEFON-033
+  text: Fiyat 532,34 TL oldu.
+  expect: []
+- id: TELEFON-034
+  text: 532 lot alındı, 216 lot satıldı.
+  expect: []
+- id: TELEFON-035
+  text: 'WhatsApp: 05442345678'
+  expect:
+  - entity: TELEFON
+    value: 05442345678
+- id: TELEFON-036
+  text: Tel:+905062345678
+  expect:
+  - entity: TELEFON
+    value: '+905062345678'
+- id: TELEFON-037
+  text: GSM 0 543 234 56 78 aktif.
+  expect:
+  - entity: TELEFON
+    value: 0 543 234 56 78
+- id: TELEFON-038
+  text: Fax (0212) 234-56-78
+  expect:
+  - entity: TELEFON
+    value: (0212) 234-56-78
+- id: TELEFON-039
+  text: '{"telefon": "05322345678"}'
+  expect:
+  - entity: TELEFON
+    value: 05322345678
+- id: TELEFON-040
+  text: Beni 0532 234 56 78'den arayın.
+  expect:
+  - entity: TELEFON
+    value: 0532 234 56 78
+- id: TELEFON-041
+  text: Mobil 0561 234 56 78 yeni hat.
+  expect:
+  - entity: TELEFON
+    value: 0561 234 56 78
+- id: TELEFON-042
+  text: Kanun 5411 sayılı, madde 73.
+  expect: []
+- id: TELEFON-043
+  text: Tarih 2024-05-32 değil.
+  expect: []
+- id: TELEFON-044
+  text: "Ofis hattı +90 (216) 345 67 89, mesai içinde arayın."
+  expect:
+  - entity: TELEFON
+    value: +90 (216) 345 67 89
+- id: TELEFON-045
+  text: "WhatsApp: 0 505 987 65 43 üzerinden yazabilirsiniz."
+  expect:
+  - entity: TELEFON
+    value: 0 505 987 65 43

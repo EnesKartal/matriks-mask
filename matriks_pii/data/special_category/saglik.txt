@@ -1,0 +1,163 @@
+hastalık
+hastalığı
+kronik hastalık
+ilaç kullanıyor
+ilaç kullanıyorum
+tedavi görüyor
+tedavi görüyorum
+ameliyat
+ameliyatı
+ameliyat oldu
+ameliyat oldum
+teşhis
+tanı konuldu
+tanısı
+engelli
+engellilik
+engel oranı
+engelli raporu
+sağlık raporu
+heyet raporu
+hamile
+hamilelik
+gebelik
+düşük yaptı
+psikiyatri
+psikiyatrist
+psikolojik tedavi
+antidepresan
+depresyon
+anksiyete
+panik atak
+bipolar
+şizofreni
+obsesif kompulsif
+otizm
+dehb
+demans
+alzheimer
+parkinson
+kanser
+lösemi
+lenfoma
+tümör
+kemoterapi
+radyoterapi
+diyabet
+şeker hastası
+şeker hastalığı
+insülin
+hipertansiyon
+tansiyon hastası
+kalp hastası
+kalp krizi
+bypass
+by-pass
+stent
+inme
+felç
+epilepsi
+sara hastası
+astım
+koah
+böbrek yetmezliği
+diyaliz
+siroz
+hepatit
+hiv
+aids
+cinsel yolla bulaşan
+frengi
+verem
+tüberküloz
+covid
+korona pozitif
+alkol bağımlılığı
+madde bağımlılığı
+bağımlılık tedavisi
+amatem
+reçete
+tetkik
+tahlil sonucu
+kan tahlili
+mr sonucu
+biyopsi
+poliklinik
+yoğun bakım
+hastanede yatıyor
+taburcu
+rapor aldı
+raporlu
+istirahat raporu
+kan grubu
+migren
+multipl skleroz
+ms hastası
+crohn
+çölyak
+tiroid
+guatr
+kolesterol
+obezite
+anoreksi
+bulimi
+körlük
+işitme kaybı
+hastası
+hastasıyım
+tiroit
+kalp yetmezliği
+yetmezliği
+böbrek nakli
+organ nakli
+nakli
+gebe
+gebeyim
+sigara içiyor
+sigara içiyorum
+sigara bağımlısı
+sigara kullanıyor
+alkol bağımlısı
+alkolik
+alkol kullanıyor
+madde bağımlısı
+uyuşturucu kullanıyor
+uyuşturucu bağımlısı
+down sendromlu
+down sendromu
+otistik
+psikolojik destek
+terapi görüyor
+terapi alıyor
+intihar girişimi
+intihar etti
+kürtaj
+tüp bebek
+kısırlık tedavisi
+menopoz
+obez
+protez
+tekerlekli sandalye
+işitme cihazı
+malul
+malulen emekli
+özürlü
+engel durumu
+kanser tedavisi
+hamileyim
+sakatlık raporu
+psikiyatrik
+psikiyatrik tedavi
+psikiyatrik ilaç
+!Xanax
+!Prozac
+!Lustral
+!Cipralex
+!Concerta
+!Ritalin
+!Lyrica
+!Rivotril
+!Seroquel
+!Risperdal
+!Zyprexa
+!Abilify

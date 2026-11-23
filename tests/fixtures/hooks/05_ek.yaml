@@ -1,0 +1,89 @@
+# Ek kanca senaryoları: biçim/etiket, fail modları, JSON biçimi, gizli anahtar, boş/sayısal içerik, allow/deny, boyut.
+# Elle yazıldı; tüm değerler sentetiktir.
+- id: HOOK-047
+  config: {placeholder_format: "<{label}-{n}>"}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ben Ayşe Demir, TCKN 17291716060."}]}
+  expect_request: {messages.0.content: "Ben <KISI-1>, TCKN <TCKN-1>."}
+  llm_response: {content: "Merhaba <KISI-1>, <TCKN-1> kayıtlı."}
+  expect_client: {choices.0.message.content: "Merhaba Ayşe Demir, 17291716060 kayıtlı."}
+- id: HOOK-048
+  config: {labels: {KISI: AD, TCKN: KIMLIK}}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ben Ayşe Demir, TCKN 17291716060."}]}
+  expect_request: {messages.0.content: "Ben <AD_1>, TCKN <KIMLIK_1>."}
+  llm_response: {content: "<AD_1> / <KIMLIK_1>"}
+  expect_client: {choices.0.message.content: "Ayşe Demir / 17291716060"}
+- id: HOOK-049
+  config: {revert_fail_mode: open}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "TCKN 17291716060"}]}
+  pop_session_before_post: true
+  llm_response: {content: "Kayıt <TCKN_1>"}
+  expect_client: {choices.0.message.content: "Kayıt <TCKN_1>"}
+- id: HOOK-050
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ben Ayşe Demir."}]}
+  llm_response: {content: "{\n  \"ad\": \"<KISI_1>\"\n}"}
+  expect_client: {choices.0.message.content: "{\n  \"ad\": \"Ayşe Demir\"\n}"}
+- id: HOOK-051
+  request: {model: m, metadata: {}, messages: [{role: user, content: "api_key=sk-abc123def456ghi789jkl012mno345pqr ile dene"}]}
+  expect_request: {messages.0.content: "api_key=<GIZLI_ANAHTAR_1> ile dene"}
+  forbid: ["sk-abc123def456ghi789jkl012mno345pqr"]
+  llm_response: {content: "Anahtar <GIZLI_ANAHTAR_1> geçersiz."}
+  expect_client: {choices.0.message.content: "Anahtar **** geçersiz."}
+- id: HOOK-052
+  config: {profile: strict, hash_secret: "0123456789abcdef0123456789abcdef"}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "api_key=sk-abc123def456ghi789jkl012mno345pqr"}]}
+  expect_error: {status: 400, entity: GIZLI_ANAHTAR}
+  forbid: ["sk-abc123def456ghi789jkl012mno345pqr"]
+- id: HOOK-053
+  request: {model: m, metadata: {}, messages: []}
+  expect_request: {messages: []}
+- id: HOOK-054
+  request: {model: m, metadata: {}, messages: [{role: user, content: ""}, {role: assistant, content: null}, {role: user, content: "TCKN 17291716060"}]}
+  expect_request: {messages.0.content: "", messages.1.content: null, messages.2.content: "TCKN <TCKN_1>"}
+- id: HOOK-055
+  request: {model: m, metadata: {}, messages: [{role: user, content: 12345}]}
+  expect_request: {messages.0.content: 12345}
+- id: HOOK-056
+  config: {allow_list: ["Can Bey"]}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Can Bey aradı."}]}
+  expect_request: {messages.0.content: "Can Bey aradı."}
+  absent_keys: [metadata.matriks_pii_session_id]
+- id: HOOK-057
+  config: {deny_list: [{phrase: "Proje Kartal", entity: PROJE}]}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Proje Kartal bütçesi"}]}
+  expect_request: {messages.0.content: "<PROJE_1> bütçesi"}
+  llm_response: {content: "<PROJE_1> onaylandı"}
+  expect_client: {choices.0.message.content: "Proje Kartal onaylandı"}
+- id: HOOK-058
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Müşteri Ahmet Yılmaz aradı. Müşteri Ahmet Yılmaz aradı. Müşteri Ahmet Yılmaz aradı. Müşteri Ahmet Yılmaz aradı. Müşteri Ahmet Yılmaz aradı. Müşteri Ahmet Yılmaz aradı. Müşteri Ahmet Yılmaz aradı. Müşteri Ahmet Yılmaz aradı. Müşteri Ahmet Yılmaz aradı. Müşteri Ahmet Yılmaz aradı."}]}
+  config: {executor_threshold_chars: 50}
+  forbid: ["Ahmet Yılmaz"]
+  expect_keys: [metadata.matriks_pii_session_id]
+- id: HOOK-059
+  config: {max_text_chars: 1024}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "TCKN 17291716060 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}]}
+  expect_error: {status: 413}
+  forbid: ["17291716060"]
+- id: HOOK-060
+  call_type: atranscription
+  request: {model: m, metadata: {}, prompt: "Müşteri Ahmet Yılmaz"}
+  expect_request: {prompt: "Müşteri <KISI_1>"}
+- id: HOOK-092
+  request: {model: m, metadata: {}, messages: [{role: user, content: "TCKN 17291716060"}]}
+  pop_session_before_post: true
+  llm_response: {content: "Kayıt <TCKN_1>"}
+  expect_post_error: {status: 500, error: matriks_pii_session_missing}
+- id: HOOK-093
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Merhaba, nasılsın?"}]}
+  expect_request: {messages.0.content: "Merhaba, nasılsın?"}
+  absent_keys: [metadata.matriks_pii_session_id]
+  llm_response: {content: "İyiyim <KISI_1>"}
+  expect_client: {choices.0.message.content: "İyiyim <KISI_1>"}
+- id: HOOK-094
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ahmet YILMAZ'ın TCKN'si 17291716060"}]}
+  expect_request: {messages.0.content: "<KISI_1>'ın TCKN'si <TCKN_1>"}
+  llm_response: {content: "<KISI_1>'a ilettim, <TCKN_1>'i doğruladım."}
+  expect_client: {choices.0.message.content: "Ahmet YILMAZ'a ilettim, 17291716060'ı doğruladım."}
+- id: HOOK-095
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Kemal Sunal'a sor."}]}
+  llm_response: {content: "<KISI_1>'a sordum, <PERSON_1>'ın yanıtı olumlu."}
+  expect_client: {choices.0.message.content: "Kemal Sunal'a sordum, Kemal Sunal'ın yanıtı olumlu."}

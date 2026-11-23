@@ -1,0 +1,85 @@
+# elle yazıldı — yeni kurallar/varlıklar için yanlış pozitif tuzakları. Tüm değerler sentetiktir.
+- id: NEG-576
+  text: Ahmet Yılmaz Portföy Yönetimi A.Ş. duyurdu.
+  expect: []
+  why: şirket unvanı
+  tags:
+  - kisi
+  - kurum
+- id: NEG-577
+  text: Deniz Yatırım hisseleri yükseldi.
+  expect: []
+  why: kurum
+  tags:
+  - kisi
+  - kurum
+- id: NEG-578
+  text: Çan Çanakkale arası 30 km.
+  expect: []
+  why: yer adı dizisi
+  tags:
+  - kisi
+  - adres
+- id: NEG-579
+  text: Mvk. raporu hazırlandı.
+  expect: []
+  why: kısaltma
+  tags:
+  - kisi
+  - adres
+- id: NEG-580
+  text: İnönü Cad. trafiğe kapalı.
+  expect: []
+  why: cadde adı
+  tags:
+  - kisi
+  - adres
+- id: NEG-581
+  text: Kavaklı Köyü Çan Çanakkale yolu açıldı.
+  expect: []
+  why: köy ve ilçe
+  tags:
+  - kisi
+  - adres
+- id: NEG-582
+  text: 0532 l23 45 67 hatalı yazılmış
+  expect: []
+  why: harf l
+  tags:
+  - telefon
+- id: NEG-583
+  text: sipariş 330006100519786457841326 iptal
+  expect: []
+  why: etiketsiz TR'siz IBAN biçimi
+  tags:
+  - iban
+- id: NEG-584
+  text: 12.03.85 tarihli fatura ödendi.
+  expect: []
+  why: doğum bağlamı yok
+  tags:
+  - tarih
+- id: NEG-585
+  text: 34abc123 kodu girildi.
+  expect: []
+  why: etiketsiz küçük harf
+  tags:
+  - plaka
+- id: NEG-586
+  text: Bağdat Caddesi trafiği yoğun.
+  expect: []
+  why: tek çapa, numara yok
+  tags:
+  - adres
+- id: NEG-587
+  text: Posta kodu alanı boş bırakıldı.
+  expect: []
+  why: değer yok
+  tags:
+  - adres
+- id: NEG-588
+  text: Eşim bugün gelmedi.
+  expect: []
+  why: akrabalık sözcüğü
+  tags:
+  - kisi

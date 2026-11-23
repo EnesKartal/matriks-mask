@@ -1,0 +1,345 @@
+{"id": "H2-001", "text": "Müşterinin TC kimlik numarası 59146818710, hesap açılışı onaylandı.", "entities": [{"entity": "TCKN", "value": "59146818710"}], "note": "plain TCKN in CRM sentence"}
+{"id": "H2-002", "text": "TCKN: 18163316166", "entities": [{"entity": "TCKN", "value": "18163316166"}], "note": "bare form field TCKN"}
+{"id": "H2-003", "text": "tc no 41796321238 olan musteri icin limit artisi istendi", "entities": [{"entity": "TCKN", "value": "41796321238"}], "note": "ASCII lowercase TCKN context"}
+{"id": "H2-004", "text": "Kimlik no: 369 998 578 82 — müşteri gruplu yazmış.", "entities": [{"entity": "TCKN", "value": "369 998 578 82"}], "note": "grouped TCKN with kimlik label"}
+{"id": "H2-005", "text": "18990982602'ı sisteme yanlış girmişim, düzeltebilir misiniz?", "entities": [{"entity": "TCKN", "value": "18990982602"}], "note": "TCKN with apostrophe suffix at sentence start"}
+{"id": "H2-006", "text": "Yabancı kimlik numarası 99285583728 olan müşterimiz için ikamet izni belgesi yüklendi.", "entities": [{"entity": "TCKN", "value": "99285583728"}], "note": "foreign ID 98/99 prefix"}
+{"id": "H2-007", "text": "{\"musteri\": {\"tckn\": \"97658843998\", \"segment\": \"bireysel\"}}", "entities": [{"entity": "TCKN", "value": "97658843998"}], "note": "TCKN inside JSON"}
+{"id": "H2-008", "text": "T.C. KİMLİK NO: 10339791722 AD SOYAD: MEHMET KARAKAŞ", "entities": [{"entity": "TCKN", "value": "10339791722"}, {"entity": "KISI", "value": "MEHMET KARAKAŞ"}], "note": "ALL CAPS form TCKN + name"}
+{"id": "H2-009", "text": "| Ad Soyad | TCKN |\n|---|---|\n| Elif Şahin | 28482730048 |\n| Oğuz Tekin | 48046052638 |", "entities": [{"entity": "KISI", "value": "Elif Şahin"}, {"entity": "TCKN", "value": "28482730048"}, {"entity": "KISI", "value": "Oğuz Tekin"}, {"entity": "TCKN", "value": "48046052638"}], "note": "markdown table two people"}
+{"id": "H2-010", "text": "Annemin TC'si 78956774924, onun adına da hesap açabilir miyim?", "entities": [{"entity": "TCKN", "value": "78956774924"}], "note": "relative's TCKN in chat"}
+{"id": "H2-011", "text": "Kimlik numaram 29987482616den farklı görünüyor ekranda, kontrol eder misiniz", "entities": [{"entity": "TCKN", "value": "29987482616"}], "note": "TCKN with attached suffix no apostrophe"}
+{"id": "H2-012", "text": "TC:43117401292;AD:Serkan;SOYAD:Uçar", "entities": [{"entity": "TCKN", "value": "43117401292"}, {"entity": "KISI", "value": "Serkan"}, {"entity": "KISI", "value": "Uçar"}], "note": "semicolon separated record; first and last name in separate fields"}
+{"id": "H2-013", "text": "Sayın Gülşen Akbulut, 35116745484 T.C. kimlik numaralı başvurunuz alınmıştır.", "entities": [{"entity": "KISI", "value": "Gülşen Akbulut"}, {"entity": "TCKN", "value": "35116745484"}], "note": "honorific excluded, TCKN before label"}
+{"id": "H2-014", "text": "Velinin kimlik numarası: 18894826040 (çocuk hesabı için)", "entities": [{"entity": "TCKN", "value": "18894826040"}], "note": "guardian TCKN"}
+{"id": "H2-015", "text": "kimlik 355 334 871 10 olarak kayıtlı ama e-devlette farklı çıkıyor", "entities": [{"entity": "TCKN", "value": "355 334 871 10"}], "note": "grouped TCKN lowercase kimlik label"}
+{"id": "H2-016", "text": "Vergi no: 1336313995, Kadıköy Vergi Dairesi.", "entities": [{"entity": "VKN", "value": "1336313995"}], "note": "VKN with vergi dairesi"}
+{"id": "H2-017", "text": "Şirketimizin vergi kimlik numarası 8945066898'dur, faturayı buna göre kesin.", "entities": [{"entity": "VKN", "value": "8945066898"}], "note": "VKN with suffix"}
+{"id": "H2-018", "text": "VKN 7822398952 olan mükellef adına kurumsal hesap açılacak.", "entities": [{"entity": "VKN", "value": "7822398952"}], "note": "VKN label + mükellef"}
+{"id": "H2-019", "text": "{\"unvan\": \"Ege Tekstil Ltd. Şti.\", \"vergi_dairesi\": \"Konak\", \"vergi_no\": \"2888417133\"}", "entities": [{"entity": "VKN", "value": "2888417133"}], "note": "VKN in JSON with company name (company not PII)"}
+{"id": "H2-020", "text": "Şahıs şirketi sahibi Hakan Ertürk, vergi numarası 7056560188, Ostim Vergi Dairesi mükellefi.", "entities": [{"entity": "KISI", "value": "Hakan Ertürk"}, {"entity": "VKN", "value": "7056560188"}], "note": "sole proprietor name + VKN"}
+{"id": "H2-021", "text": "VERGİ DAİRESİ: MECİDİYEKÖY VERGİ NO: 6506502726", "entities": [{"entity": "VKN", "value": "6506502726"}], "note": "ALL CAPS VKN"}
+{"id": "H2-022", "text": "vergi kimlik no 3664999073 - faturada yanlis yazilmis", "entities": [{"entity": "VKN", "value": "3664999073"}], "note": "ASCII VKN"}
+{"id": "H2-023", "text": "Para çekme talimatı için IBAN: TR540013406959072171298688", "entities": [{"entity": "IBAN", "value": "TR540013406959072171298688"}], "note": "contiguous TR IBAN"}
+{"id": "H2-024", "text": "Lütfen TR14 0006 7017 8705 3239 0047 18 numaralı hesaba havale yapın.", "entities": [{"entity": "IBAN", "value": "TR14 0006 7017 8705 3239 0047 18"}], "note": "spaced TR IBAN"}
+{"id": "H2-025", "text": "Tuba Erdem'in IBAN'ı TR45 0001 5025 2073 4456 9065 93 olarak güncellendi.", "entities": [{"entity": "KISI", "value": "Tuba Erdem"}, {"entity": "IBAN", "value": "TR45 0001 5025 2073 4456 9065 93"}], "note": "name with suffix + spaced IBAN"}
+{"id": "H2-026", "text": "iban numaram TR900011107663744483037666ye gönderebilir misiniz", "entities": [{"entity": "IBAN", "value": "TR900011107663744483037666"}], "note": "IBAN with attached suffix, lowercase chat"}
+{"id": "H2-027", "text": "Almanya'daki hesabım: DE57 6704 5599 5078 4024 79", "entities": [{"entity": "IBAN", "value": "DE57 6704 5599 5078 4024 79"}], "note": "German IBAN spaced"}
+{"id": "H2-028", "text": "{\"beneficiary_iban\": \"TR490006205502192049432263\", \"amount\": 15000, \"currency\": \"TRY\"}", "entities": [{"entity": "IBAN", "value": "TR490006205502192049432263"}], "note": "IBAN in JSON payment payload"}
+{"id": "H2-029", "text": "Eski IBAN TR350001203504075816029771 kapatıldı, yeni IBAN TR36 0004 6031 8368 0445 9734 03 tanımlandı.", "entities": [{"entity": "IBAN", "value": "TR350001203504075816029771"}, {"entity": "IBAN", "value": "TR36 0004 6031 8368 0445 9734 03"}], "note": "two IBANs"}
+{"id": "H2-030", "text": "ALICI IBAN: TR31 0004 6066 9498 2342 2935 25 ALICI: FATMA NUR ÖZDEMİR", "entities": [{"entity": "IBAN", "value": "TR31 0004 6066 9498 2342 2935 25"}, {"entity": "KISI", "value": "FATMA NUR ÖZDEMİR"}], "note": "ALL CAPS IBAN + double first name"}
+{"id": "H2-031", "text": "Londra'daki kızımın hesabı GB05NWBK34314300895765, oraya EFT değil SWIFT lazım galiba.", "entities": [{"entity": "IBAN", "value": "GB05NWBK34314300895765"}], "note": "GB IBAN with letters in BBAN"}
+{"id": "H2-032", "text": "Havale açıklaması: kira ödemesi. Hesap: TR39 0001 2043 4169 4010 8602 07", "entities": [{"entity": "IBAN", "value": "TR39 0001 2043 4169 4010 8602 07"}], "note": "IBAN after 'Hesap:'"}
+{"id": "H2-033", "text": "Kart numaram 4290 0132 5100 5587, neden reddedildi?", "entities": [{"entity": "KART", "value": "4290 0132 5100 5587"}], "note": "Visa grouped"}
+{"id": "H2-034", "text": "Kart: 5580439705267216 CVV: 920 son kullanma 08/28", "entities": [{"entity": "KART", "value": "5580439705267216"}, {"entity": "KART_CVV", "value": "920"}, {"entity": "KART_SKT", "value": "08/28"}], "note": "MC + CVV + expiry"}
+{"id": "H2-035", "text": "Amex kartım 3407 311591 36067 ile ödeme yaptım ama yansımadı.", "entities": [{"entity": "KART", "value": "3407 311591 36067"}], "note": "Amex 4-6-5"}
+{"id": "H2-036", "text": "Troy kart no: 9792-4849-6409-5037", "entities": [{"entity": "KART", "value": "9792-4849-6409-5037"}], "note": "Troy dashed"}
+{"id": "H2-037", "text": "kart 2626 7438 9418 4287 skt 11/27 cvc 640", "entities": [{"entity": "KART", "value": "2626 7438 9418 4287"}, {"entity": "KART_SKT", "value": "11/27"}, {"entity": "KART_CVV", "value": "640"}], "note": "MC 2-series lowercase skt/cvc"}
+{"id": "H2-038", "text": "Discover kartımın numarası 6011818909275694.", "entities": [{"entity": "KART", "value": "6011818909275694"}], "note": "Discover contiguous"}
+{"id": "H2-039", "text": "JCB 3550 1543 3065 6151 kartla yurtdışı harcaması yapılmış, ben yapmadım.", "entities": [{"entity": "KART", "value": "3550 1543 3065 6151"}], "note": "JCB fraud complaint"}
+{"id": "H2-040", "text": "{\"card_number\": \"4944226034119083\", \"skt\": \"03/29\", \"cvv\": \"427\"}", "entities": [{"entity": "KART", "value": "4944226034119083"}, {"entity": "KART_SKT", "value": "03/29"}, {"entity": "KART_CVV", "value": "427"}], "note": "card JSON with skt/cvv keys"}
+{"id": "H2-041", "text": "Amex 349999942713663, güvenlik kodu 1091.", "entities": [{"entity": "KART", "value": "349999942713663"}, {"entity": "KART_CVV", "value": "1091"}], "note": "Amex 4-digit security code"}
+{"id": "H2-042", "text": "Kart sahibi: Bülent Kara | Kart No: 4076 1094 9838 9808 | SKT: 05/30", "entities": [{"entity": "KISI", "value": "Bülent Kara"}, {"entity": "KART", "value": "4076 1094 9838 9808"}, {"entity": "KART_SKT", "value": "05/30"}], "note": "pipe form card holder"}
+{"id": "H2-043", "text": "5228 5985 6906 8552'den 3 taksit çekilmiş, iptal edin lütfen", "entities": [{"entity": "KART", "value": "5228 5985 6906 8552"}], "note": "card with suffix at sentence start"}
+{"id": "H2-044", "text": "Müşteri 0536 972 30 64 numarasından aradı, geri dönüş bekliyor.", "entities": [{"entity": "TELEFON", "value": "0536 972 30 64"}], "note": "mobile spaced"}
+{"id": "H2-045", "text": "Cep: +90 559 252 76 46", "entities": [{"entity": "TELEFON", "value": "+90 559 252 76 46"}], "note": "+90 mobile"}
+{"id": "H2-046", "text": "Yurt dışından 0090 ile yazıyorum: 0090 501 631 59 96", "entities": [{"entity": "TELEFON", "value": "0090 501 631 59 96"}], "note": "0090 prefix"}
+{"id": "H2-047", "text": "İş telefonum (0212) 304 30 25, mesai saatlerinde ulaşabilirsiniz.", "entities": [{"entity": "TELEFON", "value": "(0212) 304 30 25"}], "note": "Istanbul landline parenthesized"}
+{"id": "H2-048", "text": "Tel: 0216-353-93-51", "entities": [{"entity": "TELEFON", "value": "0216-353-93-51"}], "note": "landline dashed"}
+{"id": "H2-049", "text": "whatsapp 05497546014 buradan yazin bana", "entities": [{"entity": "TELEFON", "value": "05497546014"}], "note": "contiguous 05xx"}
+{"id": "H2-050", "text": "GSM 5527397048", "entities": [{"entity": "TELEFON", "value": "5527397048"}], "note": "bare 10-digit with GSM word"}
+{"id": "H2-051", "text": "Beni 5357486628 numaramdan arayın lütfen.", "entities": [{"entity": "TELEFON", "value": "5357486628"}], "note": "bare 10-digit with numaramdan"}
+{"id": "H2-052", "text": "Ofisimizin numarası 0850 546 82 34.", "entities": [{"entity": "TELEFON", "value": "0850 546 82 34"}], "note": "0850 line"}
+{"id": "H2-053", "text": "sms gelmedi, numara +905077474844 kayıtlı olmalı", "entities": [{"entity": "TELEFON", "value": "+905077474844"}], "note": "+90 contiguous"}
+{"id": "H2-054", "text": "Ankara şubemizden 0312 831 42 28 üzerinden Gamze Hanım ile görüşebilirsiniz.", "entities": [{"entity": "TELEFON", "value": "0312 831 42 28"}, {"entity": "KISI", "value": "Gamze"}], "note": "landline + first name with Hanım"}
+{"id": "H2-055", "text": "0232 768 96 89'dan aradılar, bankadan olduklarını söylediler, dolandırıcı mı?", "entities": [{"entity": "TELEFON", "value": "0232 768 96 89"}], "note": "landline with suffix"}
+{"id": "H2-056", "text": "Yeni cep telefonu: 0533-914-64-88", "entities": [{"entity": "TELEFON", "value": "0533-914-64-88"}], "note": "mobile dashed"}
+{"id": "H2-057", "text": "Telefon 0 (544) 406 77 18", "entities": [{"entity": "TELEFON", "value": "0 (544) 406 77 18"}], "note": "mobile parenthesized operator"}
+{"id": "H2-058", "text": "Antalya ofis: +90 242 647 5094", "entities": [{"entity": "TELEFON", "value": "+90 242 647 5094"}], "note": "+90 landline Antalya"}
+{"id": "H2-059", "text": "Cep 0505 925 95 93, ev 0322 820 72 96.", "entities": [{"entity": "TELEFON", "value": "0505 925 95 93"}, {"entity": "TELEFON", "value": "0322 820 72 96"}], "note": "two phones"}
+{"id": "H2-060", "text": "TELEFON NO: 0538 338 34 34 - ACİL ARANMASI RİCA OLUNUR", "entities": [{"entity": "TELEFON", "value": "0538 338 34 34"}], "note": "ALL CAPS phone"}
+{"id": "H2-061", "text": "Bursa'daki muhasebecimin numarası 0224 611 11 40, ona da bilgi verin.", "entities": [{"entity": "TELEFON", "value": "0224 611 11 40"}], "note": "Bursa landline"}
+{"id": "H2-062", "text": "Kocaeli şube sabit hat (0262) 484 11 96", "entities": [{"entity": "TELEFON", "value": "(0262) 484 11 96"}], "note": "Kocaeli landline"}
+{"id": "H2-063", "text": "Ekstreyi ayse.demirtas@example.com adresine gönderin.", "entities": [{"entity": "EPOSTA", "value": "ayse.demirtas@example.com"}], "note": "plain email"}
+{"id": "H2-064", "text": "E-POSTA: MURAT.KESKIN@EXAMPLE.NET", "entities": [{"entity": "EPOSTA", "value": "MURAT.KESKIN@EXAMPLE.NET"}], "note": "ALL CAPS email"}
+{"id": "H2-065", "text": "mailim kemal.ozkan(at)example(nokta)com spam olmasın diye böyle yazdım", "entities": [{"entity": "EPOSTA", "value": "kemal.ozkan(at)example(nokta)com"}], "note": "obfuscated (at)/(nokta)"}
+{"id": "H2-066", "text": "Bana selin_k92[at]example[dot]com üzerinden ulaşın.", "entities": [{"entity": "EPOSTA", "value": "selin_k92[at]example[dot]com"}], "note": "obfuscated [at]/[dot]"}
+{"id": "H2-067", "text": "From: Okan Bayrak <okan.bayrak@ornekholding.com.tr>", "entities": [{"entity": "KISI", "value": "Okan Bayrak"}, {"entity": "EPOSTA", "value": "okan.bayrak@ornekholding.com.tr"}], "note": "email header with name"}
+{"id": "H2-068", "text": "cc: hukuk-ekibi@firma.example, berk.tas+bildirim@example.com", "entities": [{"entity": "EPOSTA", "value": "hukuk-ekibi@firma.example"}, {"entity": "EPOSTA", "value": "berk.tas+bildirim@example.com"}], "note": "two emails incl plus addressing"}
+{"id": "H2-069", "text": "Şifre sıfırlama linki zeynep.aksoy@example.org'a gitmedi.", "entities": [{"entity": "EPOSTA", "value": "zeynep.aksoy@example.org"}], "note": "email with suffix"}
+{"id": "H2-070", "text": "{\"email\": \"h.yurt@example.net\", \"kanal\": \"mobil\"}", "entities": [{"entity": "EPOSTA", "value": "h.yurt@example.net"}], "note": "email in JSON"}
+{"id": "H2-071", "text": "Şüpheli giriş 203.0.113.12 IP adresinden yapıldı.", "entities": [{"entity": "IP", "value": "203.0.113.12"}], "note": "IPv4 in security note"}
+{"id": "H2-072", "text": "2026-10-27 14:02:11 LOGIN_OK user=u48213 ip=192.0.2.200", "entities": [{"entity": "IP", "value": "192.0.2.200"}], "note": "IPv4 in log line"}
+{"id": "H2-073", "text": "Müşterinin IPv6 adresi 2a02:e0:3a4:1::7b olarak loglanmış.", "entities": [{"entity": "IP", "value": "2a02:e0:3a4:1::7b"}], "note": "IPv6"}
+{"id": "H2-074", "text": "{\"client_ip\": \"198.51.100.9\", \"user_agent\": \"MatriksMobile/5.4\"}", "entities": [{"entity": "IP", "value": "198.51.100.9"}], "note": "IP in JSON next to UA version"}
+{"id": "H2-075", "text": "Evimdeki modemin IP'si 192.0.2.3, yurtdışı engeli var mı?", "entities": [{"entity": "IP", "value": "192.0.2.3"}], "note": "IP with suffix"}
+{"id": "H2-076", "text": "Kaza yapan aracın plakası 34 ABC 123 olarak tutanağa geçti.", "entities": [{"entity": "PLAKA", "value": "34 ABC 123"}], "note": "plate spaced"}
+{"id": "H2-077", "text": "Kasko teklifi: 06-AB-1234 plakalı araç için.", "entities": [{"entity": "PLAKA", "value": "06-AB-1234"}], "note": "plate dashed"}
+{"id": "H2-078", "text": "Araç plaka: 35KLM456", "entities": [{"entity": "PLAKA", "value": "35KLM456"}], "note": "unseparated plate with context"}
+{"id": "H2-079", "text": "41 AU 4521'in trafik sigortası bitmiş.", "entities": [{"entity": "PLAKA", "value": "41 AU 4521"}], "note": "plate with suffix"}
+{"id": "H2-080", "text": "ARAÇ PLAKASI 16 FT 909 RUHSAT SAHİBİ ERDAL KOCA", "entities": [{"entity": "PLAKA", "value": "16 FT 909"}, {"entity": "KISI", "value": "ERDAL KOCA"}], "note": "caps plate + owner"}
+{"id": "H2-081", "text": "Mehmet Bey aradı, emrinin neden iptal olduğunu soruyor.", "entities": [{"entity": "KISI", "value": "Mehmet"}], "note": "first name + Bey"}
+{"id": "H2-082", "text": "Sayın Ayşe Demir'in hesap ekstresi ektedir.", "entities": [{"entity": "KISI", "value": "Ayşe Demir"}], "note": "Sayın + apostrophe suffix"}
+{"id": "H2-083", "text": "Dr. Elif Şahin ile randevu ayarlandı.", "entities": [{"entity": "KISI", "value": "Elif Şahin"}], "note": "Dr. title excluded"}
+{"id": "H2-084", "text": "Av. Burak Yıldırım vekaletnameyi şubeye teslim etti.", "entities": [{"entity": "KISI", "value": "Burak Yıldırım"}], "note": "Av. title"}
+{"id": "H2-085", "text": "Prof. Dr. Nuri Ergin'in portföy yönetim sözleşmesi yenilendi.", "entities": [{"entity": "KISI", "value": "Nuri Ergin"}], "note": "stacked titles + suffix"}
+{"id": "H2-086", "text": "Hesap sahibi Ayşe Demir-Yılmaz olarak güncellendi.", "entities": [{"entity": "KISI", "value": "Ayşe Demir-Yılmaz"}], "note": "hyphenated double surname"}
+{"id": "H2-087", "text": "ad soyad: zeynep kocabaş", "entities": [{"entity": "KISI", "value": "zeynep kocabaş"}], "note": "lowercase form field name"}
+{"id": "H2-088", "text": "Ahmetin hesabına bakar mısınız, dün para yatırdı.", "entities": [{"entity": "KISI", "value": "Ahmet"}], "note": "attached suffix no apostrophe"}
+{"id": "H2-089", "text": "Kemal'e söyleyin, sözleşmeyi imzalasın.", "entities": [{"entity": "KISI", "value": "Kemal"}], "note": "dative apostrophe"}
+{"id": "H2-090", "text": "Hatice Kübra Tunç adına iki hesap var.", "entities": [{"entity": "KISI", "value": "Hatice Kübra Tunç"}], "note": "two first names + surname"}
+{"id": "H2-091", "text": "Deniz Arslan'ın VIOP teminatı yetersiz.", "entities": [{"entity": "KISI", "value": "Deniz Arslan"}], "note": "name that is also a common word (Deniz)"}
+{"id": "H2-092", "text": "Umut Kaya bugün şubeye gelip imza attı.", "entities": [{"entity": "KISI", "value": "Umut Kaya"}], "note": "Umut Kaya as person (contrast trap)"}
+{"id": "H2-093", "text": "musteri sukru gunes aradi, kredi karti limitini sordu", "entities": [{"entity": "KISI", "value": "sukru gunes"}], "note": "ASCII lowercase name"}
+{"id": "H2-094", "text": "Temsilci notu: Özge Çetin hanım emeklilik fonunu değiştirmek istiyor.", "entities": [{"entity": "KISI", "value": "Özge Çetin"}], "note": "lowercase hanım"}
+{"id": "H2-095", "text": "Kaymakam Recep Aydoğdu'nun yatırım hesabı VIP segmente alındı.", "entities": [{"entity": "KISI", "value": "Recep Aydoğdu"}], "note": "Kaymakam title"}
+{"id": "H2-096", "text": "Öğr. Gör. Sinem Polat burs ödemesi için IBAN istedi.", "entities": [{"entity": "KISI", "value": "Sinem Polat"}], "note": "Öğr. Gör. title"}
+{"id": "H2-097", "text": "ALİ RIZA KOÇAK", "entities": [{"entity": "KISI", "value": "ALİ RIZA KOÇAK"}], "note": "name alone caps"}
+{"id": "H2-098", "text": "Merhaba Barış, dünkü işlemlerin dekontunu ekte bulabilirsin.", "entities": [{"entity": "KISI", "value": "Barış"}], "note": "greeting first name (Barış)"}
+{"id": "H2-099", "text": "Selam ben Yağmur, hesabım bloke olmuş.", "entities": [{"entity": "KISI", "value": "Yağmur"}], "note": "self-introduction first name"}
+{"id": "H2-100", "text": "Sevgili Necla Teyze'nin hesabı için vekalet lazım mı?", "entities": [{"entity": "KISI", "value": "Necla"}], "note": "Teyze kinship title excluded"}
+{"id": "H2-101", "text": "Kerem ile Ece'nin ortak hesabı kapatılacak.", "entities": [{"entity": "KISI", "value": "Kerem"}, {"entity": "KISI", "value": "Ece"}], "note": "two first names in joint account"}
+{"id": "H2-102", "text": "Müşteri temsilcisi: Gizem Uslu\nMüşteri: Tolga Sarı\nKonu: Halka arz talebi", "entities": [{"entity": "KISI", "value": "Gizem Uslu"}, {"entity": "KISI", "value": "Tolga Sarı"}], "note": "transcript header"}
+{"id": "H2-103", "text": "Saygılarımla,\nCansu Erdoğan\nKurumsal Satış Uzmanı", "entities": [{"entity": "KISI", "value": "Cansu Erdoğan"}], "note": "email signature"}
+{"id": "H2-104", "text": "[10:42] Emre Yalçın: emrim neden gerçekleşmedi?\n[10:43] Asistan: Kontrol ediyorum.", "entities": [{"entity": "KISI", "value": "Emre Yalçın"}], "note": "chat transcript speaker"}
+{"id": "H2-105", "text": "{\"ad\": \"Nihan\", \"soyad\": \"Göksu\", \"segment\": \"premium\"}", "entities": [{"entity": "KISI", "value": "Nihan"}, {"entity": "KISI", "value": "Göksu"}], "note": "JSON split name"}
+{"id": "H2-106", "text": "İlgili kişi: Halil İbrahim Çakır (müşterinin babası)", "entities": [{"entity": "KISI", "value": "Halil İbrahim Çakır"}], "note": "compound first name"}
+{"id": "H2-107", "text": "Bugün Leyla Hanım'la görüştüm, fon dağılımını değiştirmek istiyor.", "entities": [{"entity": "KISI", "value": "Leyla"}], "note": "Hanım + suffix"}
+{"id": "H2-108", "text": "ahmet yilmaz isimli musteri 3 kez yanlis sifre girmis", "entities": [{"entity": "KISI", "value": "ahmet yilmaz"}], "note": "ASCII lowercase full name"}
+{"id": "H2-109", "text": "Vefat eden Mustafa Erkan'ın mirasçıları için hesap bloke edildi.", "entities": [{"entity": "KISI", "value": "Mustafa Erkan"}], "note": "deceased person"}
+{"id": "H2-110", "text": "Onaylayan: S. Korkmaz", "entities": [{"entity": "KISI", "value": "S. Korkmaz"}], "note": "initial + surname"}
+{"id": "H2-111", "text": "Eşim Pınar Aslan'ın kartına ek kart istiyorum.", "entities": [{"entity": "KISI", "value": "Pınar Aslan"}], "note": "kinship + name (kinship excluded)"}
+{"id": "H2-112", "text": "Müşteri Arda Bey'e ulaşılamadı, sesli mesaj bırakıldı.", "entities": [{"entity": "KISI", "value": "Arda"}], "note": "Bey with apostrophe"}
+{"id": "H2-113", "text": "Yatırım danışmanı Volkan Şen ve müşteri Derya Önal toplantı yaptı.", "entities": [{"entity": "KISI", "value": "Volkan Şen"}, {"entity": "KISI", "value": "Derya Önal"}], "note": "two full names"}
+{"id": "H2-114", "text": "Adres: Caferağa Mah. Moda Cad. No:12 D:3 Kadıköy/İstanbul", "entities": [{"entity": "ADRES", "value": "Caferağa Mah. Moda Cad. No:12 D:3 Kadıköy/İstanbul"}], "note": "standard abbreviated address"}
+{"id": "H2-115", "text": "Yeni ikamet adresim Kızılay Mahallesi Atatürk Bulvarı No: 45 Kat: 3 Çankaya/Ankara oldu.", "entities": [{"entity": "ADRES", "value": "Kızılay Mahallesi Atatürk Bulvarı No: 45 Kat: 3 Çankaya/Ankara"}], "note": "full words + Atatürk inside address"}
+{"id": "H2-116", "text": "Kartımı Alsancak Mah. 1453 Sok. No:7 D:2 35220 Konak/İzmir adresine gönderin.", "entities": [{"entity": "ADRES", "value": "Alsancak Mah. 1453 Sok. No:7 D:2 35220 Konak/İzmir"}], "note": "numbered street + postcode"}
+{"id": "H2-117", "text": "Tebligat adresi: Yeşilyurt Köyü Çamlık Mevkii No:4 Merzifon/Amasya", "entities": [{"entity": "ADRES", "value": "Yeşilyurt Köyü Çamlık Mevkii No:4 Merzifon/Amasya"}], "note": "village + mevkii"}
+{"id": "H2-118", "text": "adresim Ataturk Mah. Cumhuriyet Cad. No:5 Daire:8 Bornova/Izmir kargo oraya gelsin", "entities": [{"entity": "ADRES", "value": "Ataturk Mah. Cumhuriyet Cad. No:5 Daire:8 Bornova/Izmir"}], "note": "ASCII address"}
+{"id": "H2-119", "text": "İKAMETGAH: BARBAROS MAH. ŞEBBOY SOK. NO:4 K:2 D:6 ATAŞEHİR/İSTANBUL", "entities": [{"entity": "ADRES", "value": "BARBAROS MAH. ŞEBBOY SOK. NO:4 K:2 D:6 ATAŞEHİR/İSTANBUL"}], "note": "ALL CAPS address"}
+{"id": "H2-120", "text": "Ferhat Demirci, Gürsel Mah. Ergenekon Sok. No:21 34381 Şişli/İstanbul", "entities": [{"entity": "KISI", "value": "Ferhat Demirci"}, {"entity": "ADRES", "value": "Gürsel Mah. Ergenekon Sok. No:21 34381 Şişli/İstanbul"}], "note": "name + address mailing label"}
+{"id": "H2-121", "text": "{\"adres\": \"Konyaaltı Cad. No:88 Daire 5 Muratpaşa/Antalya\", \"il\": \"Antalya\"}", "entities": [{"entity": "ADRES", "value": "Konyaaltı Cad. No:88 Daire 5 Muratpaşa/Antalya"}], "note": "address in JSON (lone city field not PII)"}
+{"id": "H2-122", "text": "Doğum tarihi: 14.03.1985", "entities": [{"entity": "DOGUM_TARIHI", "value": "14.03.1985"}], "note": "birth date form"}
+{"id": "H2-123", "text": "Müşteri 03/07/1991 doğumlu; sistemde gün ve ay ters girilmiş.", "entities": [{"entity": "DOGUM_TARIHI", "value": "03/07/1991"}], "note": "doğumlu after date"}
+{"id": "H2-124", "text": "d.t. 22.11.1978 / doğum yeri: Trabzon", "entities": [{"entity": "DOGUM_TARIHI", "value": "22.11.1978"}, {"entity": "DOGUM_YERI", "value": "Trabzon"}], "note": "abbreviated d.t. + birth place"}
+{"id": "H2-125", "text": "Doğum yeri Kadıköy, doğum tarihi 5 Mayıs 1990 olarak güncellendi.", "entities": [{"entity": "DOGUM_YERI", "value": "Kadıköy"}, {"entity": "DOGUM_TARIHI", "value": "5 Mayıs 1990"}], "note": "textual date + district birth place"}
+{"id": "H2-126", "text": "AD SOYAD: SEDA YURTSEVER\nTCKN: 71472822520\nDOĞUM TARİHİ: 30.01.1983\nDOĞUM YERİ: ERZURUM", "entities": [{"entity": "KISI", "value": "SEDA YURTSEVER"}, {"entity": "TCKN", "value": "71472822520"}, {"entity": "DOGUM_TARIHI", "value": "30.01.1983"}, {"entity": "DOGUM_YERI", "value": "ERZURUM"}], "note": "KYC block caps"}
+{"id": "H2-127", "text": "{\"dogum_tarihi\": \"1975-08-19\", \"uyruk\": \"TR\"}", "entities": [{"entity": "DOGUM_TARIHI", "value": "1975-08-19"}], "note": "ISO birth date in JSON"}
+{"id": "H2-128", "text": "dogum tarihim 12.12.2000 ama sistemde 2001 yaziyor", "entities": [{"entity": "DOGUM_TARIHI", "value": "12.12.2000"}], "note": "ASCII first-person birth date"}
+{"id": "H2-129", "text": "Pasaport no: U12345678, uyruk: TR", "entities": [{"entity": "PASAPORT", "value": "U12345678"}], "note": "passport letter+8"}
+{"id": "H2-130", "text": "Müşterinin pasaportu S7654321 numaralı, süresi 2027'de doluyor.", "entities": [{"entity": "PASAPORT", "value": "S7654321"}], "note": "passport letter+7 inflected label"}
+{"id": "H2-131", "text": "Yeni kimlik kartı seri no: A12B34567", "entities": [{"entity": "KIMLIK_SERI", "value": "A12B34567"}], "note": "ID card serial"}
+{"id": "H2-132", "text": "Kimlik seri no A07K88213, son geçerlilik 2031", "entities": [{"entity": "KIMLIK_SERI", "value": "A07K88213"}], "note": "ID serial without colon"}
+{"id": "H2-133", "text": "Ehliyet no: 482913", "entities": [{"entity": "EHLIYET", "value": "482913"}], "note": "driving licence number"}
+{"id": "H2-134", "text": "Sürücü belgesi no 7712045 olan müşteri araç kredisi istiyor.", "entities": [{"entity": "EHLIYET", "value": "7712045"}], "note": "sürücü belgesi no"}
+{"id": "H2-135", "text": "SGK sicil no: 3400719823451", "entities": [{"entity": "SGK", "value": "3400719823451"}], "note": "SGK sicil 13 digits"}
+{"id": "H2-136", "text": "Hesap no: 48291037", "entities": [{"entity": "HESAP_NO", "value": "48291037"}], "note": "account number"}
+{"id": "H2-137", "text": "hesap no 004512339 olan vadeli hesabın faizi yanlış", "entities": [{"entity": "HESAP_NO", "value": "004512339"}], "note": "account no leading zeros"}
+{"id": "H2-138", "text": "Müşteri no: 7783412", "entities": [{"entity": "MUSTERI_NO", "value": "7783412"}], "note": "customer number"}
+{"id": "H2-139", "text": "musteri no 10029384 icin sikayet kaydi acildi", "entities": [{"entity": "MUSTERI_NO", "value": "10029384"}], "note": "ASCII customer number"}
+{"id": "H2-140", "text": "MKK sicil no: 48291037", "entities": [{"entity": "MKK_SICIL", "value": "48291037"}], "note": "MKK sicil"}
+{"id": "H2-141", "text": "Yatırımcı sicil numarası 10293847 olan hesaba virman yapılacak.", "entities": [{"entity": "MKK_SICIL", "value": "10293847"}], "note": "yatırımcı sicil"}
+{"id": "H2-142", "text": "Poliçe no: 120045678912", "entities": [{"entity": "POLICE_NO", "value": "120045678912"}], "note": "policy number digits"}
+{"id": "H2-143", "text": "DASK poliçe no 2026-0458812 yenilenmedi.", "entities": [{"entity": "POLICE_NO", "value": "2026-0458812"}], "note": "policy number with dash"}
+{"id": "H2-144", "text": "Çalınan telefonun IMEI numarası 437905244025352, mobil bankacılık kapatılsın.", "entities": [{"entity": "IMEI", "value": "437905244025352"}], "note": "IMEI"}
+{"id": "H2-145", "text": "IMEI: 944739086974724", "entities": [{"entity": "IMEI", "value": "944739086974724"}], "note": "IMEI form"}
+{"id": "H2-146", "text": "şifre: Kedi1234! bunu kimseye söylemedim", "entities": [{"entity": "SIFRE", "value": "Kedi1234!"}], "note": "password value"}
+{"id": "H2-147", "text": "Parola: bJ7#mQ2z", "entities": [{"entity": "SIFRE", "value": "bJ7#mQ2z"}], "note": "parola value"}
+{"id": "H2-148", "text": "Kullanıcı: ozgur.t / şifre: Galata1453", "entities": [{"entity": "SIFRE", "value": "Galata1453"}], "note": "username + password"}
+{"id": "H2-149", "text": "{\"username\": \"dkaya\", \"password\": \"Yaz2026*Gun\"}", "entities": [{"entity": "SIFRE", "value": "Yaz2026*Gun"}], "note": "password in JSON"}
+{"id": "H2-150", "text": "OPENAI_API_KEY=sk-proj-EXAMPLEnotARealKey000000000000000000000000", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "sk-proj-EXAMPLEnotARealKey000000000000000000000000"}], "note": "OpenAI project key env var"}
+{"id": "H2-151", "text": "aws_access_key_id = AKIAEXAMPLE000000000", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "AKIAEXAMPLE000000000"}], "note": "AWS access key id"}
+{"id": "H2-152", "text": "CI için şu token'ı kullandım: ghp_EXAMPLE00000000000000000000000000000", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "ghp_EXAMPLE00000000000000000000000000000"}], "note": "GitHub PAT"}
+{"id": "H2-153", "text": "Slack bot token xoxb-000000000000-0000000000000-EXAMPLEnotARealToken0 repoya commitlenmiş!", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "xoxb-000000000000-0000000000000-EXAMPLEnotARealToken0"}], "note": "Slack bot token"}
+{"id": "H2-154", "text": "Harita servisi anahtarı: AIzaEXAMPLE-EXAMPLE-EXAMPLE-00000000000", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "AIzaEXAMPLE-EXAMPLE-EXAMPLE-00000000000"}], "note": "Google API key"}
+{"id": "H2-155", "text": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1XzQ4MjEzIiwicm9sZSI6InRyYWRlciIsImlhdCI6MTc2MTYwMDAwMH0.EXAMPLE_signature_not_a_real_token_0000000", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1XzQ4MjEzIiwicm9sZSI6InRyYWRlciIsImlhdCI6MTc2MTYwMDAwMH0.EXAMPLE_signature_not_a_real_token_0000000"}], "note": "Bearer JWT; only token labelled"}
+{"id": "H2-156", "text": "https://api.ornek-veri.com/v2/quotes?symbol=THYAO&api_key=ahlwbefv2pgg8l3m71af9s7hb6vazh9e", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "ahlwbefv2pgg8l3m71af9s7hb6vazh9e"}], "note": "api_key query param; ticker in URL not PII"}
+{"id": "H2-157", "text": "DATABASE_URL=postgres://crm_user:ornekParola1@db.ornek.internal/crm", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "crm_user:ornekParola1@db.ornek.internal"}], "note": "connection string creds"}
+{"id": "H2-158", "text": "Sunucu anahtarı:\n-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLE000000\nEXAMPLEnotARealPrivateKeyEXAMPLE00000000=\n-----END RSA PRIVATE KEY-----", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLE000000\nEXAMPLEnotARealPrivateKeyEXAMPLE00000000=\n-----END RSA PRIVATE KEY-----"}], "note": "private key block"}
+{"id": "H2-159", "text": "Müşteri chat'e yanlışlıkla sk-EXAMPLElegacyKeyNotReal0000000000000000000000000 yapıştırdı.", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "sk-EXAMPLElegacyKeyNotReal0000000000000000000000000"}], "note": "legacy OpenAI key in chat"}
+{"id": "H2-160", "text": "{\"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtdXN0ZXJpXzc3ODM0MTIiLCJleHAiOjE3NjE3MDAwMDB9.EXAMPLE_signature_not_a_real_token_00000000\", \"token_type\": \"bearer\"}", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtdXN0ZXJpXzc3ODM0MTIiLCJleHAiOjE3NjE3MDAwMDB9.EXAMPLE_signature_not_a_real_token_00000000"}], "note": "JWT in JSON"}
+{"id": "H2-161", "text": "Müşterinin anlık konumu 41.0082, 28.9784 olarak paylaşıldı.", "entities": [{"entity": "KONUM", "value": "41.0082, 28.9784"}], "note": "customer location"}
+{"id": "H2-162", "text": "Evimin koordinatı 39.9208, 32.8541, kurye oraya gelsin.", "entities": [{"entity": "KONUM", "value": "39.9208, 32.8541"}], "note": "home coordinates first person"}
+{"id": "H2-163", "text": "Kuryeye konumumu atıyorum: 38.4237,27.1428", "entities": [{"entity": "KONUM", "value": "38.4237,27.1428"}], "note": "first-person location no space"}
+{"id": "H2-164", "text": "Müşterimiz Hasan Çelik diyabet hastası olduğu için şubeye gelemiyor.", "entities": [{"entity": "KISI", "value": "Hasan Çelik"}, {"entity": "OZEL_SAGLIK", "value": "diyabet hastası"}], "note": "health + name"}
+{"id": "H2-165", "text": "Ben hamileyim, doğum izni sürecinde kredi ödemelerimi erteleyebilir miyim?", "entities": [{"entity": "OZEL_SAGLIK", "value": "hamileyim"}], "note": "pregnancy first person"}
+{"id": "H2-166", "text": "Kan grubum A Rh+, sigorta formuna yazmam gerekiyor mu?", "entities": [{"entity": "OZEL_SAGLIK", "value": "A Rh+"}], "note": "blood group first person"}
+{"id": "H2-167", "text": "Ayşe Hanım'ın engelli raporu olduğu için ÖTV muafiyetli araç kredisi istiyor.", "entities": [{"entity": "KISI", "value": "Ayşe"}, {"entity": "OZEL_SAGLIK", "value": "engelli raporu"}], "note": "disability report"}
+{"id": "H2-168", "text": "Müşterimiz psikiyatrik tedavi gördüğünü, vekaleti kızına vermek istediğini söyledi.", "entities": [{"entity": "OZEL_SAGLIK", "value": "psikiyatrik tedavi"}], "note": "psychiatric treatment"}
+{"id": "H2-169", "text": "Kemal Arslan'ın parmak izi kaydı mobil uygulamaya tanımlandı.", "entities": [{"entity": "KISI", "value": "Kemal Arslan"}, {"entity": "OZEL_BIYOMETRIK", "value": "parmak izi kaydı"}], "note": "biometric fingerprint + name"}
+{"id": "H2-170", "text": "Benim yüz tanıma verisi kaydımın silinmesini talep ediyorum.", "entities": [{"entity": "OZEL_BIYOMETRIK", "value": "yüz tanıma verisi"}], "note": "face recognition data first person"}
+{"id": "H2-171", "text": "Müşterimiz Selin Aydın'ın genetik test sonucu hayat sigortası başvurusuna eklendi.", "entities": [{"entity": "KISI", "value": "Selin Aydın"}, {"entity": "OZEL_GENETIK", "value": "genetik test sonucu"}], "note": "genetic data"}
+{"id": "H2-172", "text": "Murat Doğan'ın adli sicil kaydı bulunduğundan yetkili imza başvurusu reddedildi.", "entities": [{"entity": "KISI", "value": "Murat Doğan"}, {"entity": "OZEL_CEZA", "value": "adli sicil kaydı"}], "note": "criminal record"}
+{"id": "H2-173", "text": "Müşterimiz dolandırıcılıktan 3 yıl hapis cezası almış, hesabına tedbir geldi.", "entities": [{"entity": "OZEL_CEZA", "value": "hapis cezası"}], "note": "prison sentence"}
+{"id": "H2-174", "text": "Burak Bey'in ehliyetine el konuldu, araç kredisi sigortası etkilenir mi?", "entities": [{"entity": "KISI", "value": "Burak"}, {"entity": "OZEL_CEZA", "value": "ehliyetine el konuldu"}], "note": "licence confiscated"}
+{"id": "H2-175", "text": "Müşterimiz Musevi olduğu için cumartesi günü görüşme yapmak istemiyor.", "entities": [{"entity": "OZEL_DIN", "value": "Musevi"}], "note": "religion"}
+{"id": "H2-176", "text": "Kürt kökenli müşterimiz Rojda Aksoy Kürtçe destek talep etti.", "entities": [{"entity": "OZEL_ETNIK", "value": "Kürt kökenli"}, {"entity": "KISI", "value": "Rojda Aksoy"}], "note": "ethnic origin + name"}
+{"id": "H2-177", "text": "Müşteri Garo Bey Ermeni asıllı olduğunu ve vakıf hesabı açmak istediğini belirtti.", "entities": [{"entity": "KISI", "value": "Garo"}, {"entity": "OZEL_ETNIK", "value": "Ermeni asıllı"}], "note": "ethnic origin"}
+{"id": "H2-178", "text": "Erkan Öztürk CHP üyesi olduğu için bağış makbuzu istiyor.", "entities": [{"entity": "KISI", "value": "Erkan Öztürk"}, {"entity": "OZEL_SIYASI", "value": "CHP üyesi"}], "note": "political party membership"}
+{"id": "H2-179", "text": "Ben Türk-İş üyesiyim, sendika aidatım otomatik ödensin.", "entities": [{"entity": "OZEL_UYELIK", "value": "Türk-İş üyesi"}], "note": "union membership first person"}
+{"id": "H2-180", "text": "Hüseyin Kılıç TEMA Vakfı üyesi, aidat talimatı verecek.", "entities": [{"entity": "KISI", "value": "Hüseyin Kılıç"}, {"entity": "OZEL_UYELIK", "value": "TEMA Vakfı üyesi"}], "note": "foundation membership"}
+{"id": "H2-181", "text": "Müşterimiz eşcinsel olduğunu ve partnerini lehtar yapmak istediğini söyledi.", "entities": [{"entity": "OZEL_CINSEL", "value": "eşcinsel"}], "note": "sexual orientation"}
+{"id": "H2-182", "text": "Zeynep Hanım başörtülü olduğu için kimlik fotoğrafında sorun yaşamış.", "entities": [{"entity": "KISI", "value": "Zeynep"}, {"entity": "OZEL_KIYAFET", "value": "başörtülü"}], "note": "dress/headscarf"}
+{"id": "H2-183", "text": "Cem Bey vicdani retçi olduğunu, savunma sanayi fonlarına yatırım yapmak istemediğini söyledi.", "entities": [{"entity": "KISI", "value": "Cem"}, {"entity": "OZEL_FELSEFI", "value": "vicdani retçi"}], "note": "philosophical conviction"}
+{"id": "H2-184", "text": "Müşterimiz alkol bağımlılığı tedavisi gördüğü için kart limitinin düşürülmesini istedi.", "entities": [{"entity": "OZEL_SAGLIK", "value": "alkol bağımlılığı tedavisi"}], "note": "addiction"}
+{"id": "H2-185", "text": "Hasta Tarık Ünal HIV pozitif olduğu için hayat sigortası reddedilmiş.", "entities": [{"entity": "KISI", "value": "Tarık Ünal"}, {"entity": "OZEL_SAGLIK", "value": "HIV pozitif"}], "note": "HIV status"}
+{"id": "H2-186", "text": "Ben her gün Xanax kullanıyorum, imza atarken elim titriyor.", "entities": [{"entity": "OZEL_SAGLIK", "value": "Xanax"}], "note": "medication first person"}
+{"id": "H2-187", "text": "MÜŞTERİ NURAY ÇAKIR KANSER TEDAVİSİ GÖRÜYOR, KREDİ ERTELEME TALEBİ VAR", "entities": [{"entity": "KISI", "value": "NURAY ÇAKIR"}, {"entity": "OZEL_SAGLIK", "value": "KANSER TEDAVİSİ"}], "note": "caps health"}
+{"id": "H2-188", "text": "Müşterimiz Hristiyan olduğu için yemin yerine beyan imzalamak istedi.", "entities": [{"entity": "OZEL_DIN", "value": "Hristiyan"}], "note": "religion 2"}
+{"id": "H2-189", "text": "Merhaba, ben Seren Altıntaş. TC'm 19808901792, telefonum 0538 430 39 52. Param TR97 0006 4055 3589 9699 5663 71 IBAN'ıma yatsın.", "entities": [{"entity": "KISI", "value": "Seren Altıntaş"}, {"entity": "TCKN", "value": "19808901792"}, {"entity": "TELEFON", "value": "0538 430 39 52"}, {"entity": "IBAN", "value": "TR97 0006 4055 3589 9699 5663 71"}], "note": "chat multi-entity"}
+{"id": "H2-190", "text": "{\"ad_soyad\": \"Kaan Yüksel\", \"tckn\": \"88398213158\", \"telefon\": \"+90 555 953 32 17\", \"eposta\": \"kaan.yuksel@example.com\"}", "entities": [{"entity": "KISI", "value": "Kaan Yüksel"}, {"entity": "TCKN", "value": "88398213158"}, {"entity": "TELEFON", "value": "+90 555 953 32 17"}, {"entity": "EPOSTA", "value": "kaan.yuksel@example.com"}], "note": "JSON KYC record"}
+{"id": "H2-191", "text": "| Alan | Değer |\n|---|---|\n| Ad Soyad | Melike Durmaz |\n| TCKN | 79803027118 |\n| Cep | 0541 801 73 21 |\n| Adres | Bahçelievler Mah. Şehit Halit Sok. No:9 D:11 Bahçelievler/İstanbul |", "entities": [{"entity": "KISI", "value": "Melike Durmaz"}, {"entity": "TCKN", "value": "79803027118"}, {"entity": "TELEFON", "value": "0541 801 73 21"}, {"entity": "ADRES", "value": "Bahçelievler Mah. Şehit Halit Sok. No:9 D:11 Bahçelievler/İstanbul"}], "note": "markdown KYC table"}
+{"id": "H2-192", "text": "Çağrı notu: Müşteri Yusuf Karaca (38950574562) kartı 4823 6057 2356 1893 kayboldu bildirdi, kart kapatıldı.", "entities": [{"entity": "KISI", "value": "Yusuf Karaca"}, {"entity": "TCKN", "value": "38950574562"}, {"entity": "KART", "value": "4823 6057 2356 1893"}], "note": "call note"}
+{"id": "H2-193", "text": "Ilgili: SEVGI ONAL, tel 0501 619 32 18, mail sevgi.onal@example.org", "entities": [{"entity": "KISI", "value": "SEVGI ONAL"}, {"entity": "TELEFON", "value": "0501 619 32 18"}, {"entity": "EPOSTA", "value": "sevgi.onal@example.org"}], "note": "ASCII caps name + contacts"}
+{"id": "H2-194", "text": "Yetkili: Cengiz Avcı (TCKN 16681627344), Firma VKN: 9781947301, Beyoğlu Vergi Dairesi", "entities": [{"entity": "KISI", "value": "Cengiz Avcı"}, {"entity": "TCKN", "value": "16681627344"}, {"entity": "VKN", "value": "9781947301"}], "note": "corporate authorized signatory"}
+{"id": "H2-195", "text": "Kira sözleşmesi: Kiracı Batuhan Ekinci, ödeme IBAN TR210020603066027363456599, ev sahibi tel 0212 868 59 89.", "entities": [{"entity": "KISI", "value": "Batuhan Ekinci"}, {"entity": "IBAN", "value": "TR210020603066027363456599"}, {"entity": "TELEFON", "value": "0212 868 59 89"}], "note": "rental contract"}
+{"id": "H2-196", "text": "Ad: Irmak\nSoyad: Bozkurt\nTC Kimlik No: 91991485860\nDoğum Tarihi: 09.06.1996\nMüşteri No: 5520193", "entities": [{"entity": "KISI", "value": "Irmak"}, {"entity": "KISI", "value": "Bozkurt"}, {"entity": "TCKN", "value": "91991485860"}, {"entity": "DOGUM_TARIHI", "value": "09.06.1996"}, {"entity": "MUSTERI_NO", "value": "5520193"}], "note": "form split fields"}
+{"id": "H2-197", "text": "Mesaj: Sayın Oya Kalkan, 0506 579 64 69 numaralı hattınıza tanımlı OTP iptal edildi.", "entities": [{"entity": "KISI", "value": "Oya Kalkan"}, {"entity": "TELEFON", "value": "0506 579 64 69"}], "note": "SMS template"}
+{"id": "H2-198", "text": "FATURA KESİLECEK KİŞİ: DOĞAN ERSOY, TCKN 96269588700, ÖDEME HESABI TR760006700666840292187051", "entities": [{"entity": "KISI", "value": "DOĞAN ERSOY"}, {"entity": "TCKN", "value": "96269588700"}, {"entity": "IBAN", "value": "TR760006700666840292187051"}], "note": "caps invoicing"}
+{"id": "H2-199", "text": "Login fail x5 — user: berkay.oz@example.org, src 203.0.113.47", "entities": [{"entity": "EPOSTA", "value": "berkay.oz@example.org"}, {"entity": "IP", "value": "203.0.113.47"}], "note": "security log email + IP"}
+{"id": "H2-200", "text": "Kurye Ramazan Usta'ya 0552 565 61 99 numarasından ulaşabilirsiniz.", "entities": [{"entity": "KISI", "value": "Ramazan"}, {"entity": "TELEFON", "value": "0552 565 61 99"}], "note": "Usta title, Ramazan as name"}
+{"id": "H2-201", "text": "tckn=93142968260&gsm=05364773257&ad=caner", "entities": [{"entity": "TCKN", "value": "93142968260"}, {"entity": "TELEFON", "value": "05364773257"}, {"entity": "KISI", "value": "caner"}], "note": "query string form"}
+{"id": "H2-202", "text": "Ben Gökhan Tuna, kartım 4692168407072958 çalındı, numaram 0533 348 33 41, acil kapatın!", "entities": [{"entity": "KISI", "value": "Gökhan Tuna"}, {"entity": "KART", "value": "4692168407072958"}, {"entity": "TELEFON", "value": "0533 348 33 41"}], "note": "stolen card chat"}
+{"id": "H2-203", "text": "Vasi Nermin Kaplan, kısıtlı Şükrü Kaplan adına işlem yapacak. Kısıtlının TCKN'si 72315813392.", "entities": [{"entity": "KISI", "value": "Nermin Kaplan"}, {"entity": "KISI", "value": "Şükrü Kaplan"}, {"entity": "TCKN", "value": "72315813392"}], "note": "guardian / ward"}
+{"id": "H2-204", "text": "Toplantı yeri müşterinin ofisi: Esentepe Mah. Büyükdere Cad. No:199 Kat:6 Şişli/İstanbul; katılımcı Levent Uçar.", "entities": [{"entity": "ADRES", "value": "Esentepe Mah. Büyükdere Cad. No:199 Kat:6 Şişli/İstanbul"}, {"entity": "KISI", "value": "Levent Uçar"}], "note": "address + participant"}
+{"id": "H2-205", "text": "Müşterimiz Ece Toprak'ın konumu 40.1885, 29.0610; kuryeyle kart teslim edilecek.", "entities": [{"entity": "KISI", "value": "Ece Toprak"}, {"entity": "KONUM", "value": "40.1885, 29.0610"}], "note": "name + location"}
+{"id": "H2-206", "text": "Volkan Bey'in eşi Sibel Hanım aradı, 0545 852 39 67 numarasına dönüş istiyor.", "entities": [{"entity": "KISI", "value": "Volkan"}, {"entity": "KISI", "value": "Sibel"}, {"entity": "TELEFON", "value": "0545 852 39 67"}], "note": "two honorific first names"}
+{"id": "H2-207", "text": "Mirasçılık belgesindeki varis: Ebru Tan, TC 28745411080, doğum yeri Sivas.", "entities": [{"entity": "KISI", "value": "Ebru Tan"}, {"entity": "TCKN", "value": "28745411080"}, {"entity": "DOGUM_YERI", "value": "Sivas"}], "note": "heir record"}
+{"id": "H2-208", "text": "Otomatik ödeme talimatı: kart 9792 6105 3575 5804 yerine IBAN TR89 0006 2051 5569 4263 6077 28 kullanılsın.", "entities": [{"entity": "KART", "value": "9792 6105 3575 5804"}, {"entity": "IBAN", "value": "TR89 0006 2051 5569 4263 6077 28"}], "note": "card + IBAN"}
+{"id": "H2-209", "text": "Eski hesap no: 7781234, yeni müşteri no: 99120034", "entities": [{"entity": "HESAP_NO", "value": "7781234"}, {"entity": "MUSTERI_NO", "value": "99120034"}], "note": "account + customer no"}
+{"id": "H2-210", "text": "KVKK başvurusu: Başvuran Seda Güler, kimlik numarası 67503486076, verilerimin silinmesini istiyorum.", "entities": [{"entity": "KISI", "value": "Seda Güler"}, {"entity": "TCKN", "value": "67503486076"}], "note": "KVKK request"}
+{"id": "H2-211", "text": "Kullanıcı adım tolgaarslan, şifre: Fener1907!, giriş yapamıyorum.", "entities": [{"entity": "SIFRE", "value": "Fener1907!"}], "note": "password in chat (username not labelled)"}
+{"id": "H2-212", "text": "TALEP SAHİBİ: GÜLAY ŞİMŞEK / GSM: 0549 472 63 38 / KONU: TEMETTÜ", "entities": [{"entity": "KISI", "value": "GÜLAY ŞİMŞEK"}, {"entity": "TELEFON", "value": "0549 472 63 38"}], "note": "caps request"}
+{"id": "H2-213", "text": "yazilimci arkadas api_key=9f8e7d6c5b4a39281706f5e4d3c2b1a0 diye loga yazdirmis", "entities": [{"entity": "GIZLI_ANAHTAR", "value": "9f8e7d6c5b4a39281706f5e4d3c2b1a0"}], "note": "api_key value in ASCII chat"}
+{"id": "H2-214", "text": "Okul taksiti için alıcı: Doruk Eğitim Kurumları, IBAN TR150001504180407717917153. Veli: Aslı Koçer.", "entities": [{"entity": "IBAN", "value": "TR150001504180407717917153"}, {"entity": "KISI", "value": "Aslı Koçer"}], "note": "company payee + parent name"}
+{"id": "H2-215", "text": "Pasaport: P4412087, Uyruk: Azerbaycan, Ad: Elvin Mammadov", "entities": [{"entity": "PASAPORT", "value": "P4412087"}, {"entity": "KISI", "value": "Elvin Mammadov"}], "note": "foreign customer passport"}
+{"id": "H2-216", "text": "Murat'ın numarası 0535 520 40 70, ondan teyit alın.", "entities": [{"entity": "KISI", "value": "Murat"}, {"entity": "TELEFON", "value": "0535 520 40 70"}], "note": "first name with suffix + phone"}
+{"id": "H2-217", "text": "Kaza tutanağı: sürücü Onur Kurt, 34 MK 7781 plakalı araç, ehliyet no 590214.", "entities": [{"entity": "KISI", "value": "Onur Kurt"}, {"entity": "PLAKA", "value": "34 MK 7781"}, {"entity": "EHLIYET", "value": "590214"}], "note": "accident report"}
+{"id": "H2-218", "text": "Hasta Nilay Er'in TCKN'si 44869502312; kan grubu 0 Rh-, sağlık sigortası tazminatı için.", "entities": [{"entity": "KISI", "value": "Nilay Er"}, {"entity": "TCKN", "value": "44869502312"}, {"entity": "OZEL_SAGLIK", "value": "0 Rh-"}], "note": "health + id"}
+{"id": "H2-219", "text": "MKK yatırımcı sicil 30019283, hesap sahibi Kadir Tok.", "entities": [{"entity": "MKK_SICIL", "value": "30019283"}, {"entity": "KISI", "value": "Kadir Tok"}], "note": "MKK + name"}
+{"id": "H2-220", "text": "Duygu'nun yeni numarası 0532 206 75 26, eskisini silin.", "entities": [{"entity": "KISI", "value": "Duygu"}, {"entity": "TELEFON", "value": "0532 206 75 26"}], "note": "name that is also a word (Duygu) + phone"}
+{"id": "H2-221", "text": "Müşteri Can Özer cezaevinde olduğundan vekili Av. Sena Uysal işlem yapacak.", "entities": [{"entity": "KISI", "value": "Can Özer"}, {"entity": "OZEL_CEZA", "value": "cezaevinde"}, {"entity": "KISI", "value": "Sena Uysal"}], "note": "prison + lawyer"}
+{"id": "H2-222", "text": "Poliçe no: KSK-2026-778120, sigortalı Bahar Ilgaz.", "entities": [{"entity": "POLICE_NO", "value": "KSK-2026-778120"}, {"entity": "KISI", "value": "Bahar Ilgaz"}], "note": "alnum policy number + name"}
+{"id": "H2-223", "text": "Serbest meslek makbuzu: Mali Müşavir Tamer Sezer, VKN 4881915321, ödeme TR11 0006 2002 3872 8433 8316 79", "entities": [{"entity": "KISI", "value": "Tamer Sezer"}, {"entity": "VKN", "value": "4881915321"}, {"entity": "IBAN", "value": "TR11 0006 2002 3872 8433 8316 79"}], "note": "professional title + VKN + IBAN"}
+{"id": "H2-224", "text": "Gönderen: Melis <melis.aydemir@firma.example> Konu: İmza sirküleri", "entities": [{"entity": "KISI", "value": "Melis"}, {"entity": "EPOSTA", "value": "melis.aydemir@firma.example"}], "note": "email header first name"}
+{"id": "H2-225", "text": "Mustafa abi 0538 502 74 66 numarasından yazıyor, kimlik doğrulaması yapıldı.", "entities": [{"entity": "KISI", "value": "Mustafa"}, {"entity": "TELEFON", "value": "0538 502 74 66"}], "note": "abi kinship title excluded"}
+{"id": "H2-226", "text": "Kimlik No'su 82696472880 olan Volkan Akgün için SGK sicil 3412098811234 sorgulandı.", "entities": [{"entity": "TCKN", "value": "82696472880"}, {"entity": "KISI", "value": "Volkan Akgün"}, {"entity": "SGK", "value": "3412098811234"}], "note": "TCKN + SGK"}
+{"id": "H2-227", "text": "THYAO 312,50 TL'den 1.250 lot alış emri gerçekleşti.", "entities": [], "note": "ticker, price, lot"}
+{"id": "H2-228", "text": "GARAN hissesinde %3,2 yükseliş var, BIST 100 endeksi 10.245 puanda kapandı.", "entities": [], "note": "ticker + index"}
+{"id": "H2-229", "text": "ISIN kodu TRAAKBNK91N6 olan pay için temettü ödemesi 15 Mayıs'ta yapılacak.", "entities": [], "note": "ISIN + non-birth date"}
+{"id": "H2-230", "text": "F_XU0301226 kontratında teminat tamamlama çağrısı geldi.", "entities": [], "note": "VIOP contract"}
+{"id": "H2-231", "text": "Sipariş no 43077598523 ile ilgili iade süreci başlatıldı.", "entities": [], "note": "11-digit order no failing TCKN checksum"}
+{"id": "H2-232", "text": "Fiş no: 0012345, tutar 1.450,00 TL", "entities": [], "note": "receipt number"}
+{"id": "H2-233", "text": "Takip numaranız 7300128845123; kargonuz yolda.", "entities": [], "note": "13-digit tracking number"}
+{"id": "H2-234", "text": "Dosya no 2025/1432 E. sayılı icra dosyası kapatıldı.", "entities": [], "note": "court file number, no person"}
+{"id": "H2-235", "text": "IBAN TR01 0006 7054 6822 4864 5021 89 hatalı görünüyor, kontrol basamağı tutmuyor.", "entities": [], "note": "invalid IBAN checksum"}
+{"id": "H2-236", "text": "Test kartı 4701 9423 1558 0706 Luhn kontrolünden geçmedi.", "entities": [], "note": "card-like failing Luhn"}
+{"id": "H2-237", "text": "Kart: **** **** **** 4821 ile yapılan işlem onaylandı.", "entities": [], "note": "masked card"}
+{"id": "H2-238", "text": "Kartınızın son dört hanesi 7735 olan kartla 249,90 TL harcama yapıldı.", "entities": [], "note": "last four digits"}
+{"id": "H2-239", "text": "15.03.2025 tarihli ekstreniz hazır.", "entities": [], "note": "date without birth context"}
+{"id": "H2-240", "text": "Son ödeme tarihi 12/11/2026, asgari tutar 3.200 TL.", "entities": [], "note": "due date"}
+{"id": "H2-241", "text": "Uygulama sürümü 10.2.1.4 olarak güncellendi.", "entities": [], "note": "version string looks like IP"}
+{"id": "H2-242", "text": "Matriks IQ v1.2.3.4 build notları yayımlandı.", "entities": [], "note": "v-prefixed version"}
+{"id": "H2-243", "text": "Şubemizin koordinatları 41.0431, 29.0099; otopark mevcut.", "entities": [], "note": "coordinates of branch, no person"}
+{"id": "H2-244", "text": "USD/TRY 41,25 seviyesinde, EUR/USD 1.0845.", "entities": [], "note": "currency pairs"}
+{"id": "H2-245", "text": "Koç Holding'in üçüncü çeyrek bilançosu beklentilerin üzerinde geldi.", "entities": [], "note": "company name"}
+{"id": "H2-246", "text": "Türk Hava Yolları yolcu sayısını açıkladı.", "entities": [], "note": "company name"}
+{"id": "H2-247", "text": "Ziraat Bankası ve Halkbank kredi faizlerini düşürdü.", "entities": [], "note": "bank names"}
+{"id": "H2-248", "text": "Deniz Yatırım'ın aracı kurum raporu yayımlandı.", "entities": [], "note": "brokerage name with person-like word"}
+{"id": "H2-249", "text": "Merkez Bankası politika faizini %35'te sabit tuttu.", "entities": [], "note": "central bank"}
+{"id": "H2-250", "text": "SPK, halka arz başvurusunu onayladı.", "entities": [], "note": "regulator"}
+{"id": "H2-251", "text": "Umut ediyoruz ki piyasalar yılın son çeyreğinde toparlanır.", "entities": [], "note": "Umut as common word"}
+{"id": "H2-252", "text": "Barış görüşmeleri piyasaları olumlu etkiledi.", "entities": [], "note": "Barış as common word"}
+{"id": "H2-253", "text": "Deniz kenarında yeni bir şube açılıyor.", "entities": [], "note": "Deniz as common word"}
+{"id": "H2-254", "text": "Kaya gibi sağlam bir bilanço sundular.", "entities": [], "note": "Kaya as common word"}
+{"id": "H2-255", "text": "İstanbul şubemiz cumartesi günleri kapalıdır.", "entities": [], "note": "city alone"}
+{"id": "H2-256", "text": "Bağdat Caddesi trafiği yüzünden toplantıya geç kaldım.", "entities": [], "note": "street alone"}
+{"id": "H2-257", "text": "Kanser araştırması yayımlandı, ilaç hisseleri yükseldi.", "entities": [], "note": "health word in news"}
+{"id": "H2-258", "text": "E-posta adresinde (at) işareti yerine @ kullanmanız gerekir.", "entities": [], "note": "(at) mention without email"}
+{"id": "H2-259", "text": "sk-test anahtarını üretim ortamında kullanmayın.", "entities": [], "note": "sk-test without key body"}
+{"id": "H2-260", "text": "Bearer token gerekiyor, header'a eklemeyi unutmayın.", "entities": [], "note": "Bearer without token"}
+{"id": "H2-261", "text": "Eşim bugün gelmedi, işlemi yarın yaparız.", "entities": [], "note": "kinship word alone"}
+{"id": "H2-262", "text": "Çağrı merkezimize 444 25 25 numarasından ulaşabilirsiniz.", "entities": [], "note": "444 corporate line"}
+{"id": "H2-263", "text": "Ahmet Yılmaz Holding A.Ş. hisseleri tavan oldu.", "entities": [], "note": "company containing person name"}
+{"id": "H2-264", "text": "Atatürk Havalimanı'ndaki şubemiz taşındı.", "entities": [], "note": "historical figure in place name"}
+{"id": "H2-265", "text": "Sabancı Holding ve Yıldız Holding temettü dağıtacak.", "entities": [], "note": "holding names"}
+{"id": "H2-266", "text": "CHP kurultayı toplandı, piyasalar tepki vermedi.", "entities": [], "note": "political party in news"}
+{"id": "H2-267", "text": "Sendikalar toplu sözleşme için masaya oturdu.", "entities": [], "note": "union in news"}
+{"id": "H2-268", "text": "Parmak izi ile giriş özelliği mobil uygulamamıza eklendi.", "entities": [], "note": "biometric feature, no person"}
+{"id": "H2-269", "text": "Yüz tanıma sistemi pilot şubelerde test ediliyor.", "entities": [], "note": "biometric system news"}
+{"id": "H2-270", "text": "Adli sicil kaydı belgesi e-Devlet üzerinden alınabilir.", "entities": [], "note": "criminal record word, procedure"}
+{"id": "H2-271", "text": "Ramazan Bayramı nedeniyle piyasalar 3,5 gün kapalı olacak.", "entities": [], "note": "religious holiday; Ramazan not a person"}
+{"id": "H2-272", "text": "Hamilelik izni yönetmeliğinde değişiklik yapıldı.", "entities": [], "note": "health word in regulation news"}
+{"id": "H2-273", "text": "Diyabet hastalarının sayısı son on yılda iki katına çıktı (TÜİK).", "entities": [], "note": "health statistic, no person"}
+{"id": "H2-274", "text": "Kan bağışı kampanyamıza tüm çalışanlar davetlidir.", "entities": [], "note": "health word, no person"}
+{"id": "H2-275", "text": "Seçim sonuçları borsayı olumlu etkiledi.", "entities": [], "note": "political news"}
+{"id": "H2-276", "text": "Kürt sorunu üzerine panel düzenlendi.", "entities": [], "note": "ethnic word in news"}
+{"id": "H2-277", "text": "Şüpheli şahıs hakkında soruşturma başlatıldı.", "entities": [], "note": "şüpheli, no person"}
+{"id": "H2-278", "text": "Referans kodu 4240317807 ile EFT sorgulanabilir.", "entities": [], "note": "10-digit reference without tax context"}
+{"id": "H2-279", "text": "Bayram tatili nedeniyle valör tarihi kayacak.", "entities": [], "note": "Bayram as word"}
+{"id": "H2-280", "text": "Güneş enerjisi hisseleri bugün %5 yükseldi.", "entities": [], "note": "Güneş as word"}
+{"id": "H2-281", "text": "Çiçek siparişi kurumsal kartla ödendi.", "entities": [], "note": "Çiçek as word"}
+{"id": "H2-282", "text": "Ekim ayı enflasyonu %2,1 olarak açıklandı.", "entities": [], "note": "macro data"}
+{"id": "H2-283", "text": "Kartal şubesi yeni adresine taşındı.", "entities": [], "note": "district name alone"}
+{"id": "H2-284", "text": "{\"status\": \"ok\", \"order_id\": \"ORD-2026-001245\", \"amount\": 1500.00, \"currency\": \"TRY\"}", "entities": [], "note": "JSON order no PII"}
+{"id": "H2-285", "text": "| Sembol | Son | Değişim |\n|---|---|---|\n| ASELS | 148,20 | %1,4 |\n| KCHOL | 192,10 | -%0,8 |\n| SISE | 44,36 | %0,2 |", "entities": [], "note": "markdown ticker table"}
+{"id": "H2-286", "text": "Fon kodu AFT, birim fiyat 0,452117 TL.", "entities": [], "note": "fund code"}
+{"id": "H2-287", "text": "Kredi notunuz 1450 olarak hesaplandı.", "entities": [], "note": "credit score"}
+{"id": "H2-288", "text": "Poliçe yenileme tarihiniz yaklaşıyor.", "entities": [], "note": "policy word no number"}
+{"id": "H2-289", "text": "MKK sicil numaranızı e-Devlet'ten öğrenebilirsiniz.", "entities": [], "note": "MKK label no value"}
+{"id": "H2-290", "text": "Müşteri no alanı zorunludur.", "entities": [], "note": "label no value"}
+{"id": "H2-291", "text": "Doğum tarihi alanı GG.AA.YYYY formatında olmalıdır.", "entities": [], "note": "birth date label with format only"}
+{"id": "H2-292", "text": "SAYIN MÜŞTERİMİZ, 31.12.2026 TARİHİNE KADAR BELGELERİNİZİ GÜNCELLEYİNİZ.", "entities": [], "note": "caps notice no name"}
+{"id": "H2-293", "text": "hesabima para gelmedi, eft saat 16:45te yapildi", "entities": [], "note": "ASCII complaint no PII"}
+{"id": "H2-294", "text": "Fatih Sultan Mehmet Köprüsü trafiği nedeniyle kurye gecikti.", "entities": [], "note": "historical figure landmark"}
+{"id": "H2-295", "text": "Mimar Sinan Güzel Sanatlar Üniversitesi ile burs anlaşması imzalandı.", "entities": [], "note": "historical figure in institution"}
+{"id": "H2-296", "text": "Yunus Emre Enstitüsü'ne bağış yapıldı.", "entities": [], "note": "historical figure institution"}
+{"id": "H2-297", "text": "Şifre en az 8 karakter, bir büyük harf ve bir rakam içermelidir.", "entities": [], "note": "password policy no value"}
+{"id": "H2-298", "text": "Parolanızı kimseyle paylaşmayın.", "entities": [], "note": "password advice"}
+{"id": "H2-299", "text": "IBAN alanı boş bırakılamaz.", "entities": [], "note": "IBAN label"}
+{"id": "H2-300", "text": "TC kimlik numaranızı 11 hane olarak giriniz.", "entities": [], "note": "TCKN instruction no value"}
+{"id": "H2-301", "text": "Kayıt no 99248238491 sistemde bulunamadı.", "entities": [], "note": "11-digit failing checksum"}
+{"id": "H2-302", "text": "Fatura numarası 69909856173, KDV dahil 2.360 TL.", "entities": [], "note": "invoice number 11-digit invalid"}
+{"id": "H2-303", "text": "Sözleşme no: 7202985154", "entities": [], "note": "10-digit, no tax context, invalid VKN anyway"}
+{"id": "H2-304", "text": "Ticket #48213 kapatıldı, müşteri memnun.", "entities": [], "note": "ticket number"}
+{"id": "H2-305", "text": "Emir numarası 20261028-000451 iptal edildi.", "entities": [], "note": "order id with date"}
+{"id": "H2-306", "text": "Saat 14:30'da yatırım komitesi toplanacak.", "entities": [], "note": "time"}
+{"id": "H2-307", "text": "Hesabınıza 2.500 TL yatırıldı, kullanılabilir bakiye 18.240,55 TL.", "entities": [], "note": "amounts"}
+{"id": "H2-308", "text": "XU030 vadeli kontrat 12.450 puandan işlem görüyor.", "entities": [], "note": "index futures"}
+{"id": "H2-309", "text": "PETKM'de 50.000 lot satış baskısı var.", "entities": [], "note": "ticker lots"}
+{"id": "H2-310", "text": "BIST'te işlem saatleri 10:00-18:00 arasıdır.", "entities": [], "note": "hours"}
+{"id": "H2-311", "text": "Sunucu 443 portu üzerinden yanıt veriyor, TLS 1.3 aktif.", "entities": [], "note": "port and TLS version"}
+{"id": "H2-312", "text": "Python 3.12.10 sürümüne geçildi.", "entities": [], "note": "version"}
+{"id": "H2-313", "text": "Rapor şablonu sürüm 2.4.1.0 ile hazırlandı.", "entities": [], "note": "sürüm-prefixed dotted version"}
+{"id": "H2-314", "text": "Altın ons 2.650 dolar, gram altın 3.410 TL.", "entities": [], "note": "commodity prices"}
+{"id": "H2-315", "text": "Yeni kart başvurusu için en yakın şubeye uğrayabilirsiniz.", "entities": [], "note": "generic"}
+{"id": "H2-316", "text": "Ankara, İzmir ve Bursa bölge müdürlükleri birleşti.", "entities": [], "note": "city names"}
+{"id": "H2-317", "text": "Konum servisleri kapalıyken uygulama çalışmaz.", "entities": [], "note": "location word no coordinate"}
+{"id": "H2-318", "text": "Merkez üssü 38.2, 37.1 koordinatlarında olan deprem sonrası şubeler kapandı.", "entities": [], "note": "coordinates without person"}
+{"id": "H2-319", "text": "Teknik destek için destek ekibimize uygulama içinden yazabilirsiniz.", "entities": [], "note": "generic support"}
+{"id": "H2-320", "text": "Engelli bireyler için şubelerimize rampa yapıldı.", "entities": [], "note": "disability word, no identified person"}
+{"id": "H2-321", "text": "Gözaltı haberleri piyasada dalgalanmaya yol açtı.", "entities": [], "note": "gözaltı news"}
+{"id": "H2-322", "text": "Vakıf üyeliği ile ilgili yönetmelik Resmî Gazete'de yayımlandı.", "entities": [], "note": "membership word news"}
+{"id": "H2-323", "text": "Başörtüsü serbestisi üzerine panel düzenlendi.", "entities": [], "note": "dress word news"}
+{"id": "H2-324", "text": "Tarım kredi kooperatifleri faiz oranlarını açıkladı.", "entities": [], "note": "institution"}
+{"id": "H2-325", "text": "Lale Devri temalı reklam kampanyası başladı.", "entities": [], "note": "Lale as historical era word"}
+{"id": "H2-326", "text": "Mehmetçik Vakfı'na bağış kampanyası başladı.", "entities": [], "note": "Mehmet-like word in foundation name"}
+{"id": "H2-327", "text": "Ayvalık zeytinyağı ihracatı arttı.", "entities": [], "note": "place name"}
+{"id": "H2-328", "text": "Akbank ve Garanti BBVA yeni bono ihracını tamamladı.", "entities": [], "note": "bank names"}
+{"id": "H2-329", "text": "Erdemir hisseleri çelik fiyatlarıyla yükseldi.", "entities": [], "note": "ticker/company Erdemir"}
+{"id": "H2-330", "text": "Polat Holding ile Doğan Holding arasında birleşme görüşülüyor.", "entities": [], "note": "holding names with surname-like words"}
+{"id": "H2-331", "text": "Saygılarımızla,\nMüşteri Hizmetleri Ekibi", "entities": [], "note": "signature without name"}
+{"id": "H2-332", "text": "lütfen kimlik fotokopinizi şubeye getiriniz", "entities": [], "note": "lowercase generic request"}
+{"id": "H2-333", "text": "Sertifika parmak izi SHA-256 ile doğrulandı.", "entities": [], "note": "parmak izi as crypto fingerprint"}
+{"id": "H2-334", "text": "Ödeme ekranında 3D Secure doğrulaması zorunlu hale geldi.", "entities": [], "note": "generic"}
+{"id": "H2-335", "text": "Eft limitiniz günlük 500.000 TL'dir.", "entities": [], "note": "limit"}
+{"id": "H2-336", "text": "Kampanya kodu 5380981709154269 geçersiz.", "entities": [], "note": "16-digit failing Luhn"}
+{"id": "H2-337", "text": "KDV oranı %20, ÖTV oranı %80 olarak uygulanır.", "entities": [], "note": "tax rates, no VKN"}
+{"id": "H2-338", "text": "Vergi dairesi işlemleri için e-Devlet kullanılabilir.", "entities": [], "note": "tax word, no number"}
+{"id": "H2-339", "text": "Hesap özeti için mobil uygulamaya giriş yapın.", "entities": [], "note": "generic"}
+{"id": "H2-340", "text": "Swift kodu TGBATRISXXX olan banka şubesine gönderim yapıldı.", "entities": [], "note": "SWIFT BIC code"}
+{"id": "H2-341", "text": "Bugün Kadıköy'de yoğunluk var, şube randevuları kaydırıldı.", "entities": [], "note": "district alone"}
+{"id": "H2-342", "text": "Gül Sokak üzerindeki ATM arızalı.", "entities": [], "note": "street name alone"}
+{"id": "H2-343", "text": "Yıldız Teknik Üniversitesi stajyerleri işe başladı.", "entities": [], "note": "Yıldız as institution"}
+{"id": "H2-344", "text": "Aslan payı yine bankalara düştü.", "entities": [], "note": "Aslan idiom"}
+{"id": "H2-345", "text": "Ümit verici bir çeyrek geçirdik, kâr %12 arttı.", "entities": [], "note": "Ümit as common word"}

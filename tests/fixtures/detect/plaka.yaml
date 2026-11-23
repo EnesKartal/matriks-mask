@@ -1,0 +1,109 @@
+# detect/plaka — 25 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: PLAKA-001
+  text: Aracın plakası 34 ABC 123 olarak kayıtlı.
+  expect:
+  - entity: PLAKA
+    value: 34 ABC 123
+- id: PLAKA-002
+  text: Aracın plakası 06 A 1234 olarak kayıtlı.
+  expect:
+  - entity: PLAKA
+    value: 06 A 1234
+- id: PLAKA-003
+  text: Aracın plakası 35 AB 1234 olarak kayıtlı.
+  expect:
+  - entity: PLAKA
+    value: 35 AB 1234
+- id: PLAKA-004
+  text: Aracın plakası 16 AB 123 olarak kayıtlı.
+  expect:
+  - entity: PLAKA
+    value: 16 AB 123
+- id: PLAKA-005
+  text: Aracın plakası 01 A 12345 olarak kayıtlı.
+  expect:
+  - entity: PLAKA
+    value: 01 A 12345
+- id: PLAKA-006
+  text: Aracın plakası 81 ZZ 999 olarak kayıtlı.
+  expect:
+  - entity: PLAKA
+    value: 81 ZZ 999
+- id: PLAKA-007
+  text: Aracın plakası 34-ABC-123 olarak kayıtlı.
+  expect:
+  - entity: PLAKA
+    value: 34-ABC-123
+- id: PLAKA-008
+  text: Aracın plakası 34 TAB 12 olarak kayıtlı.
+  expect:
+  - entity: PLAKA
+    value: 34 TAB 12
+- id: PLAKA-009
+  text: Aracın plakası 06 CD 123 olarak kayıtlı.
+  expect:
+  - entity: PLAKA
+    value: 06 CD 123
+- id: PLAKA-010
+  text: 'Plaka: 34ABC123'
+  expect:
+  - entity: PLAKA
+    value: 34ABC123
+- id: PLAKA-011
+  text: Araç 06AB1234 servisteydi.
+  expect:
+  - entity: PLAKA
+    value: 06AB1234
+- id: PLAKA-012
+  text: Kod 34ABC123 depo etiketi.
+  expect: []
+- id: PLAKA-013
+  text: 00 AB 123 geçersiz il.
+  expect: []
+- id: PLAKA-014
+  text: 82 AB 123 geçersiz il.
+  expect: []
+- id: PLAKA-015
+  text: 34 QWX 123 yasak harf.
+  expect: []
+- id: PLAKA-016
+  text: 34 BIN 500 lot.
+  expect: []
+- id: PLAKA-017
+  text: 34 THYAO 12 lot.
+  expect: []
+- id: PLAKA-018
+  text: 12 05 2024 tarih.
+  expect: []
+- id: PLAKA-019
+  text: 34 TL 100 fiyat.
+  expect: []
+- id: PLAKA-020
+  text: 34 A 123 eksik rakam.
+  expect: []
+- id: PLAKA-021
+  text: 'İki araç: 34 ABC 123 ve 06 DEF 45.'
+  expect:
+  - entity: PLAKA
+    value: 34 ABC 123
+  - entity: PLAKA
+    value: 06 DEF 45
+- id: PLAKA-022
+  text: Plakası 34 ABC 123'tür.
+  expect:
+  - entity: PLAKA
+    value: 34 ABC 123
+- id: PLAKA-023
+  text: '{"plaka":"35 KL 2468"}'
+  expect:
+  - entity: PLAKA
+    value: 35 KL 2468
+- id: PLAKA-024
+  text: Ruhsat sahibi aracın plakası 41 PR 567.
+  expect:
+  - entity: PLAKA
+    value: 41 PR 567
+- id: PLAKA-025
+  text: Plaka 34 ŞK 123 Türkçe harf içeremez.
+  expect: []

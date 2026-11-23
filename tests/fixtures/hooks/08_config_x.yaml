@@ -1,0 +1,49 @@
+# Yapılandırma hataları (başlangıçta durur, ileti değer içermez). Elle yazıldı; tüm değerler sentetiktir.
+- id: HOOK-081
+  config: {entities: {TCKNN: IGNORE}}
+  request: {model: m}
+  expect_config_error: true
+- id: HOOK-082
+  config: {streaming: {holdback_max_chars: 0}}
+  request: {model: m}
+  expect_config_error: true
+- id: HOOK-083
+  config: {session_store: {ttl_seconds: -1}}
+  request: {model: m}
+  expect_config_error: true
+- id: HOOK-084
+  config: {hash_secret: 123456789, placeholder_id: hmac}
+  request: {model: m}
+  expect_config_error: true
+  forbid_in_error: ["123456789"]
+- id: HOOK-085
+  config: {session_secret: "kisa-sir-degeri"}
+  request: {model: m}
+  expect_config_error: true
+  forbid_in_error: ["kisa-sir-degeri"]
+- id: HOOK-086
+  config: {allow_list: ["17291716060"]}
+  request: {model: m}
+  expect_config_error: true
+  forbid_in_error: ["17291716060"]
+- id: HOOK-087
+  config: {session_store: {backend: redis, require_tls: true, redis_url: "redis://h:6379/0"}, session_secret: "ssssssssssssssssssssssssssssssssssssssss"}
+  request: {model: m}
+  expect_config_error: true
+- id: HOOK-088
+  config: {max_text_chars: 5000, max_request_chars: 4000}
+  request: {model: m}
+  expect_config_error: true
+- id: HOOK-089
+  config: {extra_regex: [{entity: X_NO, pattern: "([0-9]"}]}
+  request: {model: m}
+  expect_config_error: true
+- id: HOOK-090
+  config: {profile: ultra}
+  request: {model: m}
+  expect_config_error: true
+- id: HOOK-091
+  config: {label_aliases: {}}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ben Ayşe Demir."}]}
+  llm_response: {content: "<PERSON_1> geldi, <KISI_1> geldi"}
+  expect_client: {choices.0.message.content: "<PERSON_1> geldi, Ayşe Demir geldi"}

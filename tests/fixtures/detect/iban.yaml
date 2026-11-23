@@ -1,0 +1,136 @@
+# detect/iban — 25 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: IBAN-001
+  text: 'IBAN: TR33 0006 1005 1978 6457 8413 26'
+  expect:
+  - entity: IBAN
+    value: TR33 0006 1005 1978 6457 8413 26
+  masked: 'IBAN: <IBAN_1>'
+- id: IBAN-002
+  text: IBAN TR920006101532418854210086 hesabına gönderin.
+  expect:
+  - entity: IBAN
+    value: TR920006101532418854210086
+- id: IBAN-003
+  text: 'Hesap: TR96-0001-0060-9315-6159-5260-63'
+  expect:
+  - entity: IBAN
+    value: TR96-0001-0060-9315-6159-5260-63
+- id: IBAN-004
+  text: 'iban: tr09 0001 2095 3386 8620 6433 63'
+  expect:
+  - entity: IBAN
+    value: tr09 0001 2095 3386 8620 6433 63
+- id: IBAN-005
+  text: Alıcı IBAN'ı TR930001506680172517175385'dir.
+  expect:
+  - entity: IBAN
+    value: TR930001506680172517175385
+- id: IBAN-006
+  text: 'IBAN numaram
+
+    TR02 0004 6062 5117 1444 8155 41
+
+    teşekkürler'
+  expect:
+  - entity: IBAN
+    value: TR02 0004 6062 5117 1444 8155 41
+- id: IBAN-007
+  text: 'İki IBAN: TR330006100519786457841326 ve TR920006101532418854210086'
+  expect:
+  - entity: IBAN
+    value: TR330006100519786457841326
+  - entity: IBAN
+    value: TR920006101532418854210086
+  masked: 'İki IBAN: <IBAN_1> ve <IBAN_2>'
+- id: IBAN-008
+  text: Aynı IBAN TR960001006093156159526063 / TR96 0001 0060 9315 6159 5260 63
+  expect:
+  - entity: IBAN
+    value: TR960001006093156159526063
+  - entity: IBAN
+    value: TR96 0001 0060 9315 6159 5260 63
+  masked: Aynı IBAN <IBAN_1> / <IBAN_1>
+  tags:
+  - surface_variants
+- id: IBAN-009
+  text: '{"iban":"TR090001209533868620643363","tutar":1500}'
+  expect:
+  - entity: IBAN
+    value: TR090001209533868620643363
+- id: IBAN-010
+  text: Alman IBAN DE89370400440532013000 ile ödeme.
+  expect:
+  - entity: IBAN
+    value: DE89370400440532013000
+- id: IBAN-011
+  text: İngiliz IBAN GB29NWBK60161331926819 geçerlidir.
+  expect:
+  - entity: IBAN
+    value: GB29NWBK60161331926819
+- id: IBAN-012
+  text: Fransız IBAN FR7630006000011234567890189 kayıtlı.
+  expect:
+  - entity: IBAN
+    value: FR7630006000011234567890189
+- id: IBAN-013
+  text: 'Almanya: DE89 3704 0044 0532 0130 00'
+  expect:
+  - entity: IBAN
+    value: DE89 3704 0044 0532 0130 00
+- id: IBAN-014
+  text: IBAN TR330006100519786457841327 kontrol basamağı hatalı.
+  expect: []
+  tags:
+  - invalid_checksum
+- id: IBAN-015
+  text: TR33 0006 1005 1978 6457 8413 2 eksik.
+  expect: []
+- id: IBAN-016
+  text: TR3300061005197864578413267 fazla haneli.
+  expect: []
+- id: IBAN-017
+  text: TRANSFER 1234 5678 9012 numaralı işlem.
+  expect: []
+- id: IBAN-018
+  text: 'IBAN içindeki rakamlar TCKN sayılmaz: TR020004606251171444815541'
+  expect:
+  - entity: IBAN
+    value: TR020004606251171444815541
+  not_expect:
+  - TCKN
+  - KART
+  - VKN
+- id: IBAN-019
+  text: Ödeme TR330006100519786457841326.
+  expect:
+  - entity: IBAN
+    value: TR330006100519786457841326
+- id: IBAN-020
+  text: IBAN:TR920006101532418854210086
+  expect:
+  - entity: IBAN
+    value: TR920006101532418854210086
+- id: IBAN-021
+  text: (TR96 0001 0060 9315 6159 5260 63)
+  expect:
+  - entity: IBAN
+    value: TR96 0001 0060 9315 6159 5260 63
+- id: IBAN-022
+  text: IBAN TR09 0001 2095 3386 8620 6433 63 - Ziraat
+  expect:
+  - entity: IBAN
+    value: TR09 0001 2095 3386 8620 6433 63
+- id: IBAN-023
+  text: Hesap sahibine ait TR930001506680172517175385 numaralı IBAN.
+  expect:
+  - entity: IBAN
+    value: TR930001506680172517175385
+- id: IBAN-024
+  text: ISIN TRATHYAO91M5 IBAN değildir.
+  expect: []
+- id: IBAN-025
+  text: IBAN'ım TR020004606251171444815541, kartım yok.
+  expect:
+  - entity: IBAN
+    value: TR020004606251171444815541

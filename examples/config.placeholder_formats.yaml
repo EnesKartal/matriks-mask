@@ -1,0 +1,20 @@
+# Yer tutucu biçimi seçenekleri. Markdown/HTML görüntüleyiciler <...> biçimini yutabilir;
+# bu durumda __{label}_{n}__ veya [{label}_{n}] tercih edin. Geri çevirici biçimden türetilir ve
+# LLM'in bozduğu varyantları (<KISI 1>, [KISI_1], <kisi_1>, <KİŞİ_1>, &lt;KISI_1&gt;) da tanır.
+guardrails:
+  - guardrail_name: matriks-pii
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: true
+      placeholder_format: "__{label}_{n}__"     # alternatifler: "<{label}_{n}>", "[{label}_{n}]", "PII_{label}_{n}"
+      labels:                                   # isteğe bağlı: etiketleri değiştirin (ASCII büyük harf)
+        KISI: AD
+        TCKN: KIMLIK
+      placeholder_instruction: system_suffix    # LLM'e "yer tutucuları aynen kullan" talimatı (system sonuna)
+      unresolved_placeholder: keep              # haritada olmayan yer tutucu: keep | strip
+      extra_regex:                              # kuruma özel tanımlayıcılar
+        - entity: KURUM_LISANS
+          pattern: "LIS-[0-9]{8}"
+          score: 0.9
+          context: "lisans"

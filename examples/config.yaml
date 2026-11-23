@@ -1,0 +1,32 @@
+# LiteLLM proxy + matriks-pii (dengeli profil). Çalıştırma:
+#   pip install "matriks-pii[fast]"
+#   litellm --config examples/config.yaml
+model_list:
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY
+
+guardrails:
+  - guardrail_name: matriks-pii
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]          # ZORUNLU: ikisi de (post_call = geri çevirme)
+      default_on: true
+      profile: balanced                     # strict | balanced | minimal
+      entities:
+        KART: {action: MASK, restore: false}   # PCI: yanıtta yalnız son 4 hane
+        SIFRE: BLOCK
+      special_categories:
+        OZEL_SAGLIK: MASK
+        OZEL_SIYASI: LOG
+      placeholder_format: "<{label}_{n}>"
+      session_store: {backend: memory, ttl_seconds: 3600}
+      audit_log: {enabled: true, path: /var/log/litellm/matriks_pii_audit.jsonl}
+      fail_mode: closed                     # guardrail hata verirse istek LLM'e GİTMEZ
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+
+litellm_settings:
+  turn_off_message_logging: false          # savunma derinliği için true önerilir

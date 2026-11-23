@@ -1,0 +1,201 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-081
+  text: "Sipariş numaranız 17291716050 olarak sistemde kayıtlıdır."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-082
+  text: "TC kimlik numarası 10000000178 doğrulanamadı, lütfen kontrol edin."
+  expect: []
+  why: "TC bağlamı + geçersiz checksum"
+  tags: [tckn, checksum]
+- id: NEG-083
+  text: "T.C. Kimlik No: 12345678901 formatı geçersiz."
+  expect: []
+  why: "etiketli ama checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-084
+  text: "TCKN alanına 11111111111 girilemez."
+  expect: []
+  why: "tekrarlı rakam, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-085
+  text: "Kimlik numarası 07291716092 sıfırla başlayamaz."
+  expect: []
+  why: "0 ile başlar"
+  tags: [tckn]
+- id: NEG-086
+  text: "Sayı 172 917 160 60 boşluklu yazıldığı için tanınmaz."
+  expect: []
+  why: "boşluklu 11 hane, regex uymaz"
+  tags: [tckn]
+- id: NEG-087
+  text: "Barkod 8690123456789 ürün etiketinde yer alıyor."
+  expect: []
+  why: "EAN-13, BIN dışı"
+  tags: [barkod, kart]
+- id: NEG-088
+  text: "EAN-13 kodu 8691234567890 kasada okutuldu."
+  expect: []
+  why: "13 hane, BIN dışı"
+  tags: [barkod, kart]
+- id: NEG-089
+  text: "Fatura no 2026000012345 muhasebeye iletildi."
+  expect: []
+  why: "13 hane, BIN 20 dışı"
+  tags: [islem_no, kart]
+- id: NEG-090
+  text: "Abone numarası 98765432109 sistemde pasif görünüyor."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-091
+  text: "Ürün seri numarası 31415926535 garanti kapsamındadır."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-092
+  text: "Takip numarası 123456789012 ile kargo sorgulanabilir."
+  expect: []
+  why: "12 hane"
+  tags: [tckn, islem_no]
+- id: NEG-093
+  text: "Sayaç numarası 66666666666 abone kaydıyla eşleşmedi."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-094
+  text: "Kimlik doğrulama için 20241028001 kodunu girin."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-095
+  text: "Vergi numarası 9540536921 doğrulama hatası verdi."
+  expect: []
+  why: "vergi bağlamı, VKN checksum geçmez"
+  tags: [vkn, checksum]
+- id: NEG-096
+  text: "VKN 3973535711 mükellef kaydıyla uyuşmuyor."
+  expect: []
+  why: "VKN etiketi, checksum geçmez"
+  tags: [vkn, checksum]
+- id: NEG-097
+  text: "Vergi kimlik no 1029384756 için beyanname bulunamadı."
+  expect: []
+  why: "bağlam var, checksum geçmez"
+  tags: [vkn, checksum]
+- id: NEG-098
+  text: "Vergi dairesi kayıtlarında 9876543210 numaralı mükellef yok."
+  expect: []
+  why: "checksum geçmez"
+  tags: [vkn, checksum]
+- id: NEG-099
+  text: "Mükellef numarası 6677889900 hatalı girilmiş."
+  expect: []
+  why: "mükellef bağlamı, checksum geçmez"
+  tags: [vkn, checksum]
+- id: NEG-100
+  text: "On haneli 7788990011 numarası vergi kaydı değildir."
+  expect: []
+  why: "checksum geçmez"
+  tags: [vkn, checksum]
+- id: NEG-101
+  text: "Vergi levhasında 1212121212 yazıyor ama kontrol basamağı tutmuyor."
+  expect: []
+  why: "checksum geçmez"
+  tags: [vkn, checksum]
+- id: NEG-102
+  text: "Vergi No alanı boş bırakılamaz; 0000000000 geçersizdir."
+  expect: []
+  why: "sıfırlar, checksum geçmez"
+  tags: [vkn, checksum]
+- id: NEG-103
+  text: "Sipariş numarası 1357924680 fatura ile eşleşti."
+  expect: []
+  why: "bağlamsız 10 hane, checksum geçmez"
+  tags: [vkn, islem_no]
+- id: NEG-104
+  text: "Müşteri kodu 1020304050 CRM'de tanımlı."
+  expect: []
+  why: "10 hane, checksum geçmez; 'müşteri kodu' MUSTERI_NO bağlamı değil"
+  tags: [vkn, islem_no]
+- id: NEG-105
+  text: "12 haneli 123456789012 numarası TCKN olamaz."
+  expect: []
+  why: "12 hane"
+  tags: [tckn]
+- id: NEG-106
+  text: "TC: 1029384756 on hane olduğu için geçersiz."
+  expect: []
+  why: "TC bağlamı + 10 hane, VKN geçmez"
+  tags: [tckn, vkn]
+- id: NEG-107
+  text: "TCKN girişi 12121212121 rastgele dizi olduğu için reddedildi."
+  expect: []
+  why: "checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-108
+  text: "Kimlik no 99999999999 test değeri olarak kullanılamaz."
+  expect: []
+  why: "checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-109
+  text: "Protokol numarası 86420864208 ile randevu alındı."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-110
+  text: "Öğrenci numarası 20240001234 kütüphane sisteminde tanımlı."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-111
+  text: "Sözleşme numarası 11223344556 arşive kaldırıldı."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-112
+  text: "SKU 10203040506 stok sayımında eksik çıktı."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-113
+  text: "Araç şasi numarasının son 11 hanesi 76543210987 olarak okundu."
+  expect: []
+  why: "11 hane, checksum geçmez; şasi 17 karakter değil"
+  tags: [tckn, checksum]
+- id: NEG-114
+  text: "Dosya sayısı 45678912345 olarak raporlandı."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-115
+  text: "Ticaret sicil gazetesi ilan numarası 0123456789012345 arşivde kayıtlı."
+  expect: []
+  why: "16 hane, 0 ile başlar, BIN dışı, mersis bağlamı yok"
+  tags: [islem_no, kart]
+- id: NEG-116
+  text: "Ticaret sicil no 123456 altı haneli olduğundan SGK sicili değildir."
+  expect: []
+  why: "sicil bağlamı ama 6 hane"
+  tags: [sgk]
+- id: NEG-117
+  text: "Dosya no 24681357900 e-devlet üzerinden sorgulanabilir."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]
+- id: NEG-118
+  text: "ISBN 9786051234567 kitabın arka kapağında yazılı."
+  expect: []
+  why: "13 hane, BIN dışı"
+  tags: [barkod, kart]
+- id: NEG-119
+  text: "GTIP kodu 8471300000 gümrük beyannamesinde kullanıldı."
+  expect: []
+  why: "10 hane, checksum geçmez"
+  tags: [vkn]
+- id: NEG-120
+  text: "Personel numarası 13579135791 insan kaynakları sisteminde."
+  expect: []
+  why: "11 hane, checksum geçmez"
+  tags: [tckn, checksum]

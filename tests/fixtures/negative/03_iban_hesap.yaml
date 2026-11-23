@@ -1,0 +1,151 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-121
+  text: "IBAN TR330006100519786457841327 kontrol basamağı hatalı, lütfen tekrar girin."
+  expect: []
+  why: "mod-97 geçmez"
+  tags: [iban, checksum]
+- id: NEG-122
+  text: "TR33 0006 1005 1978 6457 8413 27 formatındaki numara doğrulanamadı."
+  expect: []
+  why: "boşluklu, mod-97 geçmez"
+  tags: [iban, checksum]
+- id: NEG-123
+  text: "IBAN: TR12 0001 0002 0003 0004 0005 06 geçersiz kontrol basamağı."
+  expect: []
+  why: "etiketli, mod-97 geçmez"
+  tags: [iban, checksum]
+- id: NEG-124
+  text: "TR00 0000 0000 0000 0000 0000 00 sistem tarafından reddedildi."
+  expect: []
+  why: "sıfırlar, mod-97 geçmez"
+  tags: [iban, checksum]
+- id: NEG-125
+  text: "Hesap bilgisi TR111111111111111111111111 test verisidir, gerçek IBAN değildir."
+  expect: []
+  why: "mod-97 geçmez"
+  tags: [iban, checksum]
+- id: NEG-126
+  text: "TR3300061005197864578413 yalnızca 24 karakter olduğu için IBAN değildir."
+  expect: []
+  why: "24 karakter, mod-97 geçmez"
+  tags: [iban]
+- id: NEG-127
+  text: "TR33000610051978645784132 (25 karakter) eksik haneli yazılmış."
+  expect: []
+  why: "25 karakter, mod-97 geçmez"
+  tags: [iban]
+- id: NEG-128
+  text: "TR3300061005197864578413267 fazla haneli (27 karakter) girildi."
+  expect: []
+  why: "27 karakter, mod-97 geçmez"
+  tags: [iban]
+- id: NEG-129
+  text: "TRANSFER 2024 10 28 numaralı işlem valör tarihini bekliyor."
+  expect: []
+  why: "TR ile başlayan kelime"
+  tags: [iban]
+- id: NEG-130
+  text: "TRANSFER12345678901234567890 referansı EFT havuzunda bekliyor."
+  expect: []
+  why: "kelime + 20 rakam, regex uymaz"
+  tags: [iban, kart]
+- id: NEG-131
+  text: "TRT2026 kodlu tahvil ihalesi 28.10.2026 tarihinde yapıldı."
+  expect: []
+  why: "TRT kısaltması + tarih"
+  tags: [iban, tarih]
+- id: NEG-132
+  text: "TR90 ülke kodu alan adında kullanılamaz, .tr uzantısı kullanılır."
+  expect: []
+  why: "TR90 kısa, IBAN değil"
+  tags: [iban]
+- id: NEG-133
+  text: "SWIFT: TVBATR2AXXX, banka adresi şubeden teyit edilmeli."
+  expect: []
+  why: "SWIFT kodu"
+  tags: [swift]
+- id: NEG-134
+  text: "Şube kodu 1234 ve muhasebe fiş numarası 1234567 ile kayıt yapıldı."
+  expect: []
+  why: "şube/fiş no; hesap no bağlamı yok"
+  tags: [hesap_no]
+- id: NEG-135
+  text: "Şube kodu 00061, hesap no 51978 olarak kayıtlıdır."
+  expect: []
+  why: "hesap no bağlamı var ama 5 hane (HESAP_NO ≥6)"
+  tags: [hesap_no]
+- id: NEG-136
+  text: "Fiş numarası 0987654321 sıfırla başladığı için VKN değildir."
+  expect: []
+  why: "10 hane, VKN checksum geçmez"
+  tags: [hesap_no, vkn]
+- id: NEG-137
+  text: "Yatırım hesabı 98765-4321 formatında yazılır."
+  expect: []
+  why: "tireli kısa hesap no"
+  tags: [hesap_no]
+- id: NEG-138
+  text: "Takasbank hesap kodu 2000987654 teminat havuzunda tanımlı."
+  expect: []
+  why: "10 hane, alan kodu 200 listede yok; 'hesap kodu' bağlam değil"
+  tags: [hesap_no, telefon]
+- id: NEG-139
+  text: "DE89 3704 0044 0532 0130 01 kontrol basamağı tutmayan yabancı IBAN."
+  expect: []
+  why: "DE IBAN mod-97 geçmez; içindeki 18 hane Luhn+BIN geçer → IBAN dışlama bölgesi"
+  tags: [iban, checksum, kart]
+- id: NEG-140
+  text: "GB29NWBK60161331926818 formatı İngiliz IBAN kontrolünden geçmedi."
+  expect: []
+  why: "GB IBAN mod-97 geçmez"
+  tags: [iban, checksum]
+- id: NEG-141
+  text: "FR7630006000011234567890188 Fransız IBAN girişi hatalı."
+  expect: []
+  why: "FR IBAN mod-97 geçmez"
+  tags: [iban, checksum]
+- id: NEG-142
+  text: "IBAN yerine sipariş numarası 1029384756 girilmiş."
+  expect: []
+  why: "10 hane, checksum geçmez"
+  tags: [iban, vkn]
+- id: NEG-143
+  text: "Alıcı IBAN alanı boş bırakıldı; TR ile başlamalı ve 26 karakter olmalıdır."
+  expect: []
+  why: "IBAN kelimesi, numara yok"
+  tags: [iban]
+- id: NEG-144
+  text: "TR-33-0006-1005-1978-6457-8413-27 tireli yazımda kontrol basamağı tutmuyor."
+  expect: []
+  why: "TR sonrası tire, mod-97 geçmez"
+  tags: [iban, checksum]
+- id: NEG-145
+  text: "tr33 0006 1005 1978 6457 8413 28 küçük harfli yazım da kontrol basamağından geçmedi."
+  expect: []
+  why: "küçük harf, mod-97 geçmez"
+  tags: [iban, checksum]
+- id: NEG-146
+  text: "Hesap sayısı 1234567, toplam bakiye 12.345,67 TL."
+  expect: []
+  why: "hesap sayısı + tutar"
+  tags: [hesap_no]
+- id: NEG-147
+  text: "Vergi dairesi hesap kodu 0010 ve IBAN uzunluğu 26 karakterdir."
+  expect: []
+  why: "vergi bağlamı, 4 hane"
+  tags: [vkn, iban]
+- id: NEG-148
+  text: "MT103 mesajında alan 59: TR330006100519786457841399 olarak gelmiş, doğrulanamadı."
+  expect: []
+  why: "mod-97 geçmez"
+  tags: [iban, checksum]
+- id: NEG-149
+  text: "TR+24 rakam kuralına uymayan TR12ABCD12345678901234 girdisi reddedildi."
+  expect: []
+  why: "harf içeren TR dizisi, mod-97 geçmez"
+  tags: [iban]
+- id: NEG-150
+  text: "Kart yerine IBAN istendi; 4111 1111 1111 1112 girişi kabul edilmedi."
+  expect: []
+  why: "Luhn geçmez"
+  tags: [iban, kart]

@@ -1,0 +1,149 @@
+# detect/finans_kimlikleri — 30 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: FINANS-001
+  text: 'Hesap No: 1234567'
+  expect:
+  - entity: HESAP_NO
+    value: '1234567'
+- id: FINANS-002
+  text: Yatırım hesap numaram 98765432.
+  expect:
+  - entity: HESAP_NO
+    value: '98765432'
+- id: FINANS-003
+  text: Hesap numarası 123-4567890-1
+  expect:
+  - entity: HESAP_NO
+    value: 123-4567890-1
+- id: FINANS-004
+  text: 'Müşteri No: 556677'
+  expect:
+  - entity: MUSTERI_NO
+    value: '556677'
+- id: FINANS-005
+  text: Müşteri numaranız 12345678 olarak tanımlandı.
+  expect:
+  - entity: MUSTERI_NO
+    value: '12345678'
+- id: FINANS-006
+  text: Cari kod 400123
+  expect:
+  - entity: MUSTERI_NO
+    value: '400123'
+- id: FINANS-007
+  text: Mersis no 0123456789000015
+  expect:
+  - entity: MERSIS
+    value: 0123456789000015
+- id: FINANS-008
+  text: MERSİS numarası 4540536920000017
+  expect:
+  - entity: MERSIS
+    value: '4540536920000017'
+- id: FINANS-009
+  text: ETTN 550e8400-e29b-41d4-a716-446655440000
+  expect:
+  - entity: ETTN
+    value: 550e8400-e29b-41d4-a716-446655440000
+- id: FINANS-010
+  text: UUID 550e8400-e29b-41d4-a716-446655440000 kayda atandı.
+  expect: []
+- id: FINANS-011
+  text: IMEI 356938035643809
+  expect:
+  - entity: IMEI
+    value: '356938035643809'
+- id: FINANS-012
+  text: IMEI 356938035643800 geçersiz.
+  expect: []
+- id: FINANS-013
+  text: Şasi no WVWZZZ1JZXW000001
+  expect:
+  - entity: SASI_NO
+    value: WVWZZZ1JZXW000001
+- id: FINANS-014
+  text: 'VIN: 1HGCM82633A004352'
+  expect:
+  - entity: SASI_NO
+    value: 1HGCM82633A004352
+- id: FINANS-015
+  text: BTC 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+  expect: []
+- id: FINANS-016
+  text: BTC 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+  expect:
+  - entity: KRIPTO_CUZDAN
+    value: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+  config:
+    entities:
+      KRIPTO_CUZDAN: MASK
+- id: FINANS-017
+  text: ETH 0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+  expect:
+  - entity: KRIPTO_CUZDAN
+    value: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e'
+  config:
+    entities:
+      KRIPTO_CUZDAN: MASK
+- id: FINANS-018
+  text: 'Şifre: Gizli123!'
+  expect:
+  - entity: SIFRE
+    value: Gizli123!
+- id: FINANS-019
+  text: password=Abc12345
+  expect:
+  - entity: SIFRE
+    value: Abc12345
+- id: FINANS-020
+  text: 'Parolam: kedi2026'
+  expect:
+  - entity: SIFRE
+    value: kedi2026
+- id: FINANS-021
+  text: PIN kodu 5321 SIM kartta.
+  expect:
+  - entity: SIFRE
+    value: '5321'
+- id: FINANS-022
+  text: Şifre sıfırlama bağlantısı gönderildi.
+  expect: []
+- id: FINANS-023
+  text: MKK sicil no MK-001234
+  expect:
+  - entity: MKK_SICIL
+    value: MK-001234
+  config:
+    extra_regex:
+    - entity: MKK_SICIL
+      pattern: MK-[0-9]{6}
+      score: 0.9
+- id: FINANS-024
+  text: Hesap sayısı 1234567 oldu.
+  expect: []
+- id: FINANS-025
+  text: Müşteri kodu 1020304050 CRM'de.
+  expect: []
+- id: FINANS-026
+  text: Abone numarası 98765432109 pasif.
+  expect: []
+- id: FINANS-027
+  text: Hesap no 51978 kısa.
+  expect: []
+- id: FINANS-028
+  text: '{"hesap_no": "Hesap no 7654321"}'
+  expect:
+  - entity: HESAP_NO
+    value: '7654321'
+- id: FINANS-029
+  text: Müşteri numarası 445566 ve hesap no 7788990
+  expect:
+  - entity: MUSTERI_NO
+    value: '445566'
+  - entity: HESAP_NO
+    value: '7788990'
+- id: FINANS-030
+  text: Account no 11223344
+  expect:
+  - entity: HESAP_NO
+    value: '11223344'

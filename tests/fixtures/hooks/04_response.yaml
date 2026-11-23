@@ -1,0 +1,59 @@
+# Yanıt geri çevirme (post-call) senaryoları. Tüm değerler sentetiktir.
+- id: HOOK-037
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ben Ayşe Demir, TCKN 17291716060."}]}
+  llm_response: {content: "Merhaba <KISI_1>'e, TCKN <TCKN_1> doğrulandı."}
+  expect_client: {choices.0.message.content: "Merhaba Ayşe Demir'e, TCKN 17291716060 doğrulandı."}
+- id: HOOK-038
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ahmet Yılmaz ile görüş."}]}
+  llm_response: {content: "<KISI_1>'ye ulaşıldı."}
+  expect_client: {choices.0.message.content: "Ahmet Yılmaz'a ulaşıldı."}
+- id: HOOK-039
+  request: {model: m, metadata: {}, messages: [{role: user, content: "TCKN 17291716060"}]}
+  llm_response: {content: ["A <TCKN_1>", "B <TCKN_1>"], tool_args: ["{\"t\": \"<TCKN_1>\"}"], reasoning: "R <TCKN_1>", n: 2}
+  expect_client:
+    choices.0.message.content: "A 17291716060"
+    choices.1.message.content: "B 17291716060"
+    choices.0.message.tool_calls.0.function.arguments: {t: "17291716060"}
+    choices.0.message.reasoning_content: "R 17291716060"
+- id: HOOK-040
+  config: {tool_restore_policy: none}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "TCKN 17291716060"}]}
+  llm_response: {content: "A <TCKN_1>", tool_args: ["{\"t\": \"<TCKN_1>\"}"]}
+  expect_client:
+    choices.0.message.content: "A 17291716060"
+    choices.0.message.tool_calls.0.function.arguments: {t: "<TCKN_1>"}
+- id: HOOK-041
+  request: {model: m, metadata: {}, messages: [{role: user, content: "TCKN 17291716060"}]}
+  llm_response: {content: "<TCKN_1> ve <KISI_9>"}
+  expect_client: {choices.0.message.content: "17291716060 ve <KISI_9>"}
+- id: HOOK-042
+  config: {unresolved_placeholder: strip}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "TCKN 17291716060"}]}
+  llm_response: {content: "<TCKN_1> ve <KISI_9>"}
+  expect_client: {choices.0.message.content: "17291716060 ve "}
+- id: HOOK-043
+  config: {entities: {KART: {action: MASK, restore: false}}}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Kart 4111 1111 1111 1111 ile öde."}]}
+  expect_request: {messages.0.content: "Kart <KART_1> ile öde."}
+  llm_response: {content: "<KART_1> ile ödeme alındı."}
+  expect_client: {choices.0.message.content: "**** **** **** 1111 ile ödeme alındı."}
+- id: HOOK-044
+  call_type: anthropic_messages
+  request: {model: c, messages: [{role: user, content: "TCKN 17291716060"}]}
+  llm_response:
+    raw: {content: [{type: text, text: "t <TCKN_1>"}, {type: tool_use, id: x, name: f, input: {x: "<TCKN_1>"}}]}
+  expect_client: {content.0.text: "t 17291716060", content.1.input: {x: "17291716060"}}
+- id: HOOK-045
+  call_type: aresponses
+  request: {model: m, input: "TCKN 17291716060"}
+  llm_response:
+    raw:
+      output:
+      - {type: message, content: [{type: output_text, text: "x <TCKN_1>"}]}
+      - {type: function_call, arguments: "{\"a\": \"<TCKN_1>\"}"}
+  expect_client: {output.0.content.0.text: "x 17291716060", output.1.arguments: {a: "17291716060"}}
+- id: HOOK-046
+  config: {placeholder_format: "[{label}_{n}]"}
+  request: {model: m, metadata: {}, messages: [{role: user, content: "IBAN TR330006100519786457841326"}]}
+  llm_response: {content: "IBAN [IBAN_1] kaydedildi."}
+  expect_client: {choices.0.message.content: "IBAN TR330006100519786457841326 kaydedildi."}

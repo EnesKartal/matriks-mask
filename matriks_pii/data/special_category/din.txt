@@ -1,0 +1,52 @@
+!Müslüman
+!Hristiyan
+!Hıristiyan
+!Yahudi
+!Alevi
+!Sünni
+!Şii
+!Caferi
+!Nusayri
+!Ezidi
+!Süryani
+!Katolik
+!Ortodoks
+!Protestan
+!Budist
+!Hindu
+ateist
+deist
+agnostik
+inançsız
+dinsiz
+namaz kılan
+namaz kılıyor
+namaz kılıyorum
+oruç tutan
+oruç tutuyor
+oruç tutuyorum
+ayine katılan
+ayine katılıyor
+hacca giden
+hacca gitti
+hacı
+cemaat üyesi
+tarikat üyesi
+cemevine gidiyor
+kiliseye gidiyor
+sinagoga gidiyor
+camiye gidiyor
+din değiştirdi
+mühtedi
+!Hanefi
+!Şafii
+!Hanbeli
+!Maliki
+!Nakşibendi
+!Nakşi
+!Süleymancı
+!Yehova Şahidi
+!Bahai
+!Mason
+mason locası
+!Musevi

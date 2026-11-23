@@ -1,0 +1,21 @@
+parmak izi
+parmak izim
+parmak izini
+avuç içi izi
+retina
+retina taraması
+iris
+iris taraması
+yüz tanıma verisi
+yüz geometrisi
+ses izi
+damar izi
+biyometrik veri
+biyometrik verisi
+biyometrik imza
+yüz tanıma
+yüz tanıma şablonu
+el geometrisi
+el geometrisi verisi
+iris taraması
+parmak izi okuyucu

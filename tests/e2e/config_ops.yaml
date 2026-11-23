@@ -1,0 +1,42 @@
+# İşletim e2e yığını (test_proxy_e2e_ops.py): gölge mod, depo kesintisi, oturum tahliyesi, Prometheus metrikleri.
+model_list:
+  - model_name: echo
+    litellm_params:
+      model: openai/echo
+      api_base: http://127.0.0.1:9913/v1
+      api_key: sk-echo
+
+guardrails:
+  # varsayılan açık ama gölge modda: istek/yanıt değişmez, yalnız would_mask sayılır
+  - guardrail_name: matriks-pii-dry
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: true
+      dry_run: true
+  # erişilemeyen Redis: PII içeren istek 503, PII içermeyen istek depoya dokunmadan geçer
+  - guardrail_name: matriks-pii-redisdown
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: false
+      session_secret: os.environ/MATRIKS_PII_SESSION_SECRET
+      session_store:
+        backend: redis
+        redis_url: redis://127.0.0.1:1/0
+        encryption_key: os.environ/MATRIKS_PII_STORE_KEY
+        redis_timeout_seconds: 0.2
+  # tek oturumluk bellek: eşzamanlı ikinci istek ilkinin oturumunu tahliye eder → ilk yanıt session_missing (500)
+  - guardrail_name: matriks-pii-tiny
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: false
+      session_store:
+        max_sessions: 1
+
+litellm_settings:
+  callbacks: ["prometheus", "custom_callbacks.leak_logger"]
+
+general_settings:
+  master_key: sk-test

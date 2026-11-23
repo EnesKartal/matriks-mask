@@ -1,0 +1,116 @@
+# Chat Completions isteği gezinme senaryoları. Tüm değerler sentetiktir.
+- id: HOOK-001
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Ben Ayşe Demir, TCKN 17291716060."}]}
+  expect_request: {messages.0.content: "Ben <KISI_1>, TCKN <TCKN_1>."}
+  expect_keys: [metadata.matriks_pii_session_id.matriks-pii]
+  forbid: ["17291716060", "Ayşe Demir"]
+- id: HOOK-002
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - role: user
+      content:
+      - {type: text, text: "TCKN 17291716060"}
+      - {type: image_url, image_url: {url: "https://ornek.com/a.png"}}
+  expect_request:
+    messages.0.content.0.text: "TCKN <TCKN_1>"
+    messages.0.content.1.image_url.url: "https://ornek.com/a.png"
+- id: HOOK-003
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: user, content: "Kaydı güncelle"}
+    - role: assistant
+      content: null
+      tool_calls: [{id: c1, type: function, function: {name: kaydet, arguments: "{\"tckn\":\"17291716060\",\"ad\":\"Ayşe Demir\"}"}}]
+  expect_request:
+    messages.1.content: null
+    messages.1.tool_calls.0.function.arguments: {tckn: "<TCKN_1>", ad: "<KISI_1>"}
+- id: HOOK-004
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - role: assistant
+      content: null
+      tool_calls: [{id: c1, type: function, function: {name: f, arguments: "{\"tckn\": \"17291716060\""}}]
+  forbid: ["17291716060"]
+- id: HOOK-005
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: system, content: "Müşteri Ahmet Yılmaz, IBAN TR330006100519786457841326."}
+    - {role: user, content: "Özet çıkar."}
+  expect_request: {messages.0.content: "Müşteri <KISI_1>, IBAN <IBAN_1>."}
+- id: HOOK-006
+  config: {mask_system_messages: false}
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: system, content: "Müşteri Ahmet Yılmaz."}
+    - {role: user, content: "TCKN 17291716060"}
+  expect_request: {messages.0.content: "Müşteri Ahmet Yılmaz.", messages.1.content: "TCKN <TCKN_1>"}
+- id: HOOK-007
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: user, content: "Sorgula"}
+    - {role: tool, tool_call_id: c1, content: "Sonuç: e-posta ayse@ornek.com, tel 0532 234 56 78"}
+  expect_request: {messages.1.content: "Sonuç: e-posta <EPOSTA_1>, tel <TELEFON_1>"}
+- id: HOOK-008
+  config: {mask_tool_messages: false}
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: tool, tool_call_id: c1, content: "e-posta ayse@ornek.com"}
+    - {role: user, content: "TCKN 17291716060"}
+  expect_request: {messages.0.content: "e-posta ayse@ornek.com", messages.1.content: "TCKN <TCKN_1>"}
+- id: HOOK-009
+  config: {mask_assistant_messages: false}
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: assistant, content: "Ayşe Demir kaydı bulundu."}
+    - {role: user, content: "TCKN 17291716060"}
+  expect_request: {messages.0.content: "Ayşe Demir kaydı bulundu.", messages.1.content: "TCKN <TCKN_1>"}
+- id: HOOK-010
+  request:
+    model: m
+    metadata: {}
+    messages:
+    - {role: user, content: "TCKN 17291716060"}
+    - {role: assistant, content: "17291716060 kaydı bulundu."}
+    - {role: user, content: "17291716060 için IBAN TR330006100519786457841326"}
+  expect_request:
+    messages.0.content: "TCKN <TCKN_1>"
+    messages.1.content: "<TCKN_1> kaydı bulundu."
+    messages.2.content: "<TCKN_1> için IBAN <IBAN_1>"
+- id: HOOK-011
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Şablon <KISI_1> kalsın; gerçek ad Ahmet Yılmaz."}]}
+  expect_request: {messages.0.content: "Şablon <KISI_1> kalsın; gerçek ad <KISI_2>."}
+- id: HOOK-012
+  request:
+    model: m
+    metadata: {}
+    messages: [{role: user, content: "TCKN 17291716060"}]
+    proxy_server_request: {body: {messages: [{role: user, content: "TCKN 17291716060"}]}}
+  expect_request:
+    messages.0.content: "TCKN <TCKN_1>"
+    proxy_server_request.body.messages.0.content: "TCKN <TCKN_1>"
+  forbid: ["17291716060"]
+- id: HOOK-013
+  request: {model: m, metadata: {}, messages: [{role: user, content: "Bugün THYAO 312,50 TL'den kapandı."}]}
+  expect_request: {messages.0.content: "Bugün THYAO 312,50 TL'den kapandı."}
+- id: HOOK-014
+  request:
+    model: m
+    metadata: {}
+    messages: [{role: user, content: "{\"musteri\": {\"adi\": \"Ayşe Demir\", \"tckn\": 17291716060}}"}]
+  expect_request: {messages.0.content: {musteri: {adi: "<KISI_1>", tckn: "<TCKN_1>"}}}

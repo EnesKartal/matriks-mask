@@ -1,0 +1,40 @@
+!Kürt
+!Ermeni
+!Rum
+!Roman
+!Çingene
+!Çerkes
+!Laz
+!Boşnak
+!Arnavut
+!Zaza
+!Çeçen
+!Gürcü
+!Abaza
+!Pomak
+!Süryani
+!Keldani
+!Yezidi
+!Dom
+?Arap
+?Türkmen
+?Yahudi
+etnik köken
+etnik kökeni
+etnik kimlik
+ırkı
+ırk
+kökenli
+asıllı
+?Kurt
+?Laz
+?Rum
+?Cerkes
+?Bosnak
+?Arnavut
+?Gurcu
+?Cecen
+?Zaza
+siyahi
+!Afrikalı
+!Zenci

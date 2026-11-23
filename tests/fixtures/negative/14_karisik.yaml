@@ -1,0 +1,101 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-511
+  text: "Maçta 3-1 öne geçen takım 90+4'te 3-2 kazandı."
+  expect: []
+  why: "spor skoru, 90 ülke kodu değil"
+  tags: [sayisal, telefon]
+- id: NEG-512
+  text: "TÜİK: işsizlik %8,5, istihdam 32 milyon 456 bin kişi."
+  expect: []
+  why: "istatistik"
+  tags: [sayisal]
+- id: NEG-513
+  text: "Kanunun m. 6/1-a bendi açık rızayı düzenler."
+  expect: []
+  why: "madde atfı"
+  tags: [sayisal]
+- id: NEG-514
+  text: "KVKK m. 11 kapsamında başvuru 30 gün içinde yanıtlanır."
+  expect: []
+  why: "madde atfı + süre"
+  tags: [sayisal]
+- id: NEG-515
+  text: "Hız 120 km/sa, mesafe 450 km, süre 3 saat 45 dakika."
+  expect: []
+  why: "ölçü birimleri"
+  tags: [sayisal]
+- id: NEG-516
+  text: "UTC+3 saat diliminde seans 10:00-18:00 arası."
+  expect: []
+  why: "saat dilimi"
+  tags: [sayisal, tarih]
+- id: NEG-517
+  text: "Ürün kodu PRD-2026-00123 stokta 45 adet."
+  expect: []
+  why: "ürün kodu"
+  tags: [sayisal]
+- id: NEG-518
+  text: "Yazılım sürümü 3.12.1, derleme 20261028."
+  expect: []
+  why: "sürüm + 8 haneli derleme"
+  tags: [sayisal, teknik]
+- id: NEG-519
+  text: "Ağırlık 75,5 kg, boy 1,82 m, endeks 22,8."
+  expect: []
+  why: "ölçümler, kişi yok, sağlık terimi yok"
+  tags: [sayisal]
+- id: NEG-520
+  text: "Nüfus 85.372.377, yüzölçümü 783.562 km2."
+  expect: []
+  why: "noktalı büyük sayılar; 'Nüfus' NUFUS_KAYIT bağlamı değil"
+  tags: [sayisal]
+- id: NEG-521
+  text: "Sayfa 12, paragraf 3, dipnot 45."
+  expect: []
+  why: "referans numaraları"
+  tags: [sayisal]
+- id: NEG-522
+  text: "Şampiyonada 34 puan, 12 galibiyet, 5 beraberlik, 3 mağlubiyet."
+  expect: []
+  why: "spor istatistiği, 34 plaka değil"
+  tags: [sayisal, plaka]
+- id: NEG-523
+  text: "Basket maçı 98-95 uzatmada bitti."
+  expect: []
+  why: "skor"
+  tags: [sayisal]
+- id: NEG-524
+  text: "Enflasyon 2024'te %44,4, 2025'te %31,1 oldu."
+  expect: []
+  why: "yıllar + yüzdeler"
+  tags: [sayisal, tarih]
+- id: NEG-525
+  text: "Voltaj 220 V, frekans 50 Hz, güç 1.500 W."
+  expect: []
+  why: "elektrik birimleri"
+  tags: [sayisal]
+- id: NEG-526
+  text: "Kargo 3 koli, toplam 45 kg, hacim 0,35 m3."
+  expect: []
+  why: "ölçüler"
+  tags: [sayisal]
+- id: NEG-527
+  text: "Dosya boyutu 12,5 MB, 3.456 satır, 128 sütun."
+  expect: []
+  why: "dosya istatistiği"
+  tags: [sayisal, teknik]
+- id: NEG-528
+  text: "Sınav sonucu 85/100, sıralama 1.234, yüzdelik dilim %2,5."
+  expect: []
+  why: "sınav istatistiği"
+  tags: [sayisal]
+- id: NEG-529
+  text: "Sıra no 1, 2, 3 ve 4 numaralı satırlar onaylandı."
+  expect: []
+  why: "'sıra no' NUFUS_KAYIT bağlamı ama 1 haneli rakamlar 'cilt/aile sıra' olmadan; min_score 0.5 → NUFUS_KAYIT yalnız 'cilt no' + 'sıra no' birlikte"
+  tags: [sayisal, nufus_kayit, borderline]
+- id: NEG-530
+  text: "Kanun no 5411, 6362 ve 6698 birlikte değerlendirildi."
+  expect: []
+  why: "kanun numaraları"
+  tags: [sayisal, telefon]

@@ -1,0 +1,50 @@
+# elle yazıldı — build_fixtures.py bu dosyayı üretmez/silmez; tüm değerler sentetiktir.
+# TCKN gruplama/YKN, telefon 0812 + bağlam + harf O, kart JCB/Diners, kimlik belgeleri, IBAN etiketli TR'siz,
+# 2 haneli yıllı doğum tarihi, küçük harfli plaka, kaçış varyantları (tam genişlik, tek tek rakam).
+- {id: TCKNEK-001, text: "T.C. 17.291.716.060", expect: [{entity: TCKN, value: "17.291.716.060"}]}
+- {id: TCKNEK-002, text: "TC kimlik 17.291.716.060 doğrulandı", expect: [{entity: TCKN, value: "17.291.716.060"}]}
+- {id: TCKNEK-003, text: "Yabancı kimlik no 99123456740", expect: [{entity: TCKN, value: "99123456740"}]}
+- {id: TCKNEK-004, text: "YKN: 98123456750", expect: [{entity: TCKN, value: "98123456750"}]}
+- {id: TCKNEK-005, text: "tutar 17.291.716.060 TL", expect: []}
+- {id: TCKNEK-006, text: "IP 17.291.716.060", expect: []}
+- {id: TELEK-001, text: "0812 234 56 78 numarasını ara", expect: [{entity: TELEFON, value: "0812 234 56 78"}]}
+- {id: TELEK-002, text: "5321234567 numarasından", expect: [{entity: TELEFON, value: "5321234567"}]}
+- {id: TELEK-003, text: "beni 5321234567 numaramdan arayın", expect: [{entity: TELEFON, value: "5321234567"}]}
+- {id: TELEK-004, text: "sipariş numarası 5321234567", expect: []}
+- {id: TELEK-005, text: "sipariş numarasını 5321234567 ver", expect: []}
+- {id: TELEK-006, text: "+90 812 234 56 78", expect: [{entity: TELEFON, value: "+90 812 234 56 78"}]}
+- {id: TELEK-007, text: "Tel: 0 (812) 234 56 78", expect: [{entity: TELEFON, value: "0 (812) 234 56 78"}]}
+- {id: TELEK-008, text: "812 numaralı kargo", expect: []}
+- {id: TELX-001, text: "Tel: O532 123 45 67", expect: [{entity: TELEFON, value: "O532 123 45 67"}]}
+- {id: TELX-002, text: "GSM: O 532 123 45 67", expect: [{entity: TELEFON, value: "O 532 123 45 67"}]}
+- {id: TELX-003, text: "O532 123 45 67", expect: []}
+- {id: TELX-004, text: "telefon beş üç iki bir iki üç dört beş altı yedi", expect: [{entity: TELEFON, value: "beş üç iki bir iki üç dört beş altı yedi"}]}
+- {id: KARTEK-001, text: "3530 1113 3330 0000", expect: [{entity: KART, value: "3530 1113 3330 0000"}]}
+- {id: KARTEK-002, text: "JCB kartım 3566002020360505", expect: [{entity: KART, value: "3566002020360505"}]}
+- {id: KARTEK-003, text: "3056 930902 5904", expect: [{entity: KART, value: "3056 930902 5904"}]}
+- {id: KARTEK-004, text: "36148900647913", expect: [{entity: KART, value: "36148900647913"}]}
+- {id: KARTEK-005, text: "3000000000000004 seri no", expect: []}
+- {id: KARTEK-006, text: "3530111333300001", expect: []}
+- {id: KIMLIKEK-001, text: "Pasaport no U1234567", expect: [{entity: PASAPORT, value: "U1234567"}]}
+- {id: KIMLIKEK-002, text: "Pasaport no: U 12345678", expect: [{entity: PASAPORT, value: "U 12345678"}]}
+- {id: KIMLIKEK-003, text: "Nüfus cüzdanı seri no A07 123456", expect: [{entity: KIMLIK_SERI, value: "A07 123456"}]}
+- {id: KIMLIKEK-004, text: "seri no A07 123456", expect: [{entity: KIMLIK_SERI, value: "A07 123456"}]}
+- {id: KIMLIKEK-005, text: "Mersis no 0454053692000015", expect: [{entity: MERSIS, value: "0454053692000015"}]}
+- {id: KIMLIKEK-006, text: "A07 123456 kodlu ürün", expect: []}
+- {id: KIMLIKEK-007, text: "pasaport sahibi o 12345678 numaralı", expect: []}
+- {id: IBANX-001, text: "IBAN: 33 0006 1005 1978 6457 8413 26", expect: [{entity: IBAN, value: "33 0006 1005 1978 6457 8413 26"}]}
+- {id: IBANX-002, text: "IBAN TR 33 0006 1005 1978 6457 8413 26", expect: [{entity: IBAN, value: "TR 33 0006 1005 1978 6457 8413 26"}]}
+- {id: IBANX-003, text: "IBAN: 330006100519786457841326", expect: [{entity: IBAN, value: "330006100519786457841326"}]}
+- {id: IBANX-004, text: "IBAN: 33 0006 1005 1978 6457 8413 27", expect: [], tags: [invalid_checksum]}
+- {id: TARIH-001, text: "d.t. 12.03.85", expect: [{entity: DOGUM_TARIHI, value: "12.03.85"}]}
+- {id: TARIH-002, text: "Doğum tarihi: 12/3/85", expect: [{entity: DOGUM_TARIHI, value: "12/3/85"}]}
+- {id: TARIH-003, text: "12.03.85 tarihli fatura", expect: []}
+- {id: PLAKAX-001, text: "plaka: 34abc123", expect: [{entity: PLAKA, value: "34abc123"}]}
+- {id: PLAKAX-002, text: "34abc123 kodu", expect: []}
+- {id: KACIS-001, text: "ＴＣ １７２９１７１６０６０", expect: [{entity: TCKN, value: "１７２９１７１６０６０"}]}
+- {id: KACIS-002, text: "TC: 1 7 2 9 1 7 1 6 0 6 0", expect: [{entity: TCKN, value: "1 7 2 9 1 7 1 6 0 6 0"}]}
+- {id: KACIS-003, text: "1 7 2 9 1 7 1 6 0 6 0", expect: []}
+- {id: KACIS-004, text: "tc kimlik 1729171606O", config: {checksum_policy: context}, expect: [{entity: TCKN, value: "1729171606O"}], tags: [invalid_checksum]}
+- {id: KACIS-005, text: "tc kimlik 1729171606O", expect: []}
+- {id: KACIS-006, text: "Ayşe Demir TCKN 17291716060", expect: [{entity: KISI, value: "Ayşe Demir"}, {entity: TCKN, value: "17291716060"}]}
+- {id: KACIS-007, text: "kart ４１１１ １１１１ １１１１ １１１１", expect: [{entity: KART, value: "４１１１ １１１１ １１１１ １１１１"}]}

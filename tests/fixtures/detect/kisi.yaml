@@ -1,0 +1,478 @@
+# detect/kisi — 89 senaryo
+# Üretildi: scripts/build_fixtures.py — tüm değerler sentetiktir.
+- id: KISI-001
+  text: Dün Ahmet Yılmaz ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Ahmet Yılmaz
+- id: KISI-002
+  text: Dün Ayşe Demir ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Ayşe Demir
+- id: KISI-003
+  text: Dün Mehmet Öztürk ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Mehmet Öztürk
+- id: KISI-004
+  text: Dün Fatma Şahin ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Fatma Şahin
+- id: KISI-005
+  text: Dün Mustafa Çelik ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Mustafa Çelik
+- id: KISI-006
+  text: Dün Zeynep Arslan ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Zeynep Arslan
+- id: KISI-007
+  text: Dün Emre Koç ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Emre Koç
+- id: KISI-008
+  text: Dün Elif Aydın ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Elif Aydın
+- id: KISI-009
+  text: Dün Burak Kurt ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Burak Kurt
+- id: KISI-010
+  text: Dün Merve Polat ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Merve Polat
+- id: KISI-011
+  text: Dün Hasan Doğan ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Hasan Doğan
+- id: KISI-012
+  text: Dün Hüseyin Kaya ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Hüseyin Kaya
+- id: KISI-013
+  text: Dün AHMET YILMAZ ile görüştüm.
+  expect:
+  - entity: KISI
+    value: AHMET YILMAZ
+- id: KISI-014
+  text: Dün Ali Rıza Yıldız ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Ali Rıza Yıldız
+- id: KISI-015
+  text: Dün Gülşen Er ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Gülşen Er
+- id: KISI-016
+  text: Dün Cem Karaca ile görüştüm.
+  expect:
+  - entity: KISI
+    value: Cem Karaca
+- id: KISI-017
+  text: Sayın Gürkan toplantıya katıldı.
+  expect:
+  - entity: KISI
+    value: Gürkan
+- id: KISI-018
+  text: Sn. Akın toplantıya katıldı.
+  expect:
+  - entity: KISI
+    value: Akın
+- id: KISI-019
+  text: Dr. Selim toplantıya katıldı.
+  expect:
+  - entity: KISI
+    value: Selim
+- id: KISI-020
+  text: Av. Nesrin toplantıya katıldı.
+  expect:
+  - entity: KISI
+    value: Nesrin
+- id: KISI-021
+  text: Prof. Halil toplantıya katıldı.
+  expect:
+  - entity: KISI
+    value: Halil
+- id: KISI-022
+  text: Bay Kemal toplantıya katıldı.
+  expect:
+  - entity: KISI
+    value: Kemal
+- id: KISI-023
+  text: Bayan Sevim toplantıya katıldı.
+  expect:
+  - entity: KISI
+    value: Sevim
+- id: KISI-024
+  text: Ahmet Bey aradı.
+  expect:
+  - entity: KISI
+    value: Ahmet
+- id: KISI-025
+  text: Ayşe Hanım aradı.
+  expect:
+  - entity: KISI
+    value: Ayşe
+- id: KISI-026
+  text: Mehmet Beyefendi aradı.
+  expect:
+  - entity: KISI
+    value: Mehmet
+- id: KISI-027
+  text: Zehra Hanımefendi aradı.
+  expect:
+  - entity: KISI
+    value: Zehra
+- id: KISI-028
+  text: Aydın Bey aradı.
+  expect:
+  - entity: KISI
+    value: Aydın
+- id: KISI-029
+  text: YILMAZ, Ahmet başvurdu.
+  expect:
+  - entity: KISI
+    value: YILMAZ, Ahmet
+  tags:
+  - borderline
+- id: KISI-030
+  text: Öztürk, Mehmet raporu imzaladı.
+  expect:
+  - entity: KISI
+    value: Öztürk, Mehmet
+- id: KISI-031
+  text: Raporu A. Öztürk imzaladı.
+  expect:
+  - entity: KISI
+    value: A. Öztürk
+- id: KISI-032
+  text: Dün Deniz aradı.
+  expect:
+  - entity: KISI
+    value: Deniz
+- id: KISI-033
+  text: Deniz çok güzel.
+  expect: []
+- id: KISI-034
+  text: Bugün Mehmet geldi.
+  expect:
+  - entity: KISI
+    value: Mehmet
+- id: KISI-035
+  text: Mehmet geldi.
+  expect:
+  - entity: KISI
+    value: Mehmet
+- id: KISI-036
+  text: Müşteri Mehmet aradı.
+  expect:
+  - entity: KISI
+    value: Mehmet
+- id: KISI-037
+  text: 'Müşteri adı: Ayşe'
+  expect:
+  - entity: KISI
+    value: Ayşe
+- id: KISI-038
+  text: Annesinin adı Fatma.
+  expect:
+  - entity: KISI
+    value: Fatma
+- id: KISI-039
+  text: 'Baba adı: Hüseyin'
+  expect:
+  - entity: KISI
+    value: Hüseyin
+- id: KISI-040
+  text: Ahmet isimli müşteri geldi.
+  expect:
+  - entity: KISI
+    value: Ahmet
+- id: KISI-041
+  text: Ahmet Yılmaz'ın dosyası.
+  expect:
+  - entity: KISI
+    value: Ahmet Yılmaz
+  masked: <KISI_1>'ın dosyası.
+- id: KISI-042
+  text: Ayşe'nin hesabı açıldı.
+  expect:
+  - entity: KISI
+    value: Ayşe
+  tags:
+  - borderline
+- id: KISI-043
+  text: Dosyayı Ayşe'ye ilettim.
+  expect:
+  - entity: KISI
+    value: Ayşe
+- id: KISI-044
+  text: Raporu Mehmet’e gönder.
+  expect:
+  - entity: KISI
+    value: Mehmet
+- id: KISI-045
+  text: Raporu Mehmetʼe gönder.
+  expect:
+  - entity: KISI
+    value: Mehmet
+- id: KISI-046
+  text: AHMET'İN imzası eksik.
+  expect:
+  - entity: KISI
+    value: AHMET
+  tags:
+  - borderline
+- id: KISI-047
+  text: Dün Ahmetin aradığını söyledi.
+  expect:
+  - entity: KISI
+    value: Ahmet
+- id: KISI-048
+  text: Ayşe Demir'le görüştüm.
+  expect:
+  - entity: KISI
+    value: Ayşe Demir
+- id: KISI-049
+  text: Aydın'a gittim.
+  expect: []
+- id: KISI-050
+  text: Tatil için Aydın'a gittik.
+  expect: []
+- id: KISI-051
+  text: 15 Mayıs tarihinde toplantı.
+  expect: []
+- id: KISI-052
+  text: Mustafa Kemal Atatürk 1881'de doğdu.
+  expect: []
+  tags:
+  - tarihi_kisi
+- id: KISI-053
+  text: Türk Hava Yolları uçağı indi.
+  expect: []
+- id: KISI-054
+  text: Koç Holding kâr açıkladı.
+  expect: []
+- id: KISI-055
+  text: Ahmet Yılmaz geldi. Ahmet çok yorgundu.
+  expect:
+  - entity: KISI
+    value: Ahmet Yılmaz
+  - entity: KISI
+    value: Ahmet
+  masked: <KISI_1> geldi. <KISI_2> çok yorgundu.
+- id: KISI-056
+  text: Ahmet Yılmaz, AHMET YILMAZ ve Ahmet Yılmaz aynı kişi.
+  expect:
+  - entity: KISI
+    value: Ahmet Yılmaz
+  - entity: KISI
+    value: AHMET YILMAZ
+  - entity: KISI
+    value: Ahmet Yılmaz
+  masked: <KISI_1>, <KISI_1> ve <KISI_1> aynı kişi.
+  tags:
+  - surface_variants
+- id: KISI-057
+  text: ahmet.yilmaz@ornek.com adresine yaz.
+  expect:
+  - entity: EPOSTA
+    value: ahmet.yilmaz@ornek.com
+  not_expect:
+  - KISI
+- id: KISI-058
+  text: '{"ad_soyad": "Zeynep Arslan"}'
+  expect:
+  - entity: KISI
+    value: Zeynep Arslan
+- id: KISI-059
+  text: '| Ad | Soyad |
+
+    | Elif | Aydın |'
+  expect: []
+  tags:
+  - borderline
+- id: KISI-060
+  text: '- Katılımcılar: Emre Koç, Merve Polat'
+  expect:
+  - entity: KISI
+    value: Emre Koç
+  - entity: KISI
+    value: Merve Polat
+- id: KISI-061
+  text: Sigortalı Hatice Güneş başvurdu.
+  expect:
+  - entity: KISI
+    value: Hatice Güneş
+- id: KISI-062
+  text: Kızlık soyadı Çelik.
+  expect:
+  - entity: KISI
+    value: Çelik
+  tags:
+  - borderline
+- id: KISI-063
+  text: ahmet yılmaz küçük harfle yazdı.
+  expect:
+  - entity: KISI
+    value: ahmet yılmaz
+  tags:
+  - lowercase
+- id: KISI-064
+  text: 'müşteri: şule önal, tel 0532 234 56 78'
+  expect:
+  - entity: KISI
+    value: şule önal
+  - entity: TELEFON
+    value: 0532 234 56 78
+  tags:
+  - lowercase
+- id: KISI-065
+  text: selam ben zeynep kaya, şifremi unuttum
+  expect:
+  - entity: KISI
+    value: zeynep kaya
+  tags:
+  - lowercase
+- id: KISI-066
+  text: ayşe demir toplantıya katılmıyor.
+  expect:
+  - entity: KISI
+    value: ayşe demir
+  tags:
+  - lowercase
+- id: KISI-067
+  text: mehmet öztürk raporu gönderdi.
+  expect:
+  - entity: KISI
+    value: mehmet öztürk
+  tags:
+  - lowercase
+- id: KISI-068
+  text: Jerome Powell konuştu.
+  expect: []
+- id: KISI-069
+  text: THYAO ve GARAN yükseldi.
+  expect: []
+- id: KISI-070
+  text: Yıldız Pazar'da işlem gördü.
+  expect: []
+- id: KISI-071
+  text: Dün Kıymet Hanım geldi.
+  expect:
+  - entity: KISI
+    value: Kıymet
+- id: KISI-072
+  text: Dr. Ayşe Kaya muayene etti.
+  expect:
+  - entity: KISI
+    value: Ayşe Kaya
+- id: KISI-073
+  text: Sayın Ahmet Yılmaz, başvurunuz alındı.
+  expect:
+  - entity: KISI
+    value: Ahmet Yılmaz
+- id: KISI-074
+  text: Merhaba Selin Erdem, hoş geldiniz.
+  expect:
+  - entity: KISI
+    value: Selin Erdem
+- id: KISI-075
+  text: Personel Murat Aksoy izinde.
+  expect:
+  - entity: KISI
+    value: Murat Aksoy
+- id: KISI-076
+  text: Kefil Osman Tekin imzaladı.
+  expect:
+  - entity: KISI
+    value: Osman Tekin
+- id: KISI-077
+  text: 'Alıcı: İbrahim Kılıç'
+  expect:
+  - entity: KISI
+    value: İbrahim Kılıç
+- id: KISI-078
+  text: Gönderen Esra Özkan.
+  expect:
+  - entity: KISI
+    value: Esra Özkan
+- id: KISI-079
+  text: Tanık Kerem Bulut ifade verdi.
+  expect:
+  - entity: KISI
+    value: Kerem Bulut
+- id: KISI-080
+  text: Mehmet'in hesabı dondu.
+  expect:
+  - entity: KISI
+    value: Mehmet
+- id: KISI-081
+  text: Emir Bey bugün aradı.
+  expect:
+  - entity: KISI
+    value: Emir
+- id: KISI-082
+  text: Müşteri temsilcimiz Büşra Yıldırım size dönecek.
+  expect:
+  - entity: KISI
+    value: Büşra Yıldırım
+- id: KISI-083
+  text: 'Yetkili: Okan Şimşek'
+  expect:
+  - entity: KISI
+    value: Okan Şimşek
+- id: KISI-084
+  text: Başvuran Seda Karakaya, TCKN 44771278268.
+  expect:
+  - entity: KISI
+    value: Seda Karakaya
+  - entity: TCKN
+    value: '44771278268'
+- id: KISI-085
+  text: 'CC: Tolga Erdoğan, Pınar Aksu'
+  expect:
+  - entity: KISI
+    value: Tolga Erdoğan
+  - entity: KISI
+    value: Pınar Aksu
+- id: KISI-086
+  text: 'Saygılarımla,
+
+    Gökhan Yücel
+
+    Portföy Yöneticisi'
+  expect:
+  - entity: KISI
+    value: Gökhan Yücel
+- id: KISI-087
+  text: 'Hesap sahibi: SERKAN DOĞRU'
+  expect:
+  - entity: KISI
+    value: SERKAN DOĞRU
+  tags:
+  - borderline
+- id: KISI-088
+  text: Kemal'le konuştum, Ayşe'ye de ilettim.
+  expect:
+  - entity: KISI
+    value: Kemal
+  - entity: KISI
+    value: Ayşe
+- id: KISI-089
+  text: Deniz Yılmaz'ın portföyü güncellendi.
+  expect:
+  - entity: KISI
+    value: Deniz Yılmaz

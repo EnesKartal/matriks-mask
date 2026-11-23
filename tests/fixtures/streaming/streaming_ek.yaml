@@ -1,0 +1,21 @@
+# elle yazıldı — build_fixtures.py bu dosyayı üretmez/silmez; tüm değerler sentetiktir.
+# Her biri tüm bölme stratejileriyle (her konumda ikiye, tek tek karakter, 3/7/16'lık) tam geri çevirmeye eşit olmalı.
+- id: STREAM-021
+  map: &m {<KISI_1>: Ayşe Demir, <TCKN_1>: '17291716060', <KISI_2>: Kemal}
+  full_output: "<KISI_01>'e iletildi"
+- {id: STREAM-022, map: *m, full_output: "<KISI_2>'a söyle"}
+- {id: STREAM-023, map: *m, full_output: "<KISI_1>'ydi"}
+- {id: STREAM-024, map: *m, full_output: "&lt;KISI_1&gt; ve &lt;TCKN_1&gt;"}
+- {id: STREAM-025, map: *m, full_output: "**<KISI_1>**'in"}
+- {id: STREAM-026, map: *m, full_output: "<KISI_1>\n<TCKN_1>\n<KISI_2>"}
+- {id: STREAM-027, map: *m, full_output: "[KISI_1]'e"}
+- {id: STREAM-028, map: *m, full_output: "<KISI_1><TCKN_1><KISI_2>"}
+- {id: STREAM-029, map: *m, full_output: "<KISI_1>'ndekilerden"}
+- {id: STREAM-030, map: *m, full_output: "<TCKN_1>'i doğruladım"}
+- {id: STREAM-031, map: *m, full_output: "<PERSON_1>'e yaz"}
+- {id: STREAM-032, map: *m, full_output: "<KISI _1> ve <TCKN _1>"}
+- {id: STREAM-033, map: *m, full_output: "<KISI_1>\r\n<TCKN_1>"}
+- {id: STREAM-034, map: *m, full_output: "<KISI_1>'İN"}
+- {id: STREAM-035, map: *m, full_output: "<KISI_1>lar geldi"}
+- {id: STREAM-036, map: *m, full_output: "\\u003cKISI_2\\u003e'a"}
+- {id: STREAM-037, map: {<GIZLI_ANAHTAR_1>: '****', <KISI_1>: Ayşe Demir}, full_output: "anahtar <GIZLI_ANAHTAR_1> geçersiz, <KISI_1>"}

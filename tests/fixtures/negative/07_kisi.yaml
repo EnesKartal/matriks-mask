@@ -1,0 +1,401 @@
+# Negatif (yanlış pozitif tuzağı) senaryoları. Tüm değerler sentetik; sayısal tuzaklar checksum'dan geçmez.
+- id: NEG-261
+  text: "Deniz bugün çok dalgalı, tekneler limanda kaldı."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-262
+  text: "Güneş saat 07:15'te yükseldi, hava açık."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-263
+  text: "Barış görüşmeleri Cenevre'de yeniden başlıyor."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-264
+  text: "Umut her zaman vardır, piyasa toparlanabilir."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-265
+  text: "Can güvenliği için tahliye tatbikatı yapıldı."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-266
+  text: "Kaya gibi sağlam bilanço yapısı dikkat çekti."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-267
+  text: "Yıldız oyuncu sakatlık nedeniyle kadroda yok."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-268
+  text: "Demir fiyatları ton başına 650 dolara geriledi."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-269
+  text: "Çelik ihracatı yılın ilk yarısında %12 arttı."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-270
+  text: "Aslan payını bankacılık sektörü aldı."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-271
+  text: "Doğan güneşle birlikte seans açıldı."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-272
+  text: "Şahin bakışlı analistler bilançoyu satır satır inceledi."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-273
+  text: "Bulut bilişim harcamaları 2026'da %20 arttı."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-274
+  text: "Toprak Mahsulleri Ofisi buğday alım fiyatını duyurdu."
+  expect: []
+  why: "kurum adı (org_names), cümle başı"
+  tags: [kisi, kurum]
+- id: NEG-275
+  text: "Yağmur nedeniyle açık hava etkinliği iptal edildi."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-276
+  text: "Ekin biçme işleri erken bitti, verim yüksek."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-277
+  text: "Nur yüzlü bir gülümsemeyle sunum açıldı."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-278
+  text: "Gül bahçesi belediye tarafından yenilendi."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-279
+  text: "Mutlu yatırımcılar sabırlı olanlardır."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-280
+  text: "Sevgi dolu bir çalışma ortamı verimi artırır."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-281
+  text: "Hava durumu yarın yağışlı, sıcaklık 12 derece."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-282
+  text: "Türk lirası dolar karşısında yatay seyretti."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-283
+  text: "Mert bir duruşla rakiplerine meydan okudu."
+  expect: []
+  why: "sıfat anlamı, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-284
+  text: "Onur kırıcı yorumlar moderatör tarafından silindi."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-285
+  text: "Ege Bölgesi'nde zeytin rekoltesi düştü."
+  expect: []
+  why: "bölge adı, cümle başı, Bölgesi kurum/yer son eki"
+  tags: [kisi, il_adi]
+- id: NEG-286
+  text: "Ozan sahneye çıkıp saz çaldı."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-287
+  text: "Kurt kapanı stratejisi piyasada işe yaramıyor."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-288
+  text: "Bahar aylarında turizm gelirleri artar."
+  expect: []
+  why: "mevsim adı, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-289
+  text: "Zafer kazanan takım kupayı aldı."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-290
+  text: "Cihan şampiyonası İstanbul'da düzenlenecek."
+  expect: []
+  why: "sözlük kelimesi, cümle başı"
+  tags: [kisi, sozluk]
+- id: NEG-291
+  text: "15 Mayıs tarihinde genel kurul toplanacak."
+  expect: []
+  why: "ay adı tarih bağlamında"
+  tags: [kisi, ay_adi]
+- id: NEG-292
+  text: "Toplantı 3 Nisan 2026 Perşembe günü yapılacak."
+  expect: []
+  why: "Nisan tarih bağlamında"
+  tags: [kisi, ay_adi]
+- id: NEG-293
+  text: "Vade sonu 30 Eylül 2026, kupon 15 Ekim 2026."
+  expect: []
+  why: "Eylül ve Ekim tarih bağlamında"
+  tags: [kisi, ay_adi]
+- id: NEG-294
+  text: "Aydın ilinde incir üretimi rekor kırdı."
+  expect: []
+  why: "il adı, cümle başı"
+  tags: [kisi, il_adi]
+- id: NEG-295
+  text: "Sivas Kongresi 1919'da toplandı."
+  expect: []
+  why: "il adı + tarihsel olay"
+  tags: [kisi, il_adi]
+- id: NEG-296
+  text: "Aydın'a gittim, incir aldım."
+  expect: []
+  why: "il adı yer ekiyle, cümle başı"
+  tags: [kisi, il_adi]
+- id: NEG-297
+  text: "Tatil için Aydın'a gittik."
+  expect: []
+  why: "cümle ortası il adı + yer eki: 0.6−0.4=0.2"
+  tags: [kisi, il_adi, borderline]
+- id: NEG-298
+  text: "Ordu ilinden fındık ihracatı arttı."
+  expect: []
+  why: "il adı, cümle başı"
+  tags: [kisi, il_adi]
+- id: NEG-299
+  text: "Türk Hava Yolları yeni uçak siparişi verdi."
+  expect: []
+  why: "common_words + Yolları kurum bağlamı"
+  tags: [kisi, kurum]
+- id: NEG-300
+  text: "Türkiye İş Bankası bilançosunu paylaştı."
+  expect: []
+  why: "banka adı"
+  tags: [kisi, kurum]
+- id: NEG-301
+  text: "Yapı Kredi dijital bankacılıkta yeni uygulama duyurdu."
+  expect: []
+  why: "banka adı"
+  tags: [kisi, kurum]
+- id: NEG-302
+  text: "Koç Holding yılın ilk yarısında net kârını artırdı."
+  expect: []
+  why: "tek soyad + Holding kurum bağlamı"
+  tags: [kisi, kurum]
+- id: NEG-303
+  text: "Sabancı Üniversitesi yeni kampüsünü açtı."
+  expect: []
+  why: "tek soyad + Üniversitesi kurum bağlamı"
+  tags: [kisi, kurum]
+- id: NEG-304
+  text: "Sabancı Holding enerji yatırımlarını büyütüyor."
+  expect: []
+  why: "tek soyad, kurum bağlamı"
+  tags: [kisi, kurum]
+- id: NEG-305
+  text: "Eczacıbaşı Holding temettü kararını duyurdu."
+  expect: []
+  why: "tek soyad 0,3 + Holding −0,5"
+  tags: [kisi, kurum]
+- id: NEG-306
+  text: "Doğuş Otomotiv satış rakamlarını paylaştı."
+  expect: []
+  why: "ad + Otomotiv kurum bağlamı, cümle başı"
+  tags: [kisi, kurum]
+- id: NEG-307
+  text: "Ülker Bisküvi ihracat pazarlarını genişletti."
+  expect: []
+  why: "marka + Bisküvi kurum bağlamı"
+  tags: [kisi, marka]
+- id: NEG-308
+  text: "Zorlu Enerji rüzgar santrali yatırımını bitirdi."
+  expect: []
+  why: "tek soyad + Enerji kurum bağlamı"
+  tags: [kisi, kurum]
+- id: NEG-309
+  text: "Garanti BBVA faiz oranlarını güncelledi."
+  expect: []
+  why: "banka adı"
+  tags: [kisi, kurum]
+- id: NEG-310
+  text: "Ziraat Bankası tarım kredilerini artırdı."
+  expect: []
+  why: "banka adı"
+  tags: [kisi, kurum]
+- id: NEG-311
+  text: "Anadolu Efes yurt dışı satışlarında büyüdü."
+  expect: []
+  why: "şirket adı (org_names)"
+  tags: [kisi, kurum]
+- id: NEG-312
+  text: "Borsa İstanbul yeni endeks kurallarını duyurdu."
+  expect: []
+  why: "kurum adı + il adı"
+  tags: [kisi, kurum]
+- id: NEG-313
+  text: "Merkez Bankası rezervleri 150 milyar doları aştı."
+  expect: []
+  why: "kurum adı"
+  tags: [kisi, kurum]
+- id: NEG-314
+  text: "Sermaye Piyasası Kurulu yeni tebliğ yayımladı."
+  expect: []
+  why: "kurum adı"
+  tags: [kisi, kurum]
+- id: NEG-315
+  text: "Beko ve Arçelik beyaz eşya satışlarında öne çıktı."
+  expect: []
+  why: "marka adları"
+  tags: [kisi, marka]
+- id: NEG-316
+  text: "Vestel televizyon ihracatını artırdı."
+  expect: []
+  why: "marka adı"
+  tags: [kisi, marka]
+- id: NEG-317
+  text: "Mavi Jeans yeni mağazasını açtı."
+  expect: []
+  why: "marka adı, Jeans kurum bağlamı"
+  tags: [kisi, marka]
+- id: NEG-318
+  text: "Pınar Süt yeni ürün serisini tanıttı."
+  expect: []
+  why: "ad olan marka, cümle başı + Süt kurum bağlamı"
+  tags: [kisi, marka]
+- id: NEG-319
+  text: "Selva makarna ihracatı 40 ülkeye ulaştı."
+  expect: []
+  why: "ad olan marka, cümle başı"
+  tags: [kisi, marka]
+- id: NEG-320
+  text: "Yudum ayçiçek yağı fiyatı güncellendi."
+  expect: []
+  why: "ad olan marka, cümle başı"
+  tags: [kisi, marka]
+- id: NEG-321
+  text: "deniz kenarında yürüyüş yaptık, hava güzeldi."
+  expect: []
+  why: "küçük harf sözcük-ad + soyad olmayan sözcük (eski 'ahmet yılmaz' senaryosu pozitife taşındı: KISI-047)"
+  tags: [kisi, kucuk_harf]
+- id: NEG-322
+  text: "umut verici gelişmeler piyasayı destekledi."
+  expect: []
+  why: "küçük harf sözcük-ad, cümle anlamı"
+  tags: [kisi, kucuk_harf]
+- id: NEG-323
+  text: "can sıkıcı bir gün oldu, seans erken kapandı."
+  expect: []
+  why: "küçük harf can + sıfat"
+  tags: [kisi, kucuk_harf]
+- id: NEG-324
+  text: "Öztürk ailesi yazlığa taşındı."
+  expect: []
+  why: "tek soyad 0,3"
+  tags: [kisi, soyad]
+- id: NEG-325
+  text: "Öztürk soyadlı kişi sayısı yüksektir."
+  expect: []
+  why: "tek soyad, bağlam kelimesi yok"
+  tags: [kisi, soyad]
+- id: NEG-326
+  text: "Demirci ustası kapıyı onardı."
+  expect: []
+  why: "tek soyad, meslek anlamı"
+  tags: [kisi, soyad]
+- id: NEG-327
+  text: "Kılıç kalkan oyunu sahnelendi."
+  expect: []
+  why: "tek soyad, sözlük anlamı"
+  tags: [kisi, soyad]
+- id: NEG-328
+  text: "Yılmaz bir kararlılıkla hedefe yürüdü."
+  expect: []
+  why: "sıfat anlamı, cümle başı"
+  tags: [kisi, soyad]
+- id: NEG-329
+  text: "Jerome Powell faiz kararını açıkladı."
+  expect: []
+  why: "yabancı ad, sözlükte yok"
+  tags: [kisi, yabanci_ad]
+- id: NEG-330
+  text: "Christine Lagarde ECB toplantısında konuştu."
+  expect: []
+  why: "yabancı ad, NER kapalı"
+  tags: [kisi, yabanci_ad]
+- id: NEG-331
+  text: "Warren Buffett hisse alımlarını azalttı."
+  expect: []
+  why: "yabancı ad"
+  tags: [kisi, yabanci_ad]
+- id: NEG-332
+  text: "Elon Musk şirket hisselerini sattı."
+  expect: []
+  why: "yabancı ad"
+  tags: [kisi, yabanci_ad]
+- id: NEG-333
+  text: "Jensen Huang yapay zeka çiplerini tanıttı."
+  expect: []
+  why: "yabancı ad"
+  tags: [kisi, yabanci_ad]
+- id: NEG-334
+  text: "Satya Nadella bulut gelirlerini açıkladı."
+  expect: []
+  why: "yabancı ad"
+  tags: [kisi, yabanci_ad]
+- id: NEG-335
+  text: "Larry Fink yıllık mektubunu yayımladı."
+  expect: []
+  why: "yabancı ad"
+  tags: [kisi, yabanci_ad]
+- id: NEG-336
+  text: "THYAO, GARAN ve ASELS günü yükselişle kapattı."
+  expect: []
+  why: "hisse kodları ad değil"
+  tags: [kisi, hisse]
+- id: NEG-337
+  text: "SASA ve KONTR hisselerinde devre kesici çalıştı."
+  expect: []
+  why: "hisse kodları"
+  tags: [kisi, hisse]
+- id: NEG-338
+  text: "AEFES ve DOHOL kodları büyük harfle yazılır."
+  expect: []
+  why: "büyük harfli kodlar sözlükte yok"
+  tags: [kisi, hisse]
+- id: NEG-339
+  text: "Atatürk 1881'de Selanik'te doğdu."
+  expect: []
+  why: "tek soyad tarihsel; 1881 DOB regex dışı; Selanik il listesinde yok"
+  tags: [kisi, borderline]
+- id: NEG-340
+  text: "Yıldız Pazar'da işlem gören şirket sayısı arttı."
+  expect: []
+  why: "BIST pazar adı org_names_tr.txt içinde → atla"
+  tags: [kisi, finans, borderline]
