@@ -29,7 +29,7 @@ body:
     id: expected
     attributes:
       label: Beklenen ve gerçekleşen / Expected vs actual
-      description: "Ör. `matriks-pii mask --json \"...\"` çıktısı / e.g. output of `matriks-pii mask --json \"...\"`"
+      description: "Ör. `matriks-mask mask --json \"...\"` çıktısı / e.g. output of `matriks-mask mask --json \"...\"`"
     validations:
       required: true
   - type: input

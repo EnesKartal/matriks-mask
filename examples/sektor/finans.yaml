@@ -1,6 +1,6 @@
 # Sektör örneği: finans / aracı kurum. Başlangıç noktasıdır; kendi gerçek biçimlerinize göre daraltın (bkz. README "Kuruma özel tanımlar").
-#   dene:  matriks-pii mask --config examples/sektor/finans.yaml "…"
-#   ölç:   matriks-pii selftest --config examples/sektor/finans.yaml --corpus tests/fixtures/sektor/finans.jsonl
+#   dene:  matriks-mask mask --config examples/sektor/finans.yaml "…"
+#   ölç:   matriks-mask selftest --config examples/sektor/finans.yaml --corpus tests/fixtures/sektor/finans.jsonl
 # Bu dosyadaki extra_regex listesini kendi LiteLLM config.yaml'ınızdaki matriks-pii guardrail'ine ekleyin.
 guardrails:
   - guardrail_name: matriks-pii
@@ -13,5 +13,8 @@ guardrails:
       extra_regex:
         # log/URL alanı ve FIX 1= (Account) etiketi: yalnız değer maskelenir (group)
         - {entity: HESAP_NO, pattern: '(?:AccountId=|\|1=)([0-9]{6,12})(?![0-9])', group: 1, score: 0.9}
-        - {entity: KULLANICI_ADI, pattern: '(?:username=|user=|kullanıcı adı:\s*|kullanici_adi=)([\w.\-]{3,64})', group: 1, score: 0.85}
+        # log/URL (user=MTX\ademir), JSON ("username": "ademir"), form (Kullanıcı Adı: ademir)
+        - {entity: KULLANICI_ADI, pattern: '(?<![\w])(?:username|user_name|userName|user|login|kullanıcı adı|kullanici_adi|kullaniciadi)"?\s*[:=]\s*"?([\w.\-\\@]{3,64})', group: 1, score: 0.85}
+        # XML (<UserName>ademir</UserName>)
+        - {entity: KULLANICI_ADI, pattern: '<(?:[\w.\-]+:)?(?:UserName|Username|userName|username|User|user|Login|login)>\s*([^<>\s]{3,64})\s*</', group: 1, score: 0.85}
         - {entity: EMIR_NO, pattern: '(?<![0-9A-Za-z])[0-9]{8,14}(?![0-9A-Za-z])', context: 'emir no|emir numarası|order id|orderid', context_window: 15, score: 0.8}

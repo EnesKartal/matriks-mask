@@ -8,7 +8,7 @@ from dataclasses import dataclass
 
 from .. import data
 from ..text_utils import _ASCII_FOLD, ascii_fold, fold_key, fre, is_capitalized, tr_lower
-from .base import AnalysisContext, Recognizer, Span
+from .base import EXTENDED_SUFFIX, AnalysisContext, Recognizer, Span
 from .checksums import luhn_valid, tckn_valid, vkn_valid
 
 _W = r"[a-zçğıöşüâîû]"
@@ -171,6 +171,24 @@ _NUFUS_LABEL = fre(
 _NUFUS_GATE = fre(r"(?<![a-zçğıöşü])(?:cilt|nüfusa kayıtlı|nüfus kayıt|nüfus kaydı|kütük)")
 
 
+_DATE_LIKE = re.compile(r"(?:19|20)[0-9]{2}[-/.](?:0?[1-9]|1[0-2])[-/.](?:0?[1-9]|[12][0-9]|3[01])"
+                        r"|(?:0?[1-9]|[12][0-9]|3[01])[-/.](?:0?[1-9]|1[0-2])[-/.](?:19|20)[0-9]{2}")
+_ID_TAIL = re.compile(r"(?:[-/][0-9A-Za-z]{1,6}){1,3}(?![0-9A-Za-z@_]|[.,:/-][0-9A-Za-z])")
+_ID_HEAD = re.compile(r"(?<![0-9A-Za-z/.\-@_])(?:(?=[0-9A-Za-z]{0,5}[0-9])[0-9A-Za-z]{1,6}[-/]){1,3}$")
+
+
+def _extend_id(text: str, s: int, e: int) -> tuple[int, int]:
+    """Bağlamlı kimliğe tire/eğik çizgiyle bitişik, rakam içeren parçaları da kat (kısmi maskeleme sızıntısı)."""
+    t = _ID_TAIL.match(text, e)
+    if t and any(c.isdigit() for c in t.group()):
+        e = t.end()
+    lo = max(0, s - 40)
+    h = _ID_HEAD.search(text, lo, s)
+    if h and any(c.isdigit() for c in h.group()) and not (h.start() == lo and lo > 0 and text[lo - 1].isalnum()):
+        s = h.start()
+    return s, e
+
+
 def _in_zones(starts: list[int], zones: list[tuple[int, int]], pos: int) -> bool:
     """`zones` başlangıca göre sıralı ve ayrık; ikili arama (eşleşme × etiket sayısında ikinci dereceden süre olmasın)."""
     i = bisect.bisect_right(starts, pos) - 1
@@ -209,17 +227,25 @@ class ContextualIdRecognizer(Recognizer):
                         score = 0.7  # etiketli ama kontrol basamağı hatalı: yine de cihaz kimliği
                     if score is None:
                         continue
-                v = m.group()
-                sp = Span(s, e, rule.entity, v, score if score is not None else 0.0, self.name, re.sub(r"[\s\-]", "", v).upper())
-                prev = nearest.get((s, e))
-                if prev is None:
-                    nearest[(s, e)] = (hit, sp)
-                else:
-                    (ps, pe), _ = prev
-                    overlap = hit[0] < pe and ps < hit[1]
-                    better = hit[0] < ps if overlap else hit[1] > pe
-                    if better:
-                        nearest[(s, e)] = (hit, sp)
+                xs, xe = _extend_id(text, s, e)  # "4455-667788", "…-7", "0012345/678": parçası açıkta kalmasın
+                if _DATE_LIKE.fullmatch(text, xs, xe):
+                    continue  # "Poliçe no 1234567, 2024-01-15 tarihli": tarih kimlik değildir
+                # uzatılmış aday daha uzun olduğu için tercih edilir; daha öncelikli bir span'le çakışırsa
+                # ("Hesap No/TCKN: 12345678/17291716060") temel aday kalır, kimlik düşmez
+                for cs, ce in {(s, e), (xs, xe)}:
+                    v = text[cs:ce]
+                    rname = self.name if (cs, ce) == (s, e) else self.name + EXTENDED_SUFFIX
+                    sp = Span(cs, ce, rule.entity, v, score if score is not None else 0.0, rname,
+                              re.sub(r"[\s\-]", "", v).upper())
+                    prev = nearest.get((cs, ce))
+                    if prev is None:
+                        nearest[(cs, ce)] = (hit, sp)
+                    else:
+                        (ps, pe), _ = prev
+                        overlap = hit[0] < pe and ps < hit[1]
+                        better = hit[0] < ps if overlap else hit[1] > pe
+                        if better:
+                            nearest[(cs, ce)] = (hit, sp)
         out.extend(sp for _, sp in nearest.values())
         for m in _KRIPTO_LOOSE.finditer(text):
             if _KRIPTO_CTX.search(cf[max(0, m.start() - 30) : m.start()]):
@@ -294,7 +320,7 @@ class DobRecognizer(Recognizer):
             hi = min(nl_after if nl_after >= 0 else len(cf), e + 25)
             if _DOB_CTX.search(cf[lo:s]) or _DOB_AFTER.match(cf[e:hi]):
                 out.append(Span(s, e, "DOGUM_TARIHI", text[s:e], 0.85, self.name, _norm_date(m)))
-            elif strict and not _not_birth_date(m, cf, e):
+            elif strict and not _not_birth_date(m, cf, e) and not _OTHER_DATE_CTX.search(cf[lo:s]):
                 out.append(Span(s, e, "DOGUM_TARIHI", text[s:e], 0.55, self.name, _norm_date(m)))
         for m in _DATE2_RE.finditer(text):
             s, e = m.start(), m.end()
@@ -321,6 +347,13 @@ class DobRecognizer(Recognizer):
         return out
 
 
+# strict profilde bağlamsız tarih maskelenir; ama açıkça başka bir olayın tarihi olan etiketler hariç
+_OTHER_DATE_CTX = fre(
+    r"(?<![a-zçğıöşü])(?:fatura|sözleşme|vade|işlem|islem|sipariş|teslim|ödeme|düzenleme|tanzim|başlangıç|bitiş|"
+    r"kayıt|rapor|tahakkuk|valör|son ödeme|poliçe|yenileme|iptal|onay|başvuru|randevu|toplantı|ihale|tescil|"
+    r"invoice|due|order|payment|contract|issue|effective|expiry)"
+    r"(?:[a-zçğıöşü]{0,4})(?:\s+(?:tarihi|tarihinde|tarih|günü|date))?\s*[:\-]?\s*$"
+)
 _TIME_AFTER = re.compile(r"(?:[ tT][0-9]{1,2}:[0-9]{2}|\s+saat\s+[0-9]{1,2}[:.][0-9]{2})")  # "12.05 kg" saat değil
 
 

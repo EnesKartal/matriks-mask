@@ -34,6 +34,11 @@ _ORIGIN_AFTER = re.compile(r"\s+(?:kokenli|asilli)")  # katlanmış metinde
 
 def _origin_follows(folded: str, pos: int) -> bool:
     return _ORIGIN_AFTER.match(folded, pos) is not None
+_PLACE_AFTER = fre(r"\s+(?:(?:sahil|tramvay|metro|metrobüs|otobüs|tren|minibüs|çevre)\s+)?"
+                   r"(?:aras[ıi]\w*|ilçe\w*|şube\w*|yolu\w*|hatt\w*|istikamet\w*|yönü\w*|mahalle\w*|merkez\w*|"
+                   r"sefer\w*|cadde\w*|bölge\w*)")
+_NUM_AFTER = fre(r"\s*[0-9][0-9.,]{0,12}\s*(?:tl|₺|usd|eur|dolar|euro|yaş|yaşında|adet|kg|lot|puan|%)(?![a-zçğıöşü])")  # "Ayşe TUTAR 500 TL"
+_IN_PLACE = re.compile(r"^n?(?:da|de|ta|te|daki|deki|taki|teki)$")
 _NATIONALITY_CTX = frozenset({"uyrugu", "uyruk", "uyruklu", "vatandasligi", "milliyeti", "nationality"})
 _LOCATIVE = re.compile(r"^n?(?:da|de|ta|te|dan|den|tan|ten|daki|deki|taki|teki)$")
 # ad sözlüğünde bulunan ama selamlama/işlev sözcüğü olan token'lar (tr_lower)
@@ -43,6 +48,8 @@ NOT_NAMES = frozenset(
     # akrabalık/ilişki sözcükleri: ada yapışırsa aynı kişi iki farklı yer tutucu alır ("Eşim Mehmet Demir" / "Mehmet Demir")
     "eşim eşi eşin annem annesi babam babası oğlum oğlu kızım kızı kardeşim kardeşi ablam abim ağabeyim "
     "müşterimiz müşterim danışanım öğrencim velisi vasisi vekili kefili "
+    # alan etiketi sözcükleri ("Kullanıcı Adı:", "Ürün İsmi:")
+    "adı adi ismi isim soyadı soyadi "
     # adres kısaltmaları: "İnönü Cad.", "Zafer Mvk." ad-soyad sanılmasın
     "cad cd sok sk mah mh blv bulv apt mvk kyü köy no kat daire pk".split()
 )
@@ -57,6 +64,22 @@ _CTX_FIELD = fre(
     rf"name|first{_SEP}name|last{_SEP}name|full{_SEP}name|surname|müşteri{_SEP}adı|musteri{_SEP}adi|customer{_SEP}name|"
     rf"hesap{_SEP}sahibi|kart{_SEP}sahibi|yetkili{_SEP}kişi|ilgili{_SEP}kişi)[\"']?\s*[:=]\s*[\"']?\s*$"
 )
+_NONPERSON_FIELD = fre(
+    r"(?<![a-zçğıöşü])(?:ürün|urun|proje|şube|sube|cihaz|firma|şirket|sirket|kurum|kuruluş|marka|model|sunucu|"
+    r"makine|kategori|program|uygulama|servis|hizmet|paket|kampanya|fon|hisse|sembol|şehir|sehir|il|ilçe|ilce|semt|"
+    r"mahalle|sokak|cadde|bina|site|banka|otel|okul|ders|kurs|etkinlik|toplantı|grup|ekip|departman|birim|bölüm|"
+    r"kullanıcı|kullanici|user|bilgisayar|host|domain|alan|tablo|kolon|sütun|veritabanı|sistem|ortam|rol|görev|unvan|"
+    r"pozisyon|meslek|takma|rumuz|nick|cüzdan|portföy|strateji|rapor|şablon|form|belge|evrak|ürünün|"
+    r"product|project|branch|device|company|server|user|app|service|package)"
+    rf"{_SEP}(?:adı|adi|ismi|isim|name)[\"']?\s*[:=]?\s*[\"']?\s*$"
+)
+
+
+def _field_ctx(before: str) -> bool:
+    """Form alanı etiketi ("Ad:", "Müşteri Adı:") — kişi olmayan şeyin adı ("Ürün Adı:") hariç."""
+    return _CTX_FIELD.search(before) is not None and _NONPERSON_FIELD.search(before) is None
+
+
 # bağlam: aday ADDAN ÖNCE ("müşteri Ahmet", "Sigortalı Ayşe", "ben Zeynep")
 _CTX_BEFORE = fre(
     rf"(?<![a-z])(?:adı|adım|ismi|ismim|soyadı|soyadım|ad{_SEP}soyad|adı{_SEP}soyadı|ben|benim{_SEP}adım|"
@@ -112,6 +135,7 @@ class PersonRecognizer(Recognizer):
         self.pre_hon, self.post_hon = data.honorifics()
         self.org_suffixes = data.org_suffixes()
         geo = data.geo()
+        self.provinces = geo.provinces  # "Çan Çanakkale": ilçe + il dizisi kişi adı değildir
         self.places_tr = geo.places_tr  # Türkçe yazımla karşılaştır ("Çan" ilçesi ≠ "Can" adı)
         self.neighborhoods = geo.neighborhoods
         # özel nitelikli veri terimleri (Kürt, Arap, Rum...) ad sözlüğündeki ASCII karşılıklarıyla çakışmasın
@@ -181,6 +205,8 @@ class PersonRecognizer(Recognizer):
     def _ctx_bonus(ctx: AnalysisContext, start: int, full_end: int) -> float:
         before = ctx.casefolded[max(0, start - 40) : start]
         after = ctx.casefolded[full_end : full_end + 30]
+        if _NONPERSON_FIELD.search(before):
+            return 0.0  # "Ürün Adı: Kalem", "Şube Adı: Levent": etiket kişiye ait değil
         if _CTX_FIELD.search(before):
             return 0.5
         if _CTX_STRONG.search(before):
@@ -233,7 +259,9 @@ class PersonRecognizer(Recognizer):
                     case_ok = (
                         nx.upper == t.upper
                         # "Ahmet YILMAZ": Title ad + BÜYÜK soyad (imza/resmî yazışma)
-                        or (not t.upper and nx.upper and (nx.last or nx.key in self.cont_lasts) and nx.common != "strong")
+                        or (not t.upper and nx.upper and (nx.last or nx.key in self.cont_lasts)
+                            and (nx.common != "strong" or (t.first and not t.common and nx.last and j == i
+                                                   and not _NUM_AFTER.match(ctx.casefolded, nx.full_end))))
                         # "YILMAZ Ahmet": resmî liste sırası
                         or (t.upper and not nx.upper and t.last and nx.first and j == i)
                     )
@@ -250,6 +278,8 @@ class PersonRecognizer(Recognizer):
             seq = toks[i : j + 1]
             if len(seq) >= 2:
                 score = self._score_full(seq)
+                if score is not None and all(x.place for x in seq) and _PLACE_AFTER.match(ctx.casefolded, seq[-1].full_end):
+                    score = None  # "Kartal Pendik arası", "Fatih Beyoğlu şubesi": yer adı dizisi
                 if score is not None:
                     s, e = seq[0].start, seq[-1].end
                     if lower_seq:  # küçük harfle yazılmış ad-soyad: daha zayıf kanıt, bağlam çok önemli
@@ -325,7 +355,7 @@ class PersonRecognizer(Recognizer):
             lk = fold_key(m.group(2))
             # sözcük-soyad ("A. Yılmaz") yalnız hitap/imza bağlamında ("Sayın A. Yılmaz", "imza: A. Yılmaz")
             ctx_ok = bool(_CTX_BEFORE.search(ctx.casefolded[max(0, m.start() - 30) : m.start()])
-                          or _CTX_FIELD.search(ctx.casefolded[max(0, m.start() - 30) : m.start()])
+                          or _field_ctx(ctx.casefolded[max(0, m.start() - 30) : m.start()])
                           or _IMZA.search(ctx.casefolded[max(0, m.start() - 30) : m.start()]))
             if lk in self.lasts and (not self.common.get(lk) or ctx_ok) and not in_org(m.start(), m.end()):
                 results.append((m.start(), m.end(), 0.8, m.group(1).lower() + ". " + lk))
@@ -339,8 +369,12 @@ class PersonRecognizer(Recognizer):
     # ------------------------------------------------------------------ skorlar
     def _score_full(self, seq: list[_Tok]) -> float | None:
         head, tail = seq[0], seq[-1]
-        if all(x.place for x in seq):
-            return None  # "Çan Çanakkale", "Kadıköy İstanbul": yer adı dizisi
+        if all(x.place for x in seq) and not (head.first and (tail.last or tail.key in self.cont_lasts)
+                                              and head.key not in self.provinces and tail.key not in self.provinces
+                                              and not _IN_PLACE.match(fold_key(tail.suffix))):
+            # "Çan Çanakkale", "Konya Akşehir", "Fatih Beyoğlu'nda" yer adı dizisi; ad + soyad ise ("Levent Bozkurt")
+            # kişi adıdır
+            return None
         if not head.first:
             # "YILMAZ Ahmet" (soyad-ad) — resmi listelerde
             if head.last and tail.first and len(seq) == 2 and not head.common:
@@ -368,12 +402,12 @@ class PersonRecognizer(Recognizer):
         if not t.cap:
             # form/JSON alanında küçük harfli ad ("Ad: ahmet", "ad": "ahmet"): alan etiketi güçlü kanıttır
             if t.low and (t.first or t.last) and len(t.key) >= 3 and not self._is_hon(t) \
-                    and _CTX_FIELD.search(ctx.casefolded[max(0, t.start - 40) : t.start]):
+                    and _field_ctx(ctx.casefolded[max(0, t.start - 40) : t.start]):
                 return 0.7
             return None
         if self._is_hon(t):
             return None
-        field = _CTX_FIELD.search(ctx.casefolded[max(0, t.start - 40) : t.start]) is not None
+        field = _field_ctx(ctx.casefolded[max(0, t.start - 40) : t.start])  # "Proje Adı: Kartal" alan değil
         prev = toks[idx - 1] if idx > 0 else None
         nxt = toks[idx + 1] if idx + 1 < len(toks) else None
         gap_prev = text[prev.full_end : t.start] if prev else ""

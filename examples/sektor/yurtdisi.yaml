@@ -1,6 +1,6 @@
 # Sektör örneği: yurt dışı biçimler. Başlangıç noktasıdır; kendi gerçek biçimlerinize göre daraltın (bkz. README "Kuruma özel tanımlar").
-#   dene:  matriks-pii mask --config examples/sektor/yurtdisi.yaml "…"
-#   ölç:   matriks-pii selftest --config examples/sektor/yurtdisi.yaml --corpus tests/fixtures/sektor/yurtdisi.jsonl
+#   dene:  matriks-mask mask --config examples/sektor/yurtdisi.yaml "…"
+#   ölç:   matriks-mask selftest --config examples/sektor/yurtdisi.yaml --corpus tests/fixtures/sektor/yurtdisi.jsonl
 # Bu dosyadaki extra_regex listesini kendi LiteLLM config.yaml'ınızdaki matriks-pii guardrail'ine ekleyin.
 guardrails:
   - guardrail_name: matriks-pii

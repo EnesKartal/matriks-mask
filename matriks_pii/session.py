@@ -44,6 +44,7 @@ class MaskSession:
         self.entity_counts: Counter[str] = Counter()  # maskelenen span sayısı (oluşum)
         self.log_counts: Counter[str] = Counter()
         self.blocked: str | None = None
+        self.wrapped: set[str] = set()  # istekte değer formatın parantezleri içindeydi ("<ayse@x.com>")
         self.numeric: set[str] = set()  # istekte JSON sayısı olan yer tutucular
 
     def __repr__(self) -> str:  # değer sızdırmaz
@@ -122,6 +123,7 @@ class MaskSession:
             "entity_counts": dict(self.entity_counts),
             "log_counts": dict(self.log_counts),
             "numeric": sorted(self.numeric),
+            "wrapped": sorted(self.wrapped),
         }
 
     @classmethod
@@ -135,4 +137,5 @@ class MaskSession:
         s.entity_counts = Counter(d.get("entity_counts", {}))
         s.log_counts = Counter(d.get("log_counts", {}))
         s.numeric = set(d.get("numeric", []))
+        s.wrapped = set(d.get("wrapped", []))  # eski oturumlarda yok
         return s

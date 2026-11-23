@@ -6,3 +6,8 @@
 {"text": "THYAO 312,50 TL, hacim 98765432100", "entities": []}
 {"text": "XU100 9.875,43 puandan kapandı; 1=1 koşulu her zaman doğru", "entities": []}
 {"text": "order id alanı boş geldi", "entities": []}
+{"text": "login user=MTX\\ademir ok", "entities": [{"entity": "KULLANICI_ADI", "value": "MTX\\ademir"}]}
+{"text": "{\"username\": \"mkaya\"}", "entities": [{"entity": "KULLANICI_ADI", "value": "mkaya"}]}
+{"text": "<UserName>ayilmaz</UserName>", "entities": [{"entity": "KULLANICI_ADI", "value": "ayilmaz"}]}
+{"text": "Kullanıcı Adı: bdemir", "entities": [{"entity": "KULLANICI_ADI", "value": "bdemir"}]}
+{"text": "superuser=root1 ve order user count 5", "entities": []}

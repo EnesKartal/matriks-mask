@@ -74,7 +74,7 @@ def test_selftest_delegates(capsys: pytest.CaptureFixture[str]) -> None:
     assert "SONUÇ: OK" in capsys.readouterr().out
 
 
-@pytest.mark.parametrize("argv", [[], ["bilinmeyen"], ["--help"]])
+@pytest.mark.parametrize("argv", [[], ["--help"], ["--version"]])
 def test_usage(argv: list[str]) -> None:
     with pytest.raises(SystemExit):
         main(argv)
@@ -95,3 +95,10 @@ def test_mask_non_utf8_stdout() -> None:
                        capture_output=True, env=env)
     assert r.returncode == 0, r.stderr.decode("utf-8", "replace")
     assert "<KISI_1>" in r.stdout.decode("utf-8")
+
+
+def test_default_subcommand_is_mask(capsys: pytest.CaptureFixture[str]) -> None:
+    assert main([TEXT]) == 0
+    assert capsys.readouterr().out.strip() == "Ben <KISI_1>, TCKN <TCKN_1>, IBAN <IBAN_1>"
+    assert main(["--json", TEXT]) == 0
+    assert '"masked"' in capsys.readouterr().out

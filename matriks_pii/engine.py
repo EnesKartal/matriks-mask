@@ -13,8 +13,8 @@ from typing import TYPE_CHECKING
 
 from .config import ALLOW_PROTECTED, PRIORITY, TurkishPIIConfig
 from .recognizers import build_recognizers
-from .recognizers.base import AnalysisContext, Span
-from .text_utils import ascii_dashes, ascii_width, decode_for_scan, fold_text, trie_pattern
+from .recognizers.base import EXTENDED_SUFFIX, AnalysisContext, Span
+from .text_utils import ascii_dashes, ascii_width, decode_for_scan, fold_text, form_plus_spaces, trie_pattern
 
 if TYPE_CHECKING:
     from .session import MaskSession
@@ -60,12 +60,33 @@ def _merge_decoded(text: str, orig: list[Span], dec: list[Span], cfg: TurkishPII
     return out
 
 
+def _drop_conflicting_extensions(spans: list[Span]) -> list[Span]:
+    """Bitişik parçalarla uzatılmış kimlik adayı, başka bir varlığın adayına değiyorsa atılır; temel aday kalır
+    ("hesap no 12345678/05 Kasım 1985" → uzatma "…/05" doğum tarihini yutmasın)."""
+    ext = [s for s in spans if s.recognizer.endswith(EXTENDED_SUFFIX)]
+    if not ext:
+        return spans
+    others = sorted((s for s in spans if not s.recognizer.endswith(EXTENDED_SUFFIX)), key=lambda s: s.start)
+    starts = [s.start for s in others]
+    max_len = max((s.end - s.start for s in others), default=0)
+    drop: set[int] = set()
+    for x in ext:
+        lo = bisect.bisect_left(starts, x.start - max_len)
+        hi = bisect.bisect_left(starts, x.end)
+        if any(o.entity != x.entity and o.start < x.end and x.start < o.end for o in others[lo:hi]):
+            drop.add(id(x))
+    return [s for s in spans if id(s) not in drop]
+
+
 def _dedupe_same_entity(spans: list[Span]) -> list[Span]:
     """Aynı entity'de kısmi kesişen adaylar (NER + sözlük): uzun olanı tut."""
     by_ent: dict[str, list[Span]] = {}
-    for s in spans:
-        by_ent.setdefault(s.entity, []).append(s)
     out: list[Span] = []
+    for s in spans:
+        if s.recognizer.endswith(EXTENDED_SUFFIX):
+            out.append(s)  # uzatılmış kimlik adayı temel adayı elemesin; seçim resolve_overlaps'ta (öncelikli komşu varsa temel kalır)
+            continue
+        by_ent.setdefault(s.entity, []).append(s)
     for _ent, lst in by_ent.items():
         lst.sort(key=lambda s: (-(s.end - s.start), -s.score))
         out.extend(_greedy_disjoint(lst))
@@ -167,9 +188,13 @@ class PIIEngine:
         text = ascii_width(text)  # 1:1; tanıyıcılar ASCII kopyada eşleşir, span metni aşağıda orijinalden alınır
         spans, ctx = self._detect(text)
         extra: list[Span] = []
-        dashed = ascii_dashes(text)
-        if dashed is not None:  # Unicode tireli yazım ek taramada; ana tarama span'leri düşmez (birleşim)
-            extra += [dataclasses.replace(s, text=text[s.start : s.end]) for s in self._detect(dashed)[0]]
+        for variant in (ascii_dashes(text), form_plus_spaces(text)):
+            # Unicode tireli yazım ve form "+"'sı ek taramada (1:1); ana tarama span'leri düşmez (birleşim)
+            if variant is not None:
+                for s in self._detect(variant)[0]:
+                    raw = text[s.start : s.end]
+                    changed = raw != variant[s.start : s.end]
+                    extra.append(dataclasses.replace(s, text=raw, normalized=raw if changed else s.normalized))
         dec = decode_for_scan(text)
         if dec is not None:
             extra += self._decoded_spans(text, *dec)
@@ -191,14 +216,14 @@ class PIIEngine:
         for r in self.recognizers:
             if r.phase == 1:
                 phase1.extend(r.find(text, ctx))
-        phase1 = [s for s in phase1 if s.score >= self.cfg.min_score(s.entity)]
+        phase1 = _drop_conflicting_extensions([s for s in phase1 if s.score >= self.cfg.min_score(s.entity)])
         ctx.prior_spans = resolve_overlaps(_dedupe_same_entity(phase1))
         phase2: list[Span] = []
         for r in self.recognizers:
             if r.phase == 2:
                 phase2.extend(r.find(text, ctx))
         phase2 = [s for s in phase2 if s.score >= self.cfg.min_score(s.entity)]
-        return resolve_overlaps(ctx.prior_spans + phase2), ctx
+        return resolve_overlaps(_drop_conflicting_extensions(ctx.prior_spans + phase2)), ctx
 
     def _decoded_spans(self, text: str, decoded: str, starts: list[int], ends: list[int]) -> list[Span]:
         """URL/HTML kodu çözülmüş kopyada bulunan span'ler, orijinal aralığa taşınmış olarak. Yalnız kodlu bir bölgeye
@@ -255,13 +280,18 @@ class PIIEngine:
             return text
         # numaralama soldan sağa (deterministik), yerleştirme sağdan sola
         ordered = sorted(spans, key=lambda s: s.start)
+        fo, _sep, fc = self.cfg.fmt_parts
         parts: list[str] = []
         pos = 0
         for s in ordered:
             if s.start < pos:  # güvenlik: çakışan span (olmamalı) atlanır
                 continue
             parts.append(text[pos : s.start])
-            parts.append(session.placeholder_for(s, count))
+            ph = session.placeholder_for(s, count)
+            parts.append(ph)
+            # "Ad <ayse@x.com>" → "<<EPOSTA_1>>": geri çevirmede dıştaki parantez metnin kendisidir, korunur
+            if fo and fc and text.endswith(fo, 0, s.start) and text.startswith(fc, s.end):
+                session.wrapped.add(ph)
             pos = s.end
         parts.append(text[pos:])
         return "".join(parts)

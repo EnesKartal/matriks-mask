@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Güvenlik açığı / Security vulnerability
-    url: https://github.com/MatriksData/matriks-pii/security/advisories/new
+    url: https://github.com/MatriksData/matriks-mask/security/advisories/new
     about: Güvenlik açıklarını herkese açık issue olarak açmayın. / Do not report vulnerabilities in public issues.

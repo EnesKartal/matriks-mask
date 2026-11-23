@@ -1,11 +1,11 @@
-"""Komut satırı: `matriks-pii` (pip ile kurulan komut).
+"""Komut satırı: `matriks-mask` (eski adı `matriks-pii` da çalışır).
 
-    matriks-pii mask "Ben Ayşe Demir, TCKN 17291716060"     # maskeli metin
-    echo "..." | matriks-pii mask --profile strict           # standart girdiden
-    matriks-pii mask --config config.yaml "..."              # LiteLLM config'indeki guardrail ayarlarıyla
-    matriks-pii mask --json "..."                            # maskeli metin + tespitler (değersiz)
-    matriks-pii selftest --config config.yaml [--quick]      # = python -m matriks_pii.selftest
-    matriks-pii keys [--k8s]                                 # = python -m matriks_pii.keys
+    matriks-mask "Ben Ayşe Demir, TCKN 17291716060"          # maskeli metin (= matriks-mask mask "…")
+    echo "..." | matriks-mask mask --profile strict          # standart girdiden
+    matriks-mask mask --config config.yaml "..."             # LiteLLM config'indeki guardrail ayarlarıyla
+    matriks-mask mask --json "..."                           # maskeli metin + tespitler (değersiz)
+    matriks-mask selftest --config config.yaml [--quick]     # = python -m matriks_pii.selftest
+    matriks-mask keys [--k8s]                                # = python -m matriks_pii.keys
 
 `mask` çıktısı yalnız maskeli metni ve (--json ile) tespitlerin türünü/konumunu içerir; yer tutucu → değer haritası
 hiçbir zaman yazdırılmaz. BLOCK aksiyonlu bir varlık bulunursa metin yazdırılmaz, çıkış kodu 2 olur.
@@ -36,7 +36,7 @@ def _config(args: argparse.Namespace) -> Any:
 
 
 def _mask(argv: list[str]) -> int:
-    ap = argparse.ArgumentParser(prog="matriks-pii mask", description="Metindeki kişisel verileri maskeler.")
+    ap = argparse.ArgumentParser(prog="matriks-mask mask", description="Metindeki kişisel verileri maskeler.")
     ap.add_argument("text", nargs="?", help="maskelenecek metin (verilmezse standart girdiden okunur)")
     ap.add_argument("--profile", choices=["balanced", "strict", "minimal"], default="balanced")
     ap.add_argument("--config", help="LiteLLM config.yaml (guardrail ayarları buradan okunur; --profile yok sayılır)")
@@ -87,8 +87,16 @@ def _utf8_streams() -> None:
 def main(argv: list[str] | None = None) -> int:
     _utf8_streams()
     argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] not in _SUB and argv[0] not in ("-h", "--help", "--version"):
+        import difflib
+
+        near = difflib.get_close_matches(argv[0], ("selftest", "keys"), n=1, cutoff=0.75)
+        if near and " " not in argv[0]:
+            print(f"matriks-mask: bilinmeyen komut '{argv[0]}'; '{near[0]}' mı demek istediniz?", file=sys.stderr)
+            return 2
+        argv = ["mask", *argv]  # alt komutsuz kullanım: matriks-mask "metin" / matriks-mask --json "metin"
     if not argv or argv[0] not in _SUB:
-        ap = argparse.ArgumentParser(prog="matriks-pii", description=__doc__,
+        ap = argparse.ArgumentParser(prog="matriks-mask", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
         ap.add_argument("command", choices=_SUB)
         ap.add_argument("--version", action="version", version=_version())

@@ -272,7 +272,7 @@ class TurkishPIIGuardrail(CustomGuardrail):
         return await self.store.get(sid) if sid else None
 
     def _reverter(self, session: MaskSession) -> Reverter:
-        return Reverter(session.map, session.entities, self.cfg, reserved=session.reserved)
+        return Reverter(session.map, session.entities, self.cfg, reserved=session.reserved, wrapped=session.wrapped)
 
     @property
     def _skip_system(self) -> bool:

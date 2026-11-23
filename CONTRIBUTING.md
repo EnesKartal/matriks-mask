@@ -6,7 +6,7 @@ Contributions are welcome; issues and pull requests may be written in Turkish or
 ## Geliştirme ortamı
 
 ```bash
-git clone https://github.com/MatriksData/matriks-pii && cd matriks-pii
+git clone https://github.com/MatriksData/matriks-mask && cd matriks-pii
 python -m venv .venv && source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -e ".[dev,fast,metrics,redis]"
 export PYTHONUTF8=1                                         # Windows: set PYTHONUTF8=1
@@ -50,7 +50,7 @@ aynıysa — TCKN, IBAN, URL kodlaması — çekirdeğe; kurumdan kuruma değiş
    `context_window`, gerekiyorsa `group`).
 2. `tests/fixtures/sektor/<sektör>.jsonl`: her kural için en az bir pozitif ve dosya başına en az iki negatif satır
    (`"entities": []`), yalnız sentetik değerler.
-3. `matriks-pii selftest --config examples/sektor/<sektör>.yaml --corpus tests/fixtures/sektor/<sektör>.jsonl` →
+3. `matriks-mask selftest --config examples/sektor/<sektör>.yaml --corpus tests/fixtures/sektor/<sektör>.jsonl` →
    P = R = 1; `pytest -q tests/test_sektor_ornekleri.py`.
 
 Sector-specific formats go into example configs, not into the core. Copy an existing file, add rules plus a

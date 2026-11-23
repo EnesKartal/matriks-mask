@@ -1,6 +1,6 @@
 # Sektör örneği: havayolu / seyahat. Başlangıç noktasıdır; kendi gerçek biçimlerinize göre daraltın (bkz. README "Kuruma özel tanımlar").
-#   dene:  matriks-pii mask --config examples/sektor/havayolu.yaml "…"
-#   ölç:   matriks-pii selftest --config examples/sektor/havayolu.yaml --corpus tests/fixtures/sektor/havayolu.jsonl
+#   dene:  matriks-mask mask --config examples/sektor/havayolu.yaml "…"
+#   ölç:   matriks-mask selftest --config examples/sektor/havayolu.yaml --corpus tests/fixtures/sektor/havayolu.jsonl
 # Bu dosyadaki extra_regex listesini kendi LiteLLM config.yaml'ınızdaki matriks-pii guardrail'ine ekleyin.
 guardrails:
   - guardrail_name: matriks-pii

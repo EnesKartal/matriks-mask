@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "matriks-mask"
-version = "0.4.0"
+version = "0.4.1"
 description = "KVKK uyum süreçlerini destekleyen, Türkçe ve geri çevrilebilir PII maskeleme guardrail'i (LiteLLM) / Turkish reversible PII masking guardrail for LiteLLM"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -52,12 +52,12 @@ matriks-pii = "matriks_pii.cli:main"
 matriks-mask = "matriks_pii.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/MatriksData/matriks-pii"
-Repository = "https://github.com/MatriksData/matriks-pii"
-Issues = "https://github.com/MatriksData/matriks-pii/issues"
-Changelog = "https://github.com/MatriksData/matriks-pii/blob/main/CHANGELOG.md"
-"Turkish docs" = "https://github.com/MatriksData/matriks-pii/blob/main/README.tr.md"
-Security = "https://github.com/MatriksData/matriks-pii/blob/main/SECURITY.md"
+Homepage = "https://github.com/MatriksData/matriks-mask"
+Repository = "https://github.com/MatriksData/matriks-mask"
+Issues = "https://github.com/MatriksData/matriks-mask/issues"
+Changelog = "https://github.com/MatriksData/matriks-mask/blob/main/CHANGELOG.md"
+"Turkish docs" = "https://github.com/MatriksData/matriks-mask/blob/main/README.tr.md"
+Security = "https://github.com/MatriksData/matriks-mask/blob/main/SECURITY.md"
 
 [tool.setuptools.packages.find]
 include = ["matriks_pii*"]

@@ -103,7 +103,7 @@ def test_extra_regex_group_validated(group: object) -> None:
 
 def test_strict_dates() -> None:
     eng = PIIEngine(TurkishPIIConfig.build({"profile": "strict"}))
-    assert [s.entity for s in eng.detected("Kayıt 12.03.1985 tarihli")] == ["DOGUM_TARIHI"]  # strict: bağlamsız da
+    assert [s.entity for s in eng.detected("Not: 12.03.1985")] == ["DOGUM_TARIHI"]  # strict: bağlamsız da
     assert eng.detected("2026-11-20 14:32:11 INFO order accepted") == []
     assert eng.detected("Ödeme 20.11.2026 saat 14:30'da alındı") == []
     assert eng.detected("Vade 15.03.2099") == []
@@ -155,8 +155,8 @@ def test_decoded_span_never_drops_original() -> None:
 
 def test_strict_dates_review() -> None:
     eng = PIIEngine(TurkishPIIConfig.build({"profile": "strict"}))
-    assert [s.text for s in eng.detected("Randevular: 15.03.1985 20.04.1990")] == ["15.03.1985", "20.04.1990"]
-    assert [s.text for s in eng.detected("Kayit 12.03.1985 12.05 kg")] == ["12.03.1985"]
+    assert [s.text for s in eng.detected("Tarihler: 15.03.1985 20.04.1990")] == ["15.03.1985", "20.04.1990"]
+    assert [s.text for s in eng.detected("Not 12.03.1985 12.05 kg")] == ["12.03.1985"]
 
 
 @pytest.mark.parametrize("text,ents", [

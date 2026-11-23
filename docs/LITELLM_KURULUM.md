@@ -12,7 +12,7 @@ Test edilen sürümler: **LiteLLM 1.106.1, 1.106.5 ve 1.110.2** (asgari 1.106.1)
 ```bash
 pip install "matriks-mask[fast]"
 # main dalındaki en son sürüm
-pip install "matriks-mask[fast] @ git+https://github.com/MatriksData/matriks-pii"
+pip install "matriks-mask[fast] @ git+https://github.com/MatriksData/matriks-mask"
 # veya yerel kopyadan
 pip install "/yol/matriks-pii[fast]"
 ```

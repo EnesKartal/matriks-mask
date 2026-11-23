@@ -1,5 +1,27 @@
 # Değişiklik günlüğü / Changelog
 
+## 0.4.1 — 2026-11-23
+
+Dış değerlendirmenin ikinci raporundan çıkan düzeltmeler. / Fixes from the second external evaluation.
+
+- **Ad:** GitHub deposu ve komut `matriks-mask` (`matriks-mask "metin"` alt komutsuz da maskeler). Python modülü
+  (`matriks_pii`), guardrail yolu, `MATRIKS_PII_*` değişkenleri ve metrik adları değişmedi; `matriks-pii` komutu da kurulur.
+- **Kısmi maskeleme (sızıntı):** bağlamlı kimliklerde tire/eğik çizgiyle bitişik parçalar artık değerle birlikte
+  maskelenir (`Müşteri no 4455-667788`, `Poliçe no …-7`, `MKK sicil no …-8`, `hesap no 0012345/678`); tarih biçimindeki
+  değer kimlik sayılmaz (`Poliçe no 1234567, 2024-01-15 tarihli`).
+- **Adlar (sızıntı):** BÜYÜK harfli, aynı zamanda sözcük olan soyadlar (`İrem DUMAN`, `KORKMAZ`, `AVCI`, `ÇİFTÇİ`),
+  tırnaklı e-posta başlığı (`To: "İrem DUMAN" <…>`) ve ad ile soyadı yer adı da olan kişiler (`Levent Bozkurt`,
+  `Defne Demirci`) yakalanır; ilçe + il dizisi (`Çan Çanakkale`) kişi sayılmaz.
+- **Yanlış pozitif:** kişi olmayan şeylerin adı (`Ürün Adı:`, `Proje Adı:`, `Şube Adı:`, `Cihaz Adı:`,
+  `Kullanıcı Adı:`) kişi alanı sayılmaz; "Adı" sözcüğü maskelenmez. Bu yüzden `Kullanıcı adı: Ayşe` gibi alanda
+  tek ad artık maskelenmez (kullanıcı adları için `extra_regex`, bkz. `examples/sektor/finans.yaml`). Yer adı
+  dizileri (`Konya Akşehir`, `Kartal Pendik arası`) kişi sayılmaz.
+- **Köşeli parantez:** `Ayşe Demir <ayse@example.com>` yanıtta parantezleriyle geri çevrilir (oturum, değerin istekte
+  parantez içinde olduğunu tutar; Redis'te geriye uyumlu).
+- **Form kodlaması:** URL/form parçasında harf/rakam arasındaki `+` boşluk olarak çözülür (`tel=0532+123+45+67`).
+- **strict tarih:** fatura, sözleşme, vade, sipariş, ödeme… etiketli tarihler doğum tarihi sayılmaz.
+- `examples/sektor/finans.yaml`: kullanıcı adı `user=MTX\ademir`, JSON (`"username": …`) ve XML (`<UserName>`) biçimleri.
+
 ## 0.4.0 — 2026-11-23
 
 İlk PyPI sürümü. / First release on PyPI.

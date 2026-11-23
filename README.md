@@ -1,11 +1,11 @@
-# matriks-pii
+# matriks-mask
 
-[![PyPI](https://img.shields.io/pypi/v/matriks-mask.svg)](https://pypi.org/project/matriks-mask/)
-[![Python](https://img.shields.io/pypi/pyversions/matriks-mask.svg)](https://pypi.org/project/matriks-mask/)
-[![ci](https://github.com/MatriksData/matriks-pii/actions/workflows/ci.yml/badge.svg)](https://github.com/MatriksData/matriks-pii/actions/workflows/ci.yml)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/MatriksData/matriks-pii/blob/main/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/matriks-mask.svg?cacheSeconds=3600)](https://pypi.org/project/matriks-mask/)
+[![Python](https://img.shields.io/pypi/pyversions/matriks-mask.svg?cacheSeconds=3600)](https://pypi.org/project/matriks-mask/)
+[![ci](https://github.com/MatriksData/matriks-mask/actions/workflows/ci.yml/badge.svg)](https://github.com/MatriksData/matriks-mask/actions/workflows/ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/MatriksData/matriks-mask/blob/main/LICENSE)
 
-**English** | [Türkçe](https://github.com/MatriksData/matriks-pii/blob/main/README.tr.md)
+**English** | [Türkçe](https://github.com/MatriksData/matriks-mask/blob/main/README.tr.md)
 
 Reversible personal data (PII) masking for Turkish text, built as a [LiteLLM](https://github.com/BerriAI/litellm)
 guardrail. It supports KVKK (Turkey's personal data protection law) compliance processes.
@@ -27,7 +27,7 @@ metrics or the audit trail. Everything runs in-process: no text is sent to an ex
 
 ```
 User ──"Ben Ayşe Demir, TCKN 17291716060"──▶ LiteLLM proxy ──"Ben <KISI_1>, TCKN <TCKN_1>"──▶ LLM
-User ◀──"Merhaba Ayşe Demir'e ilettim"────── matriks-pii ◀──"Merhaba <KISI_1>'e ilettim"───── LLM
+User ◀──"Merhaba Ayşe Demir'e ilettim"────── matriks-mask ◀──"Merhaba <KISI_1>'e ilettim"───── LLM
                                              (suffix repair: 'e → 'e/'ye by vowel harmony)
 ```
 
@@ -46,27 +46,29 @@ User ◀──"Merhaba Ayşe Demir'e ilettim"────── matriks-pii ◀�
 
 ## Installation
 
-The PyPI package is [**`matriks-mask`**](https://pypi.org/project/matriks-mask/); the Python module is `matriks_pii` and the command is `matriks-pii`
-(`matriks-mask` is an alias). Upgrading from a git install of `matriks-pii` ≤ 0.3.3: run `pip uninstall matriks-pii`
-first.
+The package and the command are [**`matriks-mask`**](https://pypi.org/project/matriks-mask/). The Python module
+(`matriks_pii`, LiteLLM guardrail path `matriks_pii.guardrail.TurkishPIIGuardrail`), the `MATRIKS_PII_*` environment
+variables and the `matriks_pii_*` metrics keep their names, so existing configurations keep working; the old command
+name `matriks-pii` is still installed as an alias. Upgrading from a git install of `matriks-pii` ≤ 0.3.3: run
+`pip uninstall matriks-pii` first.
 
 ```bash
 pip install "matriks-mask[fast]"                 # fast: pyahocorasick (optional, faster lexicon lookup)
 pip install "matriks-mask[redis,fast,metrics]"   # production: encrypted Redis session store + Prometheus
 pip install "matriks-mask[ner]"                  # optional Turkish NER (transformers + torch)
-pip install "git+https://github.com/MatriksData/matriks-pii"   # latest version on main
-pipx install matriks-mask                        # CLI only (`matriks-pii mask`), isolated environment
+pip install "git+https://github.com/MatriksData/matriks-mask"   # latest version on main
+pipx install matriks-mask                        # CLI only (`matriks-mask "…"`), isolated environment
 ```
 
-For pinned production versions use [`constraints/prod.txt`](https://github.com/MatriksData/matriks-pii/blob/main/constraints/prod.txt) from the repository
+For pinned production versions use [`constraints/prod.txt`](https://github.com/MatriksData/matriks-mask/blob/main/constraints/prod.txt) from the repository
 (`pip install "matriks-mask[redis,fast,metrics]" -c constraints/prod.txt`).
 
 ### Try it without LiteLLM
 
 ```bash
-$ matriks-pii mask "Ben Ayşe Demir, TCKN 17291716060"
+$ matriks-mask "Ben Ayşe Demir, TCKN 17291716060"
 Ben <KISI_1>, TCKN <TCKN_1>
-$ echo "Ahmet Yılmaz'ın telefonu 0532 234 56 78" | matriks-pii mask --profile strict --json   # type + position, no values
+$ echo "Ahmet Yılmaz'ın telefonu 0532 234 56 78" | matriks-mask mask --profile strict --json   # type + position, no values
 ```
 
 From Python (mask → restore):
@@ -102,18 +104,18 @@ guardrails:
 Verify the installation (prints no values; can also be used in CI and as a Kubernetes `startupProbe`):
 
 ```bash
-matriks-pii selftest --config config.yaml           # config, store, 12 canonical probes, latency
-matriks-pii selftest --config config.yaml --quick   # < 2 s
+matriks-mask selftest --config config.yaml           # config, store, 12 canonical probes, latency
+matriks-mask selftest --config config.yaml --quick   # < 2 s
 ```
 
 Step-by-step installation, multiple workers/replicas, verification and troubleshooting:
-[`docs/LITELLM_KURULUM.md`](https://github.com/MatriksData/matriks-pii/blob/main/docs/LITELLM_KURULUM.md). Operations runbook (error codes, metrics, secret rotation,
-rollback): [`docs/RUNBOOK.md`](https://github.com/MatriksData/matriks-pii/blob/main/docs/RUNBOOK.md). KVKK data category mapping (VERBİS/DPIA):
-[`docs/KVKK_VERI_KATEGORILERI.md`](https://github.com/MatriksData/matriks-pii/blob/main/docs/KVKK_VERI_KATEGORILERI.md). These documents are in Turkish.
+[`docs/LITELLM_KURULUM.md`](https://github.com/MatriksData/matriks-mask/blob/main/docs/LITELLM_KURULUM.md). Operations runbook (error codes, metrics, secret rotation,
+rollback): [`docs/RUNBOOK.md`](https://github.com/MatriksData/matriks-mask/blob/main/docs/RUNBOOK.md). KVKK data category mapping (VERBİS/DPIA):
+[`docs/KVKK_VERI_KATEGORILERI.md`](https://github.com/MatriksData/matriks-mask/blob/main/docs/KVKK_VERI_KATEGORILERI.md). These documents are in Turkish.
 
-Full examples: [`examples/config.yaml`](https://github.com/MatriksData/matriks-pii/blob/main/examples/config.yaml), [`config.strict.yaml`](https://github.com/MatriksData/matriks-pii/blob/main/examples/config.strict.yaml),
-[`config.redis.yaml`](https://github.com/MatriksData/matriks-pii/blob/main/examples/config.redis.yaml), [`config.placeholder_formats.yaml`](https://github.com/MatriksData/matriks-pii/blob/main/examples/config.placeholder_formats.yaml),
-[`Dockerfile`](https://github.com/MatriksData/matriks-pii/blob/main/examples/Dockerfile).
+Full examples: [`examples/config.yaml`](https://github.com/MatriksData/matriks-mask/blob/main/examples/config.yaml), [`config.strict.yaml`](https://github.com/MatriksData/matriks-mask/blob/main/examples/config.strict.yaml),
+[`config.redis.yaml`](https://github.com/MatriksData/matriks-mask/blob/main/examples/config.redis.yaml), [`config.placeholder_formats.yaml`](https://github.com/MatriksData/matriks-mask/blob/main/examples/config.placeholder_formats.yaml),
+[`Dockerfile`](https://github.com/MatriksData/matriks-mask/blob/main/examples/Dockerfile).
 
 With `default_on: false`, the guardrail is enabled per request with `"guardrails": ["matriks-pii"]` in the request body.
 Clients cannot disable it: `disable_global_guardrails` / `opted_out_global_guardrails` are read only from admin
@@ -189,10 +191,10 @@ deny_list:
 allow_list: ["Can Bey"]
 ```
 
-**Ready-made sector examples** ([`examples/sektor/`](https://github.com/MatriksData/matriks-pii/blob/main/examples/sektor)): finance/brokerage, airline, healthcare, insurance,
+**Ready-made sector examples** ([`examples/sektor/`](https://github.com/MatriksData/matriks-mask/blob/main/examples/sektor)): finance/brokerage, airline, healthcare, insurance,
 manufacturing, e-commerce/shipping, telecom and foreign formats (international phone numbers, US SSN, UK NINO). Each
-file is tested in CI against its own evaluation set ([`tests/fixtures/sektor/`](https://github.com/MatriksData/matriks-pii/blob/main/tests/fixtures/sektor)). They are
-starting points; narrow them to your real formats. To contribute a new sector file: [`CONTRIBUTING.md`](https://github.com/MatriksData/matriks-pii/blob/main/CONTRIBUTING.md).
+file is tested in CI against its own evaluation set ([`tests/fixtures/sektor/`](https://github.com/MatriksData/matriks-mask/blob/main/tests/fixtures/sektor)). They are
+starting points; narrow them to your real formats. To contribute a new sector file: [`CONTRIBUTING.md`](https://github.com/MatriksData/matriks-mask/blob/main/CONTRIBUTING.md).
 
 **Built-in sector types:** `HESAP_NO`, `MUSTERI_NO`, `MKK_SICIL`, `POLICE_NO` are finance/insurance specific but fire
 only in their own context ("hesap no", "MKK sicil", "poliçe no"), so they do not cause false positives in other sectors.
@@ -201,13 +203,13 @@ only in their own context ("hesap no", "MKK sicil", "poliçe no"), so they do no
 
 ```bash
 # 1) add the rule to the config and try a single text (no values printed; --show-values only for local debugging)
-matriks-pii selftest --config config.yaml --probe "PNR: TX4K9Q yolcu Ayşe Demir"
+matriks-mask selftest --config config.yaml --probe "PNR: TX4K9Q yolcu Ayşe Demir"
 #   probe: entity=PNR start=5 end=11 score=0.8 recognizer=extra_regex
-matriks-pii mask --config config.yaml "PNR: TX4K9Q yolcu Ayşe Demir"
+matriks-mask mask --config config.yaml "PNR: TX4K9Q yolcu Ayşe Demir"
 #   PNR: <PNR_1> yolcu <KISI_1>
 
 # 2) measure on your own labelled set (one JSON per line; rows that must not be masked have "entities": [])
-matriks-pii selftest --config config.yaml --corpus set.jsonl
+matriks-mask selftest --config config.yaml --corpus set.jsonl
 ```
 
 ```json
@@ -226,8 +228,8 @@ out of the box.**
 
 | Data | Turkey | Other countries |
 |---|---|---|
-| National ID number | TCKN, VKN | not built in (SSN, NINO: [`yurtdisi.yaml`](https://github.com/MatriksData/matriks-pii/blob/main/examples/sektor/yurtdisi.yaml)) |
-| Phone number | detected | not built in ([`yurtdisi.yaml`](https://github.com/MatriksData/matriks-pii/blob/main/examples/sektor/yurtdisi.yaml)) |
+| National ID number | TCKN, VKN | not built in (SSN, NINO: [`yurtdisi.yaml`](https://github.com/MatriksData/matriks-mask/blob/main/examples/sektor/yurtdisi.yaml)) |
+| Phone number | detected | not built in ([`yurtdisi.yaml`](https://github.com/MatriksData/matriks-mask/blob/main/examples/sektor/yurtdisi.yaml)) |
 | IBAN, card | detected | detected |
 | Passport | with context | with context |
 | E-mail, IP | detected | detected |
@@ -297,9 +299,9 @@ The pre-call and post-call hooks of a request run in the same process; a `memory
 Redis is recommended for Admin UI "guardrail test" (`apply_guardrail`) pairs behind many pods/replicas, for keeping
 sessions across restarts and for moving the memory limit out of the process.
 
-1. Generate secrets **once** and put them in a secret manager: `matriks-pii keys` (`--k8s` for a kubectl command).
+1. Generate secrets **once** and put them in a secret manager: `matriks-mask keys` (`--k8s` for a kubectl command).
 2. `pip install "matriks-mask[redis,fast]"`.
-3. [`examples/config.redis.yaml`](https://github.com/MatriksData/matriks-pii/blob/main/examples/config.redis.yaml):
+3. [`examples/config.redis.yaml`](https://github.com/MatriksData/matriks-mask/blob/main/examples/config.redis.yaml):
 
    ```yaml
    guardrails:
@@ -318,7 +320,7 @@ sessions across restarts and for moving the memory limit out of the process.
            require_tls: true
    ```
 
-`*_PREVIOUS` variables for zero-downtime secret/key rotation: [`docs/RUNBOOK.md`](https://github.com/MatriksData/matriks-pii/blob/main/docs/RUNBOOK.md#sır-ve-anahtar-rotasyonu-kesintisiz).
+`*_PREVIOUS` variables for zero-downtime secret/key rotation: [`docs/RUNBOOK.md`](https://github.com/MatriksData/matriks-mask/blob/main/docs/RUNBOOK.md#sır-ve-anahtar-rotasyonu-kesintisiz).
 
 ### Per-tenant (key/team) policy
 
@@ -403,7 +405,7 @@ processed in linear time.
   blocked, unresolved_placeholder, ner_failed, audit_write_failed, dry_run_would_mask), `matriks_pii_scores_total`,
   `matriks_pii_sessions_open`, `matriks_pii_cache_entries`. Safe in multi-worker mode.
 - **Gradual rollout:** first `dry_run: true` (staging 5 business days, production 1 week), then a per-key canary, then `default_on`.
-- **Rollback:** wheel + config as a pair; in an emergency `MATRIKS_PII_IGNORE_UNKNOWN_KEYS=1`. Details: [`docs/RUNBOOK.md`](https://github.com/MatriksData/matriks-pii/blob/main/docs/RUNBOOK.md).
+- **Rollback:** wheel + config as a pair; in an emergency `MATRIKS_PII_IGNORE_UNKNOWN_KEYS=1`. Details: [`docs/RUNBOOK.md`](https://github.com/MatriksData/matriks-mask/blob/main/docs/RUNBOOK.md).
 
 ## KVKK and sector regulation (not legal advice)
 
@@ -427,7 +429,7 @@ processed in linear time.
   purposes under the Confidentiality Regulation.
 - **Test data:** All test fixtures in the repository are synthetic; they contain no data belonging to real persons.
 
-Category mapping and audit trail fields: [`docs/KVKK_VERI_KATEGORILERI.md`](https://github.com/MatriksData/matriks-pii/blob/main/docs/KVKK_VERI_KATEGORILERI.md).
+Category mapping and audit trail fields: [`docs/KVKK_VERI_KATEGORILERI.md`](https://github.com/MatriksData/matriks-mask/blob/main/docs/KVKK_VERI_KATEGORILERI.md).
 
 **Obligations outside the plugin:** SCC-2 + notification, a data processing agreement with the provider
 (sub-processors, no training use, retention period), DPIA, privacy notice, VERBİS/inventory, breach response plan
@@ -443,12 +445,10 @@ Category mapping and audit trail fields: [`docs/KVKK_VERI_KATEGORILERI.md`](http
   without context (`Deniz kenarında`).
 - Numbers split by zero-width characters (`1729​1716060`) are not detected. Full-width digits (`１７２９…`) are detected.
 - URL-encoded (`%40`, `%20`; only inside URLs/forms, Turkish percent notation such as "%40" excluded) and HTML-entity
-  (`&#64;`) values are decoded for scanning and the original encoded range is masked. Not decoded: form `+` for
-  spaces (`tel=0532+123+45+67`), a run containing an invalid byte (`%40%FF`), triple encoding (`%252540`), a single
-  `%XX` run outside a URL/form, and other encodings such as Base64.
-- A value written directly inside angle brackets (`Ayşe Demir <ayse.demir@example.com>`) is restored without the
-  brackets in the response (`<<EPOSTA_1>>` is read as a double-bracket placeholder).
-- Foreign phone numbers and foreign national ID numbers are not built in; see [`yurtdisi.yaml`](https://github.com/MatriksData/matriks-pii/blob/main/examples/sektor/yurtdisi.yaml).
+  (`&#64;`) values, and form `+` between letters/digits (`tel=0532+123+45+67`), are decoded for scanning and the
+  original encoded range is masked. Not decoded: a run containing an invalid byte (`%40%FF`), triple encoding
+  (`%252540`), a single `%XX` run outside a URL/form, and other encodings such as Base64.
+- Foreign phone numbers and foreign national ID numbers are not built in; see [`yurtdisi.yaml`](https://github.com/MatriksData/matriks-mask/blob/main/examples/sektor/yurtdisi.yaml).
 - Personal data inside images/files (PDFs, ID card photos) is not scanned; such content reaches the provider as is.
 - History kept server-side via Responses API `previous_response_id` cannot be masked.
 - In Anthropic `/anthropic/*` **passthrough** streaming, LiteLLM does not call the post-call guardrail (LiteLLM #42476);
@@ -479,7 +479,7 @@ pytest -q && pytest -q -m benchmark && pytest -q -m e2e
 python scripts/external_bench.py --download && pytest -q -m external
 ruff check matriks_pii scripts tests && mypy matriks_pii --ignore-missing-imports
 python scripts/corpus_report.py
-matriks-pii selftest --config examples/config.yaml
+matriks-mask selftest --config examples/config.yaml
 # to rebuild the lexicons:
 python scripts/fetch_raw.py && python scripts/build_name_lists.py && python scripts/build_common_words.py && python scripts/build_geo.py
 python scripts/build_org_names.py   # optional KAP company-name list: scripts/_raw/kap_companies.txt
@@ -488,19 +488,19 @@ python scripts/build_org_names.py   # optional KAP company-name list: scripts/_r
 `scripts/build_fixtures.py` rewrites the generated files under `detect/revert/streaming`; hand-written files
 (`*_ek.yaml`, `*_x.yaml`, `yeni_varliklar.yaml`, `sayisal_ek.yaml`) are not affected.
 
-Data sources and licences: [`matriks_pii/data/LICENSES.md`](https://github.com/MatriksData/matriks-pii/blob/main/matriks_pii/data/LICENSES.md).
+Data sources and licences: [`matriks_pii/data/LICENSES.md`](https://github.com/MatriksData/matriks-mask/blob/main/matriks_pii/data/LICENSES.md).
 
 ## Contributing and security
 
-- Contribution guidelines (setup, tests, synthetic data only): [`CONTRIBUTING.md`](https://github.com/MatriksData/matriks-pii/blob/main/CONTRIBUTING.md). Issues and pull
+- Contribution guidelines (setup, tests, synthetic data only): [`CONTRIBUTING.md`](https://github.com/MatriksData/matriks-mask/blob/main/CONTRIBUTING.md). Issues and pull
   requests may be written in English or Turkish.
-- Code of conduct: [`CODE_OF_CONDUCT.md`](https://github.com/MatriksData/matriks-pii/blob/main/CODE_OF_CONDUCT.md).
-- Reporting a vulnerability (do not open a public issue): [`SECURITY.md`](https://github.com/MatriksData/matriks-pii/blob/main/SECURITY.md).
+- Code of conduct: [`CODE_OF_CONDUCT.md`](https://github.com/MatriksData/matriks-mask/blob/main/CODE_OF_CONDUCT.md).
+- Reporting a vulnerability (do not open a public issue): [`SECURITY.md`](https://github.com/MatriksData/matriks-mask/blob/main/SECURITY.md).
 
 ## License
 
-The source code is licensed under the [Apache License 2.0](https://github.com/MatriksData/matriks-pii/blob/main/LICENSE), © 2026 Matriks Finansal Teknolojiler A.Ş.
-(see [`NOTICE`](https://github.com/MatriksData/matriks-pii/blob/main/NOTICE)).
+The source code is licensed under the [Apache License 2.0](https://github.com/MatriksData/matriks-mask/blob/main/LICENSE), © 2026 Matriks Finansal Teknolojiler A.Ş.
+(see [`NOTICE`](https://github.com/MatriksData/matriks-mask/blob/main/NOTICE)).
 
 The package includes data files derived from third-party sources. The first-name/surname lists come from
 [mkozturk/trnames](https://github.com/mkozturk/trnames) (MIT) and the province/district data from
@@ -508,7 +508,7 @@ The package includes data files derived from third-party sources. The first-name
 `matriks_pii/data/tr_words.txt` is derived from the OpenSubtitles 2018 Turkish word list in Hermit Dave's
 [FrequencyWords](https://github.com/hermitdave/FrequencyWords) project and is licensed under
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); this file is not covered by the Apache-2.0 licence.
-Details and licence texts: [`THIRD_PARTY_NOTICES.md`](https://github.com/MatriksData/matriks-pii/blob/main/THIRD_PARTY_NOTICES.md).
+Details and licence texts: [`THIRD_PARTY_NOTICES.md`](https://github.com/MatriksData/matriks-mask/blob/main/THIRD_PARTY_NOTICES.md).
 
 **Trademark.** The licence does not grant the right to use the "Matriks" name or logos (Apache-2.0 section 6).
 Modified versions of the software must be distributed under a different name; the "Matriks" name may be used only to
@@ -517,4 +517,4 @@ indicate the origin of the software.
 **Disclaimer of warranty.** The software is provided "AS IS" under sections 7 and 8 of the licence; detection of every
 piece of personal data is not guaranteed.
 
-This README is a translation of [README.tr.md](https://github.com/MatriksData/matriks-pii/blob/main/README.tr.md); in case of discrepancy the Turkish version prevails.
+This README is a translation of [README.tr.md](https://github.com/MatriksData/matriks-mask/blob/main/README.tr.md); in case of discrepancy the Turkish version prevails.

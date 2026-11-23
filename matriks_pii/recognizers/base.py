@@ -13,6 +13,9 @@ if TYPE_CHECKING:
     from ..config import TurkishPIIConfig
 
 
+EXTENDED_SUFFIX = "+uzatma"  # bitişik parçalarla uzatılmış aday (recognizer adına eklenir)
+
+
 @dataclass(frozen=True, order=True)
 class Span:
     start: int

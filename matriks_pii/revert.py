@@ -86,6 +86,7 @@ class Reverter:
     entities: dict[str, str]
     cfg: TurkishPIIConfig
     reserved: set[str] = field(default_factory=set)
+    wrapped: set[str] = field(default_factory=set)  # istekte parantez içindeki değerler (dış parantez korunur)
     stats: RevertStats = field(default_factory=RevertStats)
 
     def __post_init__(self) -> None:
@@ -103,6 +104,7 @@ class Reverter:
         if fo:
             pairs[ascii_fold(tr_lower(fo))] = ascii_fold(tr_lower(fc))
         self._pairs = pairs
+        self._fo, self._fc = ascii_fold(tr_lower(fo)), ascii_fold(tr_lower(fc))
         self._open_first = {o[0] for o in self.opens}
 
     def _only_key(self, label: str) -> str | None:
@@ -165,7 +167,13 @@ class Reverter:
                     pos = end
                 continue
             out.append(text[pos:start])
-            out.append(json.dumps(value, ensure_ascii=False)[1:-1] if json_escape else value)
+            rendered = json.dumps(value, ensure_ascii=False)[1:-1] if json_escape else value
+            if key in self.wrapped and bracketed and self._fo and self._fc:
+                # "<<EPOSTA_1>>" (istekte "<ayse@x.com>"): yer tutucunun parantezleri düşer, metnin kendi parantezi kalır
+                o, c = m["open"] or "", m["close"] or ""
+                if o == self._fo * 2 and c == self._fc * 2:
+                    rendered = text[start : start + len(self._fo)] + rendered + text[end - len(self._fc) : end]
+            out.append(rendered)
             pos = end
             self.stats.replaced += 1
             ent = self.entities.get(key, "")

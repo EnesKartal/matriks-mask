@@ -206,6 +206,7 @@ def strip_invisible(s: str) -> str:
 # ------------------------------------------------------------------ URL (%XX) ve HTML varlık çözümü (yalnız tarama kopyası)
 _PCT_RUN = re.compile(r"(?:%[0-9A-Fa-f]{2})+")
 _HTML_ENT = re.compile(r"&(?:#[0-9]{1,7}|#[xX][0-9A-Fa-f]{1,6}|[A-Za-z][A-Za-z0-9]{1,31});")
+_FORM_PLUS = re.compile(r"(?<=[0-9A-Za-z])\+(?=[0-9A-Za-z])")
 _URL_HINT = re.compile(r"://|[?=&]")
 
 
@@ -286,6 +287,23 @@ def _decode_once(text: str) -> tuple[str, list[int], list[int]] | None:
         starts.append(k)
         ends.append(k + 1)
     return "".join(out), starts, ends
+
+
+def form_plus_spaces(text: str) -> str | None:
+    """Form/sorgu parçasında (anahtar=değer) harf/rakam arasındaki "+" → boşluk; uzunluk korunur. Yoksa None.
+    Ek tarama olarak kullanılır; asıl taramada "+" korunur ("ayse+banka@gmail.com" e-postası bütün kalır)."""
+    if "+" not in text or "=" not in text:
+        return None
+    chars: list[str] | None = None
+    for tm in _TOKEN.finditer(text):
+        lo, hi = tm.span()
+        if text.find("+", lo, hi) < 0 or text.find("=", lo, hi) < 0:
+            continue
+        for pm in _FORM_PLUS.finditer(text, lo, hi):
+            if chars is None:
+                chars = list(text)
+            chars[pm.start()] = " "
+    return "".join(chars) if chars is not None else None
 
 
 def decode_for_scan(text: str, max_passes: int = 2) -> tuple[str, list[int], list[int]] | None:

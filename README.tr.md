@@ -1,8 +1,8 @@
-# matriks-pii
+# matriks-mask
 
-[![PyPI](https://img.shields.io/pypi/v/matriks-mask.svg)](https://pypi.org/project/matriks-mask/)
-[![Python](https://img.shields.io/pypi/pyversions/matriks-mask.svg)](https://pypi.org/project/matriks-mask/)
-[![ci](https://github.com/MatriksData/matriks-pii/actions/workflows/ci.yml/badge.svg)](https://github.com/MatriksData/matriks-pii/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/matriks-mask.svg?cacheSeconds=3600)](https://pypi.org/project/matriks-mask/)
+[![Python](https://img.shields.io/pypi/pyversions/matriks-mask.svg?cacheSeconds=3600)](https://pypi.org/project/matriks-mask/)
+[![ci](https://github.com/MatriksData/matriks-mask/actions/workflows/ci.yml/badge.svg)](https://github.com/MatriksData/matriks-mask/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 [English](README.md) | **Türkçe**
@@ -25,7 +25,7 @@ metriklere ve denetim izine gitmez. Tüm işlem süreç içidir: tespit için ve
 
 ```
 Kullanıcı ──"Ben Ayşe Demir, TCKN 17291716060"──▶ LiteLLM proxy ──"Ben <KISI_1>, TCKN <TCKN_1>"──▶ LLM
-Kullanıcı ◀──"Merhaba Ayşe Demir'e ilettim"────── matriks-pii ◀──"Merhaba <KISI_1>'e ilettim"───── LLM
+Kullanıcı ◀──"Merhaba Ayşe Demir'e ilettim"────── matriks-mask ◀──"Merhaba <KISI_1>'e ilettim"───── LLM
                                                   (ek onarımı: 'e → 'e/'ye ünlü uyumuna göre)
 ```
 
@@ -42,15 +42,17 @@ Kullanıcı ◀──"Merhaba Ayşe Demir'e ilettim"────── matriks-p
 
 ## Kurulum
 
-PyPI paket adı [**`matriks-mask`**](https://pypi.org/project/matriks-mask/); Python modülü `matriks_pii`, komut `matriks-pii` (`matriks-mask` aynı komutun
-diğer adı). Git'ten kurulmuş `matriks-pii` ≤ 0.3.3'ten geçerken önce `pip uninstall matriks-pii` çalıştırın.
+Paket ve komut adı [**`matriks-mask`**](https://pypi.org/project/matriks-mask/). Python modülü (`matriks_pii`,
+LiteLLM guardrail yolu `matriks_pii.guardrail.TurkishPIIGuardrail`), `MATRIKS_PII_*` ortam değişkenleri ve
+`matriks_pii_*` metrikleri adını korur; mevcut yapılandırmalar değişmeden çalışır. Eski komut adı `matriks-pii` de
+kurulur. Git'ten kurulmuş `matriks-pii` ≤ 0.3.3'ten geçerken önce `pip uninstall matriks-pii` çalıştırın.
 
 ```bash
 pip install "matriks-mask[fast]"                 # fast: pyahocorasick (opsiyonel, daha hızlı sözlük araması)
 pip install "matriks-mask[redis,fast,metrics]"   # üretim: şifreli Redis oturum deposu + Prometheus
 pip install "matriks-mask[ner]"                  # opsiyonel Türkçe NER (transformers + torch)
-pip install "git+https://github.com/MatriksData/matriks-pii"   # main dalındaki en son sürüm
-pipx install matriks-mask                        # yalnız komut (`matriks-pii mask`), yalıtılmış ortam
+pip install "git+https://github.com/MatriksData/matriks-mask"   # main dalındaki en son sürüm
+pipx install matriks-mask                        # yalnız komut (`matriks-mask "…"`), yalıtılmış ortam
 ```
 
 Üretimde sabit sürümler için depodaki [`constraints/prod.txt`](constraints/prod.txt) ile kurun
@@ -59,9 +61,9 @@ pipx install matriks-mask                        # yalnız komut (`matriks-pii m
 ### LiteLLM olmadan deneme
 
 ```bash
-$ matriks-pii mask "Ben Ayşe Demir, TCKN 17291716060"
+$ matriks-mask "Ben Ayşe Demir, TCKN 17291716060"
 Ben <KISI_1>, TCKN <TCKN_1>
-$ echo "Ahmet Yılmaz'ın telefonu 0532 234 56 78" | matriks-pii mask --profile strict --json   # tür + konum, değer yok
+$ echo "Ahmet Yılmaz'ın telefonu 0532 234 56 78" | matriks-mask mask --profile strict --json   # tür + konum, değer yok
 ```
 
 Python'dan (maskele → geri çevir):
@@ -189,13 +191,13 @@ yalnız kendi bağlamlarında ("hesap no", "MKK sicil", "poliçe no") tetiklenir
 
 ```bash
 # 1) kuralı config'e yaz, tek metinle dene (çıktıda değer yok; --show-values yalnız yerel hata ayıklama için)
-matriks-pii selftest --config config.yaml --probe "PNR: TX4K9Q yolcu Ayşe Demir"
+matriks-mask selftest --config config.yaml --probe "PNR: TX4K9Q yolcu Ayşe Demir"
 #   probe: entity=PNR start=5 end=11 score=0.8 recognizer=extra_regex
-matriks-pii mask --config config.yaml "PNR: TX4K9Q yolcu Ayşe Demir"
+matriks-mask mask --config config.yaml "PNR: TX4K9Q yolcu Ayşe Demir"
 #   PNR: <PNR_1> yolcu <KISI_1>
 
 # 2) kendi etiketli kümenizle ölçün (satır başına bir JSON; maskelenmemesi gereken satırlar "entities": [])
-matriks-pii selftest --config config.yaml --corpus kume.jsonl
+matriks-mask selftest --config config.yaml --corpus kume.jsonl
 ```
 
 ```json
@@ -421,11 +423,9 @@ saklama süresi), DPIA, aydınlatma metni, VERBİS/envanter, ihlal müdahale pla
   ortasında (`Dün Deniz aradı`) yakalanır, cümle başında bağlamsız (`Deniz kenarında`) yakalanmaz.
 - Sıfır genişlikli karakterle bölünmüş sayılar (`1729​1716060`) tespit edilmez. Tam genişlik rakamlar (`１７２９…`) tespit edilir.
 - URL kodlu (`%40`, `%20`; yalnız URL/form içinde, Türkçe yüzde yazımı "%40" hariç) ve HTML varlıklı (`&#64;`) değerler
-  çözülerek taranır, orijinal kodlu aralık maskelenir. Çözülmeyenler: boşluk yerine form `+`'sı
-  (`tel=0532+123+45+67`), geçersiz bayt içeren dizi (`%40%FF`), üç kat kodlama (`%252540`), URL/form dışındaki tek
+  ile URL/form parçasında harf/rakam arasındaki `+` (`tel=0532+123+45+67`) çözülerek taranır, orijinal kodlu aralık
+  maskelenir. Çözülmeyenler: geçersiz bayt içeren dizi (`%40%FF`), üç kat kodlama (`%252540`), URL/form dışındaki tek
   `%XX` dizisi ve Base64 gibi diğer kodlamalar.
-- Doğrudan köşeli parantez içine yazılmış değer (`Ayşe Demir <ayse.demir@example.com>`) yanıtta parantezsiz geri
-  çevrilir (`<<EPOSTA_1>>` çift parantezli yer tutucu olarak okunur).
 - Yabancı telefon numaraları ve yabancı ulusal kimlik numaraları yerleşik değildir; bkz. [`yurtdisi.yaml`](examples/sektor/yurtdisi.yaml).
 - Görsel/dosya (PDF, kimlik kartı fotoğrafı) içindeki kişisel veri taranmaz; bu içerik sağlayıcıya olduğu gibi gider.
 - Responses API `previous_response_id` ile sunucu tarafında tutulan geçmiş maskelenemez.

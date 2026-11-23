@@ -8,7 +8,7 @@ oturum jetonu/şifreleme zayıflığı veya fail-open davranışı güvenlik aç
 
 **Herkese açık issue açmayın.** Bildirimi GitHub'ın özel açık bildirim akışıyla yapın:
 deponun **Security** sekmesi → **Report a vulnerability**
-(<https://github.com/MatriksData/matriks-pii/security/advisories/new>).
+(<https://github.com/MatriksData/matriks-mask/security/advisories/new>).
 Bu akışı kullanamıyorsanız e-posta: **matriksiq@matriksdata.com** (konu satırına `matriks-pii security` yazın).
 
 Bildirime şunları ekleyin:
