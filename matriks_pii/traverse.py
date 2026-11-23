@@ -250,6 +250,9 @@ def json_or_text(holder: Any, key: Any, path: str, role: str | None, commits: li
             obj = json.loads(raw)
         except (ValueError, TypeError):
             obj = None
+    boxed = isinstance(obj, int | float) and not isinstance(obj, bool)
+    if boxed:  # tek sayıdan oluşan JSON belgesi (tool argümanı "1.52e+274"): yaprak olarak işlenir, geçerli JSON kalır
+        obj = [obj]
     if not isinstance(obj, dict | list):
         yield _text(holder, key, "text", role, path)
         return
@@ -259,7 +262,7 @@ def json_or_text(holder: Any, key: Any, path: str, role: str | None, commits: li
 
     def commit() -> None:
         if flag.changed:
-            setter(json.dumps(obj, ensure_ascii=ensure_ascii, separators=(",", ":")))
+            setter(json.dumps(obj[0] if boxed else obj, ensure_ascii=ensure_ascii, separators=(",", ":")))
 
     commits.append(commit)
     yield from walk_leaves(obj, path, role, flag)

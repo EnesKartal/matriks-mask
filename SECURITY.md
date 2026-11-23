@@ -9,6 +9,7 @@ oturum jetonu/şifreleme zayıflığı veya fail-open davranışı güvenlik aç
 **Herkese açık issue açmayın.** Bildirimi GitHub'ın özel açık bildirim akışıyla yapın:
 deponun **Security** sekmesi → **Report a vulnerability**
 (<https://github.com/MatriksData/matriks-pii/security/advisories/new>).
+Bu akışı kullanamıyorsanız e-posta: **matriksiq@matriksdata.com** (konu satırına `matriks-pii security` yazın).
 
 Bildirime şunları ekleyin:
 
@@ -22,7 +23,8 @@ yayımlanana kadar ayrıntıları gizli tutmanızı rica ederiz.
 ## Reporting a vulnerability (English)
 
 Please do **not** open a public issue. Use GitHub private vulnerability reporting:
-**Security** tab → **Report a vulnerability**. Include the affected version, your guardrail configuration with secrets
+**Security** tab → **Report a vulnerability**. If you cannot use it, e-mail **matriksiq@matriksdata.com** with
+`matriks-pii security` in the subject line. Include the affected version, your guardrail configuration with secrets
 removed, and reproduction steps using **synthetic data only**. We aim to respond within 5 business days.
 
 ## Desteklenen sürümler
@@ -32,5 +34,5 @@ Güvenlik düzeltmeleri yalnız en son yayımlanan sürüme yapılır.
 ## Kapsam dışı
 
 - LiteLLM'in kendisindeki açıklar (ör. `--detailed_debug` ile ham gövdenin loglanması): <https://github.com/BerriAI/litellm>.
-- Bilinen sınırlar: README'deki "Bilinen sınırlar" bölümünde belgelenmiş tespit eksikleri (ör. görsel/PDF içi metin).
+- Bilinen sınırlar: README'deki "Bilinen sınırlar" (Known limitations) bölümünde belgelenmiş tespit eksikleri (ör. görsel/PDF içi metin).
   Yeni bir yanlış negatif örneği güvenlik açığı değil, normal bir issue'dur.

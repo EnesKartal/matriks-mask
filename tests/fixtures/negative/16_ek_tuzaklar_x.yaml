@@ -83,3 +83,49 @@
   why: akrabalık sözcüğü
   tags:
   - kisi
+- id: NEG-589
+  text: Faiz %40 arttı, hisse %53 yükseldi.
+  expect: []
+  why: Türkçe yüzde yazımı URL kodu sayılmaz
+  tags:
+  - kodlu
+- id: NEG-590
+  text: İndirim oranı %20'ye çıktı (%25 değil), hedef%30.
+  expect: []
+  why: yüzde, URL kodu değil
+  tags:
+  - kodlu
+- id: NEG-591
+  text: R&amp;D bütçesi ve AT&amp;T raporu &lt;taslak&gt;
+  expect: []
+  why: HTML varlıkları çözülür ama kişisel veri yok
+  tags:
+  - kodlu
+- id: NEG-592
+  text: https://example.com/search?q=hisse%20senedi%20fiyatlar%C4%B1&sort=desc
+  expect: []
+  why: URL kodlu sıradan arama
+  tags:
+  - kodlu
+- id: NEG-593
+  text: <password>***</password> <pwd>string</pwd>
+  expect: []
+  why: XML etiketinde yer tutucu ve tip adı
+  tags:
+  - sifre
+- id: NEG-594
+  text: 2026-11-20 14:32:11 INFO order accepted id=4411
+  expect: []
+  why: log zaman damgası doğum tarihi değildir (strict)
+  config:
+    profile: strict
+  tags:
+  - tarih
+- id: NEG-595
+  text: Vade tarihi 15.03.2099, sözleşme 2026-11-20T09:15:00Z tarihinde imzalandı.
+  expect: []
+  why: gelecekteki tarih ve ISO zaman damgası (strict)
+  config:
+    profile: strict
+  tags:
+  - tarih

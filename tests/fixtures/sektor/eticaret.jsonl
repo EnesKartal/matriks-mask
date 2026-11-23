@@ -1,0 +1,6 @@
+{"text": "Sipariş no 1029384756 kargoya verildi", "entities": [{"entity": "SIPARIS_NO", "value": "1029384756"}]}
+{"text": "Kargo takip no YK123456789TR ile sorgulayın", "entities": [{"entity": "KARGO_TAKIP", "value": "YK123456789TR"}]}
+{"text": "Order number SP-20261123 iptal edildi", "entities": [{"entity": "SIPARIS_NO", "value": "SP-20261123"}]}
+{"text": "Gönderi no 7012345678901 dağıtımda", "entities": [{"entity": "KARGO_TAKIP", "value": "7012345678901"}]}
+{"text": "Ürün kodu ABC123 stokta, 3 adet", "entities": []}
+{"text": "Kargo ücreti 49,90 TL; 500 TL üzeri ücretsiz", "entities": []}

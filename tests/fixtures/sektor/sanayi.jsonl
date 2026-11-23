@@ -1,0 +1,6 @@
+{"text": "Personel no P-004512 vardiyaya girdi", "entities": [{"entity": "PERSONEL_NO", "value": "P-004512"}]}
+{"text": "Giriş kartı 04A3F2B9 kayıp bildirildi", "entities": [{"entity": "PERSONEL_KART", "value": "04A3F2B9"}]}
+{"text": "Forklift operatör belgesi FOB-2024-0193 yenilendi", "entities": [{"entity": "OPERATOR_BELGE", "value": "FOB-2024-0193"}]}
+{"text": "Çalışan no 88213 izinde", "entities": [{"entity": "PERSONEL_NO", "value": "88213"}]}
+{"text": "Hat 3'te 4500 adet üretildi, fire oranı %2", "entities": []}
+{"text": "Makine seri no ZX-450 bakımda; personel toplantısı 14:00", "entities": []}

@@ -21,10 +21,10 @@ def generate() -> dict[str, str]:
     }
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--k8s", action="store_true", help="kubectl create secret generic komutu yazdır")
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
     keys = generate()
     if a.k8s:
         args = " ".join(f"--from-literal={k}='{v}'" for k, v in keys.items())

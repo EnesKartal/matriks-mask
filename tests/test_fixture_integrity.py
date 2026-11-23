@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import html
 import re
 import unicodedata
 from collections import Counter
 from pathlib import Path
+from urllib.parse import unquote
 
 import yaml
 from conftest import FIX, engine_for, load_cases
@@ -19,7 +21,7 @@ ALL = {sub: load_cases(sub) for sub in ("detect", "negative", "revert", "streami
 
 def test_counts() -> None:
     assert len(ALL["detect"]) >= 487
-    assert len(ALL["negative"]) == 588
+    assert len(ALL["negative"]) == 595
     assert len(ALL["revert"]) >= 40 and len(ALL["streaming"]) >= 20
 
 
@@ -48,7 +50,8 @@ def test_expected_values_in_text_and_checksums() -> None:
             if "invalid_checksum" in c.get("tags", []):
                 continue
             # tam genişlik rakam (NFKC), gruplu TCKN noktası, etiketli TR'siz IBAN da doğrulanır
-            digits = re.sub(r"[\s\-.]" if e["entity"] == "TCKN" else r"[\s\-]", "", unicodedata.normalize("NFKC", e["value"]))
+            raw = html.unescape(unquote(unquote(e["value"])))  # URL/HTML kodlu değerler (kodlu_ek.yaml)
+            digits = re.sub(r"[\s\-.]" if e["entity"] == "TCKN" else r"[\s\-]", "", unicodedata.normalize("NFKC", raw))
             if e["entity"] == "IBAN" and digits[:1].isdigit():
                 digits = "TR" + digits
             if e["entity"] == "TCKN" and c.get("config", {}).get("tckn_require_checksum", True):

@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING
 from .config import ALLOW_PROTECTED, PRIORITY, TurkishPIIConfig
 from .recognizers import build_recognizers
 from .recognizers.base import AnalysisContext, Span
-from .text_utils import ascii_width, fold_text, trie_pattern
+from .text_utils import ascii_width, decode_for_scan, fold_text, trie_pattern
 
 if TYPE_CHECKING:
     from .session import MaskSession
@@ -28,6 +28,35 @@ def resolve_overlaps(spans: list[Span]) -> list[Span]:
     """Öncelik > skor > uzunluk > başlangıç sırasıyla kabul et; kabul edilenlerle kesişeni at."""
     ordered = sorted(spans, key=lambda s: (-_priority(s.entity), -s.score, -(s.end - s.start), s.start))
     return _greedy_disjoint(ordered)
+
+
+def _merge_decoded(text: str, orig: list[Span], dec: list[Span]) -> list[Span]:
+    """Orijinal tarama span'leri asla düşürülmez. Çözülmüş kopyadan gelen span orijinal bir span'le kesişirse ikisi
+    birleşimi kapsayan tek span olur (öncelikli varlık etiketiyle); hiçbir parça açıkta kalmaz."""
+    if not dec:
+        return orig
+    items = sorted([(s.start, s.end, 0, s) for s in orig] + [(s.start, s.end, 1, s) for s in dec], key=lambda x: (x[0], -x[1]))
+    clusters: list[list[Span]] = []
+    cur_end = -1
+    for st, en, _src, sp in items:
+        if clusters and st < cur_end:
+            clusters[-1].append(sp)
+            cur_end = max(cur_end, en)
+        else:
+            clusters.append([sp])
+            cur_end = en
+    out: list[Span] = []
+    for c in clusters:
+        if len(c) == 1:
+            out.append(c[0])
+            continue
+        rep = max(c, key=lambda x: (_priority(x.entity), x.score, x.end - x.start))
+        u_s, u_e = min(x.start for x in c), max(x.end for x in c)
+        if (u_s, u_e) == (rep.start, rep.end):
+            out.append(rep)
+        else:
+            out.append(dataclasses.replace(rep, start=u_s, end=u_e, text=text[u_s:u_e], normalized=text[u_s:u_e]))
+    return out
 
 
 def _dedupe_same_entity(spans: list[Span]) -> list[Span]:
@@ -135,6 +164,21 @@ class PIIEngine:
             return hit
         orig = text
         text = ascii_width(text)  # 1:1; tanıyıcılar ASCII kopyada eşleşir, span metni aşağıda orijinalden alınır
+        spans, ctx = self._detect(text)
+        dec = decode_for_scan(text)
+        if dec is not None:
+            spans = _merge_decoded(text, spans, self._decoded_spans(text, *dec))
+        if self._allow_rx is not None:
+            zones = [(m.start(), m.end()) for m in self._allow_rx.finditer(ctx.casefolded)]
+            if zones:  # izin listesindeki ifadenin bir geçişi span'i tamamen kapsıyorsa at (kesin kimlikler hariç)
+                spans = [s for s in spans if s.entity in ALLOW_PROTECTED or not any(a <= s.start and s.end <= b for a, b in zones)]
+        if text is not orig:
+            spans = [dataclasses.replace(s, text=orig[s.start : s.end]) for s in spans]
+        if len(text) <= MAX_CACHED_TEXT_CHARS:  # büyük metinler önbelleğe girmez (bellek + tekrar olasılığı düşük)
+            self.cache.put(key, spans)
+        return spans
+
+    def _detect(self, text: str) -> tuple[list[Span], AnalysisContext]:
         ctx = AnalysisContext.build(self.cfg, text)
         phase1: list[Span] = []
         for r in self.recognizers:
@@ -147,16 +191,26 @@ class PIIEngine:
             if r.phase == 2:
                 phase2.extend(r.find(text, ctx))
         phase2 = [s for s in phase2 if s.score >= self.cfg.min_score(s.entity)]
-        spans = resolve_overlaps(ctx.prior_spans + phase2)
-        if self._allow_rx is not None:
-            zones = [(m.start(), m.end()) for m in self._allow_rx.finditer(ctx.casefolded)]
-            if zones:  # izin listesindeki ifadenin bir geçişi span'i tamamen kapsıyorsa at (kesin kimlikler hariç)
-                spans = [s for s in spans if s.entity in ALLOW_PROTECTED or not any(a <= s.start and s.end <= b for a, b in zones)]
-        if text is not orig:
-            spans = [dataclasses.replace(s, text=orig[s.start : s.end]) for s in spans]
-        if len(text) <= MAX_CACHED_TEXT_CHARS:  # büyük metinler önbelleğe girmez (bellek + tekrar olasılığı düşük)
-            self.cache.put(key, spans)
-        return spans
+        return resolve_overlaps(ctx.prior_spans + phase2), ctx
+
+    def _decoded_spans(self, text: str, decoded: str, starts: list[int], ends: list[int]) -> list[Span]:
+        """URL/HTML kodu çözülmüş kopyada bulunan span'ler, orijinal aralığa taşınmış olarak. Yalnız kodlu bir bölgeye
+        dokunan ya da bağlam penceresi içinde kodlu bölge olan span'ler alınır ("hesap%20no=12345678"); kodlu bölgeden
+        uzak tespitler zaten orijinal taramada vardır, davranış değişmesin diye alınmaz."""
+        enc = [0] * (len(decoded) + 1)  # önek toplamı: çözülmüş karakter kodlu bir diziden mi geldi
+        for i in range(len(decoded)):
+            enc[i + 1] = enc[i] + (ends[i] - starts[i] != 1 or decoded[i] != text[starts[i]])
+        if not enc[-1]:
+            return []
+        w = self.cfg.context_window
+        out: list[Span] = []
+        for s in self._detect(decoded)[0]:
+            lo, hi = max(0, s.start - w), min(len(decoded), s.end + w)
+            if enc[hi] - enc[lo] == 0:
+                continue
+            o_s, o_e = starts[s.start], ends[s.end - 1]
+            out.append(dataclasses.replace(s, start=o_s, end=o_e, text=text[o_s:o_e]))
+        return out
 
     def analyze_with_prefix(self, text: str, prefix: str = "") -> list[Span]:
         """Bağlam önekiyle analiz (ör. JSON anahtarı "Adı soyadı: "); span'ler `text`'e göre döner."""

@@ -1,0 +1,6 @@
+{"text": "Abone no 5012345678 için fatura oluşturuldu", "entities": [{"entity": "ABONE_NO", "value": "5012345678"}]}
+{"text": "IMSI 286011234567890 kayıtlı", "entities": [{"entity": "IMSI", "value": "286011234567890"}]}
+{"text": "SIM kart no 8990011234567890123", "entities": [{"entity": "ICCID", "value": "8990011234567890123"}]}
+{"text": "ICCID: 89900112345678901234", "entities": [{"entity": "ICCID", "value": "89900112345678901234"}]}
+{"text": "Baz istasyonu 286 adet, kapsama %98", "entities": []}
+{"text": "Tarife 20 GB, 1000 dk", "entities": []}

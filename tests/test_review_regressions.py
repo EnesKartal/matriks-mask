@@ -287,3 +287,30 @@ def test_suffix_not_confused_with_label() -> None:
 
     rev = Reverter({"<KISI_1>": "Ali", "<KISI_2>": "Ayşe"}, {"<KISI_1>": "KISI", "<KISI_2>": "KISI"}, cfg_for())
     assert rev.revert("<KISI_2>'KISI_1'ye") == "Ayşe'Ali'ye"
+
+
+@pytest.mark.parametrize("raw", ["1.5193372543090723e+274", "5193372543090723"])
+def test_scalar_number_tool_arguments_stay_valid_json(raw: str) -> None:
+    """Tek sayıdan oluşan tool argümanı (hypothesis bulgusu): sayı içindeki kart numarası maskelenince JSON geçerli kalır."""
+    import json as _json
+
+    from conftest import engine_for
+
+    from matriks_pii.session import MaskSession
+    from matriks_pii.traverse import iter_request_texts
+
+    data = {"messages": [{"role": "assistant", "content": None, "tool_calls": [
+        {"id": "1", "type": "function", "function": {"name": "f", "arguments": raw}}]}]}
+    eng = engine_for()
+    s = MaskSession(eng.cfg)
+    commits: list = []
+    for ref in list(iter_request_texts(data, "acompletion", eng.cfg, commits)):
+        t = ref.get()
+        if isinstance(t, str) and t:
+            m = eng.actionable(eng.analyze(t))[0]
+            if m:
+                ref.set(eng.mask(t, m, s))
+    for c in commits:
+        c()
+    out = _json.loads(data["messages"][0]["tool_calls"][0]["function"]["arguments"])
+    assert isinstance(out, str) and "<KART_1>" in out and "5193372543090723" not in out

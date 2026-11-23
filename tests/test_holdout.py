@@ -1,6 +1,6 @@
 """Bağımsız değerlendirme kümeleri (tests/fixtures/holdout/) — regresyon eşikleri.
 
-İki küme de uygulama kodunu görmeyen ayrı ajanlar tarafından yazıldı. İlk (kör) ölçümlerden sonra bulunan genel hatalar
+İki küme de uygulama kodunu görmeyen ayrı LLM ajanları (yapay zekâ modelleri) tarafından yazıldı. İlk (kör) ölçümlerden sonra bulunan genel hatalar
 düzeltildi; bu yüzden artık "kör" değildir, yalnız gerilemeyi yakalar.
 
 - holdout.jsonl: deterministik varlıklar + KISI eşiği. Özel nitelikli verilerde span sınırları bu kümede yoruma açık

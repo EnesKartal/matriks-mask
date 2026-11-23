@@ -181,14 +181,27 @@ def check_guardrail(name: str, params: dict[str, Any], quick: bool = False) -> t
     return rep, engine
 
 
+class CorpusFormatError(ValueError):
+    pass
+
+
 def corpus_report(engine: Any, path: str) -> dict[str, dict[str, float]]:
     st: dict[str, Counter[str]] = {}
-    for line in Path(path).read_text(encoding="utf-8").splitlines():
+    for no, line in enumerate(Path(path).read_text(encoding="utf-8").splitlines(), 1):
         if not line.strip():
             continue
-        c = json.loads(line)
+        try:
+            c = json.loads(line)
+            if not isinstance(c, dict) or not isinstance(c.get("text"), str):
+                raise ValueError
+            exp_list = [(str(e["entity"]), str(e["value"])) for e in c.get("entities", [])]
+        except (ValueError, KeyError, TypeError):  # değer içermeyen ileti
+            raise CorpusFormatError(
+                f"{path}:{no}: --corpus JSONL bekler (satır başına bir JSON): "
+                '{"text": "...", "entities": [{"entity": "KISI", "value": "..."}]}'
+            ) from None
         got = Counter((s.entity, s.text) for s in engine.detected(c["text"]))
-        exp = Counter((e["entity"], e["value"]) for e in c.get("entities", []))
+        exp = Counter(exp_list)
         for ent, val in got | exp:
             tp = min(got[(ent, val)], exp[(ent, val)])
             s = st.setdefault(ent, Counter())
@@ -232,7 +245,11 @@ def main(argv: list[str] | None = None) -> int:
                 for s in engine.detected(a.probe)
             ]
         if engine is not None and a.corpus:
-            res["corpus"] = corpus_report(engine, a.corpus)
+            try:
+                res["corpus"] = corpus_report(engine, a.corpus)
+            except (CorpusFormatError, OSError) as e:
+                print(f"FAIL: {e}", file=sys.stderr)
+                return 2
         results.append(res)
     if a.json:
         print(json.dumps({"ok": not failed, "guardrails": results}, ensure_ascii=False, indent=2))

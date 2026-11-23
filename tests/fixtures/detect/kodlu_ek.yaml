@@ -1,0 +1,13 @@
+# elle yazıldı — build_fixtures.py bu dosyayı üretmez/silmez; tüm değerler sentetiktir.
+# URL (%XX) / HTML varlık kodlu değerler, XML etiketli parola, tireli hesap no (geliştirici düzenleme listesi K1–K3).
+- {id: KODLU-001, text: "https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fportal.example.com%2Flogin%3Fuser%3Dayse.demir%40example.com%26tel%3D0532%20123%2045%2067", expect: [{entity: EPOSTA, value: "ayse.demir%40example.com"}, {entity: TELEFON, value: "0532%20123%2045%2067"}]}
+- {id: KODLU-002, text: "İletişim: ayse&#64;example.com", expect: [{entity: EPOSTA, value: "ayse&#64;example.com"}], masked: "İletişim: <EPOSTA_1>"}
+- {id: KODLU-003, text: "mail: mehmet.kaya&#x40;example.org", expect: [{entity: EPOSTA, value: "mehmet.kaya&#x40;example.org"}]}
+- {id: KODLU-004, text: "redirect?to=ayse.demir%2540example.com", expect: [{entity: EPOSTA, value: "ayse.demir%2540example.com"}]}
+- {id: KODLU-005, text: "form?tckn=17291716060&iban=TR33%200006%201005%201978%206457%208413%2026", expect: [{entity: TCKN, value: "17291716060"}, {entity: IBAN, value: "TR33%200006%201005%201978%206457%208413%2026"}]}
+- {id: KODLU-006, text: "callback?ip=192.0.2.15&mail=info%40example.com", expect: [{entity: IP, value: "192.0.2.15"}, {entity: EPOSTA, value: "info%40example.com"}]}
+- {id: XMLSIFRE-001, text: "<User>ademir</User><Password>Gizli123!</Password>", expect: [{entity: SIFRE, value: "Gizli123!"}]}
+- {id: XMLSIFRE-002, text: "<şifre>Abc12345</şifre>", expect: [{entity: SIFRE, value: "Abc12345"}]}
+- {id: XMLSIFRE-003, text: "<pwd> P@ss-w0rd </pwd>", expect: [{entity: SIFRE, value: "P@ss-w0rd"}]}
+- {id: HESAPTIRE-001, text: "Hesap No 0012345-678", expect: [{entity: HESAP_NO, value: "0012345-678"}], masked: "Hesap No <HESAP_NO_1>"}
+- {id: HESAPTIRE-002, text: "hesap numarası 1234-5678901-23 olarak güncellendi", expect: [{entity: HESAP_NO, value: "1234-5678901-23"}]}

@@ -1,0 +1,6 @@
+{"text": "Hasta no 20261123 için tahlil sonucu hazır", "entities": [{"entity": "HASTA_NO", "value": "20261123"}, {"entity": "OZEL_SAGLIK", "value": "tahlil sonucu"}]}
+{"text": "Protokol no 4412938, poliklinik 3", "entities": [{"entity": "HASTA_NO", "value": "4412938"}]}
+{"text": "E-reçete no 2X4K9QA ile ilaç alındı", "entities": [{"entity": "RECETE_NO", "value": "2X4K9QA"}]}
+{"text": "Provizyon takip no 5K2M9X8Q1 onaylandı", "entities": [{"entity": "TAKIP_NO", "value": "5K2M9X8Q1"}]}
+{"text": "Hastanemiz 24 saat hizmet verir, 1200 yatak kapasiteli", "entities": []}
+{"text": "Reçete yazılırken ICD10 kodu kullanılır", "entities": []}

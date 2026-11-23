@@ -1,0 +1,39 @@
+name: Tespit sorunu / Detection issue
+description: Kaçırılan kişisel veri (yanlış negatif) veya gereksiz maskeleme (yanlış pozitif) / Missed PII or false positive
+labels: [detection]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Yalnız sentetik veri kullanın.** Gerçek kişi adı, gerçek TCKN/IBAN/telefon veya gerçek anahtar yazmayın;
+        değerleri uydurun (TCKN/IBAN için kontrol basamağı geçerli sahte değer üretin).
+        **Use synthetic data only.** Never paste real names, IDs, phone numbers or credentials.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Tür / Kind
+      options:
+        - Kaçırıldı (yanlış negatif) / Missed (false negative)
+        - Gereksiz maskelendi (yanlış pozitif) / Masked unnecessarily (false positive)
+        - Geri çevirme / ek onarımı hatası / Restoration or suffix repair error
+    validations:
+      required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: Örnek metin (sentetik) / Example text (synthetic)
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Beklenen ve gerçekleşen / Expected vs actual
+      description: "Ör. `matriks-pii mask --json \"...\"` çıktısı / e.g. output of `matriks-pii mask --json \"...\"`"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Sürüm ve profil / Version and profile
+      placeholder: "matriks-pii 0.4.0, profile: balanced"

@@ -1,4 +1,4 @@
-"""Değersiz işletim metrikleri (Prometheus, opsiyonel: `pip install "matriks-pii[metrics]"`).
+"""Değersiz işletim metrikleri (Prometheus, opsiyonel: `pip install "matriks-mask[metrics]"`).
 
 * Etiketler yalnız guardrail adı, varlık türü, aksiyon, kanca, durum, olay adı ve skor kovası taşır — hiçbir değer yok.
 * `prometheus_client` yoksa veya `MATRIKS_PII_METRICS=0` ise tüm çağrılar no-op'tur.

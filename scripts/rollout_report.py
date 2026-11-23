@@ -1,6 +1,6 @@
 """Kademeli yayın kapı raporu: denetim izinden (audit JSONL, değersiz) gölge mod ve canary aşamalarını değerlendirir.
 
-Operasyonel kapılar (CHANGELOG "Kademeli yayın", docs/RUNBOOK.md):
+Operasyonel kapılar (docs/RUNBOOK.md "Kademeli yayın"):
   1. gölge mod (dry_run): would_mask / would_block sayımları beklentiyle uyumlu, guardrail hatası yok
   2. canary: oturum kaybı oranı ≤ %1, guardrail hatası yok, KISI oranı gölge moda göre ±%15 içinde
 

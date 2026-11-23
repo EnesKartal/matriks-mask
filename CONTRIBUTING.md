@@ -41,6 +41,21 @@ pytest -q -m e2e tests/e2e                  # gerçek LiteLLM proxy (yerel echo 
   eski davranışa dönüş bayrağıyla belirtilir.
 - Commit mesajları kısa ve konu bazlıdır (`fix(revert): …`, `feat(policy): …`, `docs: …`).
 
+## Sektör dosyası ekleme / Adding a sector file
+
+Kuruma veya ülkeye özel biçimler çekirdek koda değil, örnek yapılandırma dosyalarına girer (bir biçim her kurumda
+aynıysa — TCKN, IBAN, URL kodlaması — çekirdeğe; kurumdan kuruma değişiyorsa — PNR, hesap alanı — örnek dosyaya).
+
+1. `examples/sektor/<sektör>.yaml`: mevcut bir dosyayı kopyalayın; `extra_regex` kurallarını yazın (dar `context` ve
+   `context_window`, gerekiyorsa `group`).
+2. `tests/fixtures/sektor/<sektör>.jsonl`: her kural için en az bir pozitif ve dosya başına en az iki negatif satır
+   (`"entities": []`), yalnız sentetik değerler.
+3. `matriks-pii selftest --config examples/sektor/<sektör>.yaml --corpus tests/fixtures/sektor/<sektör>.jsonl` →
+   P = R = 1; `pytest -q tests/test_sektor_ornekleri.py`.
+
+Sector-specific formats go into example configs, not into the core. Copy an existing file, add rules plus a
+`.jsonl` evaluation set (positives and at least two negatives), and make `tests/test_sektor_ornekleri.py` pass.
+
 ## Güvenlik açıkları
 
 Herkese açık issue açmayın; [`SECURITY.md`](SECURITY.md).

@@ -1,0 +1,7 @@
+{"text": "Call +44 20 7946 0958 or +1 415 555 0132", "entities": [{"entity": "TELEFON", "value": "+44 20 7946 0958"}, {"entity": "TELEFON", "value": "+1 415 555 0132"}]}
+{"text": "SSN 078-05-1120, tarih 2026-11-20", "entities": [{"entity": "US_SSN", "value": "078-05-1120"}]}
+{"text": "National Insurance no AB 12 34 56 C", "entities": [{"entity": "UK_NINO", "value": "AB 12 34 56 C"}]}
+{"text": "Türkiye hattı +90 532 234 56 78", "entities": [{"entity": "TELEFON", "value": "+90 532 234 56 78"}]}
+{"text": "Fiyat +15 puan, hedef +3 5 10", "entities": []}
+{"text": "Endeks +1.250 puan yükseldi, hacim +12.500.000", "entities": []}
+{"text": "Sipariş kodu 123-45-6789 kargoya verildi", "entities": []}

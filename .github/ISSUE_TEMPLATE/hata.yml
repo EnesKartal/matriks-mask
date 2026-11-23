@@ -1,0 +1,34 @@
+name: Hata bildirimi / Bug report
+description: Kurulum, LiteLLM entegrasyonu, akış, oturum deposu vb. hatalar / Installation, LiteLLM integration, streaming, session store…
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Güvenlik açıklarını burada bildirmeyin (SECURITY.md). Loglarda ve config'de **sırları ve gerçek kişisel veriyi silin**.
+        Do not report vulnerabilities here (see SECURITY.md). **Remove secrets and real personal data** from logs and config.
+  - type: textarea
+    id: what
+    attributes:
+      label: Ne oldu? / What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Yeniden üretme adımları / Steps to reproduce
+      description: İstek gövdesi (sentetik), guardrail config'i (sırlar çıkarılmış) / Request body (synthetic), guardrail config (secrets removed)
+    validations:
+      required: true
+  - type: textarea
+    id: selftest
+    attributes:
+      label: "`matriks-pii selftest --config config.yaml` çıktısı / output"
+      render: text
+  - type: input
+    id: versions
+    attributes:
+      label: Sürümler / Versions
+      placeholder: "matriks-pii 0.4.0, LiteLLM 1.106.5, Python 3.12, Linux"
+    validations:
+      required: true

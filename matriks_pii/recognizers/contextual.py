@@ -6,7 +6,7 @@ import re
 from dataclasses import dataclass
 
 from .. import data
-from ..text_utils import ascii_fold, fold_key, fre, is_capitalized, tr_lower
+from ..text_utils import _ASCII_FOLD, ascii_fold, fold_key, fre, is_capitalized, tr_lower
 from .base import AnalysisContext, Recognizer, Span
 from .checksums import luhn_valid, tckn_valid, vkn_valid
 
@@ -97,7 +97,8 @@ RULES: tuple[CtxRule, ...] = (
     CtxRule("ETTN", re.compile(rf"(?<![0-9A-Za-z\-]){_UUID}(?![0-9A-Za-z\-])"), _ctx("ettn", "e-fatura", "efatura", "e-arşiv"), 0.8),
     CtxRule(
         "HESAP_NO",
-        _num(r"[0-9]{6,12}|[0-9]{3,5}-[0-9]{5,9}(?:-[0-9]{1,3})?"),
+        # tireli biçim önce ve tek değer: "0012345-678", "12345678-9" ("-678" açıkta kalmasın)
+        _num(r"[0-9]{6,12}-[0-9]{1,9}(?:-[0-9]{1,3})?|[0-9]{3,5}-[0-9]{5,9}(?:-[0-9]{1,3})?|[0-9]{6,12}"),
         _ctx("hesap no", "hesap numarası", "hesap numaram", "hesap numaranız", "hesap numarasi", "hesap #", "account no", "account number", "yatırım hesap no", "müşteri hesap no"),
         0.7,
         window=40,
@@ -154,6 +155,12 @@ def _pw_value_ok(v: str) -> bool:
 _SIFRE_LOOSE_RE = fre(
     r"(?<![a-zçğıöşü])(?:şifre(?:m|mi|si|sini|niz|nizi)?|parola(?:m|mı|sı)?|pin(?: kodu| kodum|im| i|i)?|password)"
     r"\s+(?:olarak\s+|da\s+|de\s+)?(?P<v>(?=\S*[0-9])\S{4,64})"
+)
+
+# XML/HTML etiketi: <Password>Gizli123!</Password>, <şifre>…</şifre>
+_SIFRE_TAG_RE = fre(  # isim alanı öneki (<wsse:Password>) ve öznitelikler (Type="…") olabilir
+    r"<\s*(?:[\w.\-]+:)?(?P<t>password|passwd|pwd|pass|şifre|sifre|parola|pin)(?:\s[^<>]*)?>\s*(?P<v>[^<>\s]{4,64})"
+    r"\s*<\s*/\s*(?:[\w.\-]+:)?(?P=t)\s*>"
 )
 
 _MAP_PIN = fre(r"(?:harita|konum|iğne|map)\s*$")
@@ -214,7 +221,14 @@ class ContextualIdRecognizer(Recognizer):
             for m in rx.finditer(text):
                 out.append(Span(m.start(), m.end(), "KRIPTO_CUZDAN", m.group(), 0.8, self.name, m.group()))
         seen_pw: set[int] = set()
-        for m in list(_SIFRE_RE.finditer(cf)) + list(_SIFRE_LOOSE_RE.finditer(cf)):
+        tag_matches = list(_SIFRE_TAG_RE.finditer(cf)) if "<" in cf else []
+        tag_zones = [(m.start(), m.end()) for m in tag_matches]
+        # etiket içindeki öznitelik metni ("Password Type=…") ayrıca parola sanılmasın: etiket bölgesindeki diğer eşleşmeler atlanır
+        pw_matches = tag_matches + [
+            m for m in list(_SIFRE_RE.finditer(cf)) + list(_SIFRE_LOOSE_RE.finditer(cf))
+            if not any(a <= m.start() < b for a, b in tag_zones)
+        ]
+        for m in pw_matches:
             s, e = m.start("v"), m.end("v")
             if s in seen_pw or _MAP_PIN.search(cf[max(0, m.start() - 12) : m.start()]):
                 continue  # "harita pini 40.71, …": konum iğnesi, PIN değil
@@ -272,7 +286,7 @@ class DobRecognizer(Recognizer):
             hi = min(nl_after if nl_after >= 0 else len(cf), e + 25)
             if _DOB_CTX.search(cf[lo:s]) or _DOB_AFTER.match(cf[e:hi]):
                 out.append(Span(s, e, "DOGUM_TARIHI", text[s:e], 0.85, self.name, _norm_date(m)))
-            elif strict:
+            elif strict and not _not_birth_date(m, cf, e):
                 out.append(Span(s, e, "DOGUM_TARIHI", text[s:e], 0.55, self.name, _norm_date(m)))
         for m in _DATE2_RE.finditer(text):
             s, e = m.start(), m.end()
@@ -297,6 +311,22 @@ class DobRecognizer(Recognizer):
             if _BIRTHPLACE_BEFORE.search(before) or _BIRTHPLACE_AFTER.match(after):
                 out.append(Span(m.start(), m.end(), "DOGUM_YERI", w, 0.8, self.name, k))
         return out
+
+
+_TIME_AFTER = re.compile(r"(?:[ tT][0-9]{1,2}:[0-9]{2}|\s+saat\s+[0-9]{1,2}[:.][0-9]{2})")  # "12.05 kg" saat değil
+
+
+def _not_birth_date(m: re.Match[str], cf: str, e: int) -> bool:
+    """strict profilde bağlamsız tarih: zaman damgası (tarih + saat, log satırı) ve gelecekteki tarih doğum tarihi olamaz."""
+    if _TIME_AFTER.match(cf, e):
+        return True
+    import datetime as _dt
+
+    try:
+        d, mo, y = (int(x) for x in _norm_date(m).split("."))
+        return _dt.date(y, mo, d) > _dt.date.today()
+    except ValueError:
+        return False
 
 
 def _norm_date(m: re.Match[str]) -> str:
@@ -343,17 +373,21 @@ class ExtraRegexRecognizer(Recognizer):
         self.rules = []
         for x in cfg.extra_regex:
             flags = re.IGNORECASE if x.ignore_case else 0
-            ctxp = re.compile(x.context) if x.context else None
+            # bağlam katlanmış metinde aranır (küçük harf, ş→s, ı→i …): desen de katlanır, büyük/küçük harf duyarsız
+            ctxp = re.compile(x.context.translate(_ASCII_FOLD), re.IGNORECASE) if x.context else None
             self.rules.append((x, re.compile(x.pattern, flags), ctxp))
         self.entities = tuple(x.entity for x in cfg.extra_regex)
 
     def find(self, text: str, ctx: AnalysisContext) -> list[Span]:
         out = []
         for x, rx, ctxp in self.rules:
+            g = x.group if x.group is not None else 0
             for m in rx.finditer(text):
-                if m.end() == m.start():
+                s, e = m.span(g)
+                if s < 0 or e == s:  # grup bu eşleşmeye katılmadı / boş
                     continue
-                if ctxp is not None and not ctx.has_context(m.start(), m.end(), ctxp, window=x.context_window):
+                if ctxp is not None and not ctx.has_context(s, e, ctxp, window=x.context_window):
                     continue
-                out.append(Span(m.start(), m.end(), x.entity, m.group(), x.score, self.name, m.group().upper()))
+                v = text[s:e]
+                out.append(Span(s, e, x.entity, v, x.score, self.name, v.upper()))
         return out

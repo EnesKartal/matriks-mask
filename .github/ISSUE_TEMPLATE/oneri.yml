@@ -1,0 +1,15 @@
+name: Öneri / Feature request
+description: Yeni varlık türü, ayar veya entegrasyon önerisi / New entity type, setting or integration
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: İhtiyaç / Use case
+      description: Hangi sorunu çözüyor? Sentetik örnek ekleyin. / What problem does it solve? Add a synthetic example.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Öneri / Proposal

@@ -1,7 +1,7 @@
 # matriks-pii — LiteLLM kurulum kılavuzu
 
 Bu belge `matriks-pii` guardrail'inin bir LiteLLM proxy'sine nasıl kurulacağını, yapılandırılacağını ve doğrulanacağını
-anlatır. Eklentinin ne yaptığı ve kalite ölçümleri için ana [README](../README.md)'ye bakın.
+anlatır. Eklentinin ne yaptığı ve kalite ölçümleri için ana [README](../README.tr.md)'ye bakın.
 
 Test edilen sürümler: **LiteLLM 1.106.1 ve 1.106.5** (asgari 1.106.1), Python 3.10–3.13.
 
@@ -9,11 +9,10 @@ Test edilen sürümler: **LiteLLM 1.106.1 ve 1.106.5** (asgari 1.106.1), Python 
 
 ## 1. Kurulum
 
-Paket henüz PyPI'da değildir; GitHub deposundan veya yerel kopyadan kurulur:
-
 ```bash
-# depodan (geliştirme / tek sunucu)
-pip install "matriks-pii[fast] @ git+https://github.com/MatriksData/matriks-pii"
+pip install "matriks-mask[fast]"
+# main dalındaki en son sürüm
+pip install "matriks-mask[fast] @ git+https://github.com/MatriksData/matriks-pii"
 # veya yerel kopyadan
 pip install "/yol/matriks-pii[fast]"
 ```
@@ -114,7 +113,7 @@ Aksiyonlar: `MASK` (yer tutucu, yanıtta geri çevrilir) · `BLOCK` (HTTP 400, d
 Ortam değişkenleri LiteLLM geleneğiyle verilir: `hash_secret: os.environ/MATRIKS_PII_HASH_SECRET`.
 Tanımlı olmayan bir değişkene başvuru proxy'yi başlangıçta durdurur.
 
-Tüm ayarlar: README "Önemli ayarlar"; hazır örnekler: [`examples/`](../examples).
+Tüm ayarlar: [README](../README.tr.md#önemli-ayarlar) "Önemli ayarlar"; hazır örnekler: [`examples/`](../examples).
 
 ## 4. Desteklenen uç noktalar
 
@@ -165,7 +164,7 @@ Redis kullanılacaksa oturum ortak ve şifreli tutulur:
    | `MATRIKS_PII_STORE_KEY` | Redis'teki oturum haritasının AES-256-GCM anahtarı | 32 bayt, base64 |
    | `MATRIKS_PII_REDIS_URL` | Redis adresi (TLS için `rediss://`) | URL |
 
-2. `pip install "matriks-pii[redis,fast]"`
+2. `pip install "matriks-mask[redis,fast]"`
 
 3. `config.yaml`:
 
@@ -296,7 +295,7 @@ Beklenen:
 
 ## 9.1 NER modu üretim notları
 
-- `pip install "matriks-pii[ner]"`; CPU için `torch` CPU tekerleği yeterlidir. Model imaja önceden indirilmelidir
+- `pip install "matriks-mask[ner]"`; CPU için `torch` CPU tekerleği yeterlidir. Model imaja önceden indirilmelidir
   (`HF_HOME` dizini); `ner_preload: true` (varsayılan) model yüklenemezse proxy'nin başlamasını engeller.
 - Model 512 token üstünde hata verir: metin cümle sınırında `ner_max_chars` (1200) parçalara bölünür.
 - Her çağrı `ner_timeout_seconds` (5 sn) ile sınırlıdır; zaman aşımı/hata `ner_fail_mode: closed` → istek reddedilir,
@@ -306,7 +305,7 @@ Beklenen:
 
 ## 9.2 Metrikler
 
-`pip install "matriks-pii[metrics]"` ve LiteLLM'de:
+`pip install "matriks-mask[metrics]"` ve LiteLLM'de:
 
 ```yaml
 litellm_settings:
@@ -331,7 +330,7 @@ Geri alma: wheel + config çift olarak; acil durumda `MATRIKS_PII_IGNORE_UNKNOWN
 ## 10. Eklenti dışında kalan KVKK yükümlülükleri
 
 Maskeleme, yurt dışındaki bir LLM'e yapılan aktarımı **ortadan kaldırmaz**; riski azaltan teknik bir tedbirdir.
-Ayrıca gerekenler (README "KVKK ve sektör mevzuatı"):
+Ayrıca gerekenler ([README](../README.tr.md#kvkk-ve-sektör-mevzuatı-hukuki-görüş-değildir) "KVKK ve sektör mevzuatı"):
 
 - Standart Sözleşme-2 ve 5 iş günü içinde Kurul'a bildirim,
 - sağlayıcıyla veri işleme sözleşmesi,

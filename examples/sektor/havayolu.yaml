@@ -1,0 +1,18 @@
+# Sektör örneği: havayolu / seyahat. Başlangıç noktasıdır; kendi gerçek biçimlerinize göre daraltın (bkz. README "Kuruma özel tanımlar").
+#   dene:  matriks-pii mask --config examples/sektor/havayolu.yaml "…"
+#   ölç:   matriks-pii selftest --config examples/sektor/havayolu.yaml --corpus tests/fixtures/sektor/havayolu.jsonl
+# Bu dosyadaki extra_regex listesini kendi LiteLLM config.yaml'ınızdaki matriks-pii guardrail'ine ekleyin.
+guardrails:
+  - guardrail_name: matriks-pii
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: true
+      profile: balanced
+      extra_regex:
+        # PNR: 6 karakter, en az bir harf; yalnız "pnr / rezervasyon kodu" yakınında (pencere dar tutuldu)
+        - {entity: PNR, pattern: '(?<![0-9A-Za-z])(?=[0-9]*[A-Z])[A-Z0-9]{6}(?![0-9A-Za-z])', context: 'pnr|rezervasyon kodu|booking ref', context_window: 25, ignore_case: false, score: 0.85}
+        # e-bilet: 3 haneli havayolu kodu + 10 hane
+        - {entity: BILET_NO, pattern: '(?<![0-9])[0-9]{3}-?[0-9]{10}(?![0-9])', context: 'bilet|ticket', score: 0.85}
+        # sadakat programı üye no: 2 harf + 9 hane, üyelik bağlamıyla
+        - {entity: SADAKAT_NO, pattern: '(?<![0-9A-Za-z])[A-Z]{2}[0-9]{9}(?![0-9])', context: 'üye no|üyelik no|mil programı|sadakat|frequent flyer', context_window: 30, score: 0.85}

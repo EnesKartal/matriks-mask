@@ -1,5 +1,5 @@
 # Çoklu worker / çoklu replika: oturum haritası AES-GCM ile şifreli olarak Redis'te tutulur.
-#   pip install "matriks-pii[redis,fast]"
+#   pip install "matriks-mask[redis,fast]"
 #   python -m matriks_pii.keys      → MATRIKS_PII_SESSION_SECRET ve MATRIKS_PII_STORE_KEY (bir kez üretin, TÜM örneklere aynısını verin)
 #   litellm --config config.redis.yaml --num_workers 4
 # Sır/anahtar eksikse proxy başlangıçta hata vererek durur.

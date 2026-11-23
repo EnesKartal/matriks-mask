@@ -4,7 +4,7 @@ Bu belge nöbetçi/SRE içindir: her hata kodu ve metrik için **belirti → tan
 görüntülemeyi gerektirmez; loglar, denetim izi ve metrikler değersizdir.
 
 Ön koşullar: `python -m matriks_pii.selftest --config config.yaml` çalıştırılabilir; Prometheus metrikleri için
-`litellm_settings.callbacks: ["prometheus"]` ve `pip install "matriks-pii[metrics]"`.
+`litellm_settings.callbacks: ["prometheus"]` ve `pip install "matriks-mask[metrics]"`.
 
 ## Hızlı tanı
 

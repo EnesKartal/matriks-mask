@@ -1,4 +1,4 @@
-"""Opsiyonel Hugging Face NER adaptörü (`pip install matriks-pii[ner]`).
+"""Opsiyonel Hugging Face NER adaptörü (`pip install matriks-mask[ner]`).
 
 Model tembel yüklenir; yalnız `ner_label_map` ile eşlenen etiketler (varsayılan PER→KISI) üretilir.
 LOC/ORG maskelenmez. Model çıktısı sonradan düzeltilir: alt sözcük parçaları ("Jer" + "om" + "e Powell") sözcük
@@ -73,7 +73,7 @@ class HFNerRecognizer(Recognizer):
                     try:
                         from transformers import pipeline  # type: ignore[import-not-found]
                     except ImportError as e:  # pragma: no cover
-                        raise RuntimeError("ner_backend=hf için 'pip install matriks-pii[ner]' gerekli") from e
+                        raise RuntimeError("ner_backend=hf için 'pip install matriks-mask[ner]' gerekli") from e
                     pipe = pipeline(
                         "token-classification",
                         model=self.cfg.ner_model,

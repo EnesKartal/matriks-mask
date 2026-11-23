@@ -3,15 +3,15 @@ requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "matriks-pii"
-version = "0.3.3"
+name = "matriks-mask"
+version = "0.4.0"
 description = "KVKK uyum süreçlerini destekleyen, Türkçe ve geri çevrilebilir PII maskeleme guardrail'i (LiteLLM) / Turkish reversible PII masking guardrail for LiteLLM"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0 AND MIT AND CC-BY-SA-4.0"
 license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md"]
 authors = [{ name = "Matriks Finansal Teknolojiler A.Ş." }]
-keywords = ["pii", "kvkk", "gdpr", "litellm", "guardrail", "turkish", "anonymization", "pseudonymization", "llm", "redaction"]
+keywords = ["pii", "kvkk", "gdpr", "litellm", "guardrail", "turkish", "masking", "pseudonymization", "llm", "redaction"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -46,6 +46,10 @@ metrics = ["prometheus_client>=0.17"]
 ner = ["transformers", "torch"]
 redis = ["redis>=5", "cryptography"]
 fast = ["pyahocorasick"]
+
+[project.scripts]
+matriks-pii = "matriks_pii.cli:main"
+matriks-mask = "matriks_pii.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/MatriksData/matriks-pii"

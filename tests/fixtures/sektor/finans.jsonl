@@ -1,0 +1,8 @@
+{"text": "login failed username=ademir AccountId=12345678", "entities": [{"entity": "KULLANICI_ADI", "value": "ademir"}, {"entity": "HESAP_NO", "value": "12345678"}]}
+{"text": "8=FIX.4.4|35=D|1=48213377|55=THYAO|38=100", "entities": [{"entity": "HESAP_NO", "value": "48213377"}]}
+{"text": "Emir no 2026112000451 iptal edildi, sipariş 12345678 beklemede", "entities": [{"entity": "EMIR_NO", "value": "2026112000451"}]}
+{"text": "Kullanıcı adı: mehmet.kaya ile giriş yapıldı", "entities": [{"entity": "KULLANICI_ADI", "value": "mehmet.kaya"}]}
+{"text": "Hesap no 1234567890 için virman talebi", "entities": [{"entity": "HESAP_NO", "value": "1234567890"}]}
+{"text": "THYAO 312,50 TL, hacim 98765432100", "entities": []}
+{"text": "XU100 9.875,43 puandan kapandı; 1=1 koşulu her zaman doğru", "entities": []}
+{"text": "order id alanı boş geldi", "entities": []}

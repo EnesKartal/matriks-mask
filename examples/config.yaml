@@ -1,5 +1,5 @@
 # LiteLLM proxy + matriks-pii (dengeli profil). Çalıştırma:
-#   pip install "matriks-pii[fast]"
+#   pip install "matriks-mask[fast]"
 #   litellm --config examples/config.yaml
 model_list:
   - model_name: gpt-4o

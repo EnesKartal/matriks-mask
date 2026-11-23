@@ -90,7 +90,7 @@ def test_ner_missing_dependency_message(monkeypatch: pytest.MonkeyPatch) -> None
 
     monkeypatch.setattr(builtins, "__import__", fake_import)
     r = HFNerRecognizer(cfg_for({"name_detection": {"ner_backend": "hf"}}))
-    with pytest.raises(RuntimeError, match=r"matriks-pii\[ner\]"):
+    with pytest.raises(RuntimeError, match=r"matriks-mask\[ner\]"):
         r.find("Ahmet", AnalysisContext.build(cfg_for(), "Ahmet"))
 
 

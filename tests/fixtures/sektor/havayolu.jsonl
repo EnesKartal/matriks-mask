@@ -1,0 +1,7 @@
+{"text": "PNR: TX4K9Q, bilet no 235-1234567890 onaylandı", "entities": [{"entity": "PNR", "value": "TX4K9Q"}, {"entity": "BILET_NO", "value": "235-1234567890"}]}
+{"text": "Rezervasyon kodu ABC12D için koltuk 14C seçildi", "entities": [{"entity": "PNR", "value": "ABC12D"}]}
+{"text": "Mil programı üye no TK123456789 hesabına mil eklendi", "entities": [{"entity": "SADAKAT_NO", "value": "TK123456789"}]}
+{"text": "e-bilet numarası 2351234567890", "entities": [{"entity": "BILET_NO", "value": "2351234567890"}]}
+{"text": "TK1984 seferi 14:30 kalkış, kapı B12", "entities": []}
+{"text": "PNR sistemi bakımda; IST-ESB hattı 2 saat gecikmeli", "entities": []}
+{"text": "Bilet fiyatı 1.250 TL, uçuş TK2154", "entities": []}

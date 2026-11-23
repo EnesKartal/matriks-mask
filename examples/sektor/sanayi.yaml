@@ -1,0 +1,16 @@
+# Sektör örneği: sanayi / üretim (çalışan kimlikleri). Başlangıç noktasıdır; kendi gerçek biçimlerinize göre daraltın (bkz. README "Kuruma özel tanımlar").
+#   dene:  matriks-pii mask --config examples/sektor/sanayi.yaml "…"
+#   ölç:   matriks-pii selftest --config examples/sektor/sanayi.yaml --corpus tests/fixtures/sektor/sanayi.jsonl
+# Bu dosyadaki extra_regex listesini kendi LiteLLM config.yaml'ınızdaki matriks-pii guardrail'ine ekleyin.
+guardrails:
+  - guardrail_name: matriks-pii
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: true
+      profile: balanced
+      # Not: "sicil no" bağlamı yerleşik SGK kuralına gider; personel numarası için ayrı ifade kullanın.
+      extra_regex:
+        - {entity: PERSONEL_NO, pattern: '(?<![0-9A-Za-z])[A-Z]{0,3}-?[0-9]{4,8}(?![0-9A-Za-z])', context: 'personel no|personel numarası|çalışan no|employee id', context_window: 20, score: 0.85}
+        - {entity: PERSONEL_KART, pattern: '(?<![0-9A-Za-z])[0-9A-F]{8,10}(?![0-9A-Za-z])', context: 'giriş kartı|yaka kartı|badge|kart id', context_window: 20, score: 0.8}
+        - {entity: OPERATOR_BELGE, pattern: '(?<![0-9A-Za-z])[A-Z0-9][A-Z0-9\-]{5,15}[0-9](?![0-9A-Za-z])', context: 'operatör belge|operatör belgesi|sertifika no', context_window: 25, score: 0.8}

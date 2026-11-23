@@ -137,7 +137,7 @@ def test_ner_preload_loads_at_init(monkeypatch: pytest.MonkeyPatch) -> None:
 
 def test_ner_preload_failure_stops_startup(monkeypatch: pytest.MonkeyPatch) -> None:
     def broken(self: HFNerRecognizer) -> Any:
-        raise RuntimeError("ner_backend=hf için 'pip install matriks-pii[ner]' gerekli")
+        raise RuntimeError("ner_backend=hf için 'pip install matriks-mask[ner]' gerekli")
 
     monkeypatch.setattr(HFNerRecognizer, "_pipeline", broken)
     with pytest.raises(RuntimeError, match="ner"):

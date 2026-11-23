@@ -234,6 +234,26 @@ class ExtraRegex(BaseModel):
     ignore_case: bool = True
     action: Action = "MASK"
     restore: bool = True
+    # yalnız bu yakalama grubu maskelenir ("AccountId=(\d+)" → yalnız sayı); verilmezse eşleşmenin tamamı
+    group: int | str | None = None
+
+    @field_validator("group", mode="before")
+    @classmethod
+    def _grp_type(cls, v: object) -> object:
+        if isinstance(v, bool):  # YAML "group: true" sessizce 1 olmasın
+            raise ValueError("extra_regex group sayı ya da grup adı olmalı")
+        return v
+
+    @model_validator(mode="after")
+    def _grp(self) -> ExtraRegex:
+        if self.group is not None:
+            rx = re.compile(self.pattern)
+            if isinstance(self.group, int):
+                if not 0 <= self.group <= rx.groups:
+                    raise ValueError(f"extra_regex group {self.group}: desende {rx.groups} yakalama grubu var")
+            elif self.group not in rx.groupindex:
+                raise ValueError(f"extra_regex group {self.group!r}: desende bu adlı grup yok")
+        return self
 
     @field_validator("entity")
     @classmethod

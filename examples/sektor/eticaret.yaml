@@ -1,0 +1,14 @@
+# Sektör örneği: e-ticaret / kargo. Başlangıç noktasıdır; kendi gerçek biçimlerinize göre daraltın (bkz. README "Kuruma özel tanımlar").
+#   dene:  matriks-pii mask --config examples/sektor/eticaret.yaml "…"
+#   ölç:   matriks-pii selftest --config examples/sektor/eticaret.yaml --corpus tests/fixtures/sektor/eticaret.jsonl
+# Bu dosyadaki extra_regex listesini kendi LiteLLM config.yaml'ınızdaki matriks-pii guardrail'ine ekleyin.
+guardrails:
+  - guardrail_name: matriks-pii
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: true
+      profile: balanced
+      extra_regex:
+        - {entity: SIPARIS_NO, pattern: '(?<![0-9A-Za-z])[A-Z]{0,3}-?[0-9]{6,14}(?![0-9A-Za-z])', context: 'sipariş no|sipariş numarası|order no|order number', context_window: 20, score: 0.8}
+        - {entity: KARGO_TAKIP, pattern: '(?<![0-9A-Za-z])[A-Z0-9]{8,22}(?![0-9A-Za-z])', context: 'kargo takip|takip no|gönderi no|tracking', context_window: 20, ignore_case: false, score: 0.8}

@@ -1,5 +1,5 @@
 # Üretim için sabitlenmiş sürümler (test edilen kombinasyon, 2026-10-28).
-#   pip install "matriks-pii[redis,fast,metrics]" -c constraints/prod.txt
+#   pip install "matriks-mask[redis,fast,metrics]" -c constraints/prod.txt
 # Güncellerken: pip-audit + pytest -q + pytest -m e2e çalıştırın.
 cryptography==50.0.2
 fastapi==0.162.0

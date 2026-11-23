@@ -15,10 +15,12 @@ def _pkg_version() -> str:
         from importlib.metadata import PackageNotFoundError, version
     except ImportError:  # pragma: no cover
         return "0.0.0+local"
-    try:
-        return version("matriks-pii")
-    except PackageNotFoundError:
-        return "0.0.0+local"
+    for dist in ("matriks-mask", "matriks-pii"):  # dağıtım adı 0.4.0'dan itibaren matriks-mask; içe aktarma adı aynı
+        try:
+            return version(dist)
+        except PackageNotFoundError:
+            continue
+    return "0.0.0+local"
 
 
 __version__ = _pkg_version()

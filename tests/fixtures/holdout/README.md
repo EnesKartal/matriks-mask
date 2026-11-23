@@ -1,7 +1,7 @@
 # Bağımsız değerlendirme kümesi
 
 `holdout.jsonl` (269 senaryo: 162 PII içeren, 107 tuzak) uygulama kodunu ve diğer fixture'ları **görmeyen** ayrı bir
-ajan tarafından, Türk finans/aracı kurum yazılımı müşteri metinlerine benzer biçimde yazıldı. Tüm değerler sentetiktir;
+LLM ajanı (yapay zekâ modeli) tarafından, Türk finans/aracı kurum yazılımı müşteri metinlerine benzer biçimde yazıldı. Tüm değerler sentetiktir;
 TCKN/VKN/IBAN/kart etiketleri python-stdnum ile doğrulandı.
 
 **Kör ölçüm (2026-10-28, düzeltme öncesi):** deterministik varlıklarda P≈R≈1.0 (TCKN R=0.95, TELEFON P=0.90),
@@ -14,7 +14,7 @@ Yeni bir kör ölçüm için bu küme yerine yeni, bağımsız bir küme yazdır
 
 ## holdout2.jsonl
 
-345 senaryo (226 PII içeren, 119 tuzak), yine uygulama kodunu ve fixture'ları görmeyen ayrı bir ajan tarafından 0.3.0
+345 senaryo (226 PII içeren, 119 tuzak), yine uygulama kodunu ve fixture'ları görmeyen ayrı bir LLM ajanı tarafından 0.3.0
 kapsamına göre (Ad SOYAD, form alanları, yeni varlıklar `GIZLI_ANAHTAR`/`KONUM`/`MKK_SICIL`/`POLICE_NO`, kaçış
 varyantları, özel nitelikli öz-bildirimler) yazıldı. Tüm değerler sentetiktir.
 
