@@ -33,9 +33,35 @@ def test_url_encoded_roundtrip_keeps_original_encoding() -> None:
 
 
 def test_html_entity_roundtrip() -> None:
-    masked, back = _roundtrip("Yazın: ayse&#64;example.com veya ayse@example.com")
-    assert masked == "Yazın: <EPOSTA_1> veya <EPOSTA_1>"  # aynı değer → aynı yer tutucu
-    assert back == "Yazın: ayse&#64;example.com veya ayse&#64;example.com"
+    text = "Yazın: ayse&#64;example.com veya ayse@example.com"
+    masked, back = _roundtrip(text)
+    assert masked == "Yazın: <EPOSTA_1> veya <EPOSTA_2>"  # kodlu ve düz yazım ayrı yer tutucu
+    assert back == text  # her biri kendi yazımıyla geri döner
+
+
+@pytest.mark.parametrize("text,ent", [
+    ("IBAN: TR33 0006 1005 1978 6457 8413 26", "IBAN"),
+    ("Kart: 4111 1111 1111 1111", "KART"),
+    ("Kart: 4111‑1111‑1111‑1111", "KART"),
+    ("TCKN 17291716060", "TCKN"),
+])
+def test_unicode_spaces_and_dashes(text: str, ent: str) -> None:
+    got = engine_for().detected(text)
+    assert [s.entity for s in got] == [ent] and got[0].text in text
+
+
+def test_merged_span_prefers_masked_entity() -> None:
+    got = engine_for().detected("şifre: Gizli123!AA%3ABB%3ACC%3ADD%3AEE%3AFF")
+    assert [s.entity for s in got] == ["SIFRE"]
+
+
+def test_cli_non_utf8_stdin() -> None:
+    import subprocess
+    import sys
+
+    r = subprocess.run([sys.executable, "-m", "matriks_pii.cli", "mask"], input=b"Ay\xfee Demir 0532 234 56 78\n",
+                       capture_output=True)
+    assert r.returncode == 0 and b"<TELEFON_1>" in r.stdout, r.stderr
 
 
 @pytest.mark.parametrize("text", ["Faiz %40 arttı", "(%53)", "%20'ye", "hedef %25.", "R&D", "a & b", "100%"])

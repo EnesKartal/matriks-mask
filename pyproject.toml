@@ -56,6 +56,8 @@ Homepage = "https://github.com/MatriksData/matriks-pii"
 Repository = "https://github.com/MatriksData/matriks-pii"
 Issues = "https://github.com/MatriksData/matriks-pii/issues"
 Changelog = "https://github.com/MatriksData/matriks-pii/blob/main/CHANGELOG.md"
+"Turkish docs" = "https://github.com/MatriksData/matriks-pii/blob/main/README.tr.md"
+Security = "https://github.com/MatriksData/matriks-pii/blob/main/SECURITY.md"
 
 [tool.setuptools.packages.find]
 include = ["matriks_pii*"]

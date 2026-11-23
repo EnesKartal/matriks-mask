@@ -18,7 +18,7 @@
   deposu, kurulum doğrulaması (`selftest`).
 - `matriks-pii` komutu (diğer adı `matriks-mask`): `mask` (LiteLLM olmadan maskeleme; `--profile`, `--config`,
   `--json`), `selftest`, `keys`.
-- Kuruma özel tanımlar: README'de ayrı bölüm; `examples/sektor/` altında finans, havayolu, sağlık, sanayi,
+- Kuruma özel tanımlar: README'de ayrı bölüm; `examples/sektor/` altında finans, havayolu, sağlık, sigorta, sanayi,
   e-ticaret/kargo, telekom ve yurt dışı örnek dosyaları, her biri kendi ölçüm kümesiyle test edilir.
 - Lisans: kod Apache-2.0; paketteki üçüncü taraf veri dosyaları için `THIRD_PARTY_NOTICES.md`.
 
@@ -38,3 +38,9 @@ değişenler:
 - `selftest --corpus` hatalı girdide yığın izi yerine biçimi anlatan kısa bir ileti verir (çıkış kodu 2).
 - Tek sayıdan oluşan tool argümanında (`"arguments": "1.52e+274"`) sayı içindeki değer maskelenince JSON bozuluyordu;
   artık JSON metni olarak geçerli kalır (özellik testi buldu).
+- `constraints/prod.txt`: LiteLLM 1.110.2, fastapi 0.162.5, pydantic 2.14.4 (birim, uçtan uca, selftest, pip-audit ile
+  sınandı); CI matrisine LiteLLM 1.110.2 eklendi; GitHub Actions sürümleri (checkout v7, setup-python v7,
+  upload-artifact v7, download-artifact v8). Asgari LiteLLM sürümü değişmedi (1.106.1).
+- Sektör örneklerine sigorta eklendi (hasar dosya no, ekspertiz rapor no).
+- Bölünmez/dar boşluk (U+00A0, U+202F …) ve Unicode tire (U+2010–2013, U+2212) ile yazılmış IBAN, kart, TCKN gibi
+  değerler artık yakalanır (web/PDF kopyaları); önceden maskelenmiyordu.

@@ -3,7 +3,7 @@
 Bu belge `matriks-pii` guardrail'inin bir LiteLLM proxy'sine nasıl kurulacağını, yapılandırılacağını ve doğrulanacağını
 anlatır. Eklentinin ne yaptığı ve kalite ölçümleri için ana [README](../README.tr.md)'ye bakın.
 
-Test edilen sürümler: **LiteLLM 1.106.1 ve 1.106.5** (asgari 1.106.1), Python 3.10–3.13.
+Test edilen sürümler: **LiteLLM 1.106.1, 1.106.5 ve 1.110.2** (asgari 1.106.1), Python 3.10–3.13.
 
 ---
 

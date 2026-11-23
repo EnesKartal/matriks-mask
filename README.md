@@ -1,5 +1,7 @@
 # matriks-pii
 
+[![PyPI](https://img.shields.io/pypi/v/matriks-mask.svg)](https://pypi.org/project/matriks-mask/)
+[![Python](https://img.shields.io/pypi/pyversions/matriks-mask.svg)](https://pypi.org/project/matriks-mask/)
 [![ci](https://github.com/MatriksData/matriks-pii/actions/workflows/ci.yml/badge.svg)](https://github.com/MatriksData/matriks-pii/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/MatriksData/matriks-pii/blob/main/LICENSE)
 
@@ -44,7 +46,7 @@ User ◀──"Merhaba Ayşe Demir'e ilettim"────── matriks-pii ◀�
 
 ## Installation
 
-The PyPI package is **`matriks-mask`**; the Python module is `matriks_pii` and the command is `matriks-pii`
+The PyPI package is [**`matriks-mask`**](https://pypi.org/project/matriks-mask/); the Python module is `matriks_pii` and the command is `matriks-pii`
 (`matriks-mask` is an alias). Upgrading from a git install of `matriks-pii` ≤ 0.3.3: run `pip uninstall matriks-pii`
 first.
 
@@ -85,7 +87,7 @@ print(reverter.revert("<KISI_1>'e ilettim", final=True))   # Ayşe Demir'e ilett
 
 ### With LiteLLM
 
-Minimum LiteLLM version is **1.106.1** (tested with 1.106.1 and 1.106.5). LiteLLM `config.yaml`:
+Minimum LiteLLM version is **1.106.1** (tested with 1.106.1, 1.106.5 and 1.110.2). LiteLLM `config.yaml`:
 
 ```yaml
 guardrails:
@@ -187,7 +189,7 @@ deny_list:
 allow_list: ["Can Bey"]
 ```
 
-**Ready-made sector examples** ([`examples/sektor/`](https://github.com/MatriksData/matriks-pii/blob/main/examples/sektor)): finance/brokerage, airline, healthcare,
+**Ready-made sector examples** ([`examples/sektor/`](https://github.com/MatriksData/matriks-pii/blob/main/examples/sektor)): finance/brokerage, airline, healthcare, insurance,
 manufacturing, e-commerce/shipping, telecom and foreign formats (international phone numbers, US SSN, UK NINO). Each
 file is tested in CI against its own evaluation set ([`tests/fixtures/sektor/`](https://github.com/MatriksData/matriks-pii/blob/main/tests/fixtures/sektor)). They are
 starting points; narrow them to your real formats. To contribute a new sector file: [`CONTRIBUTING.md`](https://github.com/MatriksData/matriks-pii/blob/main/CONTRIBUTING.md).
@@ -346,7 +348,7 @@ JSON content in responses is restored with its formatting preserved.
 All tests: `pytest -q` (≈2.3k tests + hypothesis property tests), `pytest -m benchmark`, `pytest -m e2e` (real LiteLLM
 proxy + OpenAI-compatible and Gemini echo servers), `pytest -m external`, `pytest -m ner`, `pytest -m redis_live`.
 
-- Positive/mixed fixtures (731 detection + 76 restoration + 37 streaming + 94 hook scenarios + 46 sector-example rows) and **595 false-positive
+- Positive/mixed fixtures (733 detection + 76 restoration + 37 streaming + 94 hook scenarios + 52 sector-example rows) and **596 false-positive
   traps** (stock tickers, ISINs, VIOP contracts, numbers with invalid checksums, organisation names, currency pairs,
   secret-key prefixes, news sentences about special categories…): `python scripts/corpus_report.py`. In the default
   lexicon mode the false-positive count is 0.

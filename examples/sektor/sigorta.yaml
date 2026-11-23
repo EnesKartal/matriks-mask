@@ -1,0 +1,16 @@
+# Sektör örneği: sigorta. Başlangıç noktasıdır; kendi gerçek biçimlerinize göre daraltın (bkz. README "Kuruma özel tanımlar").
+#   dene:  matriks-pii mask --config examples/sektor/sigorta.yaml "…"
+#   ölç:   matriks-pii selftest --config examples/sektor/sigorta.yaml --corpus tests/fixtures/sektor/sigorta.jsonl
+# Bu dosyadaki extra_regex listesini kendi LiteLLM config.yaml'ınızdaki matriks-pii guardrail'ine ekleyin.
+guardrails:
+  - guardrail_name: matriks-pii
+    litellm_params:
+      guardrail: matriks_pii.guardrail.TurkishPIIGuardrail
+      mode: [pre_call, post_call]
+      default_on: true
+      profile: balanced
+      # yerleşik: POLICE_NO ("poliçe no" bağlamıyla), PLAKA, SASI_NO, TCKN, IBAN
+      extra_regex:
+        # (?!…) tarihleri dışlar: "23/11/2026", "2026-11-23"
+        - {entity: HASAR_DOSYA_NO, pattern: '(?<![0-9A-Za-z/.-])(?![0-9]{1,4}[./-][0-9]{1,2}[./-][0-9]{1,4}(?![0-9A-Za-z]))[A-Z0-9][A-Z0-9\-/]{4,20}[0-9](?![0-9A-Za-z])', context: 'hasar dosya no|hasar dosyası|hasar no|claim no|claim number', context_window: 25, ignore_case: false, score: 0.85}
+        - {entity: EKSPER_RAPOR_NO, pattern: '(?<![0-9A-Za-z/.-])(?![0-9]{1,4}[./-][0-9]{1,2}[./-][0-9]{1,4}(?![0-9A-Za-z]))[A-Z0-9][A-Z0-9\-/]{4,20}[0-9](?![0-9A-Za-z])', context: 'ekspertiz rapor no|eksper rapor no|eksper raporu', context_window: 25, ignore_case: false, score: 0.8}

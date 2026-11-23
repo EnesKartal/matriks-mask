@@ -15,7 +15,7 @@ FILES = sorted((ROOT / "examples" / "sektor").glob("*.yaml"))
 
 
 def test_sector_files_exist() -> None:
-    assert {f.stem for f in FILES} >= {"finans", "havayolu", "yurtdisi", "saglik", "sanayi", "eticaret", "telekom"}
+    assert {f.stem for f in FILES} >= {"finans", "havayolu", "yurtdisi", "saglik", "sanayi", "eticaret", "telekom", "sigorta"}
 
 
 @pytest.mark.parametrize("path", FILES, ids=[f.stem for f in FILES])

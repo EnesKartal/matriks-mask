@@ -1,5 +1,7 @@
 # matriks-pii
 
+[![PyPI](https://img.shields.io/pypi/v/matriks-mask.svg)](https://pypi.org/project/matriks-mask/)
+[![Python](https://img.shields.io/pypi/pyversions/matriks-mask.svg)](https://pypi.org/project/matriks-mask/)
 [![ci](https://github.com/MatriksData/matriks-pii/actions/workflows/ci.yml/badge.svg)](https://github.com/MatriksData/matriks-pii/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
@@ -40,7 +42,7 @@ Kullanıcı ◀──"Merhaba Ayşe Demir'e ilettim"────── matriks-p
 
 ## Kurulum
 
-PyPI paket adı **`matriks-mask`**; Python modülü `matriks_pii`, komut `matriks-pii` (`matriks-mask` aynı komutun
+PyPI paket adı [**`matriks-mask`**](https://pypi.org/project/matriks-mask/); Python modülü `matriks_pii`, komut `matriks-pii` (`matriks-mask` aynı komutun
 diğer adı). Git'ten kurulmuş `matriks-pii` ≤ 0.3.3'ten geçerken önce `pip uninstall matriks-pii` çalıştırın.
 
 ```bash
@@ -80,7 +82,7 @@ değilse (BLOCK aksiyonlu varlık) metni göndermeyin.
 
 ### LiteLLM ile
 
-Asgari LiteLLM sürümü **1.106.1** (1.106.1 ve 1.106.5 ile test edildi). LiteLLM `config.yaml`:
+Asgari LiteLLM sürümü **1.106.1** (1.106.1, 1.106.5 ve 1.110.2 ile test edildi). LiteLLM `config.yaml`:
 
 ```yaml
 guardrails:
@@ -175,7 +177,7 @@ deny_list:
 allow_list: ["Can Bey"]
 ```
 
-**Hazır sektör örnekleri** ([`examples/sektor/`](examples/sektor)): finans/aracı kurum, havayolu, sağlık, sanayi,
+**Hazır sektör örnekleri** ([`examples/sektor/`](examples/sektor)): finans/aracı kurum, havayolu, sağlık, sigorta, sanayi,
 e-ticaret/kargo, telekom ve yurt dışı biçimler (uluslararası telefon, ABD SSN, UK NINO). Her dosya kendi ölçüm
 kümesiyle ([`tests/fixtures/sektor/`](tests/fixtures/sektor)) CI'da sınanır. Başlangıç noktasıdırlar; kendi gerçek
 biçimlerinize göre daraltın. Yeni sektör dosyası katkısı için: [`CONTRIBUTING.md`](CONTRIBUTING.md).
@@ -333,7 +335,7 @@ JSON içerik biçimi korunarak geri çevrilir.
 Tüm testler: `pytest -q` (≈2.3k test + hypothesis özellik testleri), `pytest -m benchmark`, `pytest -m e2e` (gerçek
 LiteLLM proxy + OpenAI uyumlu ve Gemini echo sunucusu), `pytest -m external`, `pytest -m ner`, `pytest -m redis_live`.
 
-- Pozitif/karışık fixture'lar (731 tespit + 76 geri çevirme + 37 akış + 94 kanca senaryosu + 46 sektör örneği satırı) ve **595 yanlış pozitif
+- Pozitif/karışık fixture'lar (733 tespit + 76 geri çevirme + 37 akış + 94 kanca senaryosu + 52 sektör örneği satırı) ve **596 yanlış pozitif
   tuzağı** (hisse kodları, ISIN, VIOP, geçersiz checksum'lı sayılar, kurum adları, kur çiftleri, gizli anahtar önekleri,
   özel kategori haber cümleleri…): `python scripts/corpus_report.py`. Varsayılan sözlük modunda yanlış pozitif sayısı 0'dır.
 - Uygulama kodunu görmeyen ayrı LLM ajanlarının (yapay zekâ modelleri) yazdığı iki sentetik değerlendirme kümesi: `tests/fixtures/holdout/` (sonuçlar aşağıda).

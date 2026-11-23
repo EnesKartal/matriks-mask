@@ -1,7 +1,7 @@
 # LiteLLM proxy imajına matriks-pii eklenmiş hâli.
 #   docker build -t litellm-matriks-pii -f examples/Dockerfile .
 #   docker run -p 4000:4000 -e OPENAI_API_KEY=... -e LITELLM_MASTER_KEY=... litellm-matriks-pii
-# Sürüm sabitlenir (main-stable kayan etikettir). matriks-pii LiteLLM 1.106.1 ve 1.106.5 ile test edildi (asgari 1.106.1).
+# Sürüm sabitlenir (main-stable kayan etikettir). matriks-pii LiteLLM 1.106.1, 1.106.5 ve 1.110.2 ile test edildi (asgari 1.106.1).
 FROM ghcr.io/berriai/litellm:v1.106.5
 
 COPY . /opt/matriks-pii

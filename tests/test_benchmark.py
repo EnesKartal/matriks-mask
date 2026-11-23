@@ -88,7 +88,8 @@ def test_streaming_per_chunk() -> None:
 
 
 @pytest.mark.parametrize("text", ["1" * 100_000, "<" * 10_000, "a" * 200_000 + "@", ("Ahmet " * 20_000),
-                                  "a%41" * 50_000, "?q=" + "%20x" * 50_000, "&amp;" * 40_000])
+                                  "a%41" * 50_000, "?q=" + "%20x" * 50_000, "&amp;" * 40_000,
+                                  "%20 " + "A" * 200_000, "a=%20 " + "%" * 100_000, "?a=" + "%25" * 50_000])
 def test_pathological_inputs(text: str) -> None:
     eng = _fresh()
     t0 = time.perf_counter()

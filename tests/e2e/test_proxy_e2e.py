@@ -35,7 +35,7 @@ def _free(port: int) -> bool:
         return s.connect_ex(("127.0.0.1", port)) != 0
 
 
-def _wait(url: str, timeout: float = 120) -> None:
+def _wait(url: str, timeout: float = 240) -> None:  # yüklü makinede LiteLLM proxy açılışı 2 dakikayı aşabiliyor
     t0 = time.time()
     while time.time() - t0 < timeout:
         try:

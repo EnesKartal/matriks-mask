@@ -1,0 +1,7 @@
+{"text": "Hasar dosya no 2026/HS-004512 için eksper atandı", "entities": [{"entity": "HASAR_DOSYA_NO", "value": "2026/HS-004512"}]}
+{"text": "Ekspertiz rapor no ER-88213-7 sisteme yüklendi", "entities": [{"entity": "EKSPER_RAPOR_NO", "value": "ER-88213-7"}]}
+{"text": "Poliçe no 1234567890 kapsamında hasar no K-2026-00981 açıldı", "entities": [{"entity": "POLICE_NO", "value": "1234567890"}, {"entity": "HASAR_DOSYA_NO", "value": "K-2026-00981"}]}
+{"text": "34 ABC 123 plakalı aracın hasar dosyası 7781234 kapandı", "entities": [{"entity": "PLAKA", "value": "34 ABC 123"}, {"entity": "HASAR_DOSYA_NO", "value": "7781234"}]}
+{"text": "Kasko primi 12.500 TL, muafiyet %2", "entities": []}
+{"text": "Hasar oranı 2026'da %8 azaldı; dosya sayısı 4500", "entities": []}
+{"text": "Hasar dosyası 23/11/2026 tarihinde açıldı, 2026-11-23 itibarıyla incelemede", "entities": []}

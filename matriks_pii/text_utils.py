@@ -42,11 +42,16 @@ TR_LOWER_LETTERS = "abcçdefgğhıijklmnoöpqrsştuüvwxyzâîû"
 
 _FULLWIDTH = {cp: cp - 0xFEE0 for cp in range(0xFF01, 0xFF5F)}  # ！..～ → !..~ (rakam, Latin harf, noktalama)
 _FULLWIDTH[0x3000] = 0x20  # ideografik boşluk
-_FW_RE = re.compile("[\uff01-\uff5e\u3000]")
+# web/PDF kopyalar\u0131ndaki b\u00f6l\u00fcnmez ve dar bo\u015fluklar, Unicode tireler ("TR33 0006\u2026", "4111\u20111111\u2026")
+for _cp in (0x00A0, *range(0x2002, 0x200B), 0x202F, 0x205F):
+    _FULLWIDTH[_cp] = 0x20
+for _cp in (0x2010, 0x2011, 0x2012, 0x2013, 0x2212):
+    _FULLWIDTH[_cp] = 0x2D
+_FW_RE = re.compile("[\uff01-\uff5e\u3000\u00a0\u2002-\u200a\u202f\u205f\u2010-\u2013\u2212]")
 
 
 def ascii_width(s: str) -> str:
-    """Tam genişlik (U+FF01–FF5E) karakterleri ASCII karşılığına çevirir; uzunluk korunur.
+    """Tam genişlik (U+FF01–FF5E) karakterleri, Unicode boşlukları ve tireleri ASCII karşılığına çevirir; uzunluk korunur.
 
     Kullanıcı ya da kopyala-yapıştır "１７２９…" gibi tam genişlik rakam getirebilir (maskeleme atlatma)."""
     return s.translate(_FULLWIDTH) if _FW_RE.search(s) else s
@@ -197,15 +202,19 @@ _HTML_ENT = re.compile(r"&(?:#[0-9]{1,7}|#[xX][0-9A-Fa-f]{1,6}|[A-Za-z][A-Za-z0-
 _URL_HINT = re.compile(r"://|[?=&]")
 
 
-_PCT_TOKEN = re.compile(r"\S*%[0-9A-Fa-f]{2}\S*")
+_TOKEN = re.compile(r"\S+")
 
 
 def _url_pct_runs(text: str) -> Iterable[re.Match[str]]:
     """URL/form kodlaması olan `%XX` dizileri. Türkçe yüzde yazımı ("%40 arttı", "(%53)") çözülmez.
     Doğrusal: her boşluksuz parça bir kez taranır (parça içi ipucu ve dizi sayısı parça başına bir kez hesaplanır)."""
-    for tm in _PCT_TOKEN.finditer(text):
+    for tm in _TOKEN.finditer(text):
         lo, hi = tm.span()
+        if text.find("%", lo, hi) < 0:
+            continue
         runs = list(_PCT_RUN.finditer(text, lo, hi))
+        if not runs:
+            continue
         url_like = len(runs) >= 2 or _URL_HINT.search(text, lo, hi) is not None
         for m in runs:
             if url_like:

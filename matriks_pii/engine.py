@@ -30,7 +30,7 @@ def resolve_overlaps(spans: list[Span]) -> list[Span]:
     return _greedy_disjoint(ordered)
 
 
-def _merge_decoded(text: str, orig: list[Span], dec: list[Span]) -> list[Span]:
+def _merge_decoded(text: str, orig: list[Span], dec: list[Span], cfg: TurkishPIIConfig) -> list[Span]:
     """Orijinal tarama span'leri asla düşürülmez. Çözülmüş kopyadan gelen span orijinal bir span'le kesişirse ikisi
     birleşimi kapsayan tek span olur (öncelikli varlık etiketiyle); hiçbir parça açıkta kalmaz."""
     if not dec:
@@ -50,7 +50,8 @@ def _merge_decoded(text: str, orig: list[Span], dec: list[Span]) -> list[Span]:
         if len(c) == 1:
             out.append(c[0])
             continue
-        rep = max(c, key=lambda x: (_priority(x.entity), x.score, x.end - x.start))
+        rank = {"BLOCK": 3, "MASK": 2, "LOG": 1}  # IGNORE (0) temsilci olursa birleşim maskelenmez
+        rep = max(c, key=lambda x: (rank.get(cfg.action(x.entity), 0), _priority(x.entity), x.score, x.end - x.start))
         u_s, u_e = min(x.start for x in c), max(x.end for x in c)
         if (u_s, u_e) == (rep.start, rep.end):
             out.append(rep)
@@ -167,7 +168,7 @@ class PIIEngine:
         spans, ctx = self._detect(text)
         dec = decode_for_scan(text)
         if dec is not None:
-            spans = _merge_decoded(text, spans, self._decoded_spans(text, *dec))
+            spans = _merge_decoded(text, spans, self._decoded_spans(text, *dec), self.cfg)
         if self._allow_rx is not None:
             zones = [(m.start(), m.end()) for m in self._allow_rx.finditer(ctx.casefolded)]
             if zones:  # izin listesindeki ifadenin bir geçişi span'i tamamen kapsıyorsa at (kesin kimlikler hariç)
@@ -209,7 +210,10 @@ class PIIEngine:
             if enc[hi] - enc[lo] == 0:
                 continue
             o_s, o_e = starts[s.start], ends[s.end - 1]
-            out.append(dataclasses.replace(s, start=o_s, end=o_e, text=text[o_s:o_e]))
+            raw = text[o_s:o_e]
+            # kodlu karaktere dokunan değer ayrı yer tutucu alır (düz yazımı kodlu biçimle geri çevrilmesin)
+            touched = enc[s.end] - enc[s.start] > 0
+            out.append(dataclasses.replace(s, start=o_s, end=o_e, text=raw, normalized=raw if touched else s.normalized))
         return out
 
     def analyze_with_prefix(self, text: str, prefix: str = "") -> list[Span]:

@@ -21,7 +21,7 @@ ALL = {sub: load_cases(sub) for sub in ("detect", "negative", "revert", "streami
 
 def test_counts() -> None:
     assert len(ALL["detect"]) >= 487
-    assert len(ALL["negative"]) == 595
+    assert len(ALL["negative"]) == 596
     assert len(ALL["revert"]) >= 40 and len(ALL["streaming"]) >= 20
 
 

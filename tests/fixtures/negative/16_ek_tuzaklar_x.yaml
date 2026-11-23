@@ -129,3 +129,9 @@
     profile: strict
   tags:
   - tarih
+- id: NEG-596
+  text: 'Hesap no: 2 adet, 100-200 TL arası işlem.'
+  expect: []
+  why: tireli aralık hesap no değildir
+  tags:
+  - hesap

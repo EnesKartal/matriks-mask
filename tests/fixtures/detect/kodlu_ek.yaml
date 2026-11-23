@@ -11,3 +11,5 @@
 - {id: XMLSIFRE-003, text: "<pwd> P@ss-w0rd </pwd>", expect: [{entity: SIFRE, value: "P@ss-w0rd"}]}
 - {id: HESAPTIRE-001, text: "Hesap No 0012345-678", expect: [{entity: HESAP_NO, value: "0012345-678"}], masked: "Hesap No <HESAP_NO_1>"}
 - {id: HESAPTIRE-002, text: "hesap numarası 1234-5678901-23 olarak güncellendi", expect: [{entity: HESAP_NO, value: "1234-5678901-23"}]}
+- {id: HESAPTIRE-003, text: "hesap no 12345678-9 bloke edildi", expect: [{entity: HESAP_NO, value: "12345678-9"}]}
+- {id: HESAPTIRE-004, text: "Hesap numaram 123456-78", expect: [{entity: HESAP_NO, value: "123456-78"}]}

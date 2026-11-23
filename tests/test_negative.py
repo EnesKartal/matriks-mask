@@ -1,4 +1,4 @@
-"""Negatif set (595 yanlış pozitif tuzağı): hiçbir şey tespit edilmemeli (IGNORE aksiyonlu varlıklar hariç)."""
+"""Negatif set (596 yanlış pozitif tuzağı): hiçbir şey tespit edilmemeli (IGNORE aksiyonlu varlıklar hariç)."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ CASES = load_cases("negative")
 
 
 def test_negative_count() -> None:
-    assert len(CASES) == 595
+    assert len(CASES) == 596
 
 
 @pytest.mark.parametrize("fname,case", CASES, ids=[c["id"] for _, c in CASES])

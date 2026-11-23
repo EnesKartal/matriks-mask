@@ -79,7 +79,7 @@ def _utf8_streams() -> None:
         reconf = getattr(stream, "reconfigure", None)
         if reconf is not None and (getattr(stream, "encoding", "") or "").lower().replace("-", "") != "utf8":
             try:
-                reconf(encoding="utf-8")
+                reconf(encoding="utf-8", errors="replace" if stream is sys.stdin else "strict")
             except (ValueError, OSError):  # pragma: no cover
                 pass
 
