@@ -1,6 +1,6 @@
 """Performans eşikleri. Varsayılan çalıştırmada seçilmez: `pytest -m benchmark`.
 
-CI makineleri için 3× tolerans uygulanır (TOL).
+Eşikler TOL (MATRIKS_PII_BENCH_TOL, varsayılan 3) ile çarpılır; GitHub Actions'ta 6 kullanılır (runner hızı değişken).
 """
 
 from __future__ import annotations
