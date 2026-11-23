@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING
 from .config import ALLOW_PROTECTED, PRIORITY, TurkishPIIConfig
 from .recognizers import build_recognizers
 from .recognizers.base import AnalysisContext, Span
-from .text_utils import ascii_width, decode_for_scan, fold_text, trie_pattern
+from .text_utils import ascii_dashes, ascii_width, decode_for_scan, fold_text, trie_pattern
 
 if TYPE_CHECKING:
     from .session import MaskSession
@@ -166,9 +166,15 @@ class PIIEngine:
         orig = text
         text = ascii_width(text)  # 1:1; tanıyıcılar ASCII kopyada eşleşir, span metni aşağıda orijinalden alınır
         spans, ctx = self._detect(text)
+        extra: list[Span] = []
+        dashed = ascii_dashes(text)
+        if dashed is not None:  # Unicode tireli yazım ek taramada; ana tarama span'leri düşmez (birleşim)
+            extra += [dataclasses.replace(s, text=text[s.start : s.end]) for s in self._detect(dashed)[0]]
         dec = decode_for_scan(text)
         if dec is not None:
-            spans = _merge_decoded(text, spans, self._decoded_spans(text, *dec), self.cfg)
+            extra += self._decoded_spans(text, *dec)
+        if extra:
+            spans = _merge_decoded(text, spans, extra, self.cfg)
         if self._allow_rx is not None:
             zones = [(m.start(), m.end()) for m in self._allow_rx.finditer(ctx.casefolded)]
             if zones:  # izin listesindeki ifadenin bir geçişi span'i tamamen kapsıyorsa at (kesin kimlikler hariç)
@@ -205,7 +211,9 @@ class PIIEngine:
             return []
         w = self.cfg.context_window
         out: list[Span] = []
-        for s in self._detect(decoded)[0]:
+        scan = ascii_width(decoded)  # 1:1: çözülmüş &nbsp; / %C2%A0 / &#8209; da boşluk/tire sayılsın
+        scan = ascii_dashes(scan) or scan
+        for s in self._detect(scan)[0]:
             lo, hi = max(0, s.start - w), min(len(decoded), s.end + w)
             if enc[hi] - enc[lo] == 0:
                 continue

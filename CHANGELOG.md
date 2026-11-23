@@ -2,7 +2,7 @@
 
 ## 0.4.0 — 2026-11-23
 
-İlk herkese açık sürüm. / First public release.
+İlk PyPI sürümü. / First release on PyPI.
 
 - **PyPI paket adı `matriks-mask`** (`pip install matriks-mask`). Python modülü (`matriks_pii`), guardrail yolu
   (`matriks_pii.guardrail.TurkishPIIGuardrail`), ortam değişkenleri (`MATRIKS_PII_*`) ve metrik adları değişmedi.
@@ -43,4 +43,7 @@ değişenler:
   upload-artifact v7, download-artifact v8). Asgari LiteLLM sürümü değişmedi (1.106.1).
 - Sektör örneklerine sigorta eklendi (hasar dosya no, ekspertiz rapor no).
 - Bölünmez/dar boşluk (U+00A0, U+202F …) ve Unicode tire (U+2010–2013, U+2212) ile yazılmış IBAN, kart, TCKN gibi
-  değerler artık yakalanır (web/PDF kopyaları); önceden maskelenmiyordu.
+  değerler artık yakalanır (web/PDF kopyaları; `&nbsp;`, `%C2%A0`, `&#8209;` gibi kodlu biçimler dahil). Unicode
+  tireli yazım ek bir taramayla bulunur; değere bitişik tire ("…7216–CVV") önceki tespitleri etkilemez.
+- Değere bitişik ASCII tire (`4111111111111111-x`, `-4111…`) artık kart numarasının maskelenmesini engellemez.
+- XML parola etiketi taramasında ikinci dereceden süre giderildi (çok sayıda etiket + parola ifadesi içeren metin).

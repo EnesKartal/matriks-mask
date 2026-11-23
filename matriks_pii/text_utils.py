@@ -42,19 +42,26 @@ TR_LOWER_LETTERS = "abcçdefgğhıijklmnoöpqrsştuüvwxyzâîû"
 
 _FULLWIDTH = {cp: cp - 0xFEE0 for cp in range(0xFF01, 0xFF5F)}  # ！..～ → !..~ (rakam, Latin harf, noktalama)
 _FULLWIDTH[0x3000] = 0x20  # ideografik boşluk
-# web/PDF kopyalar\u0131ndaki b\u00f6l\u00fcnmez ve dar bo\u015fluklar, Unicode tireler ("TR33 0006\u2026", "4111\u20111111\u2026")
+# web/PDF kopyalarındaki bölünmez ve dar boşluklar ("TR33 0006 …")
 for _cp in (0x00A0, *range(0x2002, 0x200B), 0x202F, 0x205F):
     _FULLWIDTH[_cp] = 0x20
-for _cp in (0x2010, 0x2011, 0x2012, 0x2013, 0x2212):
-    _FULLWIDTH[_cp] = 0x2D
-_FW_RE = re.compile("[\uff01-\uff5e\u3000\u00a0\u2002-\u200a\u202f\u205f\u2010-\u2013\u2212]")
+_FW_RE = re.compile("[\uff01-\uff5e\u3000\u00a0\u2002-\u200a\u202f\u205f]")
+# Unicode tireler ("4111‑1111‑…"): ana taramada EŞLENMEZ (değere bitişik "–" ASCII tire gibi sınırı bozardı:
+# "5580…7216–CVV"); ayrı bir ek taramada eşlenir ve sonuç birleştirilir (engine.analyze)
+_DASHES = {cp: 0x2D for cp in (0x2010, 0x2011, 0x2012, 0x2013, 0x2212)}
+_DASH_RE = re.compile("[\u2010-\u2013\u2212]")
 
 
 def ascii_width(s: str) -> str:
-    """Tam genişlik (U+FF01–FF5E) karakterleri, Unicode boşlukları ve tireleri ASCII karşılığına çevirir; uzunluk korunur.
+    """Tam genişlik (U+FF01–FF5E) karakterleri ve Unicode boşlukları ASCII karşılığına çevirir; uzunluk korunur.
 
     Kullanıcı ya da kopyala-yapıştır "１７２９…" gibi tam genişlik rakam getirebilir (maskeleme atlatma)."""
     return s.translate(_FULLWIDTH) if _FW_RE.search(s) else s
+
+
+def ascii_dashes(s: str) -> str | None:
+    """Unicode tireleri ASCII "-" yapar (uzunluk korunur); metinde Unicode tire yoksa None."""
+    return s.translate(_DASHES) if _DASH_RE.search(s) else None
 
 
 def tr_lower(s: str) -> str:

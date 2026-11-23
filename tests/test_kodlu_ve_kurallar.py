@@ -157,3 +157,25 @@ def test_strict_dates_review() -> None:
     eng = PIIEngine(TurkishPIIConfig.build({"profile": "strict"}))
     assert [s.text for s in eng.detected("Randevular: 15.03.1985 20.04.1990")] == ["15.03.1985", "20.04.1990"]
     assert [s.text for s in eng.detected("Kayit 12.03.1985 12.05 kg")] == ["12.03.1985"]
+
+
+@pytest.mark.parametrize("text,ents", [
+    ("Kart: 5580439705267216–CVV: 920", ["KART", "KART_CVV"]),
+    ("Visa 4111 1111 1111 1111–Ayşe Demir", ["KART", "KISI"]),
+    ("–4111111111111111", ["KART"]),
+    ("müşteri no–3390127", ["MUSTERI_NO"]),
+    ("Kart 4111‑1111‑1111‑1111", ["KART"]),
+    ("4111111111111111-x", ["KART"]),
+    ("Kart: 5580439705267216-CVV: 920", ["KART", "KART_CVV"]),
+    ("IBAN: TR33&nbsp;0006&nbsp;1005&nbsp;1978&nbsp;6457&nbsp;8413&nbsp;26", ["IBAN"]),
+    ("Kart 4111&nbsp;1111&nbsp;1111&nbsp;1111", ["KART"]),
+    ("Tel: 0532&#8209;234&#8209;56&#8209;78", ["TELEFON"]),
+    ("q=TR33%C2%A00006%C2%A01005%C2%A01978%C2%A06457%C2%A08413%C2%A026&x=1", ["IBAN"]),
+])
+def test_dashes_and_encoded_spaces(text: str, ents: list[str]) -> None:
+    assert [s.entity for s in engine_for().detected(text)] == ents
+
+
+@pytest.mark.parametrize("text", ["ref 1234-4111111111111111", "2020–2021 dönemi 4500 TL", "sayfa 12–14"])
+def test_dash_no_new_false_positive(text: str) -> None:
+    assert engine_for().detected(text) == []

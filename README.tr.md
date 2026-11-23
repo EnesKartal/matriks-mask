@@ -421,7 +421,11 @@ saklama süresi), DPIA, aydınlatma metni, VERBİS/envanter, ihlal müdahale pla
   ortasında (`Dün Deniz aradı`) yakalanır, cümle başında bağlamsız (`Deniz kenarında`) yakalanmaz.
 - Sıfır genişlikli karakterle bölünmüş sayılar (`1729​1716060`) tespit edilmez. Tam genişlik rakamlar (`１７２９…`) tespit edilir.
 - URL kodlu (`%40`, `%20`; yalnız URL/form içinde, Türkçe yüzde yazımı "%40" hariç) ve HTML varlıklı (`&#64;`) değerler
-  çözülerek taranır, orijinal kodlu aralık maskelenir. Base64 gibi diğer kodlamalar taranmaz.
+  çözülerek taranır, orijinal kodlu aralık maskelenir. Çözülmeyenler: boşluk yerine form `+`'sı
+  (`tel=0532+123+45+67`), geçersiz bayt içeren dizi (`%40%FF`), üç kat kodlama (`%252540`), URL/form dışındaki tek
+  `%XX` dizisi ve Base64 gibi diğer kodlamalar.
+- Doğrudan köşeli parantez içine yazılmış değer (`Ayşe Demir <ayse.demir@example.com>`) yanıtta parantezsiz geri
+  çevrilir (`<<EPOSTA_1>>` çift parantezli yer tutucu olarak okunur).
 - Yabancı telefon numaraları ve yabancı ulusal kimlik numaraları yerleşik değildir; bkz. [`yurtdisi.yaml`](examples/sektor/yurtdisi.yaml).
 - Görsel/dosya (PDF, kimlik kartı fotoğrafı) içindeki kişisel veri taranmaz; bu içerik sağlayıcıya olduğu gibi gider.
 - Responses API `previous_response_id` ile sunucu tarafında tutulan geçmiş maskelenemez.

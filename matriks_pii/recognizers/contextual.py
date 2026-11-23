@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import bisect
 import re
 from dataclasses import dataclass
 
@@ -170,6 +171,12 @@ _NUFUS_LABEL = fre(
 _NUFUS_GATE = fre(r"(?<![a-zçğıöşü])(?:cilt|nüfusa kayıtlı|nüfus kayıt|nüfus kaydı|kütük)")
 
 
+def _in_zones(starts: list[int], zones: list[tuple[int, int]], pos: int) -> bool:
+    """`zones` başlangıca göre sıralı ve ayrık; ikili arama (eşleşme × etiket sayısında ikinci dereceden süre olmasın)."""
+    i = bisect.bisect_right(starts, pos) - 1
+    return i >= 0 and zones[i][0] <= pos < zones[i][1]
+
+
 class ContextualIdRecognizer(Recognizer):
     name = "contextual_ids"
     entities = tuple({r.entity for r in RULES}) + ("KRIPTO_CUZDAN", "SIFRE", "NUFUS_KAYIT")
@@ -223,10 +230,11 @@ class ContextualIdRecognizer(Recognizer):
         seen_pw: set[int] = set()
         tag_matches = list(_SIFRE_TAG_RE.finditer(cf)) if "<" in cf else []
         tag_zones = [(m.start(), m.end()) for m in tag_matches]
+        tag_starts = [a for a, _ in tag_zones]
         # etiket içindeki öznitelik metni ("Password Type=…") ayrıca parola sanılmasın: etiket bölgesindeki diğer eşleşmeler atlanır
         pw_matches = tag_matches + [
             m for m in list(_SIFRE_RE.finditer(cf)) + list(_SIFRE_LOOSE_RE.finditer(cf))
-            if not any(a <= m.start() < b for a, b in tag_zones)
+            if not _in_zones(tag_starts, tag_zones, m.start())
         ]
         for m in pw_matches:
             s, e = m.start("v"), m.end("v")

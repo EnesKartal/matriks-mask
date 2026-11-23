@@ -443,8 +443,11 @@ Category mapping and audit trail fields: [`docs/KVKK_VERI_KATEGORILERI.md`](http
   without context (`Deniz kenarında`).
 - Numbers split by zero-width characters (`1729​1716060`) are not detected. Full-width digits (`１７２９…`) are detected.
 - URL-encoded (`%40`, `%20`; only inside URLs/forms, Turkish percent notation such as "%40" excluded) and HTML-entity
-  (`&#64;`) values are decoded for scanning and the original encoded range is masked. Other encodings such as Base64
-  are not scanned.
+  (`&#64;`) values are decoded for scanning and the original encoded range is masked. Not decoded: form `+` for
+  spaces (`tel=0532+123+45+67`), a run containing an invalid byte (`%40%FF`), triple encoding (`%252540`), a single
+  `%XX` run outside a URL/form, and other encodings such as Base64.
+- A value written directly inside angle brackets (`Ayşe Demir <ayse.demir@example.com>`) is restored without the
+  brackets in the response (`<<EPOSTA_1>>` is read as a double-bracket placeholder).
 - Foreign phone numbers and foreign national ID numbers are not built in; see [`yurtdisi.yaml`](https://github.com/MatriksData/matriks-pii/blob/main/examples/sektor/yurtdisi.yaml).
 - Personal data inside images/files (PDFs, ID card photos) is not scanned; such content reaches the provider as is.
 - History kept server-side via Responses API `previous_response_id` cannot be masked.
